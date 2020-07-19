@@ -1,0 +1,8 @@
+.main-wrap {
+  .main-content {
+    &:before {
+      content: '';
+      height: 130px;
+    }
+  }
+}
