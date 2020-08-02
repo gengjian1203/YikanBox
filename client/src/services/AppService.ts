@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
+import Config from '@/config/index'
 import StorageManager from '@/services/StorageManager'
-import webApi from '@/api/webApi'
 
 const m_managerStorage = StorageManager.getInstance()
 
@@ -34,8 +34,11 @@ export default class AppInitDataService {
 	initAppInfo = () => {}
 
 	initCloudInfo = () => {
+		const env = Config.prod ? 'online-z8369' : 'develop-0loik'
 		// 初始化云函数
-		Taro.cloud.init()
+		Taro.cloud.init({
+			env,
+		})
 	}
 
 	init() {
