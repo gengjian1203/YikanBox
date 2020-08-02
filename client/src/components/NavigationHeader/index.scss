@@ -1,14 +1,21 @@
-@import '../../scss/scheme.scss';
+@import '../../app.scss';
 
 .navigation-header-wrap {
-  .navigation-header-content {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10000;
+	.at-nav-bar__left-view {
+		position: relative;
+		left: -10px;
+		color: $color-black;
+		text-align: center;
+	}
 
-    background-color: $color-white;
-  }
-  
+	.navigation-header-content {
+		z-index: 1000;
+		background-color: $color-white;
+	}
+
+	.navigation-header-fixed {
+		position: fixed;
+		left: 0;
+		right: 0;
+	}
 }

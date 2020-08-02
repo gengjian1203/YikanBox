@@ -63,11 +63,56 @@ export default function Main() {
 	return (
 		<View>
 			<NavigationHeader
+				isFixed
 				isShowLeftIcon
 				isShowBorder={false}
 				strNavigationTitle={strNavigationTitle}
 			/>
-			mnbtyfyt
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
+			<View>123</View>
 			{/* 顶部导航 */}
 			{/* 渲染对应内容 */}
 			{/* {renderVPage()} */}

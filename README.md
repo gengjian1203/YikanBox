@@ -27,10 +27,8 @@ tree -d -L 3 -I "node_modules|dist" > tree.md
 │       ├── services      # 封装服务
 │       └── utils         # 公共方法
 └── cloud                 # 微信云开发项目
-    ├── login
-    └── queryMemberInfo
-
-15 directories
+    └── fetchAppInfo      # AppInfo相关
+        └── queryAppInfo  # 查询AppInfo
 ```
 
 #### 版本记录
@@ -48,3 +46,4 @@ tree -d -L 3 -I "node_modules|dist" > tree.md
 3. 签到功能 🚧
 4. 等级系统 🚧
 5. 成就徽章系统 🚧
+6. 头像装饰功能 🚧
