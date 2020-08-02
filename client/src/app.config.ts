@@ -1,7 +1,6 @@
 export default {
 	pages: [
 		'pages/loading/index', // 入口页面
-		'pages/index/index',
 		'pages/demo/index',
 		'pages/main/index', // 首页
 	],

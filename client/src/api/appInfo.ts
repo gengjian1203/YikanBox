@@ -5,7 +5,8 @@ import CloudFetch from '@/services/CloudFetch'
  * @return 小程序级别配置信息
  */
 const queryAppInfo = async (params?: any) => {
-	return await CloudFetch.callFunction('login', params)
+	const res = await CloudFetch.callFunction('fetchAppInfo', params)
+	return res.data.data[0]
 }
 
 export default {

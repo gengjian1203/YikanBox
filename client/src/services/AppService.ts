@@ -17,22 +17,6 @@ export default class AppInitDataService {
 		return this._instance
 	}
 
-	initSystemInfo = () => {
-		// 初始化获取系统信息
-		Taro.getSystemInfo({
-			success: res => {
-				console.log('AppInitDataService getSystemInfo', res)
-				m_managerStorage.setStorageSync('objSystemInfo', res)
-			},
-			fail: err => {
-				console.error('AppInitDataService getSystemInfo', err)
-				m_managerStorage.setStorageSync('objSystemInfo', err)
-			},
-		})
-	}
-
-	initAppInfo = () => {}
-
 	initCloudInfo = () => {
 		const env = Config.prod ? 'online-z8369' : 'develop-0loik'
 		// 初始化云函数
@@ -42,10 +26,8 @@ export default class AppInitDataService {
 	}
 
 	init() {
-		console.log('AppInitDataService init start.')
-		this.initSystemInfo()
-		this.initAppInfo()
+		console.log('AppInitService init start.')
 		this.initCloudInfo()
-		console.log('AppInitDataService init done.')
+		console.log('AppInitService init done.')
 	}
 }

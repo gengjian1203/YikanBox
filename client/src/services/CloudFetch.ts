@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
 
-const callFunction = async (strCloudName: string, objCloudParams: any) => {
+const callFunction: any = async (strCloudName: string, objCloudParams: any) => {
 	return new Promise((resolve, reject) => {
 		Taro.cloud
 			.callFunction({
