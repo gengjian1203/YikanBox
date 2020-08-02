@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { useMemo } from 'react'
 
-function useActions<T>(actionCreators, deps?: []): T {
+export function useActions<T>(actionCreators, deps?: []): T {
 	const dispatch = useDispatch()
 
 	return useMemo(

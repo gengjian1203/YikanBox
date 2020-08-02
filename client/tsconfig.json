@@ -19,7 +19,7 @@
 			"@/*": ["./src/*"],
 			"@/api/*": ["./src/api/*"],
 			"@/components/*": ["./src/components/*"],
-			"@/hooks/*": ["/src/hooks/*"],
+			"@/hooks/*": ["./src/hooks/*"],
 			"@/pages/*": ["./src/pages/*"],
 			"@/redux/*": ["./src/redux/*"],
 			"@/scss/*": ["./src/scss/*"],
