@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import Taro, { useRouter, useDidShow } from '@tarojs/taro'
-import { View, Block } from '@tarojs/components'
-import useActions from '@/hooks/useActions'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useRouter, useDidShow } from '@tarojs/taro'
+import { View } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
-// import VPageHome from './components/VPageHome/index'
-// import VPageMine from './components/VPageMine/index'
-// import VPageDiscover from './components/VPageDiscover/index'
+import TabbarBottom from '@/components/TabBarBottom'
+import VPageHome from './components/VPageHome/index'
+import VPageDiscover from './components/VPageDiscover/index'
+import VPageMine from './components/VPageMine/index'
 
 import './index.scss'
 
@@ -32,7 +32,7 @@ export default function Main() {
 
 	// 监听nSelectIndex
 	useEffect(() => {
-		setNavigationTitle(arrBottomBarList[nSelectIndex].strName)
+		setNavigationTitle(arrBottomBarList[nSelectIndex].title)
 	}, [nSelectIndex])
 
 	useEffect(() => {
@@ -43,80 +43,37 @@ export default function Main() {
 		onShow()
 	})
 
-	// const renderVPage = () => {
-	// 	switch (999) {
-	// 		case 0: {
-	// 			return <VPageHome />
-	// 		}
-	// 		case 1: {
-	// 			return <VPageDiscover />
-	// 		}
-	// 		case 2: {
-	// 			return <VPageMine />
-	// 		}
-	// 		default: {
-	// 			return <View>未定义页面</View>
-	// 		}
-	// 	}
-	// }
+	const renderVPage = () => {
+		const code = arrBottomBarList[nSelectIndex].code
+		switch (code) {
+			case 'HOME': {
+				return <VPageHome />
+			}
+			case 'DISCOVER': {
+				return <VPageDiscover />
+			}
+			case 'MINE': {
+				return <VPageMine />
+			}
+			default: {
+				return <View>未知页面</View>
+			}
+		}
+	}
 
 	return (
 		<View>
+			{/* 顶部导航 */}
 			<NavigationHeader
 				isFixed
 				isShowLeftIcon
 				isShowBorder={false}
 				strNavigationTitle={strNavigationTitle}
 			/>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			<View>123</View>
-			{/* 顶部导航 */}
 			{/* 渲染对应内容 */}
-			{/* {renderVPage()} */}
+			{renderVPage()}
 			{/* 底部导航 */}
+			<TabbarBottom />
 		</View>
 	)
 }

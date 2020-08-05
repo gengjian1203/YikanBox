@@ -9,7 +9,7 @@ $f6: 26px; // 辅助信息，需弱化的内容，如：链接、小按钮
 $f7: 22px; // 说明文本，如：版权信息等不需要用户关注的信息
 $f8: 18px; // 十分小
 
-$color-primary: #ff9900; // 品牌颜色
+$color-primary: #2f90b9; // 品牌颜色 62云海蓝
 $color-secondary: lighten($color-primary, 10%);
 $color-tertiary: lighten($color-primary, 20%);
 
@@ -18,7 +18,7 @@ $color-black: #000000;
 
 $color-line: #ececec; // 分割线颜色
 $color-bg: #ebebeb; // 背景色
-$color-mask: rgba(0, 0, 0, 0.3);  // 蒙板颜色
+$color-mask: rgba(0, 0, 0, 0.3); // 蒙板颜色
 
 $color-text-primary: #000000; // 主内容
 $color-text-long: #353535; // 大段说明的主要内容

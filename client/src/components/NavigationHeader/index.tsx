@@ -95,7 +95,9 @@ export default function NavigationHeader(props: INavigationHeaderProps) {
 			{/* 浮于界面时，文档流占位 */}
 			{isFixed && (
 				<View
-					style={`height: ${Taro.pxTransform(nAtNavBarHeight * 2)}; `}
+					style={`height: ${Taro.pxTransform(
+						(nAtNavBarHeight + systemInfo.statusBarHeight) * 2
+					)}; `}
 				></View>
 			)}
 		</View>

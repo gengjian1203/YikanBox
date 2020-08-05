@@ -1,59 +1,60 @@
 // iconfont样式
 
 @font-face {
-  font-family: 'iconfont';  /* project id 1883488 */
-  src: url('//at.alicdn.com/t/font_1883488_qcd96fkggjk.eot');
-  src: url('//at.alicdn.com/t/font_1883488_qcd96fkggjk.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1883488_qcd96fkggjk.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1883488_qcd96fkggjk.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1883488_qcd96fkggjk.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1883488_qcd96fkggjk.svg#iconfont') format('svg');
+	font-family: 'iconfont'; /* project id 1883488 */
+	src: url('//at.alicdn.com/t/font_1883488_fwt190ef71.eot');
+	src: url('//at.alicdn.com/t/font_1883488_fwt190ef71.eot?#iefix')
+			format('embedded-opentype'),
+		url('//at.alicdn.com/t/font_1883488_fwt190ef71.woff2') format('woff2'),
+		url('//at.alicdn.com/t/font_1883488_fwt190ef71.woff') format('woff'),
+		url('//at.alicdn.com/t/font_1883488_fwt190ef71.ttf') format('truetype'),
+		url('//at.alicdn.com/t/font_1883488_fwt190ef71.svg#iconfont') format('svg');
 }
 
 .iconfont {
-  font-family: "iconfont" !important;
-  font-size: 16px;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	font-family: 'iconfont' !important;
+	font-size: 16px;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .icon-nav-back::before {
-  content: '\e743'
+	content: '\e743';
 }
 
 .icon-nav-home::before {
-  content: '\e7ae'
+	content: '\e7ae';
 }
 
 .icon-home::before {
-  content: '\e7a7'
+	content: '\e7a7';
 }
 
 .icon-home-select::before {
-  content: '\e7ae'
+	content: '\e7ae';
 }
 
 .icon-discover::before {
-  content: '\e76f'
+	content: '\e621';
 }
 
 .icon-discover-select::before {
-  content: '\e78d'
+	content: '\e6d6';
 }
 
 .icon-mine::before {
-  content: '\e6ef'
+	content: '\e6ef';
 }
 
 .icon-mine-select::before {
-  content: '\e779'
+	content: '\e779';
 }
 
 .icon-avatar::before {
-  content: '\e773';
+	content: '\e773';
 }
 
 .icon-calender::before {
-  content: '\e746';
+	content: '\e746';
 }

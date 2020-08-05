@@ -1,8 +1,8 @@
 import Taro, { useRouter, useDidShow } from '@tarojs/taro'
 import React, { useEffect } from 'react'
+import useActions from '@/hooks/useActions'
 import appInfoActions from '@/redux/actions/appInfo'
 import systemInfoActions from '@/redux/actions/systemInfo'
-import useActions from '@/hooks/useActions'
 
 import webApi from '@/api/appInfo'
 import AppService from '@/services/AppService'

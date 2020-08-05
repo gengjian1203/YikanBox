@@ -1,16 +1,39 @@
-import Taro from '@tarojs/taro'
+import Taro, { useRouter } from '@tarojs/taro'
 import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import useActions from '@/hooks/useActions'
+import systemInfoActions from '@/redux/actions/systemInfo'
+
+import webApi from '@/api/appInfo'
+import AppService from '@/services/AppService'
+import { router2url } from '@/utils/index'
+
 import { View } from '@tarojs/components'
+
 import './index.scss'
 
-interface IDemo {}
-export default function Demo(props: IDemo) {
-	useEffect(() => {
+export default function Demo() {
+	const {
+		params: { strTitle = '' },
+	} = useRouter()
+
+	const systemInfo = useSelector(state => state.systemInfo)
+
+	const { setSystemInfo } = useActions(systemInfoActions)
+
+	const onLoad = () => {
 		console.log('Demo onload')
+	}
+
+	const onUnload = () => {
+		console.log('Demo Unload')
+	}
+
+	useEffect(() => {
+		onLoad()
 		return () => {
-			console.log('Demo Unload')
+			onUnload()
 		}
 	}, [])
-	return <View>hello demo</View>
+	return <View>{strTitle}</View>
 }
-Demo.defaultProps = {}
