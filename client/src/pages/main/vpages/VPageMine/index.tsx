@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
-import appInfoActions from '@/redux/actions/appInfo'
+import memberInfoActions from '@/redux/actions/memberInfo'
 import { View, Button } from '@tarojs/components'
 
 import webApi from '@/api/memberInfo'
@@ -15,9 +15,9 @@ interface IVPageMineProps {}
 export default function VPageMine(props: IVPageMineProps) {
 	const {} = props
 
-	const appInfo = useSelector(state => state.appInfo)
+	const memberInfo = useSelector(state => state.memberInfo)
 
-	const { setBottomBarSelect } = useActions(appInfoActions)
+	const { setMemberInfo } = useActions(memberInfoActions)
 
 	const onLoad = async () => {
 		console.log('VPageMine')
@@ -30,10 +30,13 @@ export default function VPageMine(props: IVPageMineProps) {
 
 	const handleGetUserInfo = async e => {
 		console.log('handleGetUserInfo', e)
+		// if (!checkObjectEmpty(memberInfo)) {
+		// 	return
+		// }
 		const objUserInfo = e.detail.userInfo
 		if (objUserInfo && !checkObjectEmpty(objUserInfo)) {
 			const res = await webApi.addMemberInfo(objUserInfo)
-			console.log(handleGetUserInfo, res)
+			setMemberInfo(res.data)
 		}
 	}
 

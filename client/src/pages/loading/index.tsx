@@ -28,7 +28,10 @@ export default function Loading() {
 	const queryLoginInfo: any = async () => {
 		const res = await webApi.queryLoginInfo()
 		console.log('queryLoginInfo', res)
-		return res
+		return {
+			appInfo: res.appInfo.data[0],
+			memberInfo: res.memberInfo.data,
+		}
 	}
 
 	// 初始化Api基本信息
@@ -54,16 +57,21 @@ export default function Loading() {
 	const initLoginInfo = async () => {
 		// 配置小程序级别变量
 		const loginInfo = await queryLoginInfo()
-		const strMainPath = loginInfo.appInfo.strMainPath
-		setBottomBarSelect(loginInfo.appInfo.nBottomBarListSelect)
-		setBottomBarList(loginInfo.appInfo.arrBottomBarList)
+		const appInfo = loginInfo.appInfo
+		const memberInfo = loginInfo.memberInfo
+		const strMainPath = appInfo.strMainPath
+
+		setBottomBarSelect(appInfo.nBottomBarListSelect)
+		setBottomBarList(appInfo.arrBottomBarList)
 		setMainPath(strMainPath)
-		setMemberInfo(loginInfo.memberInfo)
+		setMemberInfo(memberInfo)
+
 		return loginInfo
 	}
 
 	// 跳转页面逻辑
-	const jumpPage = async objAppInfo => {
+	const jumpPage = async objLoginInfo => {
+		const appInfo = objLoginInfo.appInfo
 		// 分享进入的
 		if (strSharePath) {
 			setBottomBarSelect(0)
@@ -72,7 +80,7 @@ export default function Loading() {
 			})
 		} else {
 			Taro.reLaunch({
-				url: objAppInfo.strMainPath,
+				url: appInfo.strMainPath,
 			})
 		}
 	}
@@ -82,7 +90,7 @@ export default function Loading() {
 		await initSystemInfo()
 		const objLoginInfo = await initLoginInfo()
 
-		jumpPage(objLoginInfo.appInfo)
+		jumpPage(objLoginInfo)
 		return () => {}
 	}
 

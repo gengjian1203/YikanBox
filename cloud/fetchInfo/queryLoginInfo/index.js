@@ -31,7 +31,7 @@ async function queryLoginInfo (event, db, strMemberId) {
 	objResult = { 
 		code: 200,
 		data: {
-			appInfo: objAppInfo.data[0], 
+			appInfo: objAppInfo, 
 			memberInfo: objMemberInfo
 		}
 	}

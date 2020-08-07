@@ -9,6 +9,7 @@
 
 async function addMemberInfo (data, db, strMemberId) {
 	let objResult = {}
+	let objMemberInfo = undefined
 	const date = new Date()
 	const YYYY = date.getUTCFullYear()
 	const MM = date.getUTCMonth() + 1
@@ -18,8 +19,24 @@ async function addMemberInfo (data, db, strMemberId) {
 	const ss = date.getUTCSeconds()
 	const time = `${YYYY}-${MM}-${DD} ${hh}:${mm}:${ss}`
 
+	// 查询是否有该人注册
+	try {
+		objMemberInfo = await db.collection('memberInfo').doc(strMemberId).get()
+	} catch (e) {
+		console.error('queryMemberInfo error', e)
+	}
+	if (objMemberInfo) {
+		objResult = {
+			code: 200,
+			data: objMemberInfo
+		}
+		return objResult
+	}
+
+	// 创建新用户
 	const objMember = {
 		// 创建基本信息
+		_id: strMemberId,  // 主键
 		// 系统级
 		app_createDate: date,    // 创建时间
 		app_createTime: time,    // 创建时间
@@ -28,7 +45,6 @@ async function addMemberInfo (data, db, strMemberId) {
 		app_updateDate: date,    // 修改时间
 		app_updateTime: time,    // 修改时间
 		// 个人信息
-		user_id: strMemberId,
 		user_openid: strMemberId.substr(4),
 		user_nickName: data.nickName, // 昵称*
 		user_avatarUrl: data.avatarUrl, // 头像*
@@ -39,12 +55,12 @@ async function addMemberInfo (data, db, strMemberId) {
 		user_language: data.language, // 语言*
 		user_cellphone: data.cellphone, // 手机号
 	}
-
 	// 创建新的玩家信息	
 	try {
+		await db.collection('memberInfo').add({ data: objMember })
 		objResult = {
 			code: 200,
-			data: await db.collection('memberInfo').add({ data: objMember })
+			data: objMember
 		}
 	} catch (e) {
 		objResult = {
