@@ -4,9 +4,10 @@ import { useRouter, useDidShow } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
 import TabbarBottom from '@/components/TabBarBottom'
-import VPageHome from './components/VPageHome/index'
-import VPageDiscover from './components/VPageDiscover/index'
-import VPageMine from './components/VPageMine/index'
+
+import VPageHome from './vpages/VPageHome/index'
+import VPageDiscover from './vpages/VPageDiscover/index'
+import VPageMine from './vpages/VPageMine/index'
 
 import './index.scss'
 

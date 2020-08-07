@@ -31,7 +31,10 @@ export default function TabBarBottom(props: ITabbarBottomProps) {
 				onClick={handleTabbarSelect}
 			/>
 			{/* 文档流占位 */}
-			<View className='bottom-view'></View>
+			<Block>
+				<View style={`height: ${Taro.pxTransform(120)}`}></View>
+				<View className='safe-bottom'></View>
+			</Block>
 		</Block>
 	)
 }

@@ -3,7 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import appInfoActions from '@/redux/actions/appInfo'
-import { View } from '@tarojs/components'
+import { View, Button } from '@tarojs/components'
+
+import webApi from '@/api/memberInfo'
+import { checkObjectEmpty } from '@/utils/index'
 
 import './index.scss'
 
@@ -25,5 +28,21 @@ export default function VPageMine(props: IVPageMineProps) {
 		return () => {}
 	}, [])
 
-	return <View className='vpage-mine-wrap'>我的页面</View>
+	const handleGetUserInfo = async e => {
+		console.log('handleGetUserInfo', e)
+		const objUserInfo = e.detail.userInfo
+		if (objUserInfo && !checkObjectEmpty(objUserInfo)) {
+			const res = await webApi.addMemberInfo(objUserInfo)
+			console.log(handleGetUserInfo, res)
+		}
+	}
+
+	return (
+		<View className='vpage-mine-wrap'>
+			我的页面
+			<Button openType='getUserInfo' onGetUserInfo={handleGetUserInfo}>
+				点击
+			</Button>
+		</View>
+	)
 }

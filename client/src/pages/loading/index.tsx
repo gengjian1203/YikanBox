@@ -2,9 +2,10 @@ import Taro, { useRouter, useDidShow } from '@tarojs/taro'
 import React, { useEffect } from 'react'
 import useActions from '@/hooks/useActions'
 import appInfoActions from '@/redux/actions/appInfo'
+import memberInfoActions from '@/redux/actions/memberInfo'
 import systemInfoActions from '@/redux/actions/systemInfo'
 
-import webApi from '@/api/appInfo'
+import webApi from '@/api/loginInfo'
 import AppService from '@/services/AppService'
 import { router2url } from '@/utils/index'
 
@@ -21,14 +22,12 @@ export default function Loading() {
 	const { setMainPath, setBottomBarList, setBottomBarSelect } = useActions(
 		appInfoActions
 	)
+	const { setMemberInfo } = useActions(memberInfoActions)
 	const { setSystemInfo } = useActions(systemInfoActions)
 
-	const queryAppInfo: any = async () => {
-		const params = {
-			type: 'QUERY',
-		}
-		const res = await webApi.queryAppInfo(params)
-		console.log('queryAppInfo', res)
+	const queryLoginInfo: any = async () => {
+		const res = await webApi.queryLoginInfo()
+		console.log('queryLoginInfo', res)
 		return res
 	}
 
@@ -52,14 +51,15 @@ export default function Loading() {
 	}
 
 	// 初始化应用级信息
-	const initAppInfo = async () => {
+	const initLoginInfo = async () => {
 		// 配置小程序级别变量
-		const appInfo = await queryAppInfo()
-		const strMainPath = appInfo.strMainPath
-		setBottomBarSelect(appInfo.nBottomBarListSelect)
-		setBottomBarList(appInfo.arrBottomBarList)
+		const loginInfo = await queryLoginInfo()
+		const strMainPath = loginInfo.appInfo.strMainPath
+		setBottomBarSelect(loginInfo.appInfo.nBottomBarListSelect)
+		setBottomBarList(loginInfo.appInfo.arrBottomBarList)
 		setMainPath(strMainPath)
-		return appInfo
+		setMemberInfo(loginInfo.memberInfo)
+		return loginInfo
 	}
 
 	// 跳转页面逻辑
@@ -80,9 +80,9 @@ export default function Loading() {
 	const onLoad = async () => {
 		await initApi()
 		await initSystemInfo()
-		const objAppInfo = await initAppInfo()
+		const objLoginInfo = await initLoginInfo()
 
-		jumpPage(objAppInfo)
+		jumpPage(objLoginInfo.appInfo)
 		return () => {}
 	}
 

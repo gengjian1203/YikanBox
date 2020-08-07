@@ -1,16 +1,22 @@
-// import queryAppInfo from './queryAppInfo/index'
-
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
-const queryAppInfo = require('queryAppInfo/index.js')
+const queryLoginInfo = require('queryLoginInfo/index.js')
 
 cloud.init({
 	env: cloud.DYNAMIC_CURRENT_ENV, // API 调用都保持和云函数当前所在环境一致
 })
 
+// 校验返回值
+const validResult = (objTmp) => {
+	if (objTmp.code) {
+		objTmp.code = 500
+	}
+	return objTmp
+}
+
 /**
- * fetchAppInfo
- * 处理跟AppInfo相关的信息
+ * fetchInfo
+ * 处理所有混用 Info 相关的信息（节约接口调用次数）
  * @param {*} event
  * @param {*} context
  * @returns
@@ -18,21 +24,19 @@ cloud.init({
 // 云函数入口函数
 exports.main = async (event, context) => {
 	const {
-		OPENID: strOpenId,
-		APPID: strAppId,
-		UNIONID: strUnionId,
+		OPENID,
+		APPID,
+		UNIONID,
 	} = cloud.getWXContext()
 
 	const db = cloud.database()
+	const strMemberId = `mem-${OPENID}`
 
-	let objResult = {
-		code: 500,
-		data: {},
-	}
+	let objResult = {}
 
 	switch (event.type) {
-		case 'QUERY':
-			objResult = await queryAppInfo(event, db)
+		case 'LOGIN':
+			objResult = await queryLoginInfo(event, db, strMemberId)
 			break
 		case 'UPDATE':
 			break
@@ -40,5 +44,5 @@ exports.main = async (event, context) => {
 			break
 	}
 
-	return objResult
+	return validResult(objResult)
 }
