@@ -14,7 +14,7 @@ export default {
 	],
 	window: {
 		navigationStyle: 'custom', // 关掉微信顶部导航
-		backgroundTextStyle: 'light', // 'light'-浅色风格 'dark'-深色风格
+		backgroundTextStyle: 'dark', // 'light'-浅色风格 'dark'-深色风格
 		navigationBarBackgroundColor: '#fff',
 		navigationBarTitleText: 'WeChat',
 		navigationBarTextStyle: 'black',

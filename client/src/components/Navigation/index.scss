@@ -1,0 +1,35 @@
+@import '../../app.scss';
+
+.navigation-wrap {
+	width: 100%;
+	height: 80px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	padding-top: 400px;
+
+	.navigation-left {
+		height: 100%;
+		flex: 0 0 120px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		.left-icon {
+			font-size: 40px;
+		}
+	}
+	.navigation-mid {
+		height: 100%;
+		flex: 1 1 auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.navigation-right {
+		height: 100%;
+		flex: 0 0 120px;
+	}
+}

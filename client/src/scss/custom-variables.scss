@@ -1,8 +1,8 @@
 // 改变taro-ui的默认样式
 
 /* 改变主题变量，具体变量名可查看 taro-ui/dist/style/variables/default.scss 文件 */
-$color-brand: #2f90b9; // 品牌颜色 62云海蓝
-$color-brand-light: #4fb0e9;
-$color-brand-dark: #0f7099;
+$color-brand: #ffdc00;
+$color-brand-light: #ffdc00;
+$color-brand-dark: #ffdc00;
 /* 引入 Taro UI 默认样式 */
 @import '~taro-ui/dist/style/index.scss';

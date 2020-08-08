@@ -14,21 +14,29 @@ tree -d -L 3 -I "node_modules|dist" > tree.md
 
 ```bash
 .
-├── client                # 小程序前端项目
-│   ├── config            # 项目级配置
-│   └── src               # 项目代码
-│       ├── api           # 接口调用
-│       ├── components    # 公共组件
-│       ├── config        # 应用级配置
-│       ├── hooks         # 自定义Hook
-│       ├── pages         # 小程序页面
-│       ├── redux         # Redux
-│       ├── scss          # 公共样式
-│       ├── services      # 封装服务
-│       └── utils         # 公共方法
-└── cloud                 # 微信云开发项目
-    └── fetchAppInfo      # AppInfo相关
-        └── queryAppInfo  # 查询AppInfo
+├── client                    # 小程序前端项目
+│   ├── config                # 项目级配置
+│   └── src                   # 项目代码
+│       ├── api               # 接口调用
+│       ├── components        # 公共组件
+│       ├── config            # 应用级配置
+│       ├── hooks             # 自定义 Hook
+│       ├── pages             # 小程序页面
+│       ├── redux             # Redux
+│       ├── scss              # 公共样式
+│       ├── services          # 封装服务
+│       └── utils             # 公共方法
+└── cloud                     # 微信云开发项目
+    ├── backup                # 数据库备份
+    │   └── database
+    ├── fetchInfo             # 混表操作信息
+    │   └── queryLoginInfo    # 查询登录所需的信息
+    └── fetchMemberInfo       # 操作 memberInfo
+        ├── addMemberInfo     # 新增注册成员信息
+        └── queryMemberInfo   # 查询跟 MemberInfo 相关的信息
+
+20 directories
+
 ```
 
 #### 版本记录
@@ -47,3 +55,5 @@ tree -d -L 3 -I "node_modules|dist" > tree.md
 4. 等级系统 🚧
 5. 成就徽章系统 🚧
 6. 头像装饰功能 🚧
+7. 收集裂变玩法 🚧
+8. 复刻朋友圈 🚧

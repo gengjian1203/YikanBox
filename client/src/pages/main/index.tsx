@@ -66,9 +66,7 @@ export default function Main() {
 		<View>
 			{/* 顶部导航 */}
 			<NavigationHeader
-				isFixed
 				isShowLeftIcon
-				isShowBorder={false}
 				strNavigationTitle={strNavigationTitle}
 			/>
 			{/* 渲染对应内容 */}

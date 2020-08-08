@@ -1,13 +1,13 @@
 /**
  * queryLoginInfo
- * 查询跟AppInfo相关的信息
+ * 查询登录所需的信息
  * @param {*} event
  * @param {*} db
  * @param {*} strMemberId
  * @returns
  */
 
-async function queryLoginInfo (event, db, strMemberId) {
+async function queryLoginInfo(event, db, strMemberId) {
 	let objResult = {}
 	let objAppInfo = {}
 	let objMemberInfo = {}
@@ -28,12 +28,12 @@ async function queryLoginInfo (event, db, strMemberId) {
 		console.error('queryMemberInfo error', e)
 	}
 
-	objResult = { 
+	objResult = {
 		code: 200,
 		data: {
-			appInfo: objAppInfo, 
-			memberInfo: objMemberInfo
-		}
+			appInfo: objAppInfo,
+			memberInfo: objMemberInfo,
+		},
 	}
 
 	return objResult
