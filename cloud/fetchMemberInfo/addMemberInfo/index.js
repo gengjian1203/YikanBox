@@ -7,7 +7,7 @@
  * @returns
  */
 
-async function addMemberInfo (data, db, strMemberId) {
+async function addMemberInfo(data, db, strMemberId) {
 	let objResult = {}
 	let objMemberInfo = undefined
 	const date = new Date()
@@ -28,7 +28,7 @@ async function addMemberInfo (data, db, strMemberId) {
 	if (objMemberInfo) {
 		objResult = {
 			code: 200,
-			data: objMemberInfo
+			data: objMemberInfo,
 		}
 		return objResult
 	}
@@ -36,14 +36,14 @@ async function addMemberInfo (data, db, strMemberId) {
 	// 创建新用户
 	const objMember = {
 		// 创建基本信息
-		_id: strMemberId,  // 主键
+		_id: strMemberId, // 主键
 		// 系统级
-		app_createDate: date,    // 创建时间
-		app_createTime: time,    // 创建时间
-		app_loginDate: date,    // 登录时间
-		app_loginTime: time,    // 登录时间
-		app_updateDate: date,    // 修改时间
-		app_updateTime: time,    // 修改时间
+		app_createDate: date, // 创建时间
+		app_createTime: time, // 创建时间
+		app_loginDate: date, // 登录时间
+		app_loginTime: time, // 登录时间
+		app_updateDate: date, // 修改时间
+		app_updateTime: time, // 修改时间
 		// 个人信息
 		user_openid: strMemberId.substr(4),
 		user_nickName: data.nickName, // 昵称*
@@ -55,12 +55,12 @@ async function addMemberInfo (data, db, strMemberId) {
 		user_language: data.language, // 语言*
 		user_cellphone: data.cellphone, // 手机号
 	}
-	// 创建新的玩家信息	
+	// 创建新的玩家信息
 	try {
 		await db.collection('memberInfo').add({ data: objMember })
 		objResult = {
 			code: 200,
-			data: objMember
+			data: { data: objMember },
 		}
 	} catch (e) {
 		objResult = {

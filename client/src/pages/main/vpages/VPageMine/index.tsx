@@ -36,6 +36,7 @@ export default function VPageMine(props: IVPageMineProps) {
 		const objUserInfo = e.detail.userInfo
 		if (objUserInfo && !checkObjectEmpty(objUserInfo)) {
 			const res = await webApi.addMemberInfo(objUserInfo)
+			console.log('handleGetUserInfo addMemberInfo', res)
 			setMemberInfo(res.data)
 		}
 	}
@@ -44,7 +45,7 @@ export default function VPageMine(props: IVPageMineProps) {
 		<View className='vpage-mine-wrap'>
 			我的页面
 			<Button openType='getUserInfo' onGetUserInfo={handleGetUserInfo}>
-				点击
+				{memberInfo.user_openid ? `欢迎${memberInfo.user_nickName}` : '请登录'}
 			</Button>
 		</View>
 	)

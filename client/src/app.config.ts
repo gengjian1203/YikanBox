@@ -19,6 +19,6 @@ export default {
 		navigationBarTitleText: 'WeChat',
 		navigationBarTextStyle: 'black',
 		onReachBottomDistance: 200, // 触发上拉刷新
-		enablePullDownRefresh: true, // 开启下拉刷新
+		enablePullDownRefresh: false, // 开启下拉刷新
 	},
 }

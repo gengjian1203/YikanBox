@@ -67,6 +67,7 @@ export default function Main() {
 			{/* 顶部导航 */}
 			<NavigationHeader
 				isShowLeftIcon
+				isTransparent={arrBottomBarList[nSelectIndex].code === 'HOME'}
 				strNavigationTitle={strNavigationTitle}
 			/>
 			{/* 渲染对应内容 */}
