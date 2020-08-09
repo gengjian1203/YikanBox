@@ -1,0 +1,29 @@
+@import '../../../../app.scss';
+
+.module-agreement-wrap {
+	box-sizing: border-box;
+	width: 100%;
+	height: 100px;
+	padding: 0 60px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+
+	.agreement-content {
+		font-size: $f7;
+		.content-text {
+			color: $color-text-long;
+		}
+		.content-file {
+			color: $color-link-normal;
+		}
+	}
+
+	.agreement-pop-wrap {
+		box-sizing: border-box;
+		width: 100%;
+		height: 100%;
+		padding: 16px;
+	}
+}

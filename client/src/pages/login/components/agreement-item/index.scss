@@ -1,0 +1,18 @@
+@import '../../../../app.scss';
+
+.item-content-wrap {
+	margin-bottom: 20px;
+	font-size: $f5;
+	color: $color-text-long;
+
+	// &:after {
+	// 	content: '';
+	// 	width: 100%;
+	// 	display: inline-block;
+	// }
+
+	.item-content-text {
+		text-align: justify;
+		text-align-last: left;
+	}
+}

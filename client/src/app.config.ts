@@ -8,6 +8,10 @@ export default {
 			pages: ['index'],
 		},
 		{
+			root: 'pages/login', // 统一登录页
+			pages: ['index'],
+		},
+		{
 			root: 'pages/main', // 首页
 			pages: ['index'],
 		},

@@ -29,6 +29,7 @@ export default function Main() {
 
 	const onLoad = async () => {
 		console.log('Main onLoad.')
+		Taro.hideShareMenu()
 	}
 
 	// 监听nSelectIndex

@@ -86,6 +86,7 @@ export default function Loading() {
 	}
 
 	const onLoad = async () => {
+		Taro.hideShareMenu()
 		await initApi()
 		await initSystemInfo()
 		const objLoginInfo = await initLoginInfo()

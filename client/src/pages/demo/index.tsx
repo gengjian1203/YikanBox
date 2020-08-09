@@ -23,6 +23,7 @@ export default function Demo() {
 
 	const onLoad = () => {
 		console.log('Demo onload')
+		Taro.hideShareMenu()
 	}
 
 	const onUnload = () => {

@@ -9,7 +9,7 @@ import { View } from '@tarojs/components'
 import './index.scss'
 
 interface IComDemoProps {
-	content: string
+	content?: string
 }
 
 export default function ComDemo(props: IComDemoProps) {
