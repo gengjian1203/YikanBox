@@ -16,6 +16,12 @@ export default {
 			pages: ['index'],
 		},
 	],
+	preloadRule: {
+		'pages/loading/index': {
+			network: 'all',
+			packages: ['pages/main', 'pages/login'],
+		},
+	},
 	window: {
 		navigationStyle: 'custom', // 关掉微信顶部导航
 		backgroundTextStyle: 'dark', // 'light'-浅色风格 'dark'-深色风格

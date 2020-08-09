@@ -1,3 +1,4 @@
+import Taro from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useRouter, useDidShow } from '@tarojs/taro'
@@ -67,8 +68,7 @@ export default function Main() {
 		<View>
 			{/* 顶部导航 */}
 			<NavigationHeader
-				isShowLeftIcon
-				isTransparent={arrBottomBarList[nSelectIndex].code === 'HOME'}
+				isShowLeftIcon={false}
 				strNavigationTitle={strNavigationTitle}
 			/>
 			{/* 渲染对应内容 */}
