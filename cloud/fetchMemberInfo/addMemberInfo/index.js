@@ -54,6 +54,9 @@ async function addMemberInfo(data, db, strMemberId) {
 		user_city: data.city, // 城市*
 		user_language: data.language, // 语言*
 		user_cellphone: data.cellphone, // 手机号
+		// 应用信息
+		data_level: 1, // 等级
+		data_exp: 0, // 经验
 	}
 	// 创建新的玩家信息
 	try {

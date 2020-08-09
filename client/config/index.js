@@ -17,6 +17,7 @@ const config = {
 		'@/components': path.resolve(__dirname, '..', 'src/components'),
 		'@/config': path.resolve(__dirname, '..', 'src/config'),
 		'@/hooks': path.resolve(__dirname, '..', 'src/hooks'),
+		'@/images': path.resolve(__dirname, '..', 'src/images'),
 		'@/pages': path.resolve(__dirname, '..', 'src/pages'),
 		'@/redux': path.resolve(__dirname, '..', 'src/redux'),
 		'@/scss': path.resolve(__dirname, '..', 'src/scss'),
