@@ -56,6 +56,7 @@ export default function ModuleCard(props: IModuleCardProps) {
 			style={`padding-top: ${Taro.pxTransform(systemInfo.statusBarHeight * 2)}`}
 			onClick={handleModuleCardClick11}
 		>
+			{/* 胶囊区占位 */}
 			<View className='card-block'></View>
 			<View className='card-info'>
 				{/* 左侧 */}

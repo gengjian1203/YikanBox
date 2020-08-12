@@ -1,31 +1,25 @@
 @import '../../../../../../app.scss';
 
 .module-card-wrap {
-	box-sizing: border-box;
-	position: relative;
-	left: -30%;
-	padding: 0 30%;
-	margin-bottom: -100px;
-	width: 160%;
-	height: 500rpx;
-	background-color: $color-primary;
-	border-radius: 0 0 50% 50%;
+	width: 100%;
+	height: 500px;
+	margin-bottom: -160px;
+	background-image: linear-gradient(
+		$color-primary,
+		$color-primary,
+		$color-primary,
+		#ffffff
+	);
+
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-
-	color: #ffffff;
-
-	.card-block {
-		width: 100%;
-		flex: 0 0 80px;
-	}
+	justify-content: flex-start;
+	align-items: flex-start;
 
 	.card-info {
 		box-sizing: border-box;
 		width: 100%;
-		padding: 10px $border-bold-space 80px $border-bold-space;
+		padding: 100px $border-bold-space 100px $border-bold-space;
 		flex: 1 1 auto;
 		display: flex;
 		flex-direction: row;
@@ -46,7 +40,8 @@
 				width: 140px;
 				height: 140px;
 				border-radius: 50%;
-				border: 10px solid $color-tertiary;
+				border: 8px solid $color-tertiary;
+				box-shadow: 5px 5px 5px $color-shadow;
 
 				display: flex;
 				justify-content: center;
@@ -60,7 +55,7 @@
 			flex: 1 1 auto;
 			width: 0;
 			height: 100%;
-			padding: 0 $border-thin-space;
+			padding: 0 $border-bold-space;
 			// background-color: blue;
 			display: flex;
 			flex-direction: column;
@@ -73,24 +68,37 @@
 				white-space: nowrap;
 				text-overflow: ellipsis;
 				font-size: $f4;
-				font-weight: bold;
+				color: $color-text-long;
 			}
 
 			.mid-level {
 				width: 100%;
 				margin-top: $border-thin-space;
 				font-size: $f4;
+				color: $color-text-long;
 			}
 		}
 
 		.info-right {
-			flex: 0 0 100px;
+			flex: 0 0 160px;
 			height: 100%;
 			// background-color: purple;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
+
+			.right-sign {
+				width: 100%;
+				height: 50px;
+				border-radius: 25px;
+				background-color: $color-mask;
+				color: $color-white;
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				align-items: center;
+			}
 		}
 	}
 }

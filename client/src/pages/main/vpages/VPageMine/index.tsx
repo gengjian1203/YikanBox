@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 import { View } from '@tarojs/components'
 import ModuleCard from './components/module-card'
+import ModuleCommon from './components/module-common'
 
 import './index.scss'
 
@@ -26,9 +27,7 @@ export default function VPageMine(props: IVPageMineProps) {
 			<ModuleCard />
 			{/*  */}
 			<View className='mine-content'>
-				<View className='content-item'></View>
-				<View className='content-item'></View>
-				<View className='content-item'></View>
+				<ModuleCommon />
 			</View>
 
 			{/* 测试 */}
