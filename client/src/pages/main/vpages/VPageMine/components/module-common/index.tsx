@@ -2,6 +2,7 @@ import Taro from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 
 import { View, Image } from '@tarojs/components'
+import ModuleTitle from '@/components/ModuleTitle'
 
 import './index.scss'
 interface IModuleCommonProps {}
@@ -18,8 +19,8 @@ export default function ModuleCommon(props: IModuleCommonProps) {
 
 	return (
 		<View className='module-common-wrap'>
-			<View className='common-title'>常用功能</View>
-			<View className='common-content'>
+			<ModuleTitle strTitle='常用功能' />
+			<View className='module-common-content'>
 				<View className='common-item'>
 					<View className='common-item-icon bk-red iconfont icon-discover'></View>
 					<View className='common-item-name'>个人资料</View>

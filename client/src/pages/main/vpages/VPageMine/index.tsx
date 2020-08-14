@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { View } from '@tarojs/components'
 import ModuleCard from './components/module-card'
 import ModuleCommon from './components/module-common'
+import ModuleList from './components/module-list'
 
 import './index.scss'
 
@@ -23,74 +24,76 @@ export default function VPageMine(props: IVPageMineProps) {
 
 	return (
 		<View className='vpage-mine-wrap'>
-			{/*  */}
+			{/* 个人信息 */}
 			<ModuleCard />
-			{/*  */}
+			{/* 我的内容 */}
 			<View className='mine-content'>
+				{/* 常用模块 */}
 				<ModuleCommon />
+				{/* 列表模块 */}
+				<ModuleList />
+				{/* 测试 */}
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
+				<View>测试顶部导航变化</View>
 			</View>
-
-			{/* 测试 */}
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
-			<View>测试顶部导航变化</View>
 		</View>
 	)
 }
