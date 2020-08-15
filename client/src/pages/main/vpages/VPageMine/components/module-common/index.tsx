@@ -1,7 +1,8 @@
 import Taro from '@tarojs/taro'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import useThrottle from '@/hooks/useThrottle'
 
-import { View, Image } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import ModuleTitle from '@/components/ModuleTitle'
 
 import './index.scss'

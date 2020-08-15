@@ -1,12 +1,13 @@
 import Taro from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import useThrottle from '@/hooks/useThrottle'
 
 import { View, Image } from '@tarojs/components'
 
 import './index.scss'
 
-const strDefaultName = '点击登录，一起去开启新的旅程~'
+const strDefaultName = '点击登录，去开启新的旅程~'
 
 interface IModuleCardProps {}
 
@@ -46,21 +47,23 @@ export default function ModuleCard(props: IModuleCardProps) {
 		}
 	}
 
-	const handleModuleCardClick11 = e => {
-		console.log('handleModuleCardClick11', e)
-	}
+	// const handleModuleSignClick = e => {
+	// 	console.log('handleModuleSignClick', e)
+	// }
 
 	return (
 		<View
 			className='module-card-wrap'
 			style={`padding-top: ${Taro.pxTransform(systemInfo.statusBarHeight * 2)}`}
-			onClick={handleModuleCardClick11}
 		>
 			{/* 胶囊区占位 */}
 			<View className='card-block'></View>
 			<View className='card-info'>
 				{/* 左侧 */}
-				<View className='info-left' onClick={handleModuleCardClick}>
+				<View
+					className='info-left'
+					onClick={useThrottle(handleModuleCardClick)}
+				>
 					{isLogined ? (
 						<Image
 							className='left-avatar'
@@ -72,7 +75,7 @@ export default function ModuleCard(props: IModuleCardProps) {
 					)}
 				</View>
 				{/* 中间 */}
-				<View className='info-mid' onClick={handleModuleCardClick}>
+				<View className='info-mid' onClick={useThrottle(handleModuleCardClick)}>
 					<View className='mid-name'>
 						{isLogined ? memberInfo.user_nickName : strDefaultName}
 					</View>
