@@ -17,8 +17,8 @@ export default function TabBarBottom(props: ITabbarBottomProps) {
 	const {} = props
 
 	const objBottomBarInfo = useSelector(state => state.appInfo.objBottomBarInfo)
-	const nHeightTabbarBottom = useSelector(
-		state => state.appInfo.objAppHeight.nHeightTabbarBottom
+	const nHeightTabbar = useSelector(
+		state => state.appInfo.objAppHeight.nHeightTabbar
 	)
 
 	const { setBottomBarSelect } = useActions(appInfoActions)
@@ -37,9 +37,7 @@ export default function TabBarBottom(props: ITabbarBottomProps) {
 			/>
 			{/* 文档流占位 */}
 			<Block>
-				<View
-					style={`height: ${Taro.pxTransform(nHeightTabbarBottom * 2)}`}
-				></View>
+				<View style={`height: ${Taro.pxTransform(nHeightTabbar * 2)}`}></View>
 				<View className='safe-bottom'></View>
 			</Block>
 		</Block>

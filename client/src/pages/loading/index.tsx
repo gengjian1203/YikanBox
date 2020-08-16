@@ -20,11 +20,14 @@ export default function Loading() {
 		params: { strSharePath = '', objShareParams = {} },
 	} = useRouter()
 	const {
+		setIsIOS,
+		setIsIphoneX,
 		setMainPath,
 		setBottomBarList,
 		setBottomBarSelect,
 		setHeightNavigation,
 		setHeightNavigationHeader,
+		setHeightTabbar,
 		setHeightTabbarBottom,
 	} = useActions(appInfoActions)
 	const { setMemberInfo } = useActions(memberInfoActions)
@@ -49,16 +52,25 @@ export default function Loading() {
 		Taro.getSystemInfo({
 			success: res => {
 				console.log('AppInitDataService getSystemInfo', res)
+				const isIOS = res.system.includes('iOS')
+				const isIphoneX =
+					res.model.includes('iPhone X') || res.model.includes('iPhone12')
 				setSystemInfo(res)
+				setIsIOS(isIOS)
+				setIsIphoneX(isIphoneX)
 				setHeightNavigation(40)
 				setHeightNavigationHeader(40 + res.statusBarHeight)
-				setHeightTabbarBottom(60)
+				setHeightTabbar(60)
+				setHeightTabbarBottom(60 + (isIphoneX ? 34 : 0))
 			},
 			fail: err => {
 				console.error('AppInitDataService getSystemInfo', err)
 				setSystemInfo(err)
+				setIsIOS(false)
+				setIsIphoneX(false)
 				setHeightNavigation(40)
 				setHeightNavigationHeader(40 + 20)
+				setHeightTabbar(60)
 				setHeightTabbarBottom(60)
 			},
 		})
