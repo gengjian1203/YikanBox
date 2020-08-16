@@ -14,7 +14,7 @@ export default function ModuleArticle(props: IModuleArticleProps) {
 	return (
 		<Block>
 			<View className='article-title'>{objArticleData.title}</View>
-			<View className='article-content'>{objArticleData.content}</View>
+			<poster html={objArticleData.content} />
 		</Block>
 	)
 }
