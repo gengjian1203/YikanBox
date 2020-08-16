@@ -7,6 +7,8 @@ import appInfoActions from '@/redux/actions/appInfo'
 import { View, Block } from '@tarojs/components'
 import { AtTabBar } from 'taro-ui'
 
+import useSmartClick from './hooks/useSmartClick'
+
 import './index.scss'
 
 interface ITabbarBottomProps {}
@@ -28,7 +30,7 @@ export default function TabBarBottom(props: ITabbarBottomProps) {
 				fixed
 				tabList={objBottomBarInfo.arrBottomBarList}
 				current={objBottomBarInfo.nSelectIndex}
-				onClick={handleTabbarSelect}
+				onClick={useSmartClick(handleTabbarSelect)}
 			/>
 			{/* 文档流占位 */}
 			<Block>
