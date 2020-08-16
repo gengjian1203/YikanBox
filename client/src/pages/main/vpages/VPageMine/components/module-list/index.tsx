@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import useThrottle from '@/hooks/useThrottle'
+import useCheckLogin from '@/hooks/useCheckLogin'
 import memberInfoActions from '@/redux/actions/memberInfo'
 
 import { AtList, AtListItem } from 'taro-ui'
@@ -71,21 +72,21 @@ export default function ModuleList(props: IModuleListProps) {
 					title='我的头像秀'
 					arrow='right'
 					iconInfo={{ size: 25, color: 'red', value: 'iconfont icon-mine' }}
-					onClick={useThrottle(handleAvatarShowClick)}
+					onClick={useThrottle(useCheckLogin(handleAvatarShowClick))}
 				/>
 				<AtListItem
 					className='item-normal'
 					title='我的图片秀'
 					arrow='right'
 					iconInfo={{ size: 25, color: 'red', value: 'iconfont icon-mine' }}
-					onClick={useThrottle(handlePhotoShowClick)}
+					onClick={useThrottle(useCheckLogin(handlePhotoShowClick))}
 				/>
 				<AtListItem
 					className='item-normal'
 					title='我的接龙'
 					arrow='right'
 					iconInfo={{ size: 25, color: 'red', value: 'iconfont icon-mine' }}
-					onClick={useThrottle(handleActivityQueueClick)}
+					onClick={useThrottle(useCheckLogin(handleActivityQueueClick))}
 				/>
 
 				<AtListItem
@@ -97,13 +98,13 @@ export default function ModuleList(props: IModuleListProps) {
 						color: 'green',
 						value: 'iconfont icon-calender',
 					}}
-					onClick={useThrottle(handleOtherMomentClick)}
+					onClick={useThrottle(useCheckLogin(handleOtherMomentClick))}
 				/>
-				{memberInfo.user_openid && (
+				{memberInfo._id && (
 					<AtListItem
 						className='item-logout'
 						title='退出登录'
-						onClick={useThrottle(handleLogoutClick)}
+						onClick={handleLogoutClick}
 					/>
 				)}
 			</AtList>

@@ -1,34 +1,34 @@
 /**
- * 节流Hook
+ * 节流函数
  * 默认间隔 1000ms
  */
 
 import { useRef, useEffect, useCallback } from 'react'
 
 interface IThrottleRef {
-	funThrottle: any
+	funCallback: any
 	nTimestamp: number
 }
 
 export function useThrottle(
-	funThrottle = (any?: any) => any,
+	funCallback = (any?: any) => any,
 	delay = 1000,
 	dep = []
 ) {
 	const { current } = useRef<IThrottleRef>({
-		funThrottle: () => true,
+		funCallback: () => true,
 		nTimestamp: 0,
 	})
 
 	useEffect(() => {
-		current.funThrottle = funThrottle
-	}, [funThrottle])
+		current.funCallback = funCallback
+	}, [funCallback])
 
 	return useCallback((...args) => {
 		const now = Date.now()
 		if (now - current.nTimestamp > delay) {
 			current.nTimestamp = now
-			current.funThrottle.call(this, ...args)
+			current.funCallback.call(this, ...args)
 		}
 	}, dep)
 }

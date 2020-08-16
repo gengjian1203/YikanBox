@@ -1,23 +1,25 @@
 import Taro from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import useCheckLogin from '@/hooks/useCheckLogin'
+import useIsLogin from '@/hooks/useIsLogin'
 import useThrottle from '@/hooks/useThrottle'
 
 import { View, Image } from '@tarojs/components'
 
 import './index.scss'
 
-const strDefaultName = '点击登录，去开启新的旅程~'
-
 interface IModuleCardProps {}
 
 export default function ModuleCard(props: IModuleCardProps) {
 	const {} = props
 
-	const [isLogined, setLogined] = useState<boolean>(false)
+	const isLogin = useIsLogin()
 
 	const systemInfo = useSelector(state => state.systemInfo)
 	const memberInfo = useSelector(state => state.memberInfo)
+
+	const strDefaultName = '点击登录，去开启新的旅程~'
 
 	const onLoad = async () => {}
 
@@ -26,30 +28,9 @@ export default function ModuleCard(props: IModuleCardProps) {
 		return () => {}
 	}, [])
 
-	useEffect(() => {
-		console.log('useEffect memberInfo.user_openid', memberInfo.user_openid)
-		if (memberInfo.user_openid) {
-			setLogined(true)
-		} else {
-			setLogined(false)
-		}
-		return () => {}
-	}, [memberInfo.user_openid])
-
-	const handleModuleCardClick = e => {
-		console.log('handleModuleCardClick', e)
-		if (isLogined) {
-			Taro.showToast({ title: '您已经登录了~', icon: 'none' })
-		} else {
-			Taro.navigateTo({
-				url: '/pages/login/index',
-			})
-		}
+	const handleModuleCardClick = () => {
+		console.log('handleModuleCardClick')
 	}
-
-	// const handleModuleSignClick = e => {
-	// 	console.log('handleModuleSignClick', e)
-	// }
 
 	return (
 		<View
@@ -62,9 +43,9 @@ export default function ModuleCard(props: IModuleCardProps) {
 				{/* 左侧 */}
 				<View
 					className='info-left'
-					onClick={useThrottle(handleModuleCardClick)}
+					onClick={useThrottle(useCheckLogin(handleModuleCardClick))}
 				>
-					{isLogined ? (
+					{isLogin ? (
 						<Image
 							className='left-avatar'
 							mode='scaleToFill'
@@ -75,16 +56,19 @@ export default function ModuleCard(props: IModuleCardProps) {
 					)}
 				</View>
 				{/* 中间 */}
-				<View className='info-mid' onClick={useThrottle(handleModuleCardClick)}>
+				<View
+					className='info-mid'
+					onClick={useThrottle(useCheckLogin(handleModuleCardClick))}
+				>
 					<View className='mid-name'>
-						{isLogined ? memberInfo.user_nickName : strDefaultName}
+						{isLogin ? memberInfo.user_nickName : strDefaultName}
 					</View>
-					{isLogined && (
+					{isLogin && (
 						<View className='mid-level'>Lv.{memberInfo.data_level}</View>
 					)}
 				</View>
 				{/* 右侧 */}
-				{isLogined && (
+				{isLogin && (
 					<View className='info-right'>
 						<View className='right-sign'>签到</View>
 					</View>
