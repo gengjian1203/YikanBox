@@ -19,7 +19,7 @@ export default function VPageDiscover(props: IVPageDiscoverProps) {
 		console.log('VPageDiscover')
 		const objParams = {
 			nPageNum: 0,
-			nPageSize: 3,
+			nPageSize: 100,
 		}
 		const res = await webApi.queryArticleInfo(objParams)
 		console.log('VPageDiscover onLoad', res)

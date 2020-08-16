@@ -54,6 +54,17 @@ tree -d -L 3 -I "node_modules|dist" > tree.md
 3. 签到功能 🚧
 4. 等级系统 🚧
 5. 徽章成就荣誉墙系统 🚧
-6. 头像装饰功能 🚧
-7. 收集裂变玩法 🚧
-8. 复刻朋友圈 🚧
+6. 推广裂变玩法 🚧
+7. 头像装饰玩法 🚧
+8. 复刻朋友圈玩法 🚧
+
+### 脚本
+
+```MongoDB
+// 清空文章库
+db.collection('articleInfo')
+.where({
+  href: _.exists(true)
+})
+.remove()
+```

@@ -7,13 +7,13 @@
  * @returns
  */
 
-async function queryMemberInfo (data, db, strMemberId) {
+async function queryMemberInfo(data, db, strMemberId) {
 	let objResult = {}
 
 	try {
 		objResult = {
 			code: 200,
-			data: await db.collection('memberInfo').doc(strMemberId).get()
+			data: await db.collection('memberInfo').doc(strMemberId).get(),
 		}
 	} catch (e) {
 		// 没有查到。异常。

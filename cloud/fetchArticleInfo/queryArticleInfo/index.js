@@ -8,21 +8,19 @@
 
 const MAX_LIMIT = 100 // 每次取100条
 
-async function queryArticleInfo (data, db) {
+async function queryArticleInfo(data, db) {
 	let objResult = {}
 	const collection = db.collection('articleInfo')
-	const { 
-		nPageNum = 0, 
-		nPageSize = MAX_LIMIT 
-	} = data
+	const { nPageNum = 0, nPageSize = MAX_LIMIT } = data
 
 	try {
 		objResult = {
 			code: 200,
-			data: await collection.orderBy('createDate','desc')
+			data: await collection
+				.orderBy('createDate', 'desc')
 				.skip(nPageNum * nPageSize)
 				.limit(nPageSize)
-				.get()
+				.get(),
 		}
 	} catch (e) {
 		// 没有查到。异常。

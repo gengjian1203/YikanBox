@@ -7,7 +7,7 @@ cloud.init({
 })
 
 // 校验返回值
-const validResult = (objTmp) => {
+const validResult = objTmp => {
 	if (objTmp.code) {
 		objTmp.code = 500
 	}
@@ -23,19 +23,15 @@ const validResult = (objTmp) => {
  */
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const {
-		OPENID,
-		APPID,
-		UNIONID,
-	} = cloud.getWXContext()
+	const { OPENID, APPID, UNIONID } = cloud.getWXContext()
 
-  const db = cloud.database()  
+	const db = cloud.database()
 
 	let objResult = {}
 
 	switch (event.type) {
 		case 'QUERY':
-      objResult = await queryArticleInfo(event.data, db)
+			objResult = await queryArticleInfo(event.data, db)
 			break
 		default:
 			break

@@ -5,7 +5,7 @@ interface IQueryArticleInfoType {
 	nPageSize?: number // 每页条数
 }
 /**
- * 新增注册成员信息
+ * 查询文章信息
  * @return
  */
 const queryArticleInfo = async (objParams?: IQueryArticleInfoType) => {
