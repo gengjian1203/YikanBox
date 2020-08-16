@@ -13,11 +13,10 @@ interface INavigationHeaderProps {
 	strNavigationTitle?: string // 导航名称
 }
 
-const nNavHeight = 40 // Navigation高度
 const nNavPadding = 200 // Navigation填补空白高度
-const nProtectHeight = 100 // 保护区域
-const nOpacityFadeOutFinish = 200 // 淡出区域
-const nOpacityFadeInFinish = 300 // 淡入区域
+const nProtectHeight = 60 // 保护区域
+const nOpacityFadeOutFinish = 160 // 淡出区域
+const nOpacityFadeInFinish = 260 // 淡入区域
 
 export default function NavigationHeader(props: INavigationHeaderProps) {
 	const {
@@ -30,6 +29,9 @@ export default function NavigationHeader(props: INavigationHeaderProps) {
 	const [nOpacityColor, setOpacityColor] = useState<number>(0)
 
 	const systemInfo = useSelector(state => state.systemInfo)
+	const nHeightNavigationHeader = useSelector(
+		state => state.appInfo.objAppHeight.nHeightNavigationHeader
+	)
 
 	usePageScroll(res => {
 		if (isTransparent) {
@@ -118,9 +120,7 @@ export default function NavigationHeader(props: INavigationHeaderProps) {
 			{/* 下拉占位展示区 */}
 			{!isTransparent && (
 				<View
-					style={`height: ${Taro.pxTransform(
-						(nNavHeight + systemInfo.statusBarHeight) * 2
-					)}; `}
+					style={`height: ${Taro.pxTransform(nHeightNavigationHeader * 2)}; `}
 				></View>
 			)}
 		</View>

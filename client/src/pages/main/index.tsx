@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useRouter, useDidShow } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { Block, View } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
 import TabbarBottom from '@/components/TabBarBottom'
 
@@ -65,7 +65,7 @@ export default function Main() {
 	}
 
 	return (
-		<View>
+		<Block>
 			{/* 顶部导航 */}
 			<NavigationHeader
 				isShowLeftIcon={false}
@@ -76,6 +76,6 @@ export default function Main() {
 			{renderVPage()}
 			{/* 底部导航 */}
 			<TabbarBottom />
-		</View>
+		</Block>
 	)
 }

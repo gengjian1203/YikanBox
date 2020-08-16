@@ -2,6 +2,9 @@ import {
 	SET_MAIN_PATH,
 	SET_BOTTOM_BAR_LIST,
 	SET_BOTTOM_BAR_SELECT,
+	SET_HEIGHT_NAVIGATION,
+	SET_HEIGHT_NAVIGATION_HEADER,
+	SET_HEIGHT_TABBAR_BOTTOM,
 } from '@/redux/constants/appInfo'
 
 const appInfoActions = dispatch => {
@@ -24,6 +27,27 @@ const appInfoActions = dispatch => {
 		setBottomBarSelect: payload => {
 			dispatch({
 				type: SET_BOTTOM_BAR_SELECT,
+				payload,
+			})
+		},
+		// 设置顶部导航的高度
+		setHeightNavigation: payload => {
+			dispatch({
+				type: SET_HEIGHT_NAVIGATION,
+				payload,
+			})
+		},
+		// 设置顶部导航整体的高度
+		setHeightNavigationHeader: payload => {
+			dispatch({
+				type: SET_HEIGHT_NAVIGATION_HEADER,
+				payload,
+			})
+		},
+		// 设置底部导航的高度
+		setHeightTabbarBottom: payload => {
+			dispatch({
+				type: SET_HEIGHT_TABBAR_BOTTOM,
 				payload,
 			})
 		},

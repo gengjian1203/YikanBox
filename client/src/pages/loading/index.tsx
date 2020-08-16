@@ -19,9 +19,14 @@ export default function Loading() {
 	const {
 		params: { strSharePath = '', objShareParams = {} },
 	} = useRouter()
-	const { setMainPath, setBottomBarList, setBottomBarSelect } = useActions(
-		appInfoActions
-	)
+	const {
+		setMainPath,
+		setBottomBarList,
+		setBottomBarSelect,
+		setHeightNavigation,
+		setHeightNavigationHeader,
+		setHeightTabbarBottom,
+	} = useActions(appInfoActions)
 	const { setMemberInfo } = useActions(memberInfoActions)
 	const { setSystemInfo } = useActions(systemInfoActions)
 
@@ -45,12 +50,20 @@ export default function Loading() {
 			success: res => {
 				console.log('AppInitDataService getSystemInfo', res)
 				setSystemInfo(res)
+				setHeightNavigation(40)
+				setHeightNavigationHeader(40 + res.statusBarHeight)
+				setHeightTabbarBottom(60)
 			},
 			fail: err => {
 				console.error('AppInitDataService getSystemInfo', err)
 				setSystemInfo(err)
+				setHeightNavigation(40)
+				setHeightNavigationHeader(40 + 20)
+				setHeightTabbarBottom(60)
 			},
 		})
+
+		//
 	}
 
 	// 初始化应用级信息
