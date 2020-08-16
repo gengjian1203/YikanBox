@@ -8,9 +8,8 @@
 const strServceUrl = 'https://daily.zhihu.com'
 
 const queryZhiHuInfoDetail = async (href, superagent, cheerio, entities) => {
-	console.log('queryZhiHuInfoDetail', `${strServceUrl}${href}`)
 	const objDetail = {}
-	const result = await superagent.get(`${strServceUrl}${href}`).charset('utf-8') //取决于网页的编码方式
+	const result = await superagent.get(href).charset('utf-8') //取决于网页的编码方式
 	const data = result.text || ''
 	const $ = cheerio.load(result.text)
 	console.log('queryZhiHuInfoDetail', data)
@@ -36,11 +35,11 @@ async function spiderZhiHuInfo(db, superagent, cheerio, entities) {
 			createDate: db.serverDate(), // 创建时间
 		}
 		const objHtml = list.eq(index)
-		objInfo.href = objHtml.attr('href')
-		console.log('spiderZhiHuInfo1', objInfo.href)
-		if (objInfo.href) {
-			objInfo.id = parseInt(objInfo.href.substring(7)) // 文章ID
-			objInfo.img = objHtml.find('img').attr('src') // 文章截图
+		const href = objHtml.attr('href')
+		if (href) {
+			// objInfo.id = parseInt(href.substring(7)) // 文章ID
+			objInfo.href = `${strServceUrl}${objHtml.attr('href')}` // 文章Url
+			objInfo.posterImg = objHtml.find('img').attr('src') // 文章截图
 			objInfo.title = objHtml.find('.title').text() // 文章标题
 
 			const { author, content } = await queryZhiHuInfoDetail(
@@ -49,8 +48,8 @@ async function spiderZhiHuInfo(db, superagent, cheerio, entities) {
 				cheerio,
 				entities
 			)
-			objInfo.author = author
-			objInfo.content = content
+			objInfo.author = author // 作者
+			objInfo.content = content // 内容
 
 			arrResultList.push(objInfo)
 		}
