@@ -4,6 +4,10 @@ export default {
 	],
 	subpackages: [
 		{
+			root: 'pages/article-detail', // 文章详情页
+			pages: ['index'],
+		},
+		{
 			root: 'pages/demo', // 测试页
 			pages: ['index'],
 		},
@@ -17,9 +21,15 @@ export default {
 		},
 	],
 	preloadRule: {
+		// 加载页预加载：主页和登录页
 		'pages/loading/index': {
 			network: 'all',
 			packages: ['pages/main', 'pages/login'],
+		},
+		// 主页预加载：文章详情页
+		'pages/main/index': {
+			network: 'all',
+			packages: ['pages/article-detail'],
 		},
 	},
 	window: {
