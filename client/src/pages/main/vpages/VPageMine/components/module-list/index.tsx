@@ -32,21 +32,37 @@ export default function ModuleList(props: IModuleListProps) {
 	// 我的头像秀
 	const handleAvatarShowClick = e => {
 		console.log('handleAvatarShowClick', e)
+		Taro.showToast({
+			title: '敬请期待',
+			icon: 'none',
+		})
 	}
 
 	// 我的图片秀
 	const handlePhotoShowClick = e => {
 		console.log('handlePhotoShowClick', e)
+		Taro.showToast({
+			title: '敬请期待',
+			icon: 'none',
+		})
 	}
 
 	// 我的接龙
 	const handleActivityQueueClick = e => {
 		console.log('handleActivityQueueClick', e)
+		Taro.showToast({
+			title: '敬请期待',
+			icon: 'none',
+		})
 	}
 
 	// 另类朋友圈
 	const handleOtherMomentClick = e => {
 		console.log('handleOtherMomentClick', e)
+		Taro.showToast({
+			title: '敬请期待',
+			icon: 'none',
+		})
 	}
 
 	// 退出登录
@@ -83,15 +99,7 @@ export default function ModuleList(props: IModuleListProps) {
 				/>
 				<AtListItem
 					className='item-normal'
-					title='我的接龙'
-					arrow='right'
-					iconInfo={{ size: 25, color: 'red', value: 'iconfont icon-mine' }}
-					onClick={useThrottle(useCheckLogin(handleActivityQueueClick))}
-				/>
-
-				<AtListItem
-					className='item-normal'
-					title='另类朋友圈'
+					title='我的达人圈'
 					arrow='right'
 					iconInfo={{
 						size: 25,
@@ -100,6 +108,14 @@ export default function ModuleList(props: IModuleListProps) {
 					}}
 					onClick={useThrottle(useCheckLogin(handleOtherMomentClick))}
 				/>
+				<AtListItem
+					className='item-normal'
+					title='我的接龙'
+					arrow='right'
+					iconInfo={{ size: 25, color: 'red', value: 'iconfont icon-mine' }}
+					onClick={useThrottle(useCheckLogin(handleActivityQueueClick))}
+				/>
+
 				{memberInfo._id && (
 					<AtListItem
 						className='item-logout'

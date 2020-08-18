@@ -32,67 +32,6 @@ export default function VPageMine(props: IVPageMineProps) {
 				<ModuleCommon />
 				{/* 列表模块 */}
 				<ModuleList />
-				{/* 测试 */}
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
-				<View>测试顶部导航变化</View>
 			</View>
 		</View>
 	)

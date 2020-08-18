@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import articleInfoActions from '@/redux/actions/articleInfo'
+import { SIZE_PAGE_DISCOVER } from '@/redux/constants/articleInfo'
 import webApi from '@/api/articleInfo'
 
 import { View, Swiper, SwiperItem } from '@tarojs/components'
@@ -12,8 +13,6 @@ import ModuleArticle from './components/module-article'
 import './index.scss'
 
 interface IVPageDiscoverProps {}
-
-const PAGE_SIZE = 100
 
 export default function VPageDiscover(props: IVPageDiscoverProps) {
 	const {} = props
@@ -26,19 +25,13 @@ export default function VPageDiscover(props: IVPageDiscoverProps) {
 	const { nArticleCurrent, arrArticleList } = useSelector(
 		state => state.articleInfo
 	)
-	const { setArticleCurrent, setArticleList } = useActions(articleInfoActions)
+	const { setArticleCurrent, updateArticleListSplice } = useActions(
+		articleInfoActions
+	)
 
 	const onLoad = async () => {
 		console.log('VPageDiscover')
-		if (arrArticleList.length === 0) {
-			const objParams = {
-				nPageNum: 0,
-				nPageSize: PAGE_SIZE,
-			}
-			const res = await webApi.queryArticleInfo(objParams)
-			console.log('VPageDiscover onLoad', res)
-			setArticleList(res.data)
-		}
+
 		setLoadComplete(true)
 	}
 
@@ -48,9 +41,24 @@ export default function VPageDiscover(props: IVPageDiscoverProps) {
 	}, [])
 
 	// 切换 swiper
-	const handleSwiperChange = e => {
+	const handleSwiperChange = async e => {
 		console.log('handleSwiperChange', e)
-		setArticleCurrent(e.detail.current)
+		const nCurrent = e.detail.current
+		setArticleCurrent(nCurrent)
+		// 判断是否需要加载后续数据
+		const nLength = arrArticleList.length
+		const nPageNum = Math.floor(nCurrent / SIZE_PAGE_DISCOVER) + 1
+		if (nCurrent === nLength - 5) {
+			const objParams = {
+				nPageNum: nPageNum,
+				nPageSize: SIZE_PAGE_DISCOVER,
+			}
+			const res = await webApi.queryArticleInfo(objParams)
+			updateArticleListSplice({
+				nPageNum,
+				arrDataList: res.data,
+			})
+		}
 	}
 
 	return (

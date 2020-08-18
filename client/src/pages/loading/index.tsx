@@ -4,8 +4,11 @@ import useActions from '@/hooks/useActions'
 import appInfoActions from '@/redux/actions/appInfo'
 import memberInfoActions from '@/redux/actions/memberInfo'
 import systemInfoActions from '@/redux/actions/systemInfo'
+import articleInfoActions from '@/redux/actions/articleInfo'
+import { SIZE_PAGE_DISCOVER } from '@/redux/constants/articleInfo'
 
-import webApi from '@/api/loginInfo'
+import webApiLoginInfo from '@/api/loginInfo'
+import webApiArticleInfo from '@/api/articleInfo'
 import AppService from '@/services/AppService'
 import { router2url } from '@/utils/index'
 
@@ -32,9 +35,11 @@ export default function Loading() {
 	} = useActions(appInfoActions)
 	const { setMemberInfo } = useActions(memberInfoActions)
 	const { setSystemInfo } = useActions(systemInfoActions)
+	const { setArticleList } = useActions(articleInfoActions)
 
+	// 查询小程序信息以及用户信息
 	const queryLoginInfo: any = async () => {
-		const res = await webApi.queryLoginInfo()
+		const res = await webApiLoginInfo.queryLoginInfo()
 		console.log('queryLoginInfo', res)
 		return {
 			appInfo: res.appInfo.data[0],
@@ -45,6 +50,7 @@ export default function Loading() {
 	// 初始化Api基本信息
 	const initApi = async () => {
 		m_objAppService.init()
+		console.log('initApi done.')
 	}
 
 	// 初始化系统级信息
@@ -74,8 +80,7 @@ export default function Loading() {
 				setHeightTabbarBottom(60)
 			},
 		})
-
-		//
+		console.log('initSystemInfo done.')
 	}
 
 	// 初始化应用级信息
@@ -90,8 +95,19 @@ export default function Loading() {
 		setBottomBarList(appInfo.arrBottomBarList)
 		setMainPath(strMainPath)
 		setMemberInfo(memberInfo)
-
+		console.log('initLoginInfo done.')
 		return loginInfo
+	}
+
+	// 预加载文章列表
+	const prevLoadingArticleList = async () => {
+		const objParams = {
+			nPageNum: 0,
+			nPageSize: SIZE_PAGE_DISCOVER,
+		}
+		const res = await webApiArticleInfo.queryArticleInfo(objParams)
+		setArticleList(res.data)
+		console.log('prevLoadingData done.')
 	}
 
 	// 跳转页面逻辑
@@ -111,13 +127,26 @@ export default function Loading() {
 	}
 
 	const onLoad = async () => {
-		Taro.hideShareMenu()
-		await initApi()
-		await initSystemInfo()
-		const objLoginInfo = await initLoginInfo()
+		const [
+			resInitApi,
+			resInitSystemInfo,
+			resInitLoginInfo,
+			resLoadingArticleList,
+		] = await Promise.all([
+			initApi(),
+			initSystemInfo(),
+			initLoginInfo(),
+			prevLoadingArticleList(),
+		])
 
-		jumpPage(objLoginInfo)
-		return () => {}
+		console.log(
+			'Loading onLoad',
+			resInitApi,
+			resInitSystemInfo,
+			resInitLoginInfo,
+			resLoadingArticleList
+		)
+		jumpPage(resInitLoginInfo)
 	}
 
 	useEffect(() => {

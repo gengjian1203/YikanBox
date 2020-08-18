@@ -30,6 +30,18 @@ export default function ModuleCard(props: IModuleCardProps) {
 
 	const handleModuleCardClick = () => {
 		console.log('handleModuleCardClick')
+		Taro.showToast({
+			title: '敬请期待',
+			icon: 'none',
+		})
+	}
+
+	const handleClockInClick = () => {
+		console.log('handleClockInClick')
+		Taro.showToast({
+			title: '敬请期待',
+			icon: 'none',
+		})
 	}
 
 	return (
@@ -68,11 +80,13 @@ export default function ModuleCard(props: IModuleCardProps) {
 					)}
 				</View>
 				{/* 右侧 */}
-				{isLogin && (
-					<View className='info-right'>
-						<View className='right-sign'>签到</View>
-					</View>
-				)}
+				<View
+					className='info-right'
+					style={`${isLogin ? '' : 'display: none; '}`}
+					onClick={useThrottle(useCheckLogin(handleClockInClick))}
+				>
+					<View className='right-sign'>签到</View>
+				</View>
 			</View>
 		</View>
 	)
