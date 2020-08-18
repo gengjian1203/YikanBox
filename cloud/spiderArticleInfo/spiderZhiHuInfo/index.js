@@ -15,8 +15,11 @@ const queryZhiHuInfoDetail = async (href, superagent, cheerio, entities) => {
 	console.log('queryZhiHuInfoDetail', data)
 	console.log('queryZhiHuInfoDetail', $)
 
-	objDetail.author = $('.author').text() // 作者信息
+	const author = $('.author').text() // 作者信息
+	objDetail.author = author.slice(0, author.indexOf('，')) // 取逗号之前的字符
+	objDetail.author = objDetail.author.replace(/知乎/g, '')
 	objDetail.content = entities.decode($('.content').html()) // 文章内容
+	objDetail.content = objDetail.content.replace(/知乎/g, '')
 
 	return objDetail
 }
@@ -38,6 +41,7 @@ async function spiderZhiHuInfo(db, superagent, cheerio, entities) {
 		const href = objHtml.attr('href')
 		if (href) {
 			// objInfo.id = parseInt(href.substring(7)) // 文章ID
+			objInfo.source = 'ZHIHU' // 文章来源
 			objInfo.href = `${strServceUrl}${objHtml.attr('href')}` // 文章Url
 			objInfo.posterImg = objHtml.find('img').attr('src') // 文章截图
 			objInfo.title = objHtml.find('.title').text() // 文章标题

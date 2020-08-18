@@ -30,13 +30,33 @@ const validResult = objTmp => {
  * 信息存入数据库
  */
 const pushArticleInfoList = async arrData => {
+	const arrResult = []
+
 	try {
 		for (let item of arrData) {
-			const res = await db.collection('articleInfo').add({ data: item })
+			let objArticleInfo = null
+			// 查询是否有相同的文章
+			try {
+				objArticleInfo = await db
+					.collection('articleInfo')
+					.where({
+						href: item.href,
+					})
+					.get()
+			} catch (e) {
+				console.error('queryArticleInfo error', e)
+			}
+
+			if (objArticleInfo.data.length === 0) {
+				const res = await db.collection('articleInfo').add({ data: item })
+				arrResult.push(item)
+			}
 		}
 	} catch (e) {
 		console.error('pushArticleInfoList error.', e, arrData)
 	}
+
+	return arrResult
 }
 
 /**
@@ -49,6 +69,7 @@ exports.main = async (event, context) => {
 	const strType = 'ZHIHU' // 'ZHIHU'-知乎日报
 	let objResult = {}
 	let arrData = []
+	let arrDataResult = []
 
 	try {
 		switch (strType) {
@@ -67,7 +88,7 @@ exports.main = async (event, context) => {
 	}
 
 	try {
-		await pushArticleInfoList(arrData)
+		arrDataResult = await pushArticleInfoList(arrData)
 	} catch (e) {
 		objResult = {
 			code: 500,
@@ -76,7 +97,7 @@ exports.main = async (event, context) => {
 		console.error('信息存入数据库error.', e)
 	}
 
-	objResult.data = arrData
+	objResult.data = arrDataResult
 
 	return validResult(objResult)
 }
