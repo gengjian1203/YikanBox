@@ -39,12 +39,14 @@ const updateMemberInfo = async (db, strMemberId, objMemberData) => {
 				})
 
 			objResult = {
-				...data,
-				app_loginDate: date, // 登录时间
-				app_loginTime: time, // 登录时间
-				app_updateDate: date, // 修改时间
-				app_updateTime: time, // 修改时间
-				app_countLogin: nCountLogin, // 更新登录次数
+				data: {
+					...data,
+					app_loginDate: date, // 登录时间
+					app_loginTime: time, // 登录时间
+					app_updateDate: date, // 修改时间
+					app_updateTime: time, // 修改时间
+					app_countLogin: nCountLogin, // 更新登录次数
+				},
 			}
 		}
 	} catch (e) {

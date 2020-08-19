@@ -13,6 +13,7 @@ import AppService from '@/services/AppService'
 import { router2url } from '@/utils/index'
 
 import { View } from '@tarojs/components'
+import TipsPanel from '@/components/TipsPanel'
 
 import './index.scss'
 
@@ -154,8 +155,9 @@ export default function Loading() {
 	}, [])
 
 	return (
-		<View className='loading-page-wrap'>
-			<View>Loading...</View>
+		<View className='loading-page-wrap flex-center-v'>
+			<TipsPanel strType='LOADING' />
+			<View className='loading-page-text flex-center'>Loading...</View>
 		</View>
 	)
 }

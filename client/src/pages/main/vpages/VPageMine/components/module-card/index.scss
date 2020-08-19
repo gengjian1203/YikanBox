@@ -29,11 +29,6 @@
 		.info-left {
 			flex: 0 0 140px;
 			height: 100%;
-			// background-color: green;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
 
 			.left-avatar {
 				box-sizing: border-box;
@@ -56,7 +51,6 @@
 			width: 0;
 			height: 100%;
 			padding: 0 $border-bold-space;
-			// background-color: blue;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
@@ -82,11 +76,6 @@
 		.info-right {
 			flex: 0 0 160px;
 			height: 100%;
-			// background-color: purple;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
 
 			.right-sign {
 				width: 100%;
@@ -94,10 +83,6 @@
 				border-radius: 25px;
 				background-color: $color-mask;
 				color: $color-white;
-				display: flex;
-				flex-direction: row;
-				justify-content: center;
-				align-items: center;
 			}
 		}
 	}

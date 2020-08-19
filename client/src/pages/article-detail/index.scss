@@ -7,8 +7,21 @@
 
 	padding: $border-bold-space;
 
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+
 	.article-detail-item {
 		width: 100%;
 		height: 80px;
+	}
+
+	.article-author {
+		justify-content: flex-start;
+	}
+
+	.article-createDate {
+		justify-content: flex-start;
 	}
 }

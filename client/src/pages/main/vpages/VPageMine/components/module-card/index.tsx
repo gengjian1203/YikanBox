@@ -54,7 +54,7 @@ export default function ModuleCard(props: IModuleCardProps) {
 			<View className='card-info'>
 				{/* 左侧 */}
 				<View
-					className='info-left'
+					className='info-left flex-center-v'
 					onClick={useThrottle(useCheckLogin(handleModuleCardClick))}
 				>
 					{isLogin ? (
@@ -81,11 +81,11 @@ export default function ModuleCard(props: IModuleCardProps) {
 				</View>
 				{/* 右侧 */}
 				<View
-					className='info-right'
+					className='info-right flex-center-v'
 					style={`${isLogin ? '' : 'display: none; '}`}
 					onClick={useThrottle(useCheckLogin(handleClockInClick))}
 				>
-					<View className='right-sign'>签到</View>
+					<View className='right-sign flex-center'>签到</View>
 				</View>
 			</View>
 		</View>

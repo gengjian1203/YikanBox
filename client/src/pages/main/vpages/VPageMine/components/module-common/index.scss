@@ -9,11 +9,6 @@
 	border-radius: 10px;
 	box-shadow: 0 5px 5px $color-shadow;
 
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-
 	.module-common-content {
 		box-sizing: border-box;
 		width: 100%;
@@ -28,10 +23,6 @@
 			width: 120px;
 			height: 180px;
 			margin-right: $border-bold-space;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
 
 			.common-item-icon {
 				width: 100px;
@@ -40,10 +31,6 @@
 				font-size: $f1;
 				color: $color-white;
 				font-weight: bold;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
 			}
 
 			.common-item-name {

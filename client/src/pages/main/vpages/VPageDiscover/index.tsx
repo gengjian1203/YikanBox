@@ -7,6 +7,7 @@ import { SIZE_PAGE_DISCOVER } from '@/redux/constants/articleInfo'
 import webApi from '@/api/articleInfo'
 
 import { View, Swiper, SwiperItem } from '@tarojs/components'
+import TipsPanel from '@/components/TipsPanel'
 
 import ModuleArticle from './components/module-article'
 
@@ -16,8 +17,6 @@ interface IVPageDiscoverProps {}
 
 export default function VPageDiscover(props: IVPageDiscoverProps) {
 	const {} = props
-
-	const [isLoadComplete, setLoadComplete] = useState<boolean>(false)
 
 	const { nHeightNavigationHeader, nHeightTabbarBottom } = useSelector(
 		state => state.appInfo.objAppHeight
@@ -31,8 +30,6 @@ export default function VPageDiscover(props: IVPageDiscoverProps) {
 
 	const onLoad = async () => {
 		console.log('VPageDiscover')
-
-		setLoadComplete(true)
 	}
 
 	useEffect(() => {
@@ -63,35 +60,31 @@ export default function VPageDiscover(props: IVPageDiscoverProps) {
 
 	return (
 		<View className='vpage-discover-wrap'>
-			{isLoadComplete ? (
-				arrArticleList.length ? (
-					<Swiper
-						className='module-swiper-wrap'
-						style={`height: calc(100vh - ${Taro.pxTransform(
-							(nHeightNavigationHeader + nHeightTabbarBottom) * 2
-						)}); `}
-						vertical
-						current={nArticleCurrent}
-						onChange={handleSwiperChange}
-					>
-						{arrArticleList.map((item, index) => (
-							<SwiperItem key={index} className='swiper-item'>
-								<ModuleArticle objArticleData={item} />
-							</SwiperItem>
-						))}
-					</Swiper>
-				) : (
-					<View
-						className='module-swiper-wrap'
-						style={`height: calc(100vh - ${Taro.pxTransform(
-							(nHeightNavigationHeader + nHeightTabbarBottom) * 2
-						)}); `}
-					>
-						暂无内容呦
-					</View>
-				)
+			{arrArticleList.length ? (
+				<Swiper
+					className='module-swiper-wrap'
+					style={`height: calc(100vh - ${Taro.pxTransform(
+						(nHeightNavigationHeader + nHeightTabbarBottom) * 2
+					)}); `}
+					vertical
+					current={nArticleCurrent}
+					onChange={handleSwiperChange}
+				>
+					{arrArticleList.map((item, index) => (
+						<SwiperItem key={index} className='swiper-item flex-center'>
+							<ModuleArticle objArticleData={item} />
+						</SwiperItem>
+					))}
+				</Swiper>
 			) : (
-				<View>加载中...</View>
+				<View
+					className='module-swiper-wrap flex-center'
+					style={`height: calc(100vh - ${Taro.pxTransform(
+						(nHeightNavigationHeader + nHeightTabbarBottom) * 2
+					)}); `}
+				>
+					<TipsPanel strType='EMPTY' />
+				</View>
 			)}
 		</View>
 	)

@@ -2,6 +2,8 @@ import Taro, { useRouter } from '@tarojs/taro'
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
+import { simpleDate } from '@/utils/index'
+
 import { View, Block } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
 
@@ -28,11 +30,15 @@ export default function ArticleDetail() {
 				strNavigationTitle={arrArticleList[nArticleCurrent].title}
 			/>
 			<View className='article-detail-wrap'>
-				<View className='article-detail-item flex-center text-ellipsis'>
-					{arrArticleList[nArticleCurrent].author}
+				<View className='article-detail-item flex-center text-ellipsis article-author'>
+					<View className='text-ellipsis'>
+						作者：{arrArticleList[nArticleCurrent].author}
+					</View>
 				</View>
-				<View className='article-detail-item flex-center text-ellipsis'>
-					{arrArticleList[nArticleCurrent].createDate}
+				<View className='article-detail-item flex-center text-ellipsis article-createDate'>
+					<View className='text-ellipsis'>
+						时间： {simpleDate(arrArticleList[nArticleCurrent].createDate)}
+					</View>
 				</View>
 
 				<poster html={arrArticleList[nArticleCurrent].content} />

@@ -1,7 +1,9 @@
 import Taro from '@tarojs/taro'
 import React from 'react'
 
-import { Block, View, Image } from '@tarojs/components'
+import { simpleDate } from '@/utils/index'
+
+import { View, Image } from '@tarojs/components'
 
 import './index.scss'
 
@@ -30,14 +32,16 @@ export default function ModuleArticle(props: IModuleArticleProps) {
 
 	return (
 		<View className='article-wrap' onClick={handleArticleDetailClick}>
-			<View className='article-item flex-center text-ellipsis article-title'>
-				{objArticleData.title}
+			<View className='article-item flex-center article-title'>
+				<View className='text-ellipsis'>{objArticleData.title}</View>
 			</View>
-			<View className='article-item flex-center text-ellipsis article-author'>
-				{objArticleData.author}
+			<View className='article-item flex-center article-author'>
+				<View className='text-ellipsis'>作者：{objArticleData.author}</View>
 			</View>
-			<View className='article-item flex-center text-ellipsis article-createDate'>
-				{objArticleData.createDate}
+			<View className='article-item flex-center article-createDate'>
+				<View className='text-ellipsis'>
+					时间：{simpleDate(objArticleData.createDate)}
+				</View>
 			</View>
 			<Image
 				className='article-image'
