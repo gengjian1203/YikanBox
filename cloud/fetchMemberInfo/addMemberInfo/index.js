@@ -38,6 +38,7 @@ async function addMemberInfo(data, db, strMemberId) {
 		// 创建基本信息
 		_id: strMemberId, // 主键
 		// 系统级
+		app_countLogin: 0, // 登录次数
 		app_createDate: date, // 创建时间
 		app_createTime: time, // 创建时间
 		app_loginDate: date, // 登录时间
