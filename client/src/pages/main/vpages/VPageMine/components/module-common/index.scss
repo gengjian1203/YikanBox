@@ -28,7 +28,6 @@
 				width: 100px;
 				height: 100px;
 				border-radius: 20px;
-				font-size: $f1;
 				color: $color-white;
 				font-weight: bold;
 			}
@@ -39,16 +38,24 @@
 				color: $color-text-long;
 			}
 
-			.bk-red {
+			.icon-mine {
+				font-size: $f1;
 				background-color: red;
 			}
 
-			.bk-green {
+			.icon-clock-in {
+				font-size: 60rpx;
 				background-color: green;
 			}
 
-			.bk-blue {
-				background-color: blue;
+			.icon-achievement {
+				font-size: 60rpx;
+				background-color: darkorange;
+			}
+
+			.icon-popularize {
+				font-size: 60rpx;
+				background-color: cadetblue;
 			}
 		}
 	}

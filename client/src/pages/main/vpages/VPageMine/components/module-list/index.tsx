@@ -87,14 +87,22 @@ export default function ModuleList(props: IModuleListProps) {
 					className='item-normal'
 					title='我的头像秀'
 					arrow='right'
-					iconInfo={{ size: 25, color: 'red', value: 'iconfont icon-mine' }}
+					iconInfo={{
+						size: 25,
+						color: 'lightsalmon',
+						value: 'iconfont icon-avatar-show',
+					}}
 					onClick={useThrottle(useCheckLogin(handleAvatarShowClick))}
 				/>
 				<AtListItem
 					className='item-normal'
 					title='我的图片秀'
 					arrow='right'
-					iconInfo={{ size: 25, color: 'red', value: 'iconfont icon-mine' }}
+					iconInfo={{
+						size: 25,
+						color: 'royalblue',
+						value: 'iconfont icon-photo-show',
+					}}
 					onClick={useThrottle(useCheckLogin(handlePhotoShowClick))}
 				/>
 				<AtListItem
@@ -103,8 +111,8 @@ export default function ModuleList(props: IModuleListProps) {
 					arrow='right'
 					iconInfo={{
 						size: 25,
-						color: 'green',
-						value: 'iconfont icon-calender',
+						color: 'violet',
+						value: 'iconfont icon-other-moment',
 					}}
 					onClick={useThrottle(useCheckLogin(handleOtherMomentClick))}
 				/>
@@ -112,7 +120,11 @@ export default function ModuleList(props: IModuleListProps) {
 					className='item-normal'
 					title='我的接龙'
 					arrow='right'
-					iconInfo={{ size: 25, color: 'red', value: 'iconfont icon-mine' }}
+					iconInfo={{
+						size: 25,
+						color: 'yellowgreen',
+						value: 'iconfont icon-activity-queue',
+					}}
 					onClick={useThrottle(useCheckLogin(handleActivityQueueClick))}
 				/>
 

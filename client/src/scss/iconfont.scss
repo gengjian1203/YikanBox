@@ -2,13 +2,13 @@
 
 @font-face {
 	font-family: 'iconfont'; /* project id 1883488 */
-	src: url('//at.alicdn.com/t/font_1883488_4jezpq95h7x.eot');
-	src: url('//at.alicdn.com/t/font_1883488_4jezpq95h7x.eot?#iefix')
+	src: url('//at.alicdn.com/t/font_1883488_tvnthec8n4l.eot');
+	src: url('//at.alicdn.com/t/font_1883488_tvnthec8n4l.eot?#iefix')
 			format('embedded-opentype'),
-		url('//at.alicdn.com/t/font_1883488_4jezpq95h7x.woff2') format('woff2'),
-		url('//at.alicdn.com/t/font_1883488_4jezpq95h7x.woff') format('woff'),
-		url('//at.alicdn.com/t/font_1883488_4jezpq95h7x.ttf') format('truetype'),
-		url('//at.alicdn.com/t/font_1883488_4jezpq95h7x.svg#iconfont') format('svg');
+		url('//at.alicdn.com/t/font_1883488_tvnthec8n4l.woff2') format('woff2'),
+		url('//at.alicdn.com/t/font_1883488_tvnthec8n4l.woff') format('woff'),
+		url('//at.alicdn.com/t/font_1883488_tvnthec8n4l.ttf') format('truetype'),
+		url('//at.alicdn.com/t/font_1883488_tvnthec8n4l.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -61,4 +61,32 @@
 
 .icon-default-avatar::before {
 	content: '\e8c9';
+}
+
+.icon-clock-in::before {
+	content: '\e629';
+}
+
+.icon-achievement::before {
+	content: '\e627';
+}
+
+.icon-popularize::before {
+	content: '\e605';
+}
+
+.icon-avatar-show::before {
+	content: '\e60e';
+}
+
+.icon-photo-show::before {
+	content: '\e649';
+}
+
+.icon-other-moment::before {
+	content: '\e628';
+}
+
+.icon-activity-queue::before {
+	content: '\ec57';
 }
