@@ -15,12 +15,12 @@ const updateMemberInfo = async (db, strMemberId, objMemberData) => {
 		if (objMemberData !== null) {
 			const data = objMemberData.data
 			const date = new Date()
-			const YYYY = date.getUTCFullYear()
-			const MM = date.getUTCMonth() + 1
-			const DD = date.getUTCDate()
-			const hh = date.getUTCHours()
-			const mm = date.getUTCMinutes()
-			const ss = date.getUTCSeconds()
+			const YYYY = date.getFullYear()
+			const MM = date.getMonth() + 1
+			const DD = date.getDate()
+			const hh = date.getHours()
+			const mm = date.getMinutes()
+			const ss = date.getSeconds()
 			const time = `${YYYY}-${MM}-${DD} ${hh}:${mm}:${ss}`
 			const nCountLogin = data.app_countLogin ? ++data.app_countLogin : 1
 

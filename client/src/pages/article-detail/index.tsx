@@ -40,8 +40,16 @@ export default function ArticleDetail() {
 						时间： {simpleDate(arrArticleList[nArticleCurrent].createDate)}
 					</View>
 				</View>
-
-				<poster html={arrArticleList[nArticleCurrent].content} />
+				<View>
+					<poster
+						style='overflow: hidden;'
+						compress={3}
+						html={arrArticleList[nArticleCurrent].content}
+						lazy-load
+						selectable
+						show-with-animation
+					/>
+				</View>
 			</View>
 		</Block>
 	)

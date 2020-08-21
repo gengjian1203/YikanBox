@@ -11,12 +11,12 @@ async function addMemberInfo(data, db, strMemberId) {
 	let objResult = {}
 	let objMemberInfo = undefined
 	const date = new Date()
-	const YYYY = date.getUTCFullYear()
-	const MM = date.getUTCMonth() + 1
-	const DD = date.getUTCDate()
-	const hh = date.getUTCHours()
-	const mm = date.getUTCMinutes()
-	const ss = date.getUTCSeconds()
+	const YYYY = date.getFullYear()
+	const MM = date.getMonth() + 1
+	const DD = date.getDate()
+	const hh = date.getHours()
+	const mm = date.getMinutes()
+	const ss = date.getSeconds()
 	const time = `${YYYY}-${MM}-${DD} ${hh}:${mm}:${ss}`
 
 	// 查询是否有该人注册
