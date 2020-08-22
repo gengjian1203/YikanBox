@@ -26,7 +26,7 @@ export default function ModuleArticle(props: IModuleArticleProps) {
 
 	const handleArticleDetailClick = () => {
 		Taro.navigateTo({
-			url: `/pages/article-detail/index`,
+			url: `/pages/article-detail/index` + `?articleId=${objArticleData._id}`,
 		})
 	}
 

@@ -1,26 +1,20 @@
 /**
  * queryArticleInfo
- * 查询跟 ArticleInfo 相关的信息
+ * 查询指定ID的 ArticleInfo 的信息
  * @param {*} data
  * @param {*} db
  * @returns
  */
 
-const MAX_LIMIT = 100 // 每次取100条
-
 async function queryArticleInfo(data, db) {
 	let objResult = {}
 	const collection = db.collection('articleInfo')
-	const { nPageNum = 0, nPageSize = MAX_LIMIT } = data
+	const { articleId = '' } = data
 
 	try {
 		objResult = {
 			code: 200,
-			data: await collection
-				.orderBy('createDate', 'desc')
-				.skip(nPageNum * nPageSize)
-				.limit(nPageSize)
-				.get(),
+			data: await collection.doc(articleId).get(),
 		}
 	} catch (e) {
 		// 没有查到。异常。

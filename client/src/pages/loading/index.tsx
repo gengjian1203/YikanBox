@@ -20,9 +20,7 @@ import './index.scss'
 const m_objAppService = AppService.getInstance()
 
 export default function Loading() {
-	const {
-		params: { strSharePath = '', objShareParams = {} },
-	} = useRouter()
+	const { params } = useRouter()
 	const {
 		setIsIOS,
 		setIsIphoneX,
@@ -106,7 +104,7 @@ export default function Loading() {
 			nPageNum: 0,
 			nPageSize: SIZE_PAGE_DISCOVER,
 		}
-		const res = await webApiArticleInfo.queryArticleInfo(objParams)
+		const res = await webApiArticleInfo.queryArticleList(objParams)
 		setArticleList(res.data)
 		console.log('prevLoadingData done.')
 	}
@@ -115,10 +113,12 @@ export default function Loading() {
 	const jumpPage = async objLoginInfo => {
 		const appInfo = objLoginInfo.appInfo
 		// 分享进入的
-		if (strSharePath) {
+		if (params.sharePath) {
+			const jumpUrl = decodeURIComponent(params.sharePath)
+			console.log('Loading jumpPage', jumpUrl)
 			setBottomBarSelect(0)
 			Taro.reLaunch({
-				url: router2url(strSharePath, objShareParams),
+				url: jumpUrl,
 			})
 		} else {
 			Taro.reLaunch({

@@ -24,4 +24,44 @@
 	.article-createDate {
 		justify-content: flex-start;
 	}
+
+	.article-float {
+		position: fixed;
+		right: 0;
+		bottom: 0;
+		width: 200px;
+		height: 600px;
+
+		.float-btn-icon {
+			position: relative;
+			width: 100px;
+			height: 100px;
+			margin-bottom: 40px;
+			border: none;
+			background-color: transparent;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			&:after {
+				border: none;
+			}
+
+			.iconfont {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				font-size: 80px;
+				color: $color-text-primary;
+			}
+			.icon-collection-select {
+				position: absolute;
+				top: 0;
+				left: 0;
+				color: $color-careful;
+			}
+		}
+	}
 }

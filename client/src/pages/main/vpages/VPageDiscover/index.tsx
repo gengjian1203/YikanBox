@@ -50,7 +50,7 @@ export default function VPageDiscover(props: IVPageDiscoverProps) {
 				nPageNum: nPageNum,
 				nPageSize: SIZE_PAGE_DISCOVER,
 			}
-			const res = await webApi.queryArticleInfo(objParams)
+			const res = await webApi.queryArticleList(objParams)
 			updateArticleListSplice({
 				nPageNum,
 				arrDataList: res.data,

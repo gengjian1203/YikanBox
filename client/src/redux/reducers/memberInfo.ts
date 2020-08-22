@@ -1,7 +1,9 @@
 import { produce } from 'immer'
 import { SET_MEMBER_INFO } from '@/redux/constants/memberInfo'
 
-const INITIAL_STATE = {}
+const INITIAL_STATE = {
+	data_arrArticleLikeList: [],
+}
 
 export default function memberInfoReducer(state = INITIAL_STATE, action) {
 	const { type, payload } = action

@@ -1,29 +1,69 @@
 // 动画公共样式
 
 // 底部移入动画
-.fade-in-from-btottom {
-  animation: FadeInFromBtottom 0.2s forwards;
+.fade-in-from-bottom {
+	animation: FadeInFromBottom 0.2s forwards;
 }
 
 // 底部移出动画
-.fade-out-from-btottom {
-  animation: FadeOutFromBtottom 0.2s forwards;
+.fade-out-from-bottom {
+	animation: FadeOutFromBottom 0.2s forwards;
 }
 
-@keyframes FadeInFromBtottom {
-  0% {
-    transform: translate3d(0, 100%, 0);
-  }
-  100% {
-    transform: none;
-  }
+// 缩放移入动画
+.fade-in-from-scale {
+	animation: FadeInFromScale 0.2s forwards;
 }
 
-@keyframes FadeOutFromBtottom {
-  0% {
-    transform: none;
-  }
-  100% {
-    transform: translate3d(0, 100%, 0);
-  }
+// 缩放移出动画
+.fade-out-from-scale {
+	animation: FadeOutFromScale 0.2s forwards;
+}
+
+@keyframes FadeInFromBottom {
+	0% {
+		transform: translate3d(0, 100%, 0);
+	}
+	100% {
+		transform: none;
+	}
+}
+
+@keyframes FadeOutFromBottom {
+	0% {
+		transform: none;
+	}
+	100% {
+		transform: translate3d(0, 100%, 0);
+	}
+}
+
+@keyframes FadeInFromScale {
+	0% {
+		transform: scale(0);
+		transform-origin: center center;
+	}
+	50% {
+		transform: scale(1.2);
+		transform-origin: center center;
+	}
+	100% {
+		transform: scale(1);
+		transform-origin: center center;
+	}
+}
+
+@keyframes FadeOutFromScale {
+	0% {
+		transform: scale(1);
+		transform-origin: center center;
+	}
+	50% {
+		transform: scale(1.2);
+		transform-origin: center center;
+	}
+	100% {
+		transform: scale(0);
+		transform-origin: center center;
+	}
 }

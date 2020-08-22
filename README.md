@@ -82,3 +82,12 @@ db.collection('articleInfo')
 })
 .remove()
 ```
+
+```MongoDB
+// 清空用户库
+db.collection('memberInfo')
+.where({
+  _id: _.exists(true)
+})
+.remove()
+```
