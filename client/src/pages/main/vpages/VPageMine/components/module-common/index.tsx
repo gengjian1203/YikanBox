@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import useThrottle from '@/hooks/useThrottle'
 import useCheckLogin from '@/hooks/useCheckLogin'
 
-import { View } from '@tarojs/components'
+import { View, ScrollView } from '@tarojs/components'
 import ModuleTitle from '@/components/ModuleTitle'
 
 import './index.scss'
@@ -19,32 +19,24 @@ export default function ModuleCommon(props: IModuleCommonProps) {
 		return () => {}
 	}, [])
 
-	// 个人资料
-	const handleMyselfDataClick = e => {
+	// 我的收藏
+	const handleCollectionClick = e => {
 		Taro.showToast({
 			title: '敬请期待',
 			icon: 'none',
 		})
 	}
 
-	// 打卡记录
-	const handleClockInDataClick = e => {
+	// 我的成就
+	const handleAchievementClick = e => {
 		Taro.showToast({
 			title: '敬请期待',
 			icon: 'none',
 		})
 	}
 
-	// 成就系统
-	const handleAchievementDataClick = e => {
-		Taro.showToast({
-			title: '敬请期待',
-			icon: 'none',
-		})
-	}
-
-	// 推广记录
-	const handlePopularizeDataClick = e => {
+	// 我的推广
+	const handlePopularizeClick = e => {
 		Taro.showToast({
 			title: '敬请期待',
 			icon: 'none',
@@ -54,36 +46,35 @@ export default function ModuleCommon(props: IModuleCommonProps) {
 	return (
 		<View className='module-common-wrap flex-center-v'>
 			<ModuleTitle strTitle='常用功能' />
-			<View className='module-common-content'>
+			<ScrollView className='module-common-content' scrollX>
 				<View
-					className='common-item flex-center-v'
-					onClick={useThrottle(useCheckLogin(handleMyselfDataClick))}
+					className='common-item'
+					onClick={useThrottle(useCheckLogin(handleCollectionClick))}
 				>
-					<View className='common-item-icon flex-center iconfont icon-mine'></View>
-					<View className='common-item-name'>个人资料</View>
+					<View className='flex-center-v'>
+						<View className='common-item-icon flex-center iconfont icon-collection'></View>
+						<View className='common-item-name'>我的收藏</View>
+					</View>
 				</View>
 				<View
-					className='common-item flex-center-v'
-					onClick={useThrottle(useCheckLogin(handleClockInDataClick))}
+					className='common-item'
+					onClick={useThrottle(useCheckLogin(handleAchievementClick))}
 				>
-					<View className='common-item-icon flex-center iconfont icon-clock-in'></View>
-					<View className='common-item-name'>打卡记录</View>
+					<View className='flex-center-v'>
+						<View className='common-item-icon flex-center iconfont icon-achievement'></View>
+						<View className='common-item-name'>我的成就</View>
+					</View>
 				</View>
 				<View
-					className='common-item flex-center-v'
-					onClick={useThrottle(useCheckLogin(handleAchievementDataClick))}
+					className='common-item'
+					onClick={useThrottle(useCheckLogin(handlePopularizeClick))}
 				>
-					<View className='common-item-icon flex-center iconfont icon-achievement'></View>
-					<View className='common-item-name'>成就系统</View>
+					<View className='flex-center-v'>
+						<View className='common-item-icon flex-center iconfont icon-popularize'></View>
+						<View className='common-item-name'>我的推广</View>
+					</View>
 				</View>
-				<View
-					className='common-item flex-center-v'
-					onClick={useThrottle(useCheckLogin(handlePopularizeDataClick))}
-				>
-					<View className='common-item-icon flex-center iconfont icon-popularize'></View>
-					<View className='common-item-name'>推广记录</View>
-				</View>
-			</View>
+			</ScrollView>
 		</View>
 	)
 }

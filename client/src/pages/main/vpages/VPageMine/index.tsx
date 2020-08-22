@@ -29,7 +29,7 @@ export default function VPageMine(props: IVPageMineProps) {
 			{/* 我的内容 */}
 			<View className='mine-content'>
 				{/* 常用模块 */}
-				{/* <ModuleCommon /> */}
+				<ModuleCommon />
 				{/* 列表模块 */}
 				<ModuleList />
 			</View>

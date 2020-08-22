@@ -1,15 +1,13 @@
-import configStore from '@/redux/store/index'
-
 interface ISharePathType {
 	sharePath: string
 	[key: string]: any
 }
 
 /**
- * 校验该参数是不是空对象
+ * 整理分享参数
  * @param objParams 分享传递的参数
  * @param store Redux数据
- * @return true-为空对象 false-不为空对象
+ * @return 返回带参数可以用于直接跳转的链接字符串
  */
 export function processSharePath(objParams: ISharePathType, store: any) {
 	// 分享基本参数

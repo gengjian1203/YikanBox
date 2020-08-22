@@ -13,6 +13,7 @@
 		box-sizing: border-box;
 		width: 100%;
 		padding: 0 $border-bold-space;
+		white-space: nowrap;
 
 		display: flex;
 		flex-direction: row;
@@ -20,9 +21,14 @@
 		align-items: center;
 
 		.common-item {
+			display: inline-block;
 			width: 120px;
 			height: 180px;
 			margin-right: $border-bold-space;
+
+			&:last-child {
+				margin-right: 0;
+			}
 
 			.common-item-icon {
 				width: 100px;
@@ -38,12 +44,7 @@
 				color: $color-text-long;
 			}
 
-			.icon-mine {
-				font-size: $f1;
-				background-color: red;
-			}
-
-			.icon-clock-in {
+			.icon-collection {
 				font-size: 60rpx;
 				background-color: green;
 			}
