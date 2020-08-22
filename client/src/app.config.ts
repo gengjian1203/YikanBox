@@ -40,6 +40,5 @@ export default {
 		navigationBarTextStyle: 'black',
 		onReachBottomDistance: 200, // 触发上拉刷新
 		enablePullDownRefresh: false, // 开启下拉刷新
-		enableShareAppMessage: true, // 开启分享
 	},
 }

@@ -1,6 +1,4 @@
-import Taro from '@tarojs/taro'
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react'
 import { View } from '@tarojs/components'
 
 import './index.scss'
@@ -12,5 +10,9 @@ interface IModuleTitleProps {
 export default function ModuleTitle(props: IModuleTitleProps) {
 	const { strTitle = '' } = props
 
-	return <View className='module-tile-content'>{strTitle}</View>
+	return (
+		<View className='module-title-wrap'>
+			<View className='module-title-content'>{strTitle}</View>
+		</View>
+	)
 }
