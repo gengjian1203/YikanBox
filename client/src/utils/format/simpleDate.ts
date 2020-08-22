@@ -3,7 +3,7 @@
  * @param strDate
  * @return 只返回年月日
  */
-export function simpleDate(strDate: string = '') {
+export const simpleDate = (strDate: string = '') => {
 	let strResult = strDate.substring(0, strDate.indexOf('T'))
 	return strResult
 }

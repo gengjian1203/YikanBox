@@ -3,7 +3,7 @@
  * @param objCheck 待检验的对象
  * @return true-为空对象 false-不为空对象
  */
-export function checkObjectEmpty(objCheck) {
+export const checkObjectEmpty = objCheck => {
 	return JSON.stringify(objCheck) === '{}'
 }
 

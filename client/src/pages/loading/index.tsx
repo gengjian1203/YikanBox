@@ -4,13 +4,13 @@ import useActions from '@/hooks/useActions'
 import appInfoActions from '@/redux/actions/appInfo'
 import memberInfoActions from '@/redux/actions/memberInfo'
 import systemInfoActions from '@/redux/actions/systemInfo'
+import shareInfoActions from '@/redux/actions/shareInfo'
 import articleInfoActions from '@/redux/actions/articleInfo'
 import { SIZE_PAGE_DISCOVER } from '@/redux/constants/articleInfo'
 
 import webApiLoginInfo from '@/api/loginInfo'
 import webApiArticleInfo from '@/api/articleInfo'
 import AppService from '@/services/AppService'
-import { router2url } from '@/utils/index'
 
 import { View } from '@tarojs/components'
 import TipsPanel from '@/components/TipsPanel'
@@ -34,6 +34,7 @@ export default function Loading() {
 	} = useActions(appInfoActions)
 	const { setMemberInfo } = useActions(memberInfoActions)
 	const { setSystemInfo } = useActions(systemInfoActions)
+	const { setShareInfo } = useActions(shareInfoActions)
 	const { setArticleList } = useActions(articleInfoActions)
 
 	// 查询小程序信息以及用户信息
@@ -112,13 +113,17 @@ export default function Loading() {
 	// 跳转页面逻辑
 	const jumpPage = async objLoginInfo => {
 		const appInfo = objLoginInfo.appInfo
-		// 分享进入的
 		if (params.sharePath) {
-			const jumpUrl = decodeURIComponent(params.sharePath)
-			console.log('Loading jumpPage', jumpUrl)
-			setBottomBarSelect(0)
+			// 分享进入的
+			const shareInfoTmp = {
+				...params,
+				sharePath: decodeURIComponent(params.sharePath),
+			}
+			setShareInfo(shareInfoTmp)
+
+			console.log('Loading jumpPage', shareInfoTmp)
 			Taro.reLaunch({
-				url: jumpUrl,
+				url: shareInfoTmp.sharePath,
 			})
 		} else {
 			Taro.reLaunch({

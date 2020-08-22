@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import memberInfoActions from '@/redux/actions/memberInfo'
 
@@ -18,6 +19,8 @@ export default function ModuleLogin(props: IModuleLoginProps) {
 
 	const [isLogining, setLogining] = useState<boolean>(false)
 
+	const shareInfo = useSelector(state => state.shareInfo)
+
 	const { setMemberInfo } = useActions(memberInfoActions)
 
 	const onLoad = async () => {}
@@ -32,6 +35,9 @@ export default function ModuleLogin(props: IModuleLoginProps) {
 		const objUserInfo = e.detail.userInfo
 		if (objUserInfo && !checkObjectEmpty(objUserInfo)) {
 			setLogining(true)
+			objUserInfo.share_fromType = shareInfo.fromType
+			objUserInfo.share_resourceID = shareInfo.resourceID
+			objUserInfo.share_sharePath = shareInfo.sharePath
 			const res = await webApi.addMemberInfo(objUserInfo)
 			console.log('handleGetUserInfo addMemberInfo', res)
 			setMemberInfo(res.data)

@@ -45,6 +45,11 @@ async function addMemberInfo(data, db, strMemberId) {
 		app_loginTime: time, // 登录时间
 		app_updateDate: date, // 修改时间
 		app_updateTime: time, // 修改时间
+		// 溯源级
+		share_fromType: data.share_fromType,
+		share_resourceID: data.share_resourceID,
+		share_sharePath: data.share_sharePath,
+
 		// 个人信息
 		user_openid: strMemberId.substr(4),
 		user_nickName: data.nickName, // 昵称*

@@ -4,7 +4,7 @@
  * @param objParams 跳转参数
  * @return 合成的路由字符串
  */
-export function router2url(strPath: string = '', objParams: object = {}) {
+export const router2url = (strPath: string = '', objParams: object = {}) => {
 	let strResult = strPath
 	let isFirstParam = true
 

@@ -1,9 +1,11 @@
 import Taro, { useRouter, useShareAppMessage } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import useThrottle from '@/hooks/useThrottle'
+import useCheckLogin from '@/hooks/useCheckLogin'
 
 import webApi from '@/api/articleInfo'
-import { simpleDate } from '@/utils/index'
+import { simpleDate, processSharePath } from '@/utils/index'
 
 import { AtButton } from 'taro-ui'
 import { View, Block } from '@tarojs/components'
@@ -20,22 +22,25 @@ export default function ArticleDetail() {
 	const [isCollectionSelect, setCollectionSelect] = useState<boolean>(false)
 	const [objArticleInfo, setArticleInfo] = useState<any>({})
 
+	const store = useSelector(state => state)
 	const memberInfo = useSelector(state => state.memberInfo)
 	const { nArticleCurrent, arrArticleList } = useSelector(
 		state => state.articleInfo
 	)
 
 	useShareAppMessage(res => {
-		const sharePath = encodeURIComponent(
-			`/pages/article-detail/index` + `?from=share` + `&articleId=${articleId}`
+		const sharePath = processSharePath(
+			{
+				sharePath: path,
+				articleId: articleId,
+			},
+			store
 		)
-		const pathTmp = `/pages/loading/index?sharePath=` + sharePath
-
-		console.log('useShareAppMessage', pathTmp)
+		console.log('useShareAppMessage', sharePath)
 		return {
 			title: '',
 			imageUrl: '',
-			path: pathTmp,
+			path: sharePath,
 		}
 	})
 
@@ -106,7 +111,10 @@ export default function ArticleDetail() {
 				{/* 浮动区域 */}
 				<View className='article-float flex-center-v'>
 					{/* 点赞 */}
-					<AtButton className='float-btn-icon' onClick={handleCollectionClick}>
+					<AtButton
+						className='float-btn-icon'
+						onClick={useThrottle(useCheckLogin(handleCollectionClick))}
+					>
 						<View className={`iconfont ` + `icon-collection `}>
 							<View
 								className={
@@ -125,7 +133,7 @@ export default function ArticleDetail() {
 					<AtButton
 						className='float-btn-icon'
 						openType='share'
-						onClick={handleShareClick}
+						onClick={useThrottle(handleShareClick)}
 					>
 						<View className='iconfont icon-share'></View>
 					</AtButton>
