@@ -77,7 +77,7 @@
 					"id": 2,
 					"name": "pages/loading/index",
 					"pathName": "pages/loading/index",
-					"query": "fromType=sharePath&resourceID=mem-oKFiZ5WUDQsrZTKoo_OZ4bhnYfJA&sharePath=%2Fpages%2Farticle-detail%2Findex%3Ffrom%3Dshare%26articleId%3Df241f5fe5f409849000013a77fc2af15",
+					"query": "fromType=PATH&sourceID=mem-oKFiZ5WUDQsrZTKoo_OZ4bhnYfJA&sharePath=%2Fpages%2Farticle-detail%2Findex%3Ffrom%3Dshare%26articleId%3D2337443c5f41cd20000037806a362590",
 					"scene": null
 				}
 			]

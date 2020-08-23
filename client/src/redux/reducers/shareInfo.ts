@@ -3,7 +3,7 @@ import { SET_SHARE_INFO } from '@/redux/constants/shareInfo'
 
 const INITIAL_STATE = {
 	fromType: 'MINIPROGRAM',
-	resourceID: '',
+	sourceID: '',
 	sharePath: '',
 }
 

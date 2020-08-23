@@ -7,32 +7,37 @@
  * @returns
  */
 
-async function addMemberInfo(data, db, strMemberId) {
-	let objResult = {}
-	let objMemberInfo = undefined
-	const date = new Date()
-	const YYYY = date.getFullYear()
-	const MM = date.getMonth() + 1
-	const DD = date.getDate()
-	const hh = date.getHours()
-	const mm = date.getMinutes()
-	const ss = date.getSeconds()
-	const time = `${YYYY}-${MM}-${DD} ${hh}:${mm}:${ss}`
-
-	// 查询是否有该人注册
+// 查询溯源主的信息
+const querySourceInfo = async (data, db, strMemberId, date, time) => {
+	let objSourceInfo = null
+	// 查询溯源主的信息
 	try {
-		objMemberInfo = await db.collection('memberInfo').doc(strMemberId).get()
+		objSourceInfo = await db
+			.collection('memberInfo')
+			.doc(data.share_sourceID)
+			.get()
 	} catch (e) {
-		console.error('queryMemberInfo error', e)
+		console.error('querySourceInfo error', e)
 	}
-	if (objMemberInfo) {
-		objResult = {
-			code: 200,
-			data: objMemberInfo,
+	// 将溯源主信息加入到刚注册用户中
+	if (objSourceInfo) {
+		try {
+			await db
+				.collection('memberInfo')
+				.doc(strMemberId)
+				.update({
+					data: {
+						share_sourceID: db.command.set(objSourceInfo.data.user_nickName),
+					},
+				})
+		} catch (e) {
+			console.error('updateMemberInfo error', e)
 		}
-		return objResult
 	}
+}
 
+// 创建角色
+const createMember = async (data, db, strMemberId, date, time) => {
 	// 创建新用户
 	const objMember = {
 		// 创建基本信息
@@ -47,9 +52,8 @@ async function addMemberInfo(data, db, strMemberId) {
 		app_updateTime: time, // 修改时间
 		// 溯源级
 		share_fromType: data.share_fromType,
-		share_resourceID: data.share_resourceID,
+		share_sourceID: data.share_sourceID,
 		share_sharePath: data.share_sharePath,
-
 		// 个人信息
 		user_openid: strMemberId.substr(4),
 		user_nickName: data.nickName, // 昵称*
@@ -63,6 +67,7 @@ async function addMemberInfo(data, db, strMemberId) {
 		// 应用信息
 		data_level: 1, // 等级
 		data_exp: 0, // 经验
+		data_arrShareChildrenList: [], // 推广列表
 		data_arrCollectionArticleList: [], // 收藏文章列表
 		data_arrCollectionPhotoList: [], // 收藏图片列表
 		data_arrCollectionQueueList: [], // 收藏接龙列表
@@ -80,6 +85,69 @@ async function addMemberInfo(data, db, strMemberId) {
 			data: e,
 		}
 		console.error('addMemberInfo error', e)
+	}
+
+	return objResult
+}
+
+// 更新溯源主的推广信息
+const updateSourceInfo = async (data, db, strMemberId, date, time) => {
+	// 将溯源主信息加入到刚注册用户中
+	try {
+		await db
+			.collection('memberInfo')
+			.doc(data.share_sourceID)
+			.update({
+				data: {
+					data_arrShareChildrenList: db.command.addToSet({
+						_id: strMemberId,
+						nickName: data.nickName, // 昵称*
+						avatarUrl: data.avatarUrl, // 头像*
+						gender: data.gender, // 性别*
+						joinDate: date, // 加入时间
+						joinTime: time, // 加入时间
+					}),
+				},
+			})
+	} catch (e) {
+		console.error('updateSourceInfo error', e)
+	}
+}
+
+async function addMemberInfo(data, db, strMemberId) {
+	let objResult = {}
+	let objMemberInfo = undefined
+	const date = new Date()
+	const YYYY = date.getFullYear()
+	const MM = date.getMonth() + 1
+	const DD = date.getDate()
+	const hh = date.getHours()
+	const mm = date.getMinutes()
+	const ss = date.getSeconds()
+	const time = `${YYYY}-${MM}-${DD} ${hh}:${mm}:${ss}`
+
+	try {
+		objMemberInfo = await db.collection('memberInfo').doc(strMemberId).get()
+	} catch (e) {
+		console.error('queryMemberInfo error', e)
+	}
+
+	if (objMemberInfo) {
+		// 已经注册过注册
+		objResult = {
+			code: 200,
+			data: objMemberInfo,
+		}
+	} else {
+		// 尚未注册过
+		// 创建角色
+		objResult = await createMember(data, db, strMemberId, date, time)
+		if (data.share_sourceID) {
+			// 查询溯源主的信息
+			await querySourceInfo(data, db, strMemberId, date, time)
+			// 更新溯源主的推广信息
+			await updateSourceInfo(data, db, strMemberId, date, time)
+		}
 	}
 
 	return objResult
