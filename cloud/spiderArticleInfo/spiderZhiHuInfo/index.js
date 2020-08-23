@@ -10,10 +10,10 @@ const strServceUrl = 'https://daily.zhihu.com'
 const queryZhiHuInfoDetail = async (href, superagent, cheerio, entities) => {
 	const objDetail = {}
 	const result = await superagent.get(href).charset('utf-8') //取决于网页的编码方式
-	const data = result.text || ''
+	// const data = result.text || ''
 	const $ = cheerio.load(result.text)
-	console.log('queryZhiHuInfoDetail', data)
-	console.log('queryZhiHuInfoDetail', $)
+	// console.log('queryZhiHuInfoDetail', data)
+	// console.log('queryZhiHuInfoDetail', $)
 
 	const author = $('.author').text() // 作者信息
 	objDetail.author = author.slice(0, author.indexOf('，')) // 取逗号之前的字符
@@ -27,15 +27,15 @@ const queryZhiHuInfoDetail = async (href, superagent, cheerio, entities) => {
 async function spiderZhiHuInfo(db, superagent, cheerio, entities) {
 	const arrResultList = []
 	const result = await superagent.get(strServceUrl).charset('utf-8') //取决于网页的编码方式
-	const data = result.text || ''
+	// const data = result.text || ''
 	const $ = cheerio.load(result.text)
-	console.log('spiderZhiHuInfo', data)
-	console.log('spiderZhiHuInfo', $)
+	// console.log('spiderZhiHuInfo', data)
+	// console.log('spiderZhiHuInfo', $)
 
 	const list = $('.main-content-wrap .row').find('.link-button')
 	for (let index in list) {
 		const objInfo = {
-			createDate: db.serverDate(), // 创建时间
+			createDate: new Date(), // 创建时间
 		}
 		const objHtml = list.eq(index)
 		const href = objHtml.attr('href')

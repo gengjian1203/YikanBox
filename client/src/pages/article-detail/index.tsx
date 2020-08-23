@@ -1,15 +1,20 @@
 import Taro, { useRouter, useShareAppMessage } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import useActions from '@/hooks/useActions'
+import memberInfoActions from '@/redux/actions/memberInfo'
 import useThrottle from '@/hooks/useThrottle'
 import useCheckLogin from '@/hooks/useCheckLogin'
 
-import webApi from '@/api/articleInfo'
+import webApiArticleInfo from '@/api/articleInfo'
+import webApiMemberInfo from '@/api/memberInfo'
 import { simpleDate, processSharePath } from '@/utils/index'
 
 import { AtButton } from 'taro-ui'
 import { View, Block } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
+
+import { checkCollectionArticle } from './utils/index'
 
 import './index.scss'
 
@@ -26,6 +31,10 @@ export default function ArticleDetail() {
 	const memberInfo = useSelector(state => state.memberInfo)
 	const { nArticleCurrent, arrArticleList } = useSelector(
 		state => state.articleInfo
+	)
+
+	const { addCollectionArticleInfo, removeCollectionArticleInfo } = useActions(
+		memberInfoActions
 	)
 
 	useShareAppMessage(res => {
@@ -45,13 +54,18 @@ export default function ArticleDetail() {
 	})
 
 	useEffect(() => {
-		console.log('ArticleDetail... ', memberInfo.data_arrArticleCollectionList)
-		if (memberInfo.data_arrArticleCollectionList) {
-			// 查找该文章是否被收藏
-		} else {
-			setCollectionSelect(false)
-		}
-	}, [memberInfo.data_arrArticleCollectionList])
+		console.log(
+			'Watch.',
+			memberInfo.data_arrCollectionArticleList,
+			objArticleInfo
+		)
+		setCollectionSelect(
+			checkCollectionArticle(
+				memberInfo.data_arrCollectionArticleList,
+				objArticleInfo
+			)
+		)
+	}, [memberInfo.data_arrCollectionArticleList, objArticleInfo])
 
 	const onLoad = async () => {
 		console.log('onLoad... ', from)
@@ -60,7 +74,7 @@ export default function ArticleDetail() {
 			const objParams = {
 				articleId: articleId,
 			}
-			const res = await webApi.queryArticleInfo(objParams)
+			const res = await webApiArticleInfo.queryArticleInfo(objParams)
 			console.log('onLoad... ', res)
 			setArticleInfo(res.data)
 		} else {
@@ -68,13 +82,50 @@ export default function ArticleDetail() {
 		}
 	}
 
+	// const onUnload = async () => {
+	// 	console.log('onUnload... ', isCollectionSelect)
+	// 	// 原来没有，当前选中，则调增加收藏接口，并且更新Redux
+	// 	if (
+	// 		isCollectionSelect &&
+	// 		!checkCollectionArticle(
+	// 			memberInfo.data_arrCollectionArticleList,
+	// 			objArticleInfo
+	// 		)
+	// 	) {
+	// 		const res = await webApiMemberInfo.addCollectionArticle(objArticleInfo)
+	// 		console.log('addCollectionArticle', res)
+	// 	}
+	// 	// 原来有，目前未选中，则调移除收藏接口，并且更新Redux
+	// 	if (
+	// 		!isCollectionSelect &&
+	// 		checkCollectionArticle(
+	// 			memberInfo.data_arrCollectionArticleList,
+	// 			objArticleInfo
+	// 		)
+	// 	) {
+	// 		const res = await webApiMemberInfo.removeCollectionArticle(objArticleInfo)
+	// 		console.log('removeCollectionArticle', res)
+	// 	}
+	// }
+
 	useEffect(() => {
 		onLoad()
 	}, [])
 
-	const handleCollectionClick = () => {
-		console.log('handleCollectionClick')
-		setCollectionSelect(prev => !prev)
+	const handleCollectionClick = async () => {
+		console.log('handleCollectionClick', objArticleInfo)
+		const isCollectionSelectTmp = !isCollectionSelect
+		setCollectionSelect(isCollectionSelectTmp)
+
+		if (isCollectionSelectTmp) {
+			const res = await webApiMemberInfo.addCollectionArticle(objArticleInfo)
+			console.log('addCollectionArticle', res.data)
+			addCollectionArticleInfo(res.data)
+		} else {
+			const res = await webApiMemberInfo.removeCollectionArticle(objArticleInfo)
+			console.log('removeCollectionArticle', res)
+			removeCollectionArticleInfo(objArticleInfo)
+		}
 	}
 
 	const handleShareClick = () => {

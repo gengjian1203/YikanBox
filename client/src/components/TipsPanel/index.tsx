@@ -1,6 +1,8 @@
 import React from 'react'
 import { View, Image } from '@tarojs/components'
 
+import strEmptyUrl from '../../../images/empty.png'
+
 import './index.scss'
 
 interface IComLoadingProps {
@@ -25,8 +27,8 @@ export default function TipsPanel(props: IComLoadingProps) {
 			case 'EMPTY':
 				return (
 					<View className='empty-wrap flex-center-v'>
-						{/* <Image mode='widthFix' src='/images/empty.jpg' /> */}
-						<View className='empty-item-text'>暂无内容呦~</View>
+						<Image className='empty-image' mode='widthFix' src={strEmptyUrl} />
+						{/* <View className='empty-item-text'>暂无内容呦~</View> */}
 					</View>
 				)
 			default:

@@ -63,7 +63,7 @@ async function addMemberInfo(data, db, strMemberId) {
 		// 应用信息
 		data_level: 1, // 等级
 		data_exp: 0, // 经验
-		data_arrArticleCollectionList: [], // 收藏文章列表
+		data_arrCollectionArticleList: [], // 收藏文章列表
 	}
 	// 创建新的玩家信息
 	try {
