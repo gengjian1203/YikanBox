@@ -39,7 +39,7 @@ export default function ListArticle(props: IListArticleProps) {
 							key={index}
 							strTitle={item.title}
 							strAuthor={item.author}
-							strCollectDate={item.collectDate}
+							strCollectTime={item.collectTime}
 							strPosterImg={item.posterImg}
 							strSource={item.source}
 							onClick={() => handleArticleDetailClick(item)}

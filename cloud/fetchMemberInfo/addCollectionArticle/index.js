@@ -22,11 +22,19 @@
 async function addCollectionArticle(data, db, strMemberId) {
 	let objResult = {}
 	const date = new Date()
+	const YYYY = date.getFullYear()
+	const MM = date.getMonth() + 1
+	const DD = date.getDate()
+	const hh = date.getHours()
+	const mm = date.getMinutes()
+	const ss = date.getSeconds()
+	const time = `${YYYY}-${MM}-${DD} ${hh}:${mm}:${ss}`
 
 	try {
 		const objAddArticle = {
 			...data,
 			collectDate: date,
+			collectTime: time,
 		}
 		// 更新收藏信息
 		const res = await db

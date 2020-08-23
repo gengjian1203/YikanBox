@@ -2,8 +2,6 @@ import Taro from '@tarojs/taro'
 import React from 'react'
 import useThrottle from '@/hooks/useThrottle'
 
-import { simpleDate } from '@/utils/index'
-
 import { View, Image } from '@tarojs/components'
 
 import './index.scss'
@@ -14,6 +12,7 @@ interface IArticleType {
 	author?: string // 作者
 	content?: string // 内容HTML
 	createDate?: string // 创建时间
+	createTime?: string // 创建时间
 	href?: string // Url
 	posterImg?: string // 截图Url
 }
@@ -42,9 +41,9 @@ export default function ModuleArticle(props: IModuleArticleProps) {
 			<View className='article-item flex-center article-author'>
 				<View className='text-ellipsis'>作者：{objArticleData.author}</View>
 			</View>
-			<View className='article-item flex-center article-createDate'>
+			<View className='article-item flex-center article-createTime'>
 				<View className='text-ellipsis'>
-					时间：{simpleDate(objArticleData.createDate)}
+					收录时间：{objArticleData.createTime}
 				</View>
 			</View>
 			<Image

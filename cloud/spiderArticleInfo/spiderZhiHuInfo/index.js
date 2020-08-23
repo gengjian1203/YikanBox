@@ -34,8 +34,18 @@ async function spiderZhiHuInfo(db, superagent, cheerio, entities) {
 
 	const list = $('.main-content-wrap .row').find('.link-button')
 	for (let index in list) {
+		const date = new Date()
+		const YYYY = date.getFullYear()
+		const MM = date.getMonth() + 1
+		const DD = date.getDate()
+		const hh = date.getHours()
+		const mm = date.getMinutes()
+		const ss = date.getSeconds()
+		const time = `${YYYY}-${MM}-${DD} ${hh}:${mm}:${ss}`
+
 		const objInfo = {
-			createDate: new Date(), // 创建时间
+			createDate: date, // 创建时间
+			createTime: time, // 创建时间
 		}
 		const objHtml = list.eq(index)
 		const href = objHtml.attr('href')

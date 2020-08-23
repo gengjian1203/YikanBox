@@ -8,7 +8,7 @@ import useCheckLogin from '@/hooks/useCheckLogin'
 
 import webApiArticleInfo from '@/api/articleInfo'
 import webApiMemberInfo from '@/api/memberInfo'
-import { simpleDate, processSharePath } from '@/utils/index'
+import { processSharePath } from '@/utils/index'
 
 import { AtButton } from 'taro-ui'
 import { View, Block } from '@tarojs/components'
@@ -78,7 +78,15 @@ export default function ArticleDetail() {
 			const nIndex = arrArticleList.findIndex(item => {
 				return articleId === item._id
 			})
-			setArticleInfo(arrArticleList[nIndex])
+			if (nIndex >= 0) {
+				setArticleInfo(arrArticleList[nIndex])
+			} else {
+				const objParams = {
+					articleId: articleId,
+				}
+				const res = await webApiArticleInfo.queryArticleInfo(objParams)
+				setArticleInfo(res.data)
+			}
 		}
 	}
 
@@ -119,9 +127,9 @@ export default function ArticleDetail() {
 					<View className='text-ellipsis'>作者：{objArticleInfo.author}</View>
 				</View>
 				{/* 时间 */}
-				<View className='article-detail-item flex-center text-ellipsis article-createDate'>
+				<View className='article-detail-item flex-center text-ellipsis article-createTime'>
 					<View className='text-ellipsis'>
-						时间： {simpleDate(objArticleInfo.createDate)}
+						收录时间： {objArticleInfo.createTime}
 					</View>
 				</View>
 				{/* 富文本翻译 */}
