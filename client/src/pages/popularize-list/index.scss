@@ -1,0 +1,12 @@
+@import '../../app.scss';
+
+.popularize-list-wrap {
+	width: 100%;
+	height: 100%;
+
+	.list-empty {
+		width: 100%;
+		height: 100%;
+		margin-top: 320px;
+	}
+}

@@ -106,6 +106,8 @@ const updateSourceInfo = async (data, db, strMemberId, date, time) => {
 						gender: data.gender, // 性别*
 						joinDate: date, // 加入时间
 						joinTime: time, // 加入时间
+						fromType: data.share_fromType,
+						sharePath: data.share_sharePath,
 					}),
 				},
 			})

@@ -4,6 +4,7 @@ import processSharePath from './base/processSharePath'
 import normalDate from './format/normalDate'
 import router2url from './format/router2url'
 import simpleDate from './format/simpleDate'
+import getFromTypeName from './share/getFromTypeName'
 
 export {
 	checkObjectEmpty,
@@ -12,4 +13,5 @@ export {
 	normalDate,
 	router2url,
 	simpleDate,
+	getFromTypeName,
 }

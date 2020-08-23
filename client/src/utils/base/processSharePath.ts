@@ -14,7 +14,7 @@ export function processSharePath(objParams: ISharePathType, store: any) {
 	let strBaseUrl =
 		`/pages/loading/index` + // 分享中转页
 		`?fromType=PATH` + // 分享途径类型
-		`&sourceID=${store.memberInfo._id}` + // 分享人ID
+		`&sourceID=${store.memberInfo._id ? store.memberInfo._id : ''}` + // 分享人ID
 		`&sharePath=`
 	// 分享路径所需参数
 	let strExtendUrl = `${objParams.sharePath}?from=share`

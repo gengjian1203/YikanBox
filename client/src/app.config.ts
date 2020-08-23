@@ -23,6 +23,10 @@ export default {
 			root: 'pages/main', // 首页
 			pages: ['index'],
 		},
+		{
+			root: 'pages/popularize-list', // 我的推广
+			pages: ['index'],
+		},
 	],
 	preloadRule: {
 		// 加载页预加载：主页和登录页
@@ -30,10 +34,14 @@ export default {
 			network: 'all',
 			packages: ['pages/main', 'pages/login'],
 		},
-		// 主页预加载：文章详情页
+		// 主页预加载：文章详情页、我的收藏页、我的推广页
 		'pages/main/index': {
 			network: 'all',
-			packages: ['pages/article-detail', 'pages/collection-list'],
+			packages: [
+				'pages/article-detail',
+				'pages/collection-list',
+				'pages/popularize-list',
+			],
 		},
 	},
 	window: {

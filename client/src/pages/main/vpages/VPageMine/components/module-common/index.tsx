@@ -36,9 +36,8 @@ export default function ModuleCommon(props: IModuleCommonProps) {
 
 	// 我的推广
 	const handlePopularizeClick = e => {
-		Taro.showToast({
-			title: '敬请期待',
-			icon: 'none',
+		Taro.navigateTo({
+			url: `/pages/popularize-list/index`,
 		})
 	}
 

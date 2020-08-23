@@ -1,5 +1,6 @@
 import React from 'react'
 import useThrottle from '@/hooks/useThrottle'
+import { getFromTypeName } from '@/utils/index'
 
 import { View } from '@tarojs/components'
 import { AtCard } from 'taro-ui'
@@ -7,21 +8,25 @@ import { AtCard } from 'taro-ui'
 import './index.scss'
 
 interface IItemCardProps {
-	strTitle?: string
-	strAuthor?: string
-	strCollectTime?: string
-	strPosterImg?: string
-	strSource?: string
+	_id?: string
+	avatarUrl?: string
+	gender?: number
+	joinTime?: string
+	nickName?: string
+	fromType?: string
+	sharePath?: string
 	onClick?: any
 }
 
 export default function ItemCard(props: IItemCardProps) {
 	const {
-		strTitle = '',
-		strAuthor = '',
-		strCollectTime = '',
-		strPosterImg = '',
-		strSource = '',
+		_id = '',
+		avatarUrl = '',
+		gender = 0,
+		joinTime = '',
+		nickName = '',
+		fromType = '',
+		sharePath = '',
 		onClick = (any?: any) => any,
 	} = props
 
@@ -32,12 +37,12 @@ export default function ItemCard(props: IItemCardProps) {
 	return (
 		<View className='item-card-wrap'>
 			<AtCard
-				note={`作者：${strAuthor}`}
-				title={strTitle}
-				thumb={strPosterImg}
+				title={nickName}
+				note={`加入方式：${getFromTypeName(fromType)}`}
+				thumb={avatarUrl}
 				onClick={useThrottle(handleCardClick)}
 			>
-				{`收藏时间：${strCollectTime}`}
+				{`加入时间：${joinTime}`}
 			</AtCard>
 		</View>
 	)
