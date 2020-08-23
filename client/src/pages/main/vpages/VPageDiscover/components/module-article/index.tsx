@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro'
 import React from 'react'
+import useThrottle from '@/hooks/useThrottle'
 
 import { simpleDate } from '@/utils/index'
 
@@ -31,7 +32,10 @@ export default function ModuleArticle(props: IModuleArticleProps) {
 	}
 
 	return (
-		<View className='article-wrap' onClick={handleArticleDetailClick}>
+		<View
+			className='article-wrap'
+			onClick={useThrottle(handleArticleDetailClick)}
+		>
 			<View className='article-item flex-center article-title'>
 				<View className='text-ellipsis'>{objArticleData.title}</View>
 			</View>

@@ -10,10 +10,6 @@
 //   collectDate?: string // 收藏时间
 // }
 
-// interface IDataType {
-//   objArticle: IArticleInfoType //
-// }
-
 /**
  * removeCollectionArticle
  * 移除会话人指定文章的收藏信息
@@ -34,7 +30,7 @@ async function removeCollectionArticle(data, db, strMemberId) {
 			.update({
 				data: {
 					data_arrCollectionArticleList: db.command.pull({
-						_id: db.command.gt(data._id),
+						_id: db.command.eq(data._id),
 					}),
 				},
 			})

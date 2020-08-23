@@ -8,6 +8,10 @@ export default {
 			pages: ['index'],
 		},
 		{
+			root: 'pages/collection-list', // 我的收藏页面
+			pages: ['index'],
+		},
+		{
 			root: 'pages/demo', // 测试页
 			pages: ['index'],
 		},
@@ -29,7 +33,7 @@ export default {
 		// 主页预加载：文章详情页
 		'pages/main/index': {
 			network: 'all',
-			packages: ['pages/article-detail'],
+			packages: ['pages/article-detail', 'pages/collection-list'],
 		},
 	},
 	window: {

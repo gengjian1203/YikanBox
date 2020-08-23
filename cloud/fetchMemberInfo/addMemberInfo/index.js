@@ -64,6 +64,8 @@ async function addMemberInfo(data, db, strMemberId) {
 		data_level: 1, // 等级
 		data_exp: 0, // 经验
 		data_arrCollectionArticleList: [], // 收藏文章列表
+		data_arrCollectionPhotoList: [], // 收藏图片列表
+		data_arrCollectionQueueList: [], // 收藏接龙列表
 	}
 	// 创建新的玩家信息
 	try {

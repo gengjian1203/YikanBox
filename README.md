@@ -6,6 +6,12 @@
 
 Taro3.0.2 + redux + wxcloud 做个工具集合的微信小程序
 
+#### 相关技术
+
+1. Taro
+2. wxCloud
+3.
+
 #### 项目结构
 
 ```bash
@@ -16,6 +22,7 @@ tree -d -L 3 -I "node_modules|dist" > tree.md
 .
 ├── client                    # 小程序前端项目
 │   ├── config                # 项目级配置
+│   ├── images                # 打包进代码的静态资源
 │   └── src                   # 项目代码
 │       ├── api               # 接口调用
 │       ├── components        # 公共组件
@@ -29,13 +36,20 @@ tree -d -L 3 -I "node_modules|dist" > tree.md
 └── cloud                     # 微信云开发项目
     ├── backup                # 数据库备份
     │   └── database
+    ├── fetchArticleInfo      # 文章操作信息
+    │   ├── queryArticleInfo  # 查询单个文章
+    │   └── queryArticleList  # 查询整个文章列表
     ├── fetchInfo             # 混表操作信息
     │   └── queryLoginInfo    # 查询登录所需的信息
-    └── fetchMemberInfo       # 操作 memberInfo
-        ├── addMemberInfo     # 新增注册成员信息
-        └── queryMemberInfo   # 查询跟 MemberInfo 相关的信息
+    ├── fetchMemberInfo       # 操作 memberInfo
+    │   ├── addCollectionArticle # 将对应的文章收藏移入
+    │   ├── addMemberInfo     # 新增注册成员信息
+    │   ├── queryMemberInfo   # 查询跟 MemberInfo 相关的信息
+    │   └── removeCollectionArticle # 将对应的文章收藏移除
+    └── spiderArticleInfo     # 爬取文章接口
+        └── spiderZhiHuInfo   # 爬取知乎文章
 
-20 directories
+28 directories
 
 ```
 
@@ -72,7 +86,7 @@ tree -d -L 3 -I "node_modules|dist" > tree.md
 12. 等级系统 🚧
 13. 徽章成就荣誉墙系统 🚧
 
-### 脚本
+#### 脚本
 
 ```MongoDB
 // 清空文章库
@@ -90,4 +104,15 @@ db.collection('memberInfo')
   _id: _.exists(true)
 })
 .remove()
+```
+
+#### 配置问题
+
+1、Error: 未找到入口 sitemap.json 文件，或者文件读取失败，请检查后重新编译。
+../dist/sitemap.json
+
+```json
+{
+	"rules": []
+}
 ```

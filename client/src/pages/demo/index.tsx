@@ -8,7 +8,8 @@ import webApi from '@/api/appInfo'
 import AppService from '@/services/AppService'
 import { router2url } from '@/utils/index'
 
-import { View } from '@tarojs/components'
+import { Block } from '@tarojs/components'
+import NavigationHeader from '@/components/NavigationHeader'
 
 import './index.scss'
 
@@ -36,5 +37,10 @@ export default function Demo() {
 			onUnload()
 		}
 	}, [])
-	return <View>{strTitle}</View>
+	return (
+		<Block>
+			{/* 顶部导航 */}
+			<NavigationHeader isShowLeftIcon strNavigationTitle={strTitle} />
+		</Block>
+	)
 }

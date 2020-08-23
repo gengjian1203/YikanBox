@@ -29,9 +29,7 @@ export default function ArticleDetail() {
 
 	const store = useSelector(state => state)
 	const memberInfo = useSelector(state => state.memberInfo)
-	const { nArticleCurrent, arrArticleList } = useSelector(
-		state => state.articleInfo
-	)
+	const { arrArticleList } = useSelector(state => state.articleInfo)
 
 	const { addCollectionArticleInfo, removeCollectionArticleInfo } = useActions(
 		memberInfoActions
@@ -68,45 +66,21 @@ export default function ArticleDetail() {
 	}, [memberInfo.data_arrCollectionArticleList, objArticleInfo])
 
 	const onLoad = async () => {
-		console.log('onLoad... ', from)
+		console.log('onLoad... ', from, articleId)
 		// 直接进来不用调取接口，分享进来的需要调取接口
 		if (from === 'share') {
 			const objParams = {
 				articleId: articleId,
 			}
 			const res = await webApiArticleInfo.queryArticleInfo(objParams)
-			console.log('onLoad... ', res)
 			setArticleInfo(res.data)
 		} else {
-			setArticleInfo(arrArticleList[nArticleCurrent])
+			const nIndex = arrArticleList.findIndex(item => {
+				return articleId === item._id
+			})
+			setArticleInfo(arrArticleList[nIndex])
 		}
 	}
-
-	// const onUnload = async () => {
-	// 	console.log('onUnload... ', isCollectionSelect)
-	// 	// 原来没有，当前选中，则调增加收藏接口，并且更新Redux
-	// 	if (
-	// 		isCollectionSelect &&
-	// 		!checkCollectionArticle(
-	// 			memberInfo.data_arrCollectionArticleList,
-	// 			objArticleInfo
-	// 		)
-	// 	) {
-	// 		const res = await webApiMemberInfo.addCollectionArticle(objArticleInfo)
-	// 		console.log('addCollectionArticle', res)
-	// 	}
-	// 	// 原来有，目前未选中，则调移除收藏接口，并且更新Redux
-	// 	if (
-	// 		!isCollectionSelect &&
-	// 		checkCollectionArticle(
-	// 			memberInfo.data_arrCollectionArticleList,
-	// 			objArticleInfo
-	// 		)
-	// 	) {
-	// 		const res = await webApiMemberInfo.removeCollectionArticle(objArticleInfo)
-	// 		console.log('removeCollectionArticle', res)
-	// 	}
-	// }
 
 	useEffect(() => {
 		onLoad()

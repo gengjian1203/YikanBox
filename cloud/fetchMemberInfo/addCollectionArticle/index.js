@@ -10,10 +10,6 @@
 //   collectDate?: string // 收藏时间
 // }
 
-// interface IDataType {
-//   objArticle: IArticleInfoType //
-// }
-
 /**
  * addCollectionArticle
  * 新增会话人的文章收藏信息
@@ -28,17 +24,17 @@ async function addCollectionArticle(data, db, strMemberId) {
 	const date = new Date()
 
 	try {
-	  const objAddArticle = {
-	    ...data,
-	    collectDate: date
-	  }
+		const objAddArticle = {
+			...data,
+			collectDate: date,
+		}
 		// 更新收藏信息
 		const res = await db
 			.collection('memberInfo')
 			.doc(strMemberId)
 			.update({
 				data: {
-					data_arrCollectionArticleList: db.command.push(objAddArticle),
+					data_arrCollectionArticleList: db.command.addToSet(objAddArticle),
 				},
 			})
 		objResult = {

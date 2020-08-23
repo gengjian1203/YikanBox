@@ -79,12 +79,12 @@ export default function NavigationHeader(props: INavigationHeaderProps) {
 	})
 
 	useEffect(() => {
-		console.log(
-			'nOpacityTransparent',
-			nOpacityTransparent,
-			'nOpacityColor',
-			nOpacityColor
-		)
+		// console.log(
+		// 	'nOpacityTransparent',
+		// 	nOpacityTransparent,
+		// 	'nOpacityColor',
+		// 	nOpacityColor
+		// )
 		return () => {}
 	}, [nOpacityColor, nOpacityTransparent])
 
