@@ -8,15 +8,11 @@ import NavigationHeader from '@/components/NavigationHeader'
 import ListArticle from './components/list-article/index'
 
 import './index.scss'
-import { deepClone } from '@/utils/index'
 
 export default function CollectionList() {
 	const {} = useRouter()
 
 	const [nTabCurrent, setTabCurrent] = useState<number>(0)
-	const [arrListArticle, setListArticle] = useState<Array<any>>([])
-	const [arrListPhoto, setListPhoto] = useState<Array<any>>([])
-	const [arrListQueue, setListQueue] = useState<Array<any>>([])
 
 	const arrCollectionArticleList = useSelector(
 		state => state.memberInfo.data_arrCollectionArticleList
@@ -30,13 +26,6 @@ export default function CollectionList() {
 
 	const onLoad = () => {
 		Taro.hideShareMenu()
-		const arrCollectionArticleListTmp = deepClone(arrCollectionArticleList)
-		const arrCollectionPhotoListTmp = deepClone(arrCollectionPhotoList)
-		const arrCollectionQueueListTmp = deepClone(arrCollectionQueueList)
-
-		setListArticle(arrCollectionArticleListTmp.reverse())
-		setListPhoto(arrCollectionPhotoListTmp.reverse())
-		setListQueue(arrCollectionQueueListTmp.reverse())
 	}
 
 	useEffect(() => {
@@ -62,15 +51,15 @@ export default function CollectionList() {
 			>
 				{/* 文章 */}
 				<AtTabsPane current={nTabCurrent} index={0}>
-					<ListArticle arrList={arrListArticle} />
+					<ListArticle arrList={arrCollectionArticleList} />
 				</AtTabsPane>
 				{/* 照片 */}
 				<AtTabsPane current={nTabCurrent} index={1}>
-					<ListArticle arrList={arrListPhoto} />
+					<ListArticle arrList={arrCollectionPhotoList} />
 				</AtTabsPane>
 				{/* 接龙 */}
 				<AtTabsPane current={nTabCurrent} index={2}>
-					<ListArticle arrList={arrListQueue} />
+					<ListArticle arrList={arrCollectionQueueList} />
 				</AtTabsPane>
 			</AtTabs>
 		</Block>

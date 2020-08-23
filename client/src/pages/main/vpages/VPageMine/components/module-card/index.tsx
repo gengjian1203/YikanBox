@@ -80,13 +80,13 @@ export default function ModuleCard(props: IModuleCardProps) {
 					)}
 				</View>
 				{/* 右侧 */}
-				<View
+				{/* <View
 					className='info-right flex-center-v'
 					style={`${isLogin ? '' : 'display: none; '}`}
 					onClick={useThrottle(useCheckLogin(handleClockInClick))}
 				>
 					<View className='right-sign flex-center'>签到</View>
-				</View>
+				</View> */}
 			</View>
 		</View>
 	)

@@ -83,7 +83,7 @@ export default function ModuleList(props: IModuleListProps) {
 		<View className='module-list-wrap'>
 			<ModuleTitle strTitle='我的工具' />
 			<AtList className='module-list-content'>
-				<AtListItem
+				{/* <AtListItem
 					className='item-normal'
 					title='我的头像秀'
 					arrow='right'
@@ -93,8 +93,8 @@ export default function ModuleList(props: IModuleListProps) {
 						value: 'iconfont icon-avatar-show',
 					}}
 					onClick={useThrottle(useCheckLogin(handleAvatarShowClick))}
-				/>
-				<AtListItem
+				/> */}
+				{/* <AtListItem
 					className='item-normal'
 					title='我的图片秀'
 					arrow='right'
@@ -104,8 +104,8 @@ export default function ModuleList(props: IModuleListProps) {
 						value: 'iconfont icon-photo-show',
 					}}
 					onClick={useThrottle(useCheckLogin(handlePhotoShowClick))}
-				/>
-				<AtListItem
+				/> */}
+				{/* <AtListItem
 					className='item-normal'
 					title='我的达人圈'
 					arrow='right'
@@ -115,8 +115,8 @@ export default function ModuleList(props: IModuleListProps) {
 						value: 'iconfont icon-other-moment',
 					}}
 					onClick={useThrottle(useCheckLogin(handleOtherMomentClick))}
-				/>
-				<AtListItem
+				/> */}
+				{/* <AtListItem
 					className='item-normal'
 					title='我的接龙'
 					arrow='right'
@@ -126,7 +126,7 @@ export default function ModuleList(props: IModuleListProps) {
 						value: 'iconfont icon-activity-queue',
 					}}
 					onClick={useThrottle(useCheckLogin(handleActivityQueueClick))}
-				/>
+				/> */}
 
 				{memberInfo._id && (
 					<AtListItem
