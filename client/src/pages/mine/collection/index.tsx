@@ -9,7 +9,7 @@ import ListArticle from './components/list-article/index'
 
 import './index.scss'
 
-export default function CollectionList() {
+export default function Collection() {
 	const {} = useRouter()
 
 	const [nTabCurrent, setTabCurrent] = useState<number>(0)

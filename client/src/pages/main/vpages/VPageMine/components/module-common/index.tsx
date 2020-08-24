@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro'
 import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import useThrottle from '@/hooks/useThrottle'
 import useCheckLogin from '@/hooks/useCheckLogin'
 
@@ -12,6 +13,8 @@ interface IModuleCommonProps {}
 export default function ModuleCommon(props: IModuleCommonProps) {
 	const {} = props
 
+	const memberInfo = useSelector(state => state.memberInfo)
+
 	const onLoad = async () => {}
 
 	useEffect(() => {
@@ -22,22 +25,21 @@ export default function ModuleCommon(props: IModuleCommonProps) {
 	// 我的收藏
 	const handleCollectionClick = e => {
 		Taro.navigateTo({
-			url: `/pages/collection-list/index`,
+			url: `/pages/mine/collection/index`,
 		})
 	}
 
 	// 我的成就
 	const handleAchievementClick = e => {
-		Taro.showToast({
-			title: '敬请期待',
-			icon: 'none',
+		Taro.navigateTo({
+			url: `/pages/mine/achievement/index` + `?memberId=${memberInfo._id}`,
 		})
 	}
 
 	// 我的推广
 	const handlePopularizeClick = e => {
 		Taro.navigateTo({
-			url: `/pages/popularize-list/index`,
+			url: `/pages/mine/popularize/index`,
 		})
 	}
 

@@ -8,10 +8,6 @@ export default {
 			pages: ['index'],
 		},
 		{
-			root: 'pages/collection-list', // 我的收藏页面
-			pages: ['index'],
-		},
-		{
 			root: 'pages/demo', // 测试页
 			pages: ['index'],
 		},
@@ -24,8 +20,12 @@ export default {
 			pages: ['index'],
 		},
 		{
-			root: 'pages/popularize-list', // 我的推广
-			pages: ['index'],
+			root: 'pages/mine', // 我的页面子页面
+			pages: [
+				'achievement/index', // 我的成就
+				'collection/index', // 我的收藏
+				'popularize/index', // 我的推广
+			],
 		},
 	],
 	preloadRule: {
@@ -34,14 +34,10 @@ export default {
 			network: 'all',
 			packages: ['pages/main', 'pages/login'],
 		},
-		// 主页预加载：文章详情页、我的收藏页、我的推广页
+		// 主页预加载：文章详情子包、我的页面子包
 		'pages/main/index': {
 			network: 'all',
-			packages: [
-				'pages/article-detail',
-				'pages/collection-list',
-				'pages/popularize-list',
-			],
+			packages: ['pages/article-detail', 'pages/mine'],
 		},
 	},
 	window: {

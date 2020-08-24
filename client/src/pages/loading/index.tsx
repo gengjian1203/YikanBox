@@ -133,6 +133,8 @@ export default function Loading() {
 	}
 
 	const onLoad = async () => {
+		Taro.hideShareMenu()
+
 		const [
 			resInitApi,
 			resInitSystemInfo,

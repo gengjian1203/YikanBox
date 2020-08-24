@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { deepClone } from '@/utils/index'
 
-import { Block, View } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
 import TipsPanel from '@/components/TipsPanel'
 
@@ -11,10 +11,8 @@ import ItemCard from './components/item-card/index'
 
 import './index.scss'
 
-export default function PopularizeList() {
-	const {
-		params: { strTitle = '' },
-	} = useRouter()
+export default function Popularize() {
+	const {} = useRouter()
 
 	const [arrPopularizeList, setPopularizeList] = useState<Array<any>>([])
 
@@ -35,10 +33,13 @@ export default function PopularizeList() {
 
 	const handleMemberDetailClick = item => {
 		console.log('handleMemberDetailClick', item)
+		Taro.navigateTo({
+			url: `/pages/mine/achievement/index` + `?memberId=${item._id}`,
+		})
 	}
 
 	return (
-		<View className='popularize-list-wrap flex-center-v'>
+		<View className='popularize-wrap flex-center-v'>
 			{/* 顶部导航 */}
 			<NavigationHeader isShowLeftIcon strNavigationTitle='我的推广' />
 			{/* 列表内容 */}
