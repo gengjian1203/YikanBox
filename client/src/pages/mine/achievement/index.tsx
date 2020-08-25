@@ -4,8 +4,10 @@ import { useSelector } from 'react-redux'
 
 import webApi from '@/api/appInfo'
 
-import { Block } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
+import ModuleBase from './components/module-base'
+import ModuleBadge from './components/module-badge'
 
 import './index.scss'
 
@@ -16,6 +18,7 @@ export default function Achievement() {
 
 	const [isStateMyself, setStateMyself] = useState<boolean>(false)
 	const [strNavigationTitle, setNavigationTitle] = useState<string>('')
+	const [objMemberInfo, setMemberInfo] = useState<any>({})
 
 	const memberInfo = useSelector(state => state.memberInfo)
 
@@ -24,9 +27,11 @@ export default function Achievement() {
 		if (memberId === memberInfo._id) {
 			setStateMyself(true)
 			setNavigationTitle('我的成就')
+			setMemberInfo(memberInfo)
 		} else {
 			setStateMyself(false)
 			setNavigationTitle('Ta的成就')
+			setMemberInfo({})
 		}
 	}
 
@@ -34,13 +39,18 @@ export default function Achievement() {
 		onLoad()
 		return () => {}
 	}, [])
+
 	return (
-		<Block>
+		<View className='achievement-wrap'>
 			{/* 顶部导航 */}
 			<NavigationHeader
 				isShowLeftIcon
 				strNavigationTitle={strNavigationTitle}
 			/>
-		</Block>
+			{/* 基本信息 */}
+			<ModuleBase isStateMyself={isStateMyself} memberInfo={objMemberInfo} />
+			{/* 徽章信息 */}
+			<ModuleBadge isStateMyself={isStateMyself} memberInfo={objMemberInfo} />
+		</View>
 	)
 }

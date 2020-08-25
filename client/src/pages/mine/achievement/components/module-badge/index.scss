@@ -1,0 +1,13 @@
+@import '../../../../../app.scss';
+
+.module-badge-wrap {
+	box-sizing: border-box;
+	width: 100%;
+	background-color: $color-white;
+	margin-bottom: $border-bold-space;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}

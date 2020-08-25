@@ -14,4 +14,16 @@ module.exports = {
 		 * }
 		 */
 	},
+	terser: {
+		enable: true,
+		config: {
+			// 配置项同 https://github.com/terser/terser#minify-options
+		},
+	},
+	csso: {
+		enable: true,
+		config: {
+			// 配置项同 https://github.com/css/csso#minifysource-options
+		},
+	},
 }

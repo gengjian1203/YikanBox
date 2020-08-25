@@ -2,10 +2,10 @@ import Taro from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 
 import { View } from '@tarojs/components'
-import ModuleCard from './components/module-card/index'
-import ModuleCommon from './components/module-common/index'
-import ModuleList from './components/module-list/index'
-import ModuleAbout from './components/module-about/index'
+import ModuleCard from './components/module-card'
+import ModuleCommon from './components/module-common'
+import ModuleList from './components/module-list'
+import ModuleAbout from './components/module-about'
 
 import './index.scss'
 
