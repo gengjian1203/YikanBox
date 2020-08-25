@@ -2,9 +2,10 @@ import Taro from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 
 import { View } from '@tarojs/components'
-import ModuleCard from './components/module-card'
-import ModuleCommon from './components/module-common'
-import ModuleList from './components/module-list'
+import ModuleCard from './components/module-card/index'
+import ModuleCommon from './components/module-common/index'
+import ModuleList from './components/module-list/index'
+import ModuleAbout from './components/module-about/index'
 
 import './index.scss'
 
@@ -32,6 +33,8 @@ export default function VPageMine(props: IVPageMineProps) {
 				<ModuleCommon />
 				{/* 列表模块 */}
 				<ModuleList />
+				{/* 关于模块 */}
+				<ModuleAbout />
 			</View>
 		</View>
 	)

@@ -1,0 +1,17 @@
+@import '../../../app.scss';
+
+.about-wrap {
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	padding: $border-bold-space;
+
+	.about-title {
+		margin-bottom: $border-bold-space;
+	}
+	.about-content {
+		font-size: $f4;
+		color: $color-text-long;
+		text-align: justify;
+	}
+}

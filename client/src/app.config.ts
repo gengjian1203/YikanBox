@@ -22,6 +22,7 @@ export default {
 		{
 			root: 'pages/mine', // 我的页面子页面
 			pages: [
+				'about/index', // 关于我们
 				'achievement/index', // 我的成就
 				'collection/index', // 我的收藏
 				'popularize/index', // 我的推广

@@ -47,15 +47,6 @@ export default function ModuleList(props: IModuleListProps) {
 		})
 	}
 
-	// 我的接龙
-	const handleActivityQueueClick = e => {
-		console.log('handleActivityQueueClick', e)
-		Taro.showToast({
-			title: '敬请期待',
-			icon: 'none',
-		})
-	}
-
 	// 另类朋友圈
 	const handleOtherMomentClick = e => {
 		console.log('handleOtherMomentClick', e)
@@ -65,17 +56,21 @@ export default function ModuleList(props: IModuleListProps) {
 		})
 	}
 
-	// 退出登录
-	const handleLogoutClick = e => {
-		console.log('handleLogoutClick', e)
-		Taro.showModal({
-			title: '提示',
-			content: '是否要退出登录',
-			success: res => {
-				if (res.confirm) {
-					setMemberInfo({})
-				}
-			},
+	// 我的接龙
+	const handleActivityQueueClick = e => {
+		console.log('handleActivityQueueClick', e)
+		Taro.showToast({
+			title: '敬请期待',
+			icon: 'none',
+		})
+	}
+
+	// 我的撩闲
+	const handleOtherChatClick = e => {
+		console.log('handleOtherChatClick', e)
+		Taro.showToast({
+			title: '敬请期待',
+			icon: 'none',
 		})
 	}
 
@@ -83,7 +78,7 @@ export default function ModuleList(props: IModuleListProps) {
 		<View className='module-list-wrap'>
 			<ModuleTitle strTitle='我的工具' />
 			<AtList className='module-list-content'>
-				{/* <AtListItem
+				<AtListItem
 					className='item-normal'
 					title='我的头像秀'
 					arrow='right'
@@ -93,8 +88,8 @@ export default function ModuleList(props: IModuleListProps) {
 						value: 'iconfont icon-avatar-show',
 					}}
 					onClick={useThrottle(useCheckLogin(handleAvatarShowClick))}
-				/> */}
-				{/* <AtListItem
+				/>
+				<AtListItem
 					className='item-normal'
 					title='我的图片秀'
 					arrow='right'
@@ -104,8 +99,8 @@ export default function ModuleList(props: IModuleListProps) {
 						value: 'iconfont icon-photo-show',
 					}}
 					onClick={useThrottle(useCheckLogin(handlePhotoShowClick))}
-				/> */}
-				{/* <AtListItem
+				/>
+				<AtListItem
 					className='item-normal'
 					title='我的达人圈'
 					arrow='right'
@@ -115,8 +110,8 @@ export default function ModuleList(props: IModuleListProps) {
 						value: 'iconfont icon-other-moment',
 					}}
 					onClick={useThrottle(useCheckLogin(handleOtherMomentClick))}
-				/> */}
-				{/* <AtListItem
+				/>
+				<AtListItem
 					className='item-normal'
 					title='我的接龙'
 					arrow='right'
@@ -126,15 +121,18 @@ export default function ModuleList(props: IModuleListProps) {
 						value: 'iconfont icon-activity-queue',
 					}}
 					onClick={useThrottle(useCheckLogin(handleActivityQueueClick))}
-				/> */}
-
-				{memberInfo._id && (
-					<AtListItem
-						className='item-logout'
-						title='退出登录'
-						onClick={handleLogoutClick}
-					/>
-				)}
+				/>
+				<AtListItem
+					className='item-normal'
+					title='我的撩闲'
+					arrow='right'
+					iconInfo={{
+						size: 25,
+						color: 'darkslateblue',
+						value: 'iconfont icon-other-chat',
+					}}
+					onClick={useThrottle(useCheckLogin(handleOtherChatClick))}
+				/>
 			</AtList>
 		</View>
 	)
