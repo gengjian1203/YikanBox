@@ -72,11 +72,13 @@ export default function ModuleCard(props: IModuleCardProps) {
 								mode='scaleToFill'
 								src={memberInfo.user_avatarUrl}
 							/>
-							<Image
-								className='image-border'
-								mode='scaleToFill'
-								src={strAvatarBorderUrl_07}
-							/>
+							{false && (
+								<Image
+									className='image-border'
+									mode='scaleToFill'
+									src={strAvatarBorderUrl_07}
+								/>
+							)}
 						</View>
 					) : (
 						<View className='left-avatar iconfont icon-default-avatar'></View>

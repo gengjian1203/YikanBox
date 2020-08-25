@@ -14,13 +14,20 @@ export default function Achievement() {
 		params: { memberId = '' },
 	} = useRouter()
 
+	const [isStateMyself, setStateMyself] = useState<boolean>(false)
 	const [strNavigationTitle, setNavigationTitle] = useState<string>('')
 
 	const memberInfo = useSelector(state => state.memberInfo)
 
 	const onLoad = () => {
 		Taro.hideShareMenu()
-		setNavigationTitle(memberId === memberInfo._id ? '我的成就' : 'Ta的成就')
+		if (memberId === memberInfo._id) {
+			setStateMyself(true)
+			setNavigationTitle('我的成就')
+		} else {
+			setStateMyself(false)
+			setNavigationTitle('Ta的成就')
+		}
 	}
 
 	useEffect(() => {
