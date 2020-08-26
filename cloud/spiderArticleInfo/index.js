@@ -17,6 +17,8 @@ cloud.init({
 
 // 可在入口函数外缓存 db 对象
 const db = cloud.database()
+// 屏蔽列表
+const arrTitleBlackList = ['瞎扯 · ']
 
 // 校验返回值
 const validResult = objTmp => {
@@ -34,8 +36,13 @@ const pushArticleInfoList = async arrData => {
 
 	try {
 		for (let item of arrData) {
-			let objArticleInfo = null
+			// 处于屏蔽列表的标题不予录入
+			const nIndexTitle = arrTitleBlackList.indexOf(item.title)
+			if (nIndexTitle >= 0) {
+				continue
+			}
 			// 查询是否有相同的文章
+			let objArticleInfo = null
 			try {
 				objArticleInfo = await db
 					.collection('articleInfo')
@@ -46,7 +53,7 @@ const pushArticleInfoList = async arrData => {
 			} catch (e) {
 				console.error('queryArticleInfo error', e)
 			}
-
+			// 未录入过的文章，将其插入到数据库中
 			if (objArticleInfo.data.length === 0) {
 				const res = await db.collection('articleInfo').add({ data: item })
 				arrResult.push(item)
