@@ -14,7 +14,9 @@ interface IVPageHomeProps {}
 export default function VPageHome(props: IVPageHomeProps) {
 	const {} = props
 
-	const appInfo = useSelector(state => state.appInfo)
+	const { nHeightNavigationHeader } = useSelector(
+		state => state.appInfo.objAppHeight
+	)
 
 	const { setBottomBarSelect } = useActions(appInfoActions)
 
@@ -40,6 +42,10 @@ export default function VPageHome(props: IVPageHomeProps) {
 
 	return (
 		<View className='vpage-home-wrap'>
+			{/* 占位栏 */}
+			<View
+				style={`height: ${Taro.pxTransform(nHeightNavigationHeader * 2)}`}
+			></View>
 			<Image
 				style='width: 100%; '
 				mode='widthFix'

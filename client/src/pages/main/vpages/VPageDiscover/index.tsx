@@ -64,7 +64,7 @@ export default function VPageDiscover(props: IVPageDiscoverProps) {
 				<Swiper
 					className='module-swiper-wrap'
 					style={`height: calc(100vh - ${Taro.pxTransform(
-						(nHeightNavigationHeader + nHeightTabbarBottom) * 2
+						nHeightTabbarBottom * 2
 					)}); `}
 					vertical
 					current={nArticleCurrent}
@@ -72,6 +72,7 @@ export default function VPageDiscover(props: IVPageDiscoverProps) {
 				>
 					{arrArticleList.map((item, index) => (
 						<SwiperItem key={index} className='swiper-item flex-center'>
+							{/* 文章简介模块 */}
 							<ModuleArticle objArticleData={item} />
 						</SwiperItem>
 					))}

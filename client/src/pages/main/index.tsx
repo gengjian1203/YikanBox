@@ -69,7 +69,7 @@ export default function Main() {
 			{/* 顶部导航 */}
 			<NavigationHeader
 				isShowLeftIcon={false}
-				isTransparent={arrBottomBarList[nSelectIndex].code === 'MINE'}
+				isTransparent
 				strNavigationTitle={strNavigationTitle}
 			/>
 			{/* 渲染对应内容 */}

@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro'
 import React from 'react'
+import { useSelector } from 'react-redux'
 import useThrottle from '@/hooks/useThrottle'
 import { getArticleTagName } from '@/utils/index'
 
@@ -27,6 +28,10 @@ interface IModuleArticleProps {
 export default function ModuleArticle(props: IModuleArticleProps) {
 	const { objArticleData = {} } = props
 
+	const { nHeightNavigationHeader } = useSelector(
+		state => state.appInfo.objAppHeight
+	)
+
 	const handleArticleDetailClick = () => {
 		Taro.navigateTo({
 			url: `/pages/article-detail/index` + `?articleId=${objArticleData._id}`,
@@ -38,6 +43,11 @@ export default function ModuleArticle(props: IModuleArticleProps) {
 			className='article-wrap'
 			onClick={useThrottle(handleArticleDetailClick)}
 		>
+			{/* 占位栏 */}
+			<View
+				style={`height: ${Taro.pxTransform(nHeightNavigationHeader * 2)}`}
+			></View>
+			{/* 文章简介项 */}
 			<View className='article-item'>
 				<Tag
 					customWrapClass='item-tag'
