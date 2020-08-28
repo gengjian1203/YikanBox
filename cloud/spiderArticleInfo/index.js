@@ -31,14 +31,28 @@ const validResult = objTmp => {
 /**
  * 信息存入数据库
  */
+const checkBlackString = item => {
+	// 检验标题
+	for (let itemTitle of arrTitleBlackList) {
+		if (item.title.indexOf(itemTitle) >= 0) {
+			return false
+		}
+	}
+
+	return true
+}
+
+/**
+ * 信息存入数据库
+ */
 const pushArticleInfoList = async arrData => {
 	const arrResult = []
 
 	try {
 		for (let item of arrData) {
 			// 处于屏蔽列表的标题不予录入
-			const nIndexTitle = arrTitleBlackList.indexOf(item.title)
-			if (nIndexTitle >= 0) {
+			if (!checkBlackString(item)) {
+				console.log('pushArticleInfoList checkBlackString', item.title)
 				continue
 			}
 			// 查询是否有相同的文章

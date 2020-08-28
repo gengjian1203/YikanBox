@@ -69,7 +69,7 @@ async function spiderZhiHuInfo(db, superagent, cheerio, entities) {
 		}
 	}
 
-	console.log('spiderZhiHuInfo', arrResultList)
+	// console.log('spiderZhiHuInfo', arrResultList)
 
 	return arrResultList
 }
