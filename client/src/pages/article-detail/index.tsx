@@ -8,11 +8,12 @@ import useCheckLogin from '@/hooks/useCheckLogin'
 
 import webApiArticleInfo from '@/api/articleInfo'
 import webApiMemberInfo from '@/api/memberInfo'
-import { processSharePath } from '@/utils/index'
+import { processSharePath, getArticleTagName } from '@/utils/index'
 
 import { AtButton } from 'taro-ui'
-import { View, Block } from '@tarojs/components'
+import { Block, View, Text } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
+import Tag from '@/components/Tag'
 
 import { checkCollectionArticle } from './utils/index'
 
@@ -117,20 +118,29 @@ export default function ArticleDetail() {
 	return (
 		<Block>
 			{/* 顶部导航 */}
-			<NavigationHeader
-				isShowLeftIcon
-				strNavigationTitle={objArticleInfo.title}
-			/>
+			<NavigationHeader isShowLeftIcon strNavigationTitle='文章详情' />
 			<View className='article-detail-wrap'>
+				{/* 标题 */}
+				<View className='article-detail-item'>
+					<Tag
+						customWrapClass='item-tag'
+						strName={getArticleTagName(objArticleInfo.source)}
+						strColor='#ffffff'
+						strBKColor='#0084ff'
+					/>
+					<Text className='item-title'>{objArticleInfo.title}</Text>
+				</View>
 				{/* 作者 */}
-				<View className='article-detail-item flex-center text-ellipsis article-author'>
-					<View className='text-ellipsis'>作者：{objArticleInfo.author}</View>
+				<View className='article-detail-item'>
+					<Text className='item-value text-ellipsis'>
+						作者：{objArticleInfo.author}
+					</Text>
 				</View>
 				{/* 时间 */}
-				<View className='article-detail-item flex-center text-ellipsis article-createTime'>
-					<View className='text-ellipsis'>
-						收录时间： {objArticleInfo.createTime}
-					</View>
+				<View className='article-detail-item'>
+					<Text className='item-value text-ellipsis'>
+						时间：{objArticleInfo.createTime}
+					</Text>
 				</View>
 				{/* 富文本翻译 */}
 				<poster

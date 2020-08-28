@@ -1,3 +1,4 @@
+import getArticleTagName from './article/getArticleTagName'
 import checkObjectEmpty from './base/checkObjectEmpty'
 import deepClone from './base/deepClone'
 import processSharePath from './base/processSharePath'
@@ -8,6 +9,7 @@ import simpleDate from './format/simpleDate'
 import getFromTypeName from './share/getFromTypeName'
 
 export {
+	getArticleTagName,
 	checkObjectEmpty,
 	deepClone,
 	processSharePath,

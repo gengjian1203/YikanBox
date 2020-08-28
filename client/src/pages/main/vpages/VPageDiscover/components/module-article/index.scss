@@ -13,26 +13,35 @@
 
 	.article-item {
 		width: 100%;
-		height: 80px;
+		height: $height-line-title;
+		line-height: $height-line-title;
+		margin-bottom: $border-bold-space;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+	.item-tag {
+		display: inline-block;
+		line-height: $height-line-title;
+		margin-right: $border-thin-space;
 	}
 
 	.article-title {
+		display: inline-block;
 		font-size: $f2;
 		font-weight: bold;
+		line-height: $height-line-title;
 		color: $color-text-long;
-
-		justify-content: flex-start;
+		text-align: left;
 	}
 
-	.article-author {
-		justify-content: flex-start;
-	}
-
-	.article-createTime {
-		justify-content: flex-start;
+	.article-value {
+		text-align: left;
 	}
 
 	.article-image {
-		margin-top: 100px;
+		margin-top: 50px;
 	}
 }

@@ -1,0 +1,8 @@
+@import '../../app.scss';
+
+.tag-wrap {
+	padding: 0 $border-thin-space;
+	border-radius: $radius-sm;
+	font-size: $f5;
+	white-space: nowrap;
+}

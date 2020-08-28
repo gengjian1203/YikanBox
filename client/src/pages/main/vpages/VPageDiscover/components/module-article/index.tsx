@@ -1,8 +1,10 @@
 import Taro from '@tarojs/taro'
 import React from 'react'
 import useThrottle from '@/hooks/useThrottle'
+import { getArticleTagName } from '@/utils/index'
 
-import { View, Image } from '@tarojs/components'
+import { View, Image, Text } from '@tarojs/components'
+import Tag from '@/components/Tag'
 
 import './index.scss'
 
@@ -15,6 +17,7 @@ interface IArticleType {
 	createTime?: string // 创建时间
 	href?: string // Url
 	posterImg?: string // 截图Url
+	source?: string // 爬取源类型
 }
 
 interface IModuleArticleProps {
@@ -35,16 +38,26 @@ export default function ModuleArticle(props: IModuleArticleProps) {
 			className='article-wrap'
 			onClick={useThrottle(handleArticleDetailClick)}
 		>
-			<View className='article-item flex-center article-title'>
-				<View className='text-ellipsis'>{objArticleData.title}</View>
+			<View className='article-item'>
+				<Tag
+					customWrapClass='item-tag'
+					strName={getArticleTagName(objArticleData.source)}
+					strColor='#ffffff'
+					strBKColor='#0084ff'
+				/>
+				<Text className='article-title text-ellipsis'>
+					{objArticleData.title}
+				</Text>
 			</View>
-			<View className='article-item flex-center article-author'>
-				<View className='text-ellipsis'>作者：{objArticleData.author}</View>
+			<View className='article-item'>
+				<Text className='article-value text-ellipsis'>
+					作者：{objArticleData.author}
+				</Text>
 			</View>
-			<View className='article-item flex-center article-createTime'>
-				<View className='text-ellipsis'>
+			<View className='article-item'>
+				<Text className='article-value text-ellipsis'>
 					收录时间：{objArticleData.createTime}
-				</View>
+				</Text>
 			</View>
 			<Image
 				className='article-image'

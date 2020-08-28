@@ -9,10 +9,15 @@ $f6: 26px; // 辅助信息，需弱化的内容，如：链接、小按钮
 $f7: 22px; // 说明文本，如：版权信息等不需要用户关注的信息
 $f8: 18px; // 十分小
 
+$height-line-title: 50px;
+
 $border-thin-space: 16px;
 $border-bold-space: 32px;
 
+$radius-sm: 10px;
 $radius-thin: 20px;
+
+// $color-zhihu: #0084ff;
 
 $color-primary: #ffdc00;
 $color-secondary: lighten($color-primary, 10%);
