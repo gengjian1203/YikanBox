@@ -19,15 +19,17 @@
 	}
 
 	.item-tag {
+		position: relative;
+		top: -2px;
 		display: inline-block;
 		line-height: $height-line-title;
 		margin-right: $border-thin-space;
 	}
 
 	.item-title {
-		display: inline-block;
+		display: inline;
 		line-height: $height-line-title;
-		font-size: $f4;
+		font-size: $f2;
 		font-weight: bold;
 		text-align: left;
 		word-wrap: break-word;
