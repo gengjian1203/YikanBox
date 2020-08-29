@@ -2,7 +2,7 @@ import Taro, { useRouter } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import webApi from '@/api/appInfo'
+import webApi from '@/api/memberInfo'
 
 import { View } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
@@ -22,7 +22,7 @@ export default function Achievement() {
 
 	const memberInfo = useSelector(state => state.memberInfo)
 
-	const onLoad = () => {
+	const onLoad = async () => {
 		Taro.hideShareMenu()
 		if (memberId === memberInfo._id) {
 			setStateMyself(true)
@@ -31,7 +31,12 @@ export default function Achievement() {
 		} else {
 			setStateMyself(false)
 			setNavigationTitle('Ta的成就')
-			setMemberInfo({})
+			const param = {
+				_id: memberId,
+			}
+			const res = await webApi.queryMemberInfo(param)
+			console.log('queryMemberInfo')
+			setMemberInfo(res.data)
 		}
 	}
 

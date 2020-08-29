@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import useActions from '@/hooks/useActions'
 import useThrottle from '@/hooks/useThrottle'
 import useCheckLogin from '@/hooks/useCheckLogin'
@@ -18,7 +18,7 @@ interface IModuleBaseProps {
 }
 
 export default function ModuleBase(props: IModuleBaseProps) {
-	const { memberInfo = {} } = props
+	const { isStateMyself = true, memberInfo = {} } = props
 
 	const { setMemberInfo } = useActions(memberInfoActions)
 
@@ -29,6 +29,20 @@ export default function ModuleBase(props: IModuleBaseProps) {
 		return () => {}
 	}, [])
 
+	// 点击ID实现复制到剪贴板
+	const handleIDCopyClick = () => {
+		Taro.setClipboardData({
+			data: memberInfo._id,
+			success: resForSet => {
+				Taro.getClipboardData({
+					success: resForGet => {
+						console.log('handleIDCopyClick', resForGet.data) // data
+					},
+				})
+			},
+		})
+	}
+
 	// 我的头像秀
 	const handleAvatarShowClick = e => {
 		console.log('handleAvatarShowClick', e)
@@ -38,46 +52,63 @@ export default function ModuleBase(props: IModuleBaseProps) {
 		})
 	}
 
+	// 跳转到推广人
+	const handleJumpSourceClick = () => {
+		if (memberInfo.share_sourceID) {
+			Taro.navigateTo({
+				url:
+					`/pages/mine/achievement/index` +
+					`?memberId=${memberInfo.share_sourceID}`,
+			})
+		}
+	}
+
 	return (
 		<View className='module-base-wrap'>
 			<ModuleTitle strTitle='基本信息' />
 			<AtList className='base-list'>
 				<AtListItem
 					className='item-normal'
-					title='我的昵称'
+					title={`${isStateMyself ? '我' : 'TA'}的昵称`}
 					extraText={memberInfo.user_nickName}
-					onClick={useThrottle(useCheckLogin(handleAvatarShowClick))}
 				/>
 				<AtListItem
 					className='item-normal'
-					title='我的ID'
+					title={`${isStateMyself ? '我' : 'TA'}的ID`}
 					extraText={hiddenString(memberInfo._id)}
-					onClick={useThrottle(useCheckLogin(handleAvatarShowClick))}
+					arrow={'right'}
+					onClick={useThrottle(useCheckLogin(handleIDCopyClick))}
 				/>
 				<AtListItem
 					className='item-normal'
-					title='我的等级'
+					title={`${isStateMyself ? '我' : 'TA'}的等级`}
 					extraText={`Lv.${memberInfo.data_level}`}
-					onClick={useThrottle(useCheckLogin(handleAvatarShowClick))}
 				/>
-				<AtListItem
+				{/* <AtListItem
 					className='item-normal'
-					title='我的称号'
+					title={`${isStateMyself ? '我' : 'TA'}的称号`}
 					extraText='初出茅庐'
-					arrow='right'
+					arrow={isStateMyself ? 'right' : undefined}
 					onClick={useThrottle(useCheckLogin(handleAvatarShowClick))}
-				/>
+				/> */}
 				<AtListItem
 					className='item-normal'
-					title='我的头像框'
+					title={`${isStateMyself ? '我' : 'TA'}的头像框`}
 					extraText='新人之星'
-					arrow='right'
+					arrow={isStateMyself ? 'right' : undefined}
 					onClick={useThrottle(useCheckLogin(handleAvatarShowClick))}
 				/>
 				<AtListItem
 					className='item-normal'
-					title='注册时间'
+					title={'注册时间'}
 					extraText={simpleDate(memberInfo.app_createDate)}
+				/>
+				<AtListItem
+					className='item-normal'
+					title={`${isStateMyself ? '我' : 'TA'}的推广人`}
+					arrow='right'
+					extraText={hiddenString(memberInfo.share_sourceID)}
+					onClick={useThrottle(useCheckLogin(handleJumpSourceClick))}
 				/>
 			</AtList>
 		</View>

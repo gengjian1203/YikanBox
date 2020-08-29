@@ -21,13 +21,16 @@ const querySourceInfo = async (data, db, strMemberId, date, time) => {
 	}
 	// 将溯源主信息加入到刚注册用户中
 	if (objSourceInfo) {
+		console.log('querySourceInfo', objSourceInfo.data.user_nickName)
 		try {
 			await db
 				.collection('memberInfo')
 				.doc(strMemberId)
 				.update({
 					data: {
-						share_sourceID: db.command.set(objSourceInfo.data.user_nickName),
+						share_sourceNickName: db.command.set(
+							objSourceInfo.data.user_nickName
+						),
 					},
 				})
 		} catch (e) {
@@ -52,8 +55,9 @@ const createMember = async (data, db, strMemberId, date, time) => {
 		app_updateTime: time, // 修改时间
 		// 溯源级
 		share_fromType: data.share_fromType,
-		share_sourceID: data.share_sourceID,
 		share_sharePath: data.share_sharePath,
+		share_sourceID: data.share_sourceID,
+		share_sourceNickName: '',
 		// 个人信息
 		user_openid: strMemberId.substr(4),
 		user_nickName: data.nickName, // 昵称*
@@ -72,7 +76,6 @@ const createMember = async (data, db, strMemberId, date, time) => {
 		data_arrCollectionArticleList: [], // 收藏文章列表
 		data_arrCollectionPhotoList: [], // 收藏图片列表
 		data_arrCollectionQueueList: [], // 收藏接龙列表
-		data_arrMineAvatarBorderList: [], // 头像框列表
 		data_arrMineBadgeList: [
 			{
 				code: 'NEW_MEMBER',

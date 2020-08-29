@@ -11,6 +11,10 @@ interface IAddMemberInfoType {
 	language: string // 语言
 }
 
+interface IQueryMemberInfoType {
+	_id: string
+}
+
 interface IArticleInfoType {
 	_id: string // 文章ID
 	author: string // 文章作者
@@ -38,6 +42,20 @@ const addMemberInfo = async (objParams?: IAddMemberInfoType) => {
 	}
 	const res = await CloudFetch.callFunction('fetchMemberInfo', params)
 	console.log('addMemberInfo', res)
+	return res.data
+}
+
+/**
+ * 查询成员信息
+ * @return
+ */
+const queryMemberInfo = async (objParams?: IQueryMemberInfoType) => {
+	const params = {
+		type: 'QUERY_MEMBER',
+		data: objParams,
+	}
+	const res = await CloudFetch.callFunction('fetchMemberInfo', params)
+	console.log('queryMemberInfo', res)
 	return res.data
 }
 
@@ -71,6 +89,7 @@ const removeCollectionArticle = async (objParams?: ICollectionArticleType) => {
 
 export default {
 	addMemberInfo,
+	queryMemberInfo,
 	addCollectionArticle,
 	removeCollectionArticle,
 }

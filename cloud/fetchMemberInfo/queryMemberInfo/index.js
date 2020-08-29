@@ -13,7 +13,7 @@ async function queryMemberInfo(data, db, strMemberId) {
 	try {
 		objResult = {
 			code: 200,
-			data: await db.collection('memberInfo').doc(strMemberId).get(),
+			data: await db.collection('memberInfo').doc(data._id).get(),
 		}
 	} catch (e) {
 		// 没有查到。异常。
