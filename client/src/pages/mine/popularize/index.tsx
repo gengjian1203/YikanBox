@@ -9,6 +9,7 @@ import NavigationHeader from '@/components/NavigationHeader'
 import TipsPanel from '@/components/TipsPanel'
 
 import ItemCard from './components/item-card/index'
+import strShareUrl from '@/images/share.jpg'
 
 import './index.scss'
 
@@ -38,7 +39,7 @@ export default function Popularize() {
 		console.log('useShareAppMessage', sharePath)
 		return {
 			title: '分享了一个好用的工具箱，并@了你',
-			imageUrl: '',
+			imageUrl: strShareUrl,
 			path: sharePath,
 		}
 	})

@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Image } from '@tarojs/components'
 
-import strEmptyUrl from '../../../images/empty.png'
+import strEmptyUrl from '@/images/empty.png'
 
 import './index.scss'
 

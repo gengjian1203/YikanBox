@@ -7,13 +7,13 @@ import useThrottle from '@/hooks/useThrottle'
 
 import { View, Image } from '@tarojs/components'
 
-import strAvatarBorderUrl_01 from '../../../../../../../images/mine/border_01.png'
-import strAvatarBorderUrl_02 from '../../../../../../../images/mine/border_02.png'
-import strAvatarBorderUrl_03 from '../../../../../../../images/mine/border_03.png'
-import strAvatarBorderUrl_04 from '../../../../../../../images/mine/border_04.png'
-import strAvatarBorderUrl_05 from '../../../../../../../images/mine/border_05.png'
-import strAvatarBorderUrl_06 from '../../../../../../../images/mine/border_06.png'
-import strAvatarBorderUrl_07 from '../../../../../../../images/mine/border_07.png'
+import strAvatarBorderUrl_01 from '@/images/mine/border_01.png'
+import strAvatarBorderUrl_02 from '@/images/mine/border_02.png'
+import strAvatarBorderUrl_03 from '@/images/mine/border_03.png'
+import strAvatarBorderUrl_04 from '@/images/mine/border_04.png'
+import strAvatarBorderUrl_05 from '@/images/mine/border_05.png'
+import strAvatarBorderUrl_06 from '@/images/mine/border_06.png'
+import strAvatarBorderUrl_07 from '@/images/mine/border_07.png'
 
 import './index.scss'
 
@@ -38,9 +38,8 @@ export default function ModuleCard(props: IModuleCardProps) {
 
 	const handleModuleCardClick = () => {
 		console.log('handleModuleCardClick')
-		Taro.showToast({
-			title: '敬请期待',
-			icon: 'none',
+		Taro.navigateTo({
+			url: `/pages/mine/achievement/index` + `?memberId=${memberInfo._id}`,
 		})
 	}
 
@@ -72,11 +71,11 @@ export default function ModuleCard(props: IModuleCardProps) {
 								mode='scaleToFill'
 								src={memberInfo.user_avatarUrl}
 							/>
-							{false && (
+							{true && (
 								<Image
 									className='image-border'
 									mode='scaleToFill'
-									src={strAvatarBorderUrl_07}
+									src={strAvatarBorderUrl_02}
 								/>
 							)}
 						</View>
