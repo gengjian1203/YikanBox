@@ -10,4 +10,48 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
+
+	.module-badge-content {
+		box-sizing: border-box;
+		width: 100%;
+		padding: 0 $border-bold-space;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+	.module-curtain-content {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+
+		.curtain-image {
+			width: 400px;
+			height: 400px;
+			margin-bottom: $border-bold-space;
+		}
+
+		.curtain-gray {
+			filter: grayscale(100%);
+		}
+
+		.curtain-desc {
+			color: $color-white;
+			font-size: $f3;
+			margin-bottom: $border-bold-space;
+		}
+
+		.curtain-time {
+			color: $color-white;
+			font-size: $f3;
+			margin-bottom: $border-bold-space;
+		}
+
+		.curtain-button {
+			padding: 0 $border-bold-space;
+		}
+	}
 }

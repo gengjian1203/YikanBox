@@ -78,7 +78,7 @@ const createMember = async (data, db, strMemberId, date, time) => {
 		data_arrCollectionQueueList: [], // 收藏接龙列表
 		data_arrMineBadgeList: [
 			{
-				code: 'NEW_MEMBER',
+				code: 'BADGE_STAR',
 				time: time,
 			},
 		], // 徽章列表

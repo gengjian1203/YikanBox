@@ -1,0 +1,30 @@
+@import '../../../../../app.scss';
+
+.badge-item-wrap {
+	position: relative;
+	width: 200px;
+	height: 200px;
+	margin-right: $border-bold-space;
+	margin-bottom: 100px;
+
+	&:nth-child(3n) {
+		margin-right: 0;
+	}
+
+	.item-gray {
+		filter: grayscale(100%);
+	}
+
+	.badge-item {
+		width: 100%;
+		height: 100%;
+	}
+
+	.badge-button {
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		transform: translate(-50%, 100%);
+		padding: 0 $border-bold-space;
+	}
+}

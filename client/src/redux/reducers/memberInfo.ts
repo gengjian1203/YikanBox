@@ -3,10 +3,12 @@ import {
 	SET_MEMBER_INFO,
 	ADD_COLLECTION_ARTICLE_INFO,
 	REMOVE_COLLECTION_ARTICLE_INFO,
+	PUSH_MINE_BADGE_LIST,
 } from '@/redux/constants/memberInfo'
 
 const INITIAL_STATE = {
 	data_arrCollectionArticleList: [],
+	data_arrMineBadgeList: [],
 }
 
 export default function memberInfoReducer(state = INITIAL_STATE, action: any) {
@@ -26,6 +28,9 @@ export default function memberInfoReducer(state = INITIAL_STATE, action: any) {
 					return payload._id === item._id
 				})
 				draft.data_arrCollectionArticleList.splice(nIndxe, 1)
+				return draft
+			case PUSH_MINE_BADGE_LIST:
+				draft.data_arrMineBadgeList.push(payload)
 				return draft
 			default:
 				return draft

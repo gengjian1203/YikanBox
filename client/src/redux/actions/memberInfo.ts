@@ -2,6 +2,7 @@ import {
 	SET_MEMBER_INFO,
 	ADD_COLLECTION_ARTICLE_INFO,
 	REMOVE_COLLECTION_ARTICLE_INFO,
+	PUSH_MINE_BADGE_LIST,
 } from '@/redux/constants/memberInfo'
 
 const memberInfoActions = dispatch => {
@@ -24,6 +25,13 @@ const memberInfoActions = dispatch => {
 		removeCollectionArticleInfo: payload => {
 			dispatch({
 				type: REMOVE_COLLECTION_ARTICLE_INFO,
+				payload,
+			})
+		},
+		// 增加徽章列表
+		pushMineBadgeList: payload => {
+			dispatch({
+				type: PUSH_MINE_BADGE_LIST,
 				payload,
 			})
 		},
