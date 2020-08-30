@@ -77,7 +77,14 @@
 					"id": 2,
 					"name": "pages/loading/index",
 					"pathName": "pages/loading/index",
-					"query": "sourceID=mem-oKFiZ5WUDQsrZTKoo_OZ4bhnYfJA&shareType=PATH_POPULARIZE&sharePath=%2Fpages%2Fmain%2Findex%3Ffrom%3Dshare",
+					"query": "sourceID=mem-oKFiZ5WUDQsrZTKoo_OZ4bhnYfJA&shareType=PATH_POPULARIZE&sharePath=%2Fpages%2Fdemo%2Findex%3Ffrom%3Dshare",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/demo/index",
+					"pathName": "pages/demo/index",
+					"query": "",
 					"scene": null
 				}
 			]
