@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 import webApi from '@/api/memberInfo'
 
-import { View } from '@tarojs/components'
+import { Block, View } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
 import ModuleBase from './components/module-base'
 import ModuleBadge from './components/module-badge'
@@ -16,6 +16,7 @@ export default function Achievement() {
 		params: { memberId = '' },
 	} = useRouter()
 
+	const [isLoadComplete, setLoadComplete] = useState<boolean>(false)
 	const [isStateMyself, setStateMyself] = useState<boolean>(false)
 	const [strNavigationTitle, setNavigationTitle] = useState<string>('')
 	const [objMemberInfo, setMemberInfo] = useState<any>({})
@@ -38,6 +39,8 @@ export default function Achievement() {
 			console.log('queryMemberInfo')
 			setMemberInfo(res.data)
 		}
+
+		setLoadComplete(true)
 	}
 
 	useEffect(() => {
@@ -52,10 +55,22 @@ export default function Achievement() {
 				isShowLeftIcon
 				strNavigationTitle={strNavigationTitle}
 			/>
-			{/* 基本信息 */}
-			<ModuleBase isStateMyself={isStateMyself} memberInfo={objMemberInfo} />
-			{/* 徽章信息 */}
-			<ModuleBadge isStateMyself={isStateMyself} memberInfo={objMemberInfo} />
+			{isLoadComplete ? (
+				<Block>
+					{/* 基本信息 */}
+					<ModuleBase
+						isStateMyself={isStateMyself}
+						memberInfo={objMemberInfo}
+					/>
+					{/* 徽章信息 */}
+					<ModuleBadge
+						isStateMyself={isStateMyself}
+						memberInfo={objMemberInfo}
+					/>
+				</Block>
+			) : (
+				<Block></Block>
+			)}
 		</View>
 	)
 }

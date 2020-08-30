@@ -1,7 +1,7 @@
-import Taro, { useRouter } from '@tarojs/taro'
+import Taro, { useRouter, useShareAppMessage } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { deepClone } from '@/utils/index'
+import { shareType, processSharePath, deepClone } from '@/utils/index'
 
 import { View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
@@ -17,15 +17,31 @@ export default function Popularize() {
 
 	const [arrPopularizeList, setPopularizeList] = useState<Array<any>>([])
 
+	const store = useSelector(state => state)
 	const data_arrShareChildrenList = useSelector(
 		state => state.memberInfo.data_arrShareChildrenList
 	)
 
 	const onLoad = () => {
-		Taro.hideShareMenu()
 		const arrListTmp = deepClone(data_arrShareChildrenList)
 		setPopularizeList(arrListTmp.reverse())
 	}
+
+	useShareAppMessage(res => {
+		const sharePath = processSharePath(
+			{
+				sharePath: '/pages/main/index',
+				shareType: shareType.PATH_POPULARIZE,
+			},
+			store
+		)
+		console.log('useShareAppMessage', sharePath)
+		return {
+			title: '分享了一个好用的工具箱，并@了你',
+			imageUrl: '',
+			path: sharePath,
+		}
+	})
 
 	useEffect(() => {
 		onLoad()

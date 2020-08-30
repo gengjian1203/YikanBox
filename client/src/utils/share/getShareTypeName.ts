@@ -9,6 +9,10 @@ export const getShareTypeName = strShareType => {
 	switch (strShareType) {
 		case shareType.MINIPROGRAM:
 			strResult = `搜索小程序`
+			break
+		case shareType.PATH_POPULARIZE:
+			strResult = `分享推广链接`
+			break
 		case shareType.PATH_ARTICLE:
 			strResult = `分享文章链接`
 			break

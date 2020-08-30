@@ -59,7 +59,7 @@ export default function VPageHome(props: IVPageHomeProps) {
 			></Image>
 			{/* <Button onClick={handleCreateArticleClick}>爬取文章</Button> */}
 			{/* <Button onClick={handleLoginClick}>强制登录</Button> */}
-			<Button onClick={handleNavigationJumpClick}>重复跳转</Button>
+			{/* <Button onClick={handleNavigationJumpClick}>重复跳转</Button> */}
 		</View>
 	)
 }
