@@ -1,6 +1,6 @@
 import React from 'react'
 import useThrottle from '@/hooks/useThrottle'
-import { getFromTypeName } from '@/utils/index'
+import { getShareTypeName } from '@/utils/index'
 
 import { View } from '@tarojs/components'
 import { AtCard } from 'taro-ui'
@@ -13,7 +13,7 @@ interface IItemCardProps {
 	gender?: number
 	joinTime?: string
 	nickName?: string
-	fromType?: string
+	shareType?: string
 	sharePath?: string
 	onClick?: any
 }
@@ -25,7 +25,7 @@ export default function ItemCard(props: IItemCardProps) {
 		gender = 0,
 		joinTime = '',
 		nickName = '',
-		fromType = '',
+		shareType = '',
 		sharePath = '',
 		onClick = (any?: any) => any,
 	} = props
@@ -38,7 +38,7 @@ export default function ItemCard(props: IItemCardProps) {
 		<View className='item-card-wrap'>
 			<AtCard
 				title={nickName}
-				note={`加入方式：${getFromTypeName(fromType)}`}
+				note={`加入方式：${getShareTypeName(shareType)}`}
 				thumb={avatarUrl}
 				onClick={useThrottle(handleCardClick)}
 			>

@@ -35,8 +35,8 @@ export default function ModuleLogin(props: IModuleLoginProps) {
 		const objUserInfo = e.detail.userInfo
 		if (objUserInfo && !checkObjectEmpty(objUserInfo)) {
 			setLogining(true)
-			objUserInfo.share_fromType = shareInfo.fromType
 			objUserInfo.share_sourceID = shareInfo.sourceID
+			objUserInfo.share_shareType = shareInfo.shareType
 			objUserInfo.share_sharePath = shareInfo.sharePath
 			const res = await webApi.addMemberInfo(objUserInfo)
 			console.log('handleGetUserInfo addMemberInfo', res)

@@ -1,3 +1,8 @@
+export enum shareType {
+	MINIPROGRAM = 'MINIPROGRAM',
+	PATH_ARTICLE = 'PATH_ARTICLE',
+}
+
 interface ISharePathType {
 	sharePath: string
 	[key: string]: any
@@ -13,13 +18,13 @@ export function processSharePath(objParams: ISharePathType, store: any) {
 	// 分享基本参数
 	let strBaseUrl =
 		`/pages/loading/index` + // 分享中转页
-		`?fromType=PATH` + // 分享途径类型
-		`&sourceID=${store.memberInfo._id ? store.memberInfo._id : ''}` + // 分享人ID
+		`?sourceID=${store.memberInfo._id ? store.memberInfo._id : ''}` + // 分享人ID
+		`&shareType=${objParams.shareType}` + // 分享途径类型
 		`&sharePath=`
 	// 分享路径所需参数
 	let strExtendUrl = `${objParams.sharePath}?from=share`
 	for (let key in objParams) {
-		if (key === 'sharePath') {
+		if (key === 'sharePath' || key === 'shareType') {
 			continue
 		}
 		strExtendUrl += `&${key}=${objParams[key]}`
@@ -27,4 +32,4 @@ export function processSharePath(objParams: ISharePathType, store: any) {
 	return strBaseUrl + encodeURIComponent(strExtendUrl)
 }
 
-export default processSharePath
+export default { shareType, processSharePath }

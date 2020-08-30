@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { deepClone } from '@/utils/index'
 
 import { View } from '@tarojs/components'
+import { AtButton } from 'taro-ui'
 import NavigationHeader from '@/components/NavigationHeader'
 import TipsPanel from '@/components/TipsPanel'
 
@@ -42,6 +43,10 @@ export default function Popularize() {
 		<View className='popularize-wrap flex-center-v'>
 			{/* 顶部导航 */}
 			<NavigationHeader isShowLeftIcon strNavigationTitle='我的推广' />
+			{/* 我要推广 */}
+			<AtButton type='primary' full openType='share'>
+				我要推广
+			</AtButton>
 			{/* 列表内容 */}
 			{arrPopularizeList && arrPopularizeList.length > 0 ? (
 				arrPopularizeList.map((item, index) => {
@@ -53,7 +58,7 @@ export default function Popularize() {
 							gender={item.gender}
 							joinTime={item.joinTime}
 							nickName={item.nickName}
-							fromType={item.fromType}
+							shareType={item.shareType}
 							sharePath={item.sharePath}
 							onClick={() => handleMemberDetailClick(item)}
 						/>

@@ -106,7 +106,7 @@ export default function ModuleBase(props: IModuleBaseProps) {
 				<AtListItem
 					className='item-normal'
 					title={`${isStateMyself ? '我' : 'TA'}的推广人`}
-					arrow='right'
+					arrow={memberInfo.share_sourceID === '' ? undefined : 'right'}
 					extraText={hiddenString(memberInfo.share_sourceID)}
 					onClick={useThrottle(useCheckLogin(handleJumpSourceClick))}
 				/>

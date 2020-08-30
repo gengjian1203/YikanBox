@@ -2,9 +2,9 @@ import { produce } from 'immer'
 import { SET_SHARE_INFO } from '@/redux/constants/shareInfo'
 
 const INITIAL_STATE = {
-	fromType: 'MINIPROGRAM',
 	sourceID: '',
-	sharePath: '',
+	shareType: 'MINIPROGRAM',
+	sharePath: '/pages/main/index',
 }
 
 export default function shareInfoReducer(state = INITIAL_STATE, action) {

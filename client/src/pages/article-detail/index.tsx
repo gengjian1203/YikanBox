@@ -8,7 +8,7 @@ import useCheckLogin from '@/hooks/useCheckLogin'
 
 import webApiArticleInfo from '@/api/articleInfo'
 import webApiMemberInfo from '@/api/memberInfo'
-import { processSharePath, getArticleTagName } from '@/utils/index'
+import { shareType, processSharePath, getArticleTagName } from '@/utils/index'
 
 import { AtButton } from 'taro-ui'
 import { Block, View, Text } from '@tarojs/components'
@@ -40,14 +40,15 @@ export default function ArticleDetail() {
 		const sharePath = processSharePath(
 			{
 				sharePath: path,
+				shareType: shareType.PATH_ARTICLE,
 				articleId: articleId,
 			},
 			store
 		)
 		console.log('useShareAppMessage', sharePath)
 		return {
-			title: '',
-			imageUrl: '',
+			title: '分享了一篇文章，并@了你',
+			imageUrl: objArticleInfo.posterImg,
 			path: sharePath,
 		}
 	})

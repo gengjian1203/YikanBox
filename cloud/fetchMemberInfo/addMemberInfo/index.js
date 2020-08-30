@@ -54,10 +54,10 @@ const createMember = async (data, db, strMemberId, date, time) => {
 		app_updateDate: date, // 修改时间
 		app_updateTime: time, // 修改时间
 		// 溯源级
-		share_fromType: data.share_fromType,
-		share_sharePath: data.share_sharePath,
 		share_sourceID: data.share_sourceID,
 		share_sourceNickName: '',
+		share_shareType: data.share_shareType,
+		share_sharePath: data.share_sharePath,
 		// 个人信息
 		user_openid: strMemberId.substr(4),
 		user_nickName: data.nickName, // 昵称*
@@ -117,7 +117,7 @@ const updateSourceInfo = async (data, db, strMemberId, date, time) => {
 						gender: data.gender, // 性别*
 						joinDate: date, // 加入时间
 						joinTime: time, // 加入时间
-						fromType: data.share_fromType,
+						shareType: data.share_shareType,
 						sharePath: data.share_sharePath,
 					}),
 				},
