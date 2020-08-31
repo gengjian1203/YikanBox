@@ -39,19 +39,25 @@
 		}
 
 		.curtain-desc {
+			width: 100%;
+			text-align: left;
 			color: $color-white;
 			font-size: $f3;
 			margin-bottom: $border-bold-space;
 		}
 
 		.curtain-time {
+			width: 100%;
+			text-align: left;
 			color: $color-white;
 			font-size: $f3;
 			margin-bottom: $border-bold-space;
 		}
 
 		.curtain-button {
-			padding: 0 $border-bold-space;
+			box-sizing: border-box;
+			width: 260px;
+			// padding: 0 $border-bold-space;
 		}
 	}
 }

@@ -79,6 +79,7 @@ const createMember = async (data, db, strMemberId, date, time) => {
 		data_arrMineBadgeList: [
 			{
 				code: 'BADGE_STAR',
+				date: date,
 				time: time,
 			},
 		], // 徽章列表

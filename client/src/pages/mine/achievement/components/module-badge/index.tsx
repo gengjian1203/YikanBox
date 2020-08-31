@@ -5,6 +5,7 @@ import useActions from '@/hooks/useActions'
 import memberInfoActions from '@/redux/actions/memberInfo'
 import useThrottle from '@/hooks/useThrottle'
 import { deepClone } from '@/utils/index'
+import webApi from '@/api/memberInfo'
 
 import { View, Image } from '@tarojs/components'
 import { AtCurtain, AtButton } from 'taro-ui'
@@ -30,7 +31,7 @@ interface IModuleBadgeProps {
 export default function ModuleBadge(props: IModuleBadgeProps) {
 	const {} = props
 
-	// const [isShowCurtainBadge, setShowCurtainBadge] = useState<boolean>(false)
+	const [isActivating, setActivating] = useState<boolean>(false)
 	const [nSelectBadgeIndex, setSelectBadgeIndex] = useState<number>(-1)
 	const [objSelectBadge, setSelectBadge] = useState<any>({})
 	const [arrBadgeList, setBadgeList] = useState<Array<any>>([])
@@ -138,11 +139,17 @@ export default function ModuleBadge(props: IModuleBadgeProps) {
 	}
 
 	// 激活徽章
-	const handleItemActivateClick = () => {
+	const handleItemActivateClick = async () => {
 		console.log('handleItemActivateClick', objSelectBadge)
+		setActivating(true)
+		const param = {
+			strBadgeCode: objSelectBadge.code,
+		}
+		const res = await webApi.addMineBadge(param)
+		setActivating(false)
 		pushMineBadgeList({
-			code: objSelectBadge.code,
-			time: '111111',
+			code: res.data.code,
+			time: res.data.time,
 		})
 	}
 
@@ -173,11 +180,15 @@ export default function ModuleBadge(props: IModuleBadgeProps) {
 						mode='aspectFit'
 						className={
 							`curtain-image ` +
-							`${objSelectBadge.time === '' ? 'curtain-gray ' : ''}`
+							`${
+								objSelectBadge.time === ''
+									? 'curtain-gray '
+									: 'fade-in-from-grayscale '
+							}`
 						}
 					/>
 					<View className='curtain-desc'>
-						获取方法：{objSelectBadge.describe}
+						【获取方法】{objSelectBadge.describe}
 					</View>
 					<View
 						className={
@@ -185,7 +196,7 @@ export default function ModuleBadge(props: IModuleBadgeProps) {
 							`{${objSelectBadge.time === '' ? 'hidden ' : ''}}`
 						}
 					>
-						获取时间：{objSelectBadge.time}
+						【获取时间】{objSelectBadge.time}
 					</View>
 					<AtButton
 						className={
@@ -194,6 +205,7 @@ export default function ModuleBadge(props: IModuleBadgeProps) {
 						}
 						type='primary'
 						size='small'
+						loading={isActivating}
 						onClick={useThrottle(handleItemActivateClick)}
 					>
 						激活

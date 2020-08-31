@@ -31,6 +31,10 @@ interface ICollectionArticleType {
 	objArticle: IArticleInfoType
 }
 
+interface IAddMineBadgeType {
+	strBadgeCode: string // 徽章Code码
+}
+
 /**
  * 新增注册成员信息
  * @return
@@ -87,9 +91,24 @@ const removeCollectionArticle = async (objParams?: ICollectionArticleType) => {
 	return res.data
 }
 
+/**
+ * 激活新的徽章
+ * @return
+ */
+const addMineBadge = async (objParams?: IAddMineBadgeType) => {
+	const params = {
+		type: 'ADD_MINE_BADGE',
+		data: objParams,
+	}
+	const res = await CloudFetch.callFunction('fetchMemberInfo', params)
+	console.log('addMineBadge', res)
+	return res.data
+}
+
 export default {
 	addMemberInfo,
 	queryMemberInfo,
 	addCollectionArticle,
 	removeCollectionArticle,
+	addMineBadge,
 }
