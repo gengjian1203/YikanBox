@@ -60,12 +60,12 @@ export default function Achievement() {
 					{/* 基本信息 */}
 					<ModuleBase
 						isStateMyself={isStateMyself}
-						memberInfo={objMemberInfo}
+						objMemberInfo={objMemberInfo}
 					/>
 					{/* 徽章信息 */}
 					<ModuleBadge
 						isStateMyself={isStateMyself}
-						memberInfo={objMemberInfo}
+						objMemberInfo={objMemberInfo}
 					/>
 				</Block>
 			) : (

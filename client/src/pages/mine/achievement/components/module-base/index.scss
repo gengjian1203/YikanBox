@@ -20,4 +20,21 @@
 			color: $color-text-long;
 		}
 	}
+
+	// 自定义taro-ui样式
+	.at-float-layout__container,
+	.layout-body,
+	.layout-body__content {
+		min-height: auto;
+	}
+
+	.layout-body__content {
+		white-space: nowrap;
+
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: flex-start;
+		align-items: center;
+	}
 }

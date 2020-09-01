@@ -9,24 +9,19 @@ import './index.scss'
 
 interface IBadgeInfoType {
 	code?: string
-	url?: string
+	urlBadge?: string
 	name?: string
 	describe?: string
 	time?: string
 }
 
-interface IModuleBadgeProps {
-	objBadge: Array<IBadgeInfoType>
+interface IItemBadgeProps {
+	objBadge: IBadgeInfoType
 	onItemClick: any
-	onItemButtonClick: any
 }
 
-export default function ModuleBadge(props: IModuleBadgeProps) {
-	const {
-		objBadge = {},
-		onItemClick = () => true,
-		onItemButtonClick = () => true,
-	} = props
+export default function ItemBadge(props: IItemBadgeProps) {
+	const { objBadge = {}, onItemClick = () => true } = props
 
 	// 点击徽章
 	const handleItemClick = e => {
@@ -35,27 +30,20 @@ export default function ModuleBadge(props: IModuleBadgeProps) {
 		onItemClick(objBadge)
 	}
 
-	// 点击按钮
-	const handleItemButtonClick = e => {
-		console.log('handleButtonClick', e)
-		e.stopPropagation()
-		onItemButtonClick(objBadge)
-	}
-
 	return (
 		<View className='badge-item-wrap' onClick={useThrottle(handleItemClick)}>
 			<Image
-				src={objBadge.url}
+				src={objBadge.urlBadge}
 				mode='aspectFit'
 				className={
-					`badge-item ` + `${objBadge.time === '' ? 'item-gray ' : ''}`
+					`item-image ` + `${objBadge.time === '' ? 'item-gray ' : ''}`
 				}
 			/>
 			<AtButton
-				className='badge-button'
+				className='item-button'
 				type='primary'
 				size='small'
-				onClick={useThrottle(handleItemButtonClick)}
+				onClick={useThrottle(handleItemClick)}
 			>
 				详情
 			</AtButton>

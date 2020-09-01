@@ -1,38 +1,56 @@
 import Taro from '@tarojs/taro'
-import React, { useEffect } from 'react'
-import useActions from '@/hooks/useActions'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import useThrottle from '@/hooks/useThrottle'
 import useCheckLogin from '@/hooks/useCheckLogin'
-import memberInfoActions from '@/redux/actions/memberInfo'
 import { hiddenString, simpleDate } from '@/utils/index'
 
-import { AtList, AtListItem } from 'taro-ui'
+import { AtList, AtListItem, AtFloatLayout } from 'taro-ui'
 import { View } from '@tarojs/components'
 import ModuleTitle from '@/components/ModuleTitle'
+
+import { convertBadgeList } from '../../utils/index'
+import ItemBorder from '../item-border'
 
 import './index.scss'
 
 interface IModuleBaseProps {
 	isStateMyself: boolean // 是否为自己
-	memberInfo: any // 用户信息
+	objMemberInfo: any // 用户信息
 }
 
 export default function ModuleBase(props: IModuleBaseProps) {
-	const { isStateMyself = true, memberInfo = {} } = props
+	const { isStateMyself = true, objMemberInfo = {} } = props
 
-	const { setMemberInfo } = useActions(memberInfoActions)
+	const [isShowLayoutBorder, setShowLayoutBorder] = useState<boolean>(false)
+	const [arrBorderList, setBorderList] = useState<Array<any>>([])
 
-	const onLoad = async () => {}
+	const memberInfo = useSelector(state => state.memberInfo)
 
+	const renderBorderList = arrList => {
+		setBorderList(convertBadgeList(arrList))
+	}
+
+	// 自己的成就，监听Redux数据
 	useEffect(() => {
-		onLoad()
-		return () => {}
-	}, [])
+		if (isStateMyself) {
+			console.log('Watch renderBadgeList.myself')
+			renderBorderList(memberInfo.data_arrMineBadgeList)
+		}
+	}, [memberInfo.data_arrMineBadgeList])
+
+	// 他人的成就，监听传入数据
+	useEffect(() => {
+		if (!isStateMyself) {
+			console.log('Watch renderBorderList.not myself')
+			renderBorderList(objMemberInfo.data_arrMineBadgeList)
+		}
+	}, [objMemberInfo.data_arrMineBadgeList])
 
 	// 点击ID实现复制到剪贴板
 	const handleIDCopyClick = () => {
 		Taro.setClipboardData({
-			data: memberInfo._id,
+			data: objMemberInfo._id,
 			success: resForSet => {
 				Taro.getClipboardData({
 					success: resForGet => {
@@ -43,24 +61,32 @@ export default function ModuleBase(props: IModuleBaseProps) {
 		})
 	}
 
-	// 我的头像秀
-	const handleAvatarShowClick = e => {
+	// 我的头像框
+	const handleBorderShowClick = e => {
 		console.log('handleAvatarShowClick', e)
-		Taro.showToast({
-			title: '敬请期待',
-			icon: 'none',
-		})
+		setShowLayoutBorder(true)
 	}
 
 	// 跳转到推广人
 	const handleJumpSourceClick = () => {
-		if (memberInfo.share_sourceID) {
+		if (objMemberInfo.share_sourceID) {
 			Taro.navigateTo({
 				url:
 					`/pages/mine/achievement/index` +
-					`?memberId=${memberInfo.share_sourceID}`,
+					`?memberId=${objMemberInfo.share_sourceID}`,
 			})
 		}
+	}
+
+	// 浮窗事件：关闭
+	const handleLayoutBorderClose = () => {
+		console.log('handleLayoutBorderClose')
+		setShowLayoutBorder(false)
+	}
+
+	// 浮窗事件：点击头像框每项
+	const handleBorderItemClick = () => {
+		console.log('handleBorderItemClick')
 	}
 
 	return (
@@ -70,20 +96,20 @@ export default function ModuleBase(props: IModuleBaseProps) {
 				<AtListItem
 					className='item-normal'
 					title={`${isStateMyself ? '我' : 'TA'}的昵称`}
-					extraText={memberInfo.user_nickName}
+					extraText={objMemberInfo.user_nickName}
 				/>
 				<AtListItem
 					className='item-normal'
 					title={`${isStateMyself ? '我' : 'TA'}的ID`}
-					extraText={hiddenString(memberInfo._id)}
+					extraText={hiddenString(objMemberInfo._id)}
 					arrow={'right'}
 					onClick={useThrottle(useCheckLogin(handleIDCopyClick))}
 				/>
-				<AtListItem
+				{/* <AtListItem
 					className='item-normal'
 					title={`${isStateMyself ? '我' : 'TA'}的等级`}
 					extraText={`Lv.${memberInfo.data_level}`}
-				/>
+				/> */}
 				{/* <AtListItem
 					className='item-normal'
 					title={`${isStateMyself ? '我' : 'TA'}的称号`}
@@ -96,21 +122,38 @@ export default function ModuleBase(props: IModuleBaseProps) {
 					title={`${isStateMyself ? '我' : 'TA'}的头像框`}
 					extraText='新人之星'
 					arrow={isStateMyself ? 'right' : undefined}
-					onClick={useThrottle(useCheckLogin(handleAvatarShowClick))}
+					onClick={useThrottle(useCheckLogin(handleBorderShowClick))}
 				/>
 				<AtListItem
 					className='item-normal'
 					title={'注册时间'}
-					extraText={simpleDate(memberInfo.app_createDate)}
+					extraText={simpleDate(objMemberInfo.app_createDate)}
 				/>
 				<AtListItem
 					className='item-normal'
 					title={`${isStateMyself ? '我' : 'TA'}的推广人`}
-					arrow={memberInfo.share_sourceID === '' ? undefined : 'right'}
-					extraText={hiddenString(memberInfo.share_sourceID)}
+					arrow={objMemberInfo.share_sourceID === '' ? undefined : 'right'}
+					extraText={hiddenString(objMemberInfo.share_sourceID)}
 					onClick={useThrottle(useCheckLogin(handleJumpSourceClick))}
 				/>
 			</AtList>
+			{/* 浮动弹窗-选择头像框 */}
+			<AtFloatLayout
+				isOpened={isShowLayoutBorder}
+				title='选择头像框'
+				scrollX
+				onClose={handleLayoutBorderClose}
+			>
+				{arrBorderList.map((item, index) => {
+					return (
+						<ItemBorder
+							key={index}
+							objBorder={item}
+							onItemClick={handleBorderItemClick}
+						/>
+					)
+				})}
+			</AtFloatLayout>
 		</View>
 	)
 }
