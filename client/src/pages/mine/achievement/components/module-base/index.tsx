@@ -1,15 +1,17 @@
 import Taro from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import useActions from '@/hooks/useActions'
+import memberInfoActions from '@/redux/actions/memberInfo'
 import useThrottle from '@/hooks/useThrottle'
-import useCheckLogin from '@/hooks/useCheckLogin'
+import webApi from '@/api/memberInfo'
 import { hiddenString, simpleDate } from '@/utils/index'
 
 import { AtList, AtListItem, AtFloatLayout } from 'taro-ui'
 import { View } from '@tarojs/components'
 import ModuleTitle from '@/components/ModuleTitle'
 
-import { convertBadgeList } from '../../utils/index'
+import { convertBadgeList, getBadgeName } from '../../utils/index'
 import ItemBorder from '../item-border'
 
 import './index.scss'
@@ -22,28 +24,55 @@ interface IModuleBaseProps {
 export default function ModuleBase(props: IModuleBaseProps) {
 	const { isStateMyself = true, objMemberInfo = {} } = props
 
-	const [isShowLayoutBorder, setShowLayoutBorder] = useState<boolean>(false)
-	const [arrBorderList, setBorderList] = useState<Array<any>>([])
+	const [strBorderSelectCode, setBorderSelectCode] = useState<string>('') // 当前选中头像框
+	const [isShowLayoutBorder, setShowLayoutBorder] = useState<boolean>(false) // 是否展示头像框列表
+	const [arrBorderList, setBorderList] = useState<Array<any>>([]) // 头像框列表
 
 	const memberInfo = useSelector(state => state.memberInfo)
 
-	const renderBorderList = arrList => {
+	const { changeMineBorderCode } = useActions(memberInfoActions)
+
+	// 调用接口：更新使用头像框
+	const updateMineBorderCode = strMineBorderCode => {
+		const param = {
+			strMineBorderCode,
+		}
+		webApi.updateMineBorderCode(param)
+	}
+
+	// 应用选中头像框数据
+	const applyBorderSelectCode = strCode => {
+		setBorderSelectCode(strCode)
+	}
+
+	// 应用头像框列表数据
+	const applyBorderList = arrList => {
 		setBorderList(convertBadgeList(arrList))
 	}
 
 	// 自己的成就，监听Redux数据
 	useEffect(() => {
 		if (isStateMyself) {
-			console.log('Watch renderBadgeList.myself')
-			renderBorderList(memberInfo.data_arrMineBadgeList)
+			applyBorderSelectCode(memberInfo.data_strMineBorderCode)
+		}
+	}, [memberInfo.data_strMineBorderCode])
+
+	useEffect(() => {
+		if (isStateMyself) {
+			applyBorderList(memberInfo.data_arrMineBadgeList)
 		}
 	}, [memberInfo.data_arrMineBadgeList])
 
 	// 他人的成就，监听传入数据
 	useEffect(() => {
 		if (!isStateMyself) {
-			console.log('Watch renderBorderList.not myself')
-			renderBorderList(objMemberInfo.data_arrMineBadgeList)
+			applyBorderSelectCode(objMemberInfo.data_strMineBorderCode)
+		}
+	}, [objMemberInfo.data_strMineBorderCode])
+
+	useEffect(() => {
+		if (!isStateMyself) {
+			applyBorderList(objMemberInfo.data_arrMineBadgeList)
 		}
 	}, [objMemberInfo.data_arrMineBadgeList])
 
@@ -85,8 +114,17 @@ export default function ModuleBase(props: IModuleBaseProps) {
 	}
 
 	// 浮窗事件：点击头像框每项
-	const handleBorderItemClick = () => {
-		console.log('handleBorderItemClick')
+	const handleBorderItemClick = objBorder => {
+		console.log('handleBorderItemClick', objBorder)
+		if (strBorderSelectCode !== objBorder.code) {
+			if (objBorder.time) {
+				changeMineBorderCode(objBorder.code)
+				updateMineBorderCode(objBorder.code)
+			}
+		} else {
+			changeMineBorderCode('')
+			updateMineBorderCode('')
+		}
 	}
 
 	return (
@@ -103,7 +141,7 @@ export default function ModuleBase(props: IModuleBaseProps) {
 					title={`${isStateMyself ? '我' : 'TA'}的ID`}
 					extraText={hiddenString(objMemberInfo._id)}
 					arrow={'right'}
-					onClick={useThrottle(useCheckLogin(handleIDCopyClick))}
+					onClick={useThrottle(handleIDCopyClick)}
 				/>
 				{/* <AtListItem
 					className='item-normal'
@@ -115,14 +153,14 @@ export default function ModuleBase(props: IModuleBaseProps) {
 					title={`${isStateMyself ? '我' : 'TA'}的称号`}
 					extraText='初出茅庐'
 					arrow={isStateMyself ? 'right' : undefined}
-					onClick={useThrottle(useCheckLogin(handleAvatarShowClick))}
+					onClick={useThrottle(handleAvatarShowClick)}
 				/> */}
 				<AtListItem
 					className='item-normal'
 					title={`${isStateMyself ? '我' : 'TA'}的头像框`}
-					extraText='新人之星'
+					extraText={getBadgeName(strBorderSelectCode)}
 					arrow={isStateMyself ? 'right' : undefined}
-					onClick={useThrottle(useCheckLogin(handleBorderShowClick))}
+					onClick={useThrottle(handleBorderShowClick)}
 				/>
 				<AtListItem
 					className='item-normal'
@@ -134,7 +172,7 @@ export default function ModuleBase(props: IModuleBaseProps) {
 					title={`${isStateMyself ? '我' : 'TA'}的推广人`}
 					arrow={objMemberInfo.share_sourceID === '' ? undefined : 'right'}
 					extraText={hiddenString(objMemberInfo.share_sourceID)}
-					onClick={useThrottle(useCheckLogin(handleJumpSourceClick))}
+					onClick={useThrottle(handleJumpSourceClick)}
 				/>
 			</AtList>
 			{/* 浮动弹窗-选择头像框 */}
@@ -149,7 +187,8 @@ export default function ModuleBase(props: IModuleBaseProps) {
 						<ItemBorder
 							key={index}
 							objBorder={item}
-							onItemClick={handleBorderItemClick}
+							strBorderSelectCode={strBorderSelectCode}
+							onItemClick={() => handleBorderItemClick(item)}
 						/>
 					)
 				})}

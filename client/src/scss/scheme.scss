@@ -19,7 +19,7 @@ $radius-thin: 20px;
 
 // $color-zhihu: #0084ff;
 
-$color-primary: #ffdc00;
+$color-primary: #f7b500;
 $color-secondary: lighten($color-primary, 10%);
 $color-tertiary: lighten($color-primary, 20%);
 
@@ -32,9 +32,9 @@ $color-bg: #ebebeb; // 背景色
 $color-mask: rgba(0, 0, 0, 0.3); // 蒙板颜色
 
 $color-text-primary: #000000; // 主内容
-$color-text-long: #353535; // 大段说明的主要内容
+$color-text-long: #272637; // 大段说明的主要内容
 $color-text-secondary: #888888; // 次要内容
-$color-text-placeholder: #b2b2b2; // 缺省值
+$color-text-placeholder: #dfdfe5; // 缺省值
 
 $color-link-normal: #576b96; // 链接用色
 $color-link-press: lighten($color-link-normal, 10%);

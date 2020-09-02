@@ -3,6 +3,7 @@ import {
 	ADD_COLLECTION_ARTICLE_INFO,
 	REMOVE_COLLECTION_ARTICLE_INFO,
 	PUSH_MINE_BADGE_LIST,
+	CHANGE_MINE_BORDER_CODE,
 } from '@/redux/constants/memberInfo'
 
 const memberInfoActions = dispatch => {
@@ -32,6 +33,13 @@ const memberInfoActions = dispatch => {
 		pushMineBadgeList: payload => {
 			dispatch({
 				type: PUSH_MINE_BADGE_LIST,
+				payload,
+			})
+		},
+		// 切换使用的头像框
+		changeMineBorderCode: payload => {
+			dispatch({
+				type: CHANGE_MINE_BORDER_CODE,
 				payload,
 			})
 		},

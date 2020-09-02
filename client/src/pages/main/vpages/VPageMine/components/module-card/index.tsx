@@ -15,6 +15,8 @@ import strAvatarBorderUrl_05 from '@/images/mine/border_05.png'
 import strAvatarBorderUrl_06 from '@/images/mine/border_06.png'
 import strAvatarBorderUrl_07 from '@/images/mine/border_07.png'
 
+import { getBadgeUrl } from '../../utils/index'
+
 import './index.scss'
 
 interface IModuleCardProps {}
@@ -75,7 +77,7 @@ export default function ModuleCard(props: IModuleCardProps) {
 								<Image
 									className='image-border'
 									mode='scaleToFill'
-									src={strAvatarBorderUrl_02}
+									src={getBadgeUrl(memberInfo.data_strMineBorderCode)}
 								/>
 							)}
 						</View>

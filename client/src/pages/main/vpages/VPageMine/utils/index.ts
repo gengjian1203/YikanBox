@@ -66,39 +66,20 @@ const arrBadgeListTemplate = [
 ]
 
 /**
- * 处理徽章（头像框）List，如果已获取则赋值time字段。
- * @param data_arrMineBadgeList 已获得徽章（头像框）的数据列表
- */
-export const convertBadgeList = (data_arrMineBadgeList: Array<any>) => {
-	const arrBadgeListTmp = arrBadgeListTemplate.map(item => {
-		const nIndex = data_arrMineBadgeList.findIndex(itemMine => {
-			return itemMine.code === item.code
-		})
-		return {
-			...item,
-			time: nIndex >= 0 ? data_arrMineBadgeList[nIndex].time : '',
-		}
-	})
-	console.log('convertBadgeList', arrBadgeListTmp)
-	return arrBadgeListTmp
-}
-
-/**
- * 根据徽章Code解析徽章名称
+ * 根据徽章Code解析徽章图片Url
  * @param strBadgeCode 徽章Code
  */
-export const getBadgeName = (strBadgeCode: string) => {
+export const getBadgeUrl = (strBadgeCode: string) => {
 	let strResult = ''
 	const nIndex = arrBadgeListTemplate.findIndex(item => {
 		return item.code === strBadgeCode
 	})
 	if (nIndex >= 0) {
-		strResult = arrBadgeListTemplate[nIndex].name
+		strResult = arrBadgeListTemplate[nIndex].urlBorder
 	}
 	return strResult
 }
 
 export default {
-	convertBadgeList,
-	getBadgeName,
+	getBadgeUrl,
 }

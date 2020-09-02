@@ -35,6 +35,10 @@ interface IAddMineBadgeType {
 	strBadgeCode: string // 徽章Code码
 }
 
+interface IUpdateMineBorderCodeType {
+	strMineBorderCode: string // 头像框（徽章）Code码
+}
+
 /**
  * 新增注册成员信息
  * @return
@@ -105,10 +109,25 @@ const addMineBadge = async (objParams?: IAddMineBadgeType) => {
 	return res.data
 }
 
+/**
+ * updateMineBorderCode
+ * @param objParams
+ */
+const updateMineBorderCode = async (objParams?: IUpdateMineBorderCodeType) => {
+	const params = {
+		type: 'UPDATE_MINE_BORDER_CODE',
+		data: objParams,
+	}
+	const res = await CloudFetch.callFunction('fetchMemberInfo', params)
+	console.log('updateMineBorderCode', res)
+	return res.data
+}
+
 export default {
 	addMemberInfo,
 	queryMemberInfo,
 	addCollectionArticle,
 	removeCollectionArticle,
 	addMineBadge,
+	updateMineBorderCode,
 }

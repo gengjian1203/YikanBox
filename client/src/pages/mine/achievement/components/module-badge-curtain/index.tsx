@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import useActions from '@/hooks/useActions'
 import memberInfoActions from '@/redux/actions/memberInfo'
 import useThrottle from '@/hooks/useThrottle'

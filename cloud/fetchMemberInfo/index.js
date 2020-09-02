@@ -5,6 +5,7 @@ const queryMemberInfo = require('queryMemberInfo/index.js')
 const addCollectionArticle = require('addCollectionArticle/index.js')
 const removeCollectionArticle = require('removeCollectionArticle/index.js')
 const addMineBadge = require('addMineBadge/index.js')
+const updateMineBorderCode = require('updateMineBorderCode/index.js')
 
 cloud.init({
 	env: cloud.DYNAMIC_CURRENT_ENV, // API 调用都保持和云函数当前所在环境一致
@@ -49,6 +50,9 @@ exports.main = async (event, context) => {
 			break
 		case 'ADD_MINE_BADGE':
 			objResult = await addMineBadge(event.data, db, strMemberId)
+			break
+		case 'UPDATE_MINE_BORDER_CODE':
+			objResult = await updateMineBorderCode(event.data, db, strMemberId)
 			break
 		default:
 			break

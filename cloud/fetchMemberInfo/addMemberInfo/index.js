@@ -71,7 +71,7 @@ const createMember = async (data, db, strMemberId, date, time) => {
 		// 应用信息
 		data_level: 1, // 等级
 		data_exp: 0, // 经验
-		data_AvatarBorder: '', // 当前头像框
+		data_strMineBorderCode: '', // 当前头像框
 		data_arrShareChildrenList: [], // 推广列表
 		data_arrCollectionArticleList: [], // 收藏文章列表
 		data_arrCollectionPhotoList: [], // 收藏图片列表

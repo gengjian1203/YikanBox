@@ -1,9 +1,8 @@
 import Taro from '@tarojs/taro'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import useThrottle from '@/hooks/useThrottle'
 
 import { View, Image } from '@tarojs/components'
-import { AtButton } from 'taro-ui'
 
 import './index.scss'
 
@@ -17,11 +16,16 @@ interface IBorderInfoType {
 
 interface IItemBorderProps {
 	objBorder: IBorderInfoType
+	strBorderSelectCode: string // 选中的头像框
 	onItemClick: any
 }
 
 export default function ItemBorder(props: IItemBorderProps) {
-	const { objBorder = {}, onItemClick = () => true } = props
+	const {
+		objBorder = {},
+		strBorderSelectCode = '',
+		onItemClick = () => true,
+	} = props
 
 	// 点击头像框
 	const handleItemClick = e => {
@@ -32,7 +36,12 @@ export default function ItemBorder(props: IItemBorderProps) {
 
 	return (
 		<View className='border-item-wrap' onClick={useThrottle(handleItemClick)}>
-			<View className='border-item-content flex-center-v'>
+			<View className={`border-item-content ` + `flex-center-v `}>
+				{/* 选中框 */}
+				{objBorder.code === strBorderSelectCode && (
+					<View className='item-select'></View>
+				)}
+				{/* 头像框图片 */}
 				<Image
 					src={objBorder.urlBorder}
 					mode='aspectFit'
@@ -40,6 +49,7 @@ export default function ItemBorder(props: IItemBorderProps) {
 						`item-image ` + `${objBorder.time === '' ? 'item-gray ' : ''}`
 					}
 				/>
+				{/* 头像框名称 */}
 				<View className={`item-name`}>{objBorder.name}</View>
 			</View>
 		</View>
