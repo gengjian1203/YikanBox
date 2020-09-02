@@ -25,7 +25,7 @@ export default function ItemBadge(props: IItemBadgeProps) {
 
 	// 点击徽章
 	const handleItemClick = e => {
-		console.log('handleItemClick', e)
+		// console.log('handleItemClick', e)
 		e.stopPropagation()
 		onItemClick(objBadge)
 	}
@@ -45,7 +45,7 @@ export default function ItemBadge(props: IItemBadgeProps) {
 				size='small'
 				onClick={useThrottle(handleItemClick)}
 			>
-				详情
+				{objBadge.time === '' ? '激活' : '详情'}
 			</AtButton>
 		</View>
 	)

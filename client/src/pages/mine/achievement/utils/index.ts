@@ -20,7 +20,7 @@ const arrBadgeListTemplate = [
 		urlBadge: strBadgeUrl_01,
 		urlBorder: strBorderUrl_01,
 		name: '明日之星',
-		describe: '签到数满3天即可获得',
+		describe: '登录即可激活',
 		time: '',
 	},
 	{
@@ -28,7 +28,7 @@ const arrBadgeListTemplate = [
 		urlBadge: strBadgeUrl_02,
 		urlBorder: strBorderUrl_02,
 		name: '七彩虹光',
-		describe: '连续签到7天即可获得',
+		describe: '收藏7篇文章即可激活',
 		time: '',
 	},
 	{
@@ -79,7 +79,7 @@ export const convertBadgeList = (data_arrMineBadgeList: Array<any>) => {
 			time: nIndex >= 0 ? data_arrMineBadgeList[nIndex].time : '',
 		}
 	})
-	console.log('convertBadgeList', arrBadgeListTmp)
+	// console.log('convertBadgeList', arrBadgeListTmp)
 	return arrBadgeListTmp
 }
 
@@ -98,7 +98,49 @@ export const getBadgeName = (strBadgeCode: string) => {
 	return strResult
 }
 
+/**
+ * 检验是否满足激活徽章的条件
+ * @param objBadge 待激活徽章数据
+ * @param store Redux仓库
+ */
+export const checkBadgeActivate = (objBadge: any, store: any) => {
+	// console.log('checkBadgeActivate', objBadge, store)
+	let isResult = false
+	switch (objBadge.code) {
+		// 登录即可激活
+		case 'BADGE_STAR':
+			isResult = true
+			break
+		// 收藏7篇文章即可激活
+		case 'BADGE_RAINBOW':
+			isResult = store.memberInfo.data_arrCollectionArticleList.length >= 7
+			break
+		// 仿佛隐藏着些许的秘密
+		case 'BADGE_SNOW':
+			isResult = false
+			break
+		// 仿佛隐藏着些许的秘密
+		case 'BADGE_SPRING':
+			isResult = false
+			break
+		// 仿佛隐藏着些许的秘密
+		case 'BADGE_CHILD':
+			isResult = false
+			break
+		// 仿佛隐藏着些许的秘密
+		case 'BADGE_RICH':
+			isResult = false
+			break
+		default:
+			isResult = false
+			break
+	}
+	// isResult = true
+	return isResult
+}
+
 export default {
 	convertBadgeList,
 	getBadgeName,
+	checkBadgeActivate,
 }

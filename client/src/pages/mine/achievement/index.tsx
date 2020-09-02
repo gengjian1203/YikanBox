@@ -36,7 +36,7 @@ export default function Achievement() {
 				_id: memberId,
 			}
 			const res = await webApi.queryMemberInfo(param)
-			console.log('queryMemberInfo')
+			// console.log('queryMemberInfo')
 			setMemberInfo(res.data)
 		}
 

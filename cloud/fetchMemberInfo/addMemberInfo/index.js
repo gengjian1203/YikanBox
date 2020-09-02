@@ -76,13 +76,7 @@ const createMember = async (data, db, strMemberId, date, time) => {
 		data_arrCollectionArticleList: [], // 收藏文章列表
 		data_arrCollectionPhotoList: [], // 收藏图片列表
 		data_arrCollectionQueueList: [], // 收藏接龙列表
-		data_arrMineBadgeList: [
-			{
-				code: 'BADGE_STAR',
-				date: date,
-				time: time,
-			},
-		], // 徽章列表
+		data_arrMineBadgeList: [], // 徽章列表
 	}
 	// 创建新的玩家信息
 	try {

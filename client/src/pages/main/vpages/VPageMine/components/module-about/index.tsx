@@ -31,7 +31,7 @@ export default function ModuleAbout(props: IModuleAboutProps) {
 
 	// 关于我们
 	const handleAboutClick = e => {
-		console.log('handleAboutClick', e)
+		// console.log('handleAboutClick', e)
 		Taro.navigateTo({
 			url: `/pages/mine/about/index`,
 		})
@@ -39,7 +39,7 @@ export default function ModuleAbout(props: IModuleAboutProps) {
 
 	// 退出登录
 	const handleLogoutClick = e => {
-		console.log('handleLogoutClick', e)
+		// console.log('handleLogoutClick', e)
 		Taro.showModal({
 			title: '提示',
 			content: '是否要退出登录',
@@ -64,7 +64,7 @@ export default function ModuleAbout(props: IModuleAboutProps) {
 						color: 'deepskyblue',
 						value: 'iconfont icon-mine-about',
 					}}
-					onClick={useThrottle(useCheckLogin(handleAboutClick))}
+					onClick={useThrottle(handleAboutClick)}
 				/>
 				{memberInfo._id && (
 					<AtListItem

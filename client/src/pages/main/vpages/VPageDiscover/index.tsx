@@ -29,7 +29,7 @@ export default function VPageDiscover(props: IVPageDiscoverProps) {
 	)
 
 	const onLoad = async () => {
-		console.log('VPageDiscover')
+		// console.log('VPageDiscover')
 	}
 
 	useEffect(() => {
@@ -39,7 +39,7 @@ export default function VPageDiscover(props: IVPageDiscoverProps) {
 
 	// 切换 swiper
 	const handleSwiperChange = async e => {
-		console.log('handleSwiperChange', e)
+		// console.log('handleSwiperChange', e)
 		const nCurrent = e.detail.current
 		setArticleCurrent(nCurrent)
 		// 判断是否需要加载后续数据

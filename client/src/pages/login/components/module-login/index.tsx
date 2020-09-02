@@ -31,7 +31,7 @@ export default function ModuleLogin(props: IModuleLoginProps) {
 	}, [])
 
 	const handleGetUserInfo = async e => {
-		console.log('handleGetUserInfo', e)
+		// console.log('handleGetUserInfo', e)
 		const objUserInfo = e.detail.userInfo
 		if (objUserInfo && !checkObjectEmpty(objUserInfo)) {
 			setLogining(true)
@@ -39,7 +39,7 @@ export default function ModuleLogin(props: IModuleLoginProps) {
 			objUserInfo.share_shareType = shareInfo.shareType
 			objUserInfo.share_sharePath = shareInfo.sharePath
 			const res = await webApi.addMemberInfo(objUserInfo)
-			console.log('handleGetUserInfo addMemberInfo', res)
+			// console.log('handleGetUserInfo addMemberInfo', res)
 			setMemberInfo(res.data)
 			setLogining(false)
 			Taro.showToast({

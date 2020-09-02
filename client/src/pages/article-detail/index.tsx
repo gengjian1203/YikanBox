@@ -54,11 +54,11 @@ export default function ArticleDetail() {
 	})
 
 	useEffect(() => {
-		console.log(
-			'Watch.',
-			memberInfo.data_arrCollectionArticleList,
-			objArticleInfo
-		)
+		// console.log(
+		// 	'Watch.',
+		// 	memberInfo.data_arrCollectionArticleList,
+		// 	objArticleInfo
+		// )
 		setCollectionSelect(
 			checkCollectionArticle(
 				memberInfo.data_arrCollectionArticleList,
@@ -68,7 +68,7 @@ export default function ArticleDetail() {
 	}, [memberInfo.data_arrCollectionArticleList, objArticleInfo])
 
 	const onLoad = async () => {
-		console.log('onLoad... ', from, articleId)
+		// console.log('onLoad... ', from, articleId)
 		// 直接进来不用调取接口，分享进来的需要调取接口
 		if (from === 'share') {
 			const objParams = {
@@ -97,23 +97,19 @@ export default function ArticleDetail() {
 	}, [])
 
 	const handleCollectionClick = async () => {
-		console.log('handleCollectionClick', objArticleInfo)
+		// console.log('handleCollectionClick', objArticleInfo)
 		const isCollectionSelectTmp = !isCollectionSelect
 		setCollectionSelect(isCollectionSelectTmp)
 
 		if (isCollectionSelectTmp) {
 			const res = await webApiMemberInfo.addCollectionArticle(objArticleInfo)
-			console.log('addCollectionArticle', res.data)
+			// console.log('addCollectionArticle', res.data)
 			addCollectionArticleInfo(res.data)
 		} else {
 			const res = await webApiMemberInfo.removeCollectionArticle(objArticleInfo)
-			console.log('removeCollectionArticle', res)
+			// console.log('removeCollectionArticle', res)
 			removeCollectionArticleInfo(objArticleInfo)
 		}
-	}
-
-	const handleShareClick = () => {
-		console.log('handleShareClick')
 	}
 
 	return (
@@ -174,11 +170,7 @@ export default function ArticleDetail() {
 						</View>
 					</AtButton>
 					{/* 分享 */}
-					<AtButton
-						className='float-btn-icon'
-						openType='share'
-						onClick={useThrottle(handleShareClick)}
-					>
+					<AtButton className='float-btn-icon' openType='share'>
 						<View className='iconfont icon-share'></View>
 					</AtButton>
 				</View>

@@ -39,14 +39,14 @@ export default function ModuleCard(props: IModuleCardProps) {
 	}, [])
 
 	const handleModuleCardClick = () => {
-		console.log('handleModuleCardClick')
+		// console.log('handleModuleCardClick')
 		Taro.navigateTo({
 			url: `/pages/mine/achievement/index` + `?memberId=${memberInfo._id}`,
 		})
 	}
 
 	const handleClockInClick = () => {
-		console.log('handleClockInClick')
+		// console.log('handleClockInClick')
 		Taro.showToast({
 			title: '敬请期待',
 			icon: 'none',

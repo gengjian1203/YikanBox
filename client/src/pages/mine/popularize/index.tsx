@@ -50,7 +50,7 @@ export default function Popularize() {
 	}, [data_arrShareChildrenList])
 
 	const handleMemberDetailClick = item => {
-		console.log('handleMemberDetailClick', item)
+		// console.log('handleMemberDetailClick', item)
 		Taro.navigateTo({
 			url: `/pages/mine/achievement/index` + `?memberId=${item._id}`,
 		})

@@ -15,7 +15,7 @@ export default function VPageMine(props: IVPageMineProps) {
 	const {} = props
 
 	const onLoad = async () => {
-		console.log('VPageMine')
+		// console.log('VPageMine')
 	}
 
 	useEffect(() => {

@@ -29,7 +29,7 @@ export default function ItemBorder(props: IItemBorderProps) {
 
 	// 点击头像框
 	const handleItemClick = e => {
-		console.log('handleItemClick', e)
+		// console.log('handleItemClick', e)
 		e.stopPropagation()
 		onItemClick(objBorder)
 	}

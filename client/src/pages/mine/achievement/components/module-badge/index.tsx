@@ -33,7 +33,7 @@ export default function ModuleBadge(props: IModuleBadgeProps) {
 	// 自己的成就，监听Redux数据
 	useEffect(() => {
 		if (isStateMyself) {
-			console.log('Watch renderBadgeList.myself')
+			// console.log('Watch renderBadgeList.myself')
 			renderBadgeList(memberInfo.data_arrMineBadgeList)
 		}
 	}, [memberInfo.data_arrMineBadgeList])
@@ -41,13 +41,13 @@ export default function ModuleBadge(props: IModuleBadgeProps) {
 	// 他人的成就，监听传入数据
 	useEffect(() => {
 		if (!isStateMyself) {
-			console.log('Watch renderBadgeList.not myself')
+			// console.log('Watch renderBadgeList.not myself')
 			renderBadgeList(objMemberInfo.data_arrMineBadgeList)
 		}
 	}, [objMemberInfo.data_arrMineBadgeList])
 
 	useEffect(() => {
-		console.log('Watch nSelectBadgeIndex.', nSelectBadgeIndex)
+		// console.log('Watch nSelectBadgeIndex.', nSelectBadgeIndex)
 		if (nSelectBadgeIndex >= 0) {
 			setSelectBadge(arrBadgeList[nSelectBadgeIndex])
 		}
@@ -55,7 +55,7 @@ export default function ModuleBadge(props: IModuleBadgeProps) {
 
 	// 点击徽章
 	const handleItemClick = item => {
-		console.log('handleItemClick', item)
+		// console.log('handleItemClick', item)
 		const nIndex = arrBadgeList.findIndex(itemList => {
 			return itemList.code === item.code
 		})
@@ -88,7 +88,9 @@ export default function ModuleBadge(props: IModuleBadgeProps) {
 				closeBtnPosition='bottom'
 				onClose={handleCurtainClose}
 			>
-				<ModuleBadgeCurtain objBadge={objSelectBadge} />
+				{nSelectBadgeIndex >= 0 && (
+					<ModuleBadgeCurtain objBadge={objSelectBadge} />
+				)}
 			</AtCurtain>
 		</View>
 	)

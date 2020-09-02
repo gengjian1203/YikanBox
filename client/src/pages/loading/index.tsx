@@ -40,7 +40,7 @@ export default function Loading() {
 	// 查询小程序信息以及用户信息
 	const queryLoginInfo: any = async () => {
 		const res = await webApiLoginInfo.queryLoginInfo()
-		console.log('queryLoginInfo', res)
+		// console.log('queryLoginInfo', res)
 		return {
 			appInfo: res.appInfo.data[0],
 			memberInfo: res.memberInfo.data,
@@ -50,14 +50,14 @@ export default function Loading() {
 	// 初始化Api基本信息
 	const initApi = async () => {
 		m_objAppService.init()
-		console.log('initApi done.')
+		// console.log('initApi done.')
 	}
 
 	// 初始化系统级信息
 	const initSystemInfo = async () => {
 		Taro.getSystemInfo({
 			success: res => {
-				console.log('AppInitDataService getSystemInfo', res)
+				// console.log('AppInitDataService getSystemInfo', res)
 				const isIOS = res.system.includes('iOS')
 				const isIphoneX =
 					res.model.includes('iPhone X') || res.model.includes('iPhone12')
@@ -70,7 +70,7 @@ export default function Loading() {
 				setHeightTabbarBottom(60 + (isIphoneX ? 34 : 0))
 			},
 			fail: err => {
-				console.error('AppInitDataService getSystemInfo', err)
+				// console.error('AppInitDataService getSystemInfo', err)
 				setSystemInfo(err)
 				setIsIOS(false)
 				setIsIphoneX(false)
@@ -80,7 +80,7 @@ export default function Loading() {
 				setHeightTabbarBottom(60)
 			},
 		})
-		console.log('initSystemInfo done.')
+		// console.log('initSystemInfo done.')
 	}
 
 	// 初始化应用级信息
@@ -95,7 +95,7 @@ export default function Loading() {
 		setBottomBarList(appInfo.arrBottomBarList)
 		setMainPath(strMainPath)
 		setMemberInfo(memberInfo)
-		console.log('initLoginInfo done.')
+		// console.log('initLoginInfo done.')
 		return loginInfo
 	}
 
@@ -107,7 +107,7 @@ export default function Loading() {
 		}
 		const res = await webApiArticleInfo.queryArticleList(objParams)
 		setArticleList(res.data)
-		console.log('prevLoadingData done.')
+		// console.log('prevLoadingData done.')
 	}
 
 	// 跳转页面逻辑
@@ -121,7 +121,7 @@ export default function Loading() {
 			}
 			setShareInfo(shareInfoTmp)
 
-			console.log('Loading jumpPage', shareInfoTmp)
+			// console.log('Loading jumpPage', shareInfoTmp)
 			Taro.reLaunch({
 				url: shareInfoTmp.sharePath,
 			})

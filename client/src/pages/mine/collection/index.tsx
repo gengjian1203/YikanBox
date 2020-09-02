@@ -34,7 +34,7 @@ export default function Collection() {
 	}, [])
 
 	const handleTabsClick = e => {
-		console.log('handleTabsClick', e)
+		// console.log('handleTabsClick', e)
 		setTabCurrent(e)
 	}
 

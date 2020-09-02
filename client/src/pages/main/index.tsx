@@ -25,11 +25,11 @@ export default function Main() {
 	)
 
 	const onShow = async () => {
-		console.log('Main onShow.')
+		// console.log('Main onShow.')
 	}
 
 	const onLoad = async () => {
-		console.log('Main onLoad.')
+		// console.log('Main onLoad.')
 		Taro.hideShareMenu()
 	}
 

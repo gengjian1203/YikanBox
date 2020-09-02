@@ -21,7 +21,7 @@ export default function VPageHome(props: IVPageHomeProps) {
 	const { setBottomBarSelect } = useActions(appInfoActions)
 
 	const onLoad = async () => {
-		console.log('VPageHome')
+		// console.log('VPageHome')
 	}
 
 	useEffect(() => {

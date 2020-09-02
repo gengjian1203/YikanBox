@@ -89,7 +89,7 @@ export default function ModuleList(props: IModuleListProps) {
 					}}
 					onClick={useThrottle(useCheckLogin(handleAvatarShowClick))}
 				/>
-				<AtListItem
+				{/* <AtListItem
 					className='item-normal'
 					title='我的图片秀'
 					arrow='right'
@@ -99,8 +99,8 @@ export default function ModuleList(props: IModuleListProps) {
 						value: 'iconfont icon-photo-show',
 					}}
 					onClick={useThrottle(useCheckLogin(handlePhotoShowClick))}
-				/>
-				<AtListItem
+				/> */}
+				{/* <AtListItem
 					className='item-normal'
 					title='我的达人圈'
 					arrow='right'
@@ -110,8 +110,8 @@ export default function ModuleList(props: IModuleListProps) {
 						value: 'iconfont icon-other-moment',
 					}}
 					onClick={useThrottle(useCheckLogin(handleOtherMomentClick))}
-				/>
-				<AtListItem
+				/> */}
+				{/* <AtListItem
 					className='item-normal'
 					title='我的接龙'
 					arrow='right'
@@ -121,8 +121,8 @@ export default function ModuleList(props: IModuleListProps) {
 						value: 'iconfont icon-activity-queue',
 					}}
 					onClick={useThrottle(useCheckLogin(handleActivityQueueClick))}
-				/>
-				<AtListItem
+				/> */}
+				{/* <AtListItem
 					className='item-normal'
 					title='我的撩闲'
 					arrow='right'
@@ -132,7 +132,7 @@ export default function ModuleList(props: IModuleListProps) {
 						value: 'iconfont icon-other-chat',
 					}}
 					onClick={useThrottle(useCheckLogin(handleOtherChatClick))}
-				/>
+				/> */}
 			</AtList>
 		</View>
 	)

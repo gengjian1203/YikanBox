@@ -83,7 +83,7 @@ export default function ModuleBase(props: IModuleBaseProps) {
 			success: resForSet => {
 				Taro.getClipboardData({
 					success: resForGet => {
-						console.log('handleIDCopyClick', resForGet.data) // data
+						// console.log('handleIDCopyClick', resForGet.data) // data
 					},
 				})
 			},
@@ -109,13 +109,13 @@ export default function ModuleBase(props: IModuleBaseProps) {
 
 	// 浮窗事件：关闭
 	const handleLayoutBorderClose = () => {
-		console.log('handleLayoutBorderClose')
+		// console.log('handleLayoutBorderClose')
 		setShowLayoutBorder(false)
 	}
 
 	// 浮窗事件：点击头像框每项
 	const handleBorderItemClick = objBorder => {
-		console.log('handleBorderItemClick', objBorder)
+		// console.log('handleBorderItemClick', objBorder)
 		if (strBorderSelectCode !== objBorder.code) {
 			if (objBorder.time) {
 				changeMineBorderCode(objBorder.code)
