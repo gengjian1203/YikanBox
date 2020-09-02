@@ -32,9 +32,8 @@ export default function ModuleList(props: IModuleListProps) {
 	// 我的头像秀
 	const handleAvatarShowClick = e => {
 		console.log('handleAvatarShowClick', e)
-		Taro.showToast({
-			title: '敬请期待',
-			icon: 'none',
+		Taro.navigateTo({
+			url: `/pages/avatar-show/index`,
 		})
 	}
 

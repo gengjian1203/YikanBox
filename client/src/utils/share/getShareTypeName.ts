@@ -16,6 +16,9 @@ export const getShareTypeName = strShareType => {
 		case shareType.PATH_ARTICLE:
 			strResult = `分享文章链接`
 			break
+		case shareType.PATH_AVATAR_SHOW:
+			strResult = `分享头像秀链接`
+			break
 		default:
 			strResult = `未知-${strShareType}`
 			break

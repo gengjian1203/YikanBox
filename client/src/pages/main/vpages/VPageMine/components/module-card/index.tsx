@@ -93,9 +93,9 @@ export default function ModuleCard(props: IModuleCardProps) {
 					<View className='mid-name'>
 						{isLogin ? memberInfo.user_nickName : strDefaultName}
 					</View>
-					{isLogin && (
+					{/* {isLogin && (
 						<View className='mid-level'>Lv.{memberInfo.data_level}</View>
-					)}
+					)} */}
 				</View>
 				{/* 右侧 */}
 				{/* <View

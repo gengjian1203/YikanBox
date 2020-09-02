@@ -8,6 +8,10 @@ export default {
 			pages: ['index'],
 		},
 		{
+			root: 'pages/avatar-show', // 头像秀页面
+			pages: ['index'],
+		},
+		{
 			root: 'pages/demo', // 测试页
 			pages: ['index'],
 		},
@@ -30,15 +34,15 @@ export default {
 		},
 	],
 	preloadRule: {
-		// 加载页预加载：主页和登录页
+		// 加载页预加载：主页子包、登录页子包、
 		'pages/loading/index': {
 			network: 'all',
 			packages: ['pages/main', 'pages/login'],
 		},
-		// 主页预加载：文章详情子包、我的页面子包
+		// 主页预加载：文章详情子包、我的页面子包、头像秀页面子包
 		'pages/main/index': {
 			network: 'all',
-			packages: ['pages/article-detail', 'pages/mine'],
+			packages: ['pages/article-detail', 'pages/mine', 'pages/avatar-show'],
 		},
 	},
 	window: {

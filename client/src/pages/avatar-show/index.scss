@@ -1,0 +1,17 @@
+@import '../../app.scss';
+
+.avatar-show-wrap {
+	.avatar-show-content {
+		margin-top: $border-bold-space;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		.avatar-show-image {
+			width: 600px;
+			height: 600px;
+		}
+		.avatar-show-jewelry {
+		}
+	}
+}
