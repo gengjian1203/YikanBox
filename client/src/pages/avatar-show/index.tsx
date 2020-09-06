@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import useThrottle from '@/hooks/useThrottle'
 
-import { shareType, processSharePath } from '@/utils/index'
+import { shareType, processSharePath, getHDAvatarUrl } from '@/utils/index'
 
 import { View, Image } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
@@ -55,7 +55,7 @@ export default function AvatarShow() {
 				<Image
 					className='avatar-show-image'
 					mode='widthFix'
-					src={memberInfo.user_avatarUrl}
+					src={getHDAvatarUrl(memberInfo.user_avatarUrl)}
 				/>
 			</View>
 			{/* 饰品操作栏 */}
