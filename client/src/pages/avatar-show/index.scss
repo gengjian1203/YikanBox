@@ -2,16 +2,53 @@
 
 .avatar-show-wrap {
 	.avatar-show-content {
-		margin-top: $border-bold-space;
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-start;
-		align-items: center;
-		.avatar-show-image {
-			width: 600px;
-			height: 600px;
+		width: 100%;
+		.avatar-show-canvas {
+			position: relative;
+			margin-top: $border-bold-space;
+
+			.avatar-show-change {
+				position: absolute;
+				top: 0;
+				right: 0;
+			}
 		}
+	}
+
+	.avatar-show-bottom {
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+
 		.avatar-show-jewelry {
+			box-sizing: border-box;
+			width: 100%;
+			padding: 0 $border-bold-space;
+			display: flex;
+			flex-direction: column;
+			.jewelry-content {
+				width: 100%;
+				white-space: nowrap;
+				margin-bottom: $border-bold-space;
+
+				.jewelry-item {
+					width: 120px;
+					height: 120px;
+					margin-right: $border-bold-space;
+					border: 1px solid $color-shadow;
+					display: inline-block;
+
+					&:last-child {
+						margin-right: 0;
+					}
+
+					.item-content {
+						width: 100%;
+						height: 100%;
+					}
+				}
+			}
 		}
 	}
 }
