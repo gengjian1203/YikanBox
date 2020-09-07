@@ -1,7 +1,7 @@
 import Taro, { useRouter, useShareAppMessage } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import useDebounce from '@/hooks/useDebounce'
+import useThrottle from '@/hooks/useThrottle'
 
 import { shareType, processSharePath, getHDAvatarUrl } from '@/utils/index'
 
@@ -38,6 +38,7 @@ export default function AvatarShow() {
 	// 保存并导出头像
 	const saveAndExportAvatar = () => {
 		console.log('exportAndSaveAvatar')
+		Taro.showLoading()
 		Taro.canvasToTempFilePath({
 			x: 0,
 			y: 0,
@@ -52,6 +53,11 @@ export default function AvatarShow() {
 					filePath: resToCanvas.tempFilePath,
 					success: resSaveImage => {
 						console.log('resSaveImage', resSaveImage)
+						Taro.hideLoading()
+						Taro.showToast({
+							title: '保存成功',
+							icon: 'success',
+						})
 					},
 				})
 			},
@@ -62,11 +68,13 @@ export default function AvatarShow() {
 	const drawCanvas = () => {
 		console.log('drawCanvas.')
 		if (canvas) {
+			// 绘制头像底图
 			if (strImageAvatar) {
 				canvas.drawImage(strImageAvatar, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
 			} else {
 				console.log('drawCanvas strImageAvatar is null.')
 			}
+			// 绘制饰品
 			if (strImageJewelry) {
 				canvas.drawImage(
 					strImageJewelry,
@@ -76,6 +84,7 @@ export default function AvatarShow() {
 					nImageJewelryH + nImageJewelryH_offset
 				)
 			}
+			// 绘制测试
 			canvas.fillStyle = 'red'
 			canvas.setFontSize(50)
 			canvas.fillText(
@@ -83,6 +92,7 @@ export default function AvatarShow() {
 				nImageJewelryX + nImageJewelryX_offset,
 				nImageJewelryY + nImageJewelryY_offset
 			)
+			// 绘制
 			canvas.draw()
 		} else {
 			console.log('drawCanvas canvas is null.')
@@ -158,22 +168,30 @@ export default function AvatarShow() {
 	const handleCanvasTouchEnd = e => {
 		console.log('handleCanvasTouchEnd', e)
 		// 保存修改数据
-		setImageJewelryX(pervX => {
-			return pervX + nImageJewelryX_offset
-		})
-		setImageJewelryY(pervY => {
-			return pervY + nImageJewelryY_offset
-		})
-		setImageJewelryW(pervW => {
-			return pervW + nImageJewelryW_offset
-		})
-		setImageJewelryH(pervH => {
-			return pervH + nImageJewelryH_offset
-		})
-		setImageJewelryX_offset(0)
-		setImageJewelryY_offset(0)
-		setImageJewelryW_offset(0)
-		setImageJewelryH_offset(0)
+		setTimeout(() => {
+			setImageJewelryX(pervX => {
+				return pervX + nImageJewelryX_offset
+			})
+			setImageJewelryX_offset(0)
+		}, 0)
+		setTimeout(() => {
+			setImageJewelryY(pervY => {
+				return pervY + nImageJewelryY_offset
+			})
+			setImageJewelryY_offset(0)
+		}, 0)
+		setTimeout(() => {
+			setImageJewelryW(pervW => {
+				return pervW + nImageJewelryW_offset
+			})
+			setImageJewelryW_offset(0)
+		}, 0)
+		setTimeout(() => {
+			setImageJewelryH(pervH => {
+				return pervH + nImageJewelryH_offset
+			})
+			setImageJewelryH_offset(0)
+		}, 0)
 	}
 
 	const handleButtonSaveClick = () => {
