@@ -72,7 +72,7 @@ const createMember = async (data, db, strMemberId, date, time) => {
 		data_level: 1, // 等级
 		data_exp: 0, // 经验
 		data_strMineBorderCode: '', // 当前头像框
-		data_arrShareChildrenList: [], // 推广列表
+		data_arrShareChildrenList: [], // 邀请列表
 		data_arrCollectionArticleList: [], // 收藏文章列表
 		data_arrCollectionPhotoList: [], // 收藏图片列表
 		data_arrCollectionQueueList: [], // 收藏接龙列表
@@ -96,7 +96,7 @@ const createMember = async (data, db, strMemberId, date, time) => {
 	return objResult
 }
 
-// 更新溯源主的推广信息
+// 更新溯源主的邀请信息
 const updateSourceInfo = async (data, db, strMemberId, date, time) => {
 	// 将溯源主信息加入到刚注册用户中
 	try {
@@ -153,7 +153,7 @@ async function addMemberInfo(data, db, strMemberId) {
 		if (data.share_sourceID) {
 			// 查询溯源主的信息
 			await querySourceInfo(data, db, strMemberId, date, time)
-			// 更新溯源主的推广信息
+			// 更新溯源主的邀请信息
 			await updateSourceInfo(data, db, strMemberId, date, time)
 		}
 	}

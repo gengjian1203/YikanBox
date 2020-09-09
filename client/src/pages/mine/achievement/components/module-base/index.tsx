@@ -78,6 +78,9 @@ export default function ModuleBase(props: IModuleBaseProps) {
 
 	// 点击ID实现复制到剪贴板
 	const handleIDCopyClick = () => {
+		if (!isStateMyself) {
+			return
+		}
 		Taro.setClipboardData({
 			data: objMemberInfo._id,
 			success: resForSet => {
@@ -92,6 +95,9 @@ export default function ModuleBase(props: IModuleBaseProps) {
 
 	// 我的头像框
 	const handleBorderShowClick = e => {
+		if (!isStateMyself) {
+			return
+		}
 		console.log('handleAvatarShowClick', e)
 		setShowLayoutBorder(true)
 	}
@@ -140,7 +146,7 @@ export default function ModuleBase(props: IModuleBaseProps) {
 					className='item-normal'
 					title={`${isStateMyself ? '我' : 'TA'}的ID`}
 					extraText={hiddenString(objMemberInfo._id)}
-					arrow={'right'}
+					arrow={isStateMyself ? 'right' : undefined}
 					onClick={useThrottle(handleIDCopyClick)}
 				/>
 				{/* <AtListItem

@@ -88,7 +88,7 @@ export const convertBadgeList = (data_arrMineBadgeList: Array<any>) => {
  * @param strBadgeCode 徽章Code
  */
 export const getBadgeName = (strBadgeCode: string) => {
-	let strResult = ''
+	let strResult = '不使用头像框'
 	const nIndex = arrBadgeListTemplate.findIndex(item => {
 		return item.code === strBadgeCode
 	})

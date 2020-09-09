@@ -45,18 +45,23 @@
 			}
 
 			.icon-collection {
-				font-size: 60rpx;
-				background-color: green;
+				font-size: 60px;
+				background-image: linear-gradient(135deg, green, 80%, $color-white);
 			}
 
 			.icon-achievement {
-				font-size: 60rpx;
-				background-color: darkorange;
+				font-size: 60px;
+				background-image: linear-gradient(
+					135deg,
+					darkorange,
+					80%,
+					$color-white
+				);
 			}
 
 			.icon-popularize {
-				font-size: 60rpx;
-				background-color: cadetblue;
+				font-size: 60px;
+				background-image: linear-gradient(135deg, cadetblue, 80%, $color-white);
 			}
 		}
 	}

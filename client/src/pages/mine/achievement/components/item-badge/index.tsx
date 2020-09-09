@@ -16,12 +16,17 @@ interface IBadgeInfoType {
 }
 
 interface IItemBadgeProps {
+	isShowButton: boolean
 	objBadge: IBadgeInfoType
 	onItemClick: any
 }
 
 export default function ItemBadge(props: IItemBadgeProps) {
-	const { objBadge = {}, onItemClick = () => true } = props
+	const {
+		isShowButton = false,
+		objBadge = {},
+		onItemClick = () => true,
+	} = props
 
 	// 点击徽章
 	const handleItemClick = e => {
@@ -40,7 +45,7 @@ export default function ItemBadge(props: IItemBadgeProps) {
 				}
 			/>
 			<AtButton
-				className='item-button'
+				className={`item-button ` + `${isShowButton ? '' : 'hidden '}`}
 				type='primary'
 				size='small'
 				onClick={useThrottle(handleItemClick)}

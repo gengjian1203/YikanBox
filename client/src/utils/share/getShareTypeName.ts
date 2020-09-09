@@ -11,7 +11,7 @@ export const getShareTypeName = strShareType => {
 			strResult = `搜索小程序`
 			break
 		case shareType.PATH_POPULARIZE:
-			strResult = `分享推广链接`
+			strResult = `分享邀请链接`
 			break
 		case shareType.PATH_ARTICLE:
 			strResult = `分享文章链接`

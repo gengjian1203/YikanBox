@@ -5,6 +5,7 @@ import { shareType, processSharePath, deepClone } from '@/utils/index'
 
 import { View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
+import ModuleTitle from '@/components/ModuleTitle'
 import NavigationHeader from '@/components/NavigationHeader'
 import TipsPanel from '@/components/TipsPanel'
 
@@ -59,11 +60,15 @@ export default function Popularize() {
 	return (
 		<View className='popularize-wrap flex-center-v'>
 			{/* 顶部导航 */}
-			<NavigationHeader isShowLeftIcon strNavigationTitle='我的推广' />
-			{/* 我要推广 */}
+			<NavigationHeader isShowLeftIcon strNavigationTitle='我的邀请' />
+			{/* 我要邀请 */}
 			<AtButton type='primary' full openType='share'>
-				我要推广
+				我要邀请
 			</AtButton>
+			{/* 邀请数量 */}
+			{/* <ModuleTitle
+				strTitle={`您一共邀请到了 ${arrPopularizeList.length} 位小伙伴加入`}
+			/> */}
 			{/* 列表内容 */}
 			{arrPopularizeList && arrPopularizeList.length > 0 ? (
 				arrPopularizeList.map((item, index) => {

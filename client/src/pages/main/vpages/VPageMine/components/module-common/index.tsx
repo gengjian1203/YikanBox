@@ -36,7 +36,7 @@ export default function ModuleCommon(props: IModuleCommonProps) {
 		})
 	}
 
-	// 我的推广
+	// 我的邀请
 	const handlePopularizeClick = e => {
 		Taro.navigateTo({
 			url: `/pages/mine/popularize/index`,
@@ -71,7 +71,7 @@ export default function ModuleCommon(props: IModuleCommonProps) {
 				>
 					<View className='flex-center-v'>
 						<View className='common-item-icon flex-center iconfont icon-popularize'></View>
-						<View className='common-item-name'>我的推广</View>
+						<View className='common-item-name'>我的邀请</View>
 					</View>
 				</View>
 			</ScrollView>

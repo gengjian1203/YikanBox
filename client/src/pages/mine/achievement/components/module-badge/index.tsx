@@ -76,6 +76,7 @@ export default function ModuleBadge(props: IModuleBadgeProps) {
 					return (
 						<ItemBadge
 							key={index}
+							isShowButton={isStateMyself}
 							objBadge={item}
 							onItemClick={handleItemClick}
 						/>

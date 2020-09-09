@@ -1,6 +1,6 @@
 export enum shareType {
 	MINIPROGRAM = 'MINIPROGRAM', // 搜索小程序
-	PATH_POPULARIZE = 'PATH_POPULARIZE', // 分享推广链接
+	PATH_POPULARIZE = 'PATH_POPULARIZE', // 分享邀请链接
 	PATH_ARTICLE = 'PATH_ARTICLE', // 分享文章链接
 	PATH_AVATAR_SHOW = 'PATH_AVATAR_SHOW', // 分享头像秀链接
 }

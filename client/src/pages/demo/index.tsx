@@ -50,9 +50,9 @@ export default function Demo() {
 		<Block>
 			{/* 顶部导航 */}
 			<NavigationHeader isShowLeftIcon strNavigationTitle={strTitle} />
-			{/* 我要推广 */}
+			{/* 我要邀请 */}
 			<AtButton type='primary' full openType='share'>
-				我要推广
+				我要邀请
 			</AtButton>
 			{/* 标题 */}
 			<View className='article-detail-item'>
