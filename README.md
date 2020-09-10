@@ -6,6 +6,8 @@
 
 Taro + redux + wxcloud 做个工具集合的微信小程序
 
+![即将放飞理想的工具箱线上码](./resource/qrcode.jpg)
+
 #### 相关技术
 
 1. Taro + taro ui
