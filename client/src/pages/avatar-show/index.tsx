@@ -1,7 +1,8 @@
-import Taro, { useRouter, useShareAppMessage } from '@tarojs/taro'
+import Taro, { useRouter, useShareAppMessage, useDidShow } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import useCheckLogin from '@/hooks/useCheckLogin'
+import useIsLogin from '@/hooks/useIsLogin'
 import useThrottle from '@/hooks/useThrottle'
 
 import { shareType, processSharePath, getHDAvatarUrl } from '@/utils/index'
@@ -9,6 +10,8 @@ import { shareType, processSharePath, getHDAvatarUrl } from '@/utils/index'
 import { View, Image, Canvas, ScrollView } from '@tarojs/components'
 import ButtonBottom from '@/components/ButtonBottom'
 import NavigationHeader from '@/components/NavigationHeader'
+
+import strDefaultAvatarUrl from '@/images/avatar/default.png'
 
 import './index.scss'
 
@@ -35,6 +38,8 @@ export default function AvatarShow() {
 
 	const CANVAS_WIDTH = 300
 	const CANVAS_HEIGHT = 300
+
+	const isLogin = useIsLogin()
 
 	// 保存并导出头像
 	const saveAndExportAvatar = () => {
@@ -120,19 +125,29 @@ export default function AvatarShow() {
 		console.log('AvatarShow onload')
 		// 设置 canvas 对象
 		setCanvas(Taro.createCanvasContext('canvas'))
-		// 下载头像
-		Taro.downloadFile({
-			url: getHDAvatarUrl(memberInfo.user_avatarUrl),
-			success: res => {
-				console.log('AvatarShow downloadFile', res)
-				setImageAvatar(res.tempFilePath)
-			},
-		})
+		// 加载头像
+		if (isLogin) {
+			Taro.downloadFile({
+				url: getHDAvatarUrl(memberInfo.user_avatarUrl),
+				success: res => {
+					console.log('AvatarShow downloadFile', res)
+					setImageAvatar(res.tempFilePath)
+				},
+			})
+		} else {
+			setImageAvatar(strDefaultAvatarUrl)
+		}
 	}
 
 	useEffect(() => {
 		onLoad()
 	}, [])
+
+	const onShow = () => {}
+
+	useDidShow(() => {
+		onShow()
+	})
 
 	useEffect(() => {
 		drawCanvas()
@@ -193,6 +208,17 @@ export default function AvatarShow() {
 			})
 			setImageJewelryH_offset(0)
 		}, 0)
+	}
+
+	const handleButtonPhotoClick = () => {
+		console.log('handleButtonPhotoClick')
+		Taro.downloadFile({
+			url: getHDAvatarUrl(memberInfo.user_avatarUrl),
+			success: res => {
+				console.log('AvatarShow downloadFile', res)
+				setImageAvatar(res.tempFilePath)
+			},
+		})
 	}
 
 	const handleButtonSaveClick = () => {
@@ -261,12 +287,20 @@ export default function AvatarShow() {
 			{/* 底部操作区 */}
 			<View className='avatar-show-bottom'>
 				{/* 饰品栏 */}
-				{renderModuleJewelry()}
+				{/* {renderModuleJewelry()} */}
+				{/* 按钮 */}
+				<ButtonBottom
+					fixed={false}
+					title='更换图片'
+					customPanelClass='bottom-button-panel'
+					onButtonClick={useThrottle(useCheckLogin(handleButtonPhotoClick))}
+				/>
 				{/* 按钮 */}
 				<ButtonBottom
 					fixed={false}
 					title='保存'
-					onButtonClick={handleButtonSaveClick}
+					customPanelClass='bottom-button-panel'
+					onButtonClick={useThrottle(useCheckLogin(handleButtonSaveClick))}
 				/>
 			</View>
 		</View>
