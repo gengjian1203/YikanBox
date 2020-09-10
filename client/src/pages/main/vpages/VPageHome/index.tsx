@@ -57,7 +57,7 @@ export default function VPageHome(props: IVPageHomeProps) {
 				mode='widthFix'
 				src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596946346198&di=6adc5bcab15d19b61cc1979bdb56b0ea&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201612%2F08%2F20161208165949_JHsUe.jpeg'
 			></Image>
-			<Button onClick={handleCreateArticleClick}>爬取文章</Button>
+			{/* <Button onClick={handleCreateArticleClick}>爬取文章</Button> */}
 			{/* <Button onClick={handleLoginClick}>强制登录</Button> */}
 			{/* <Button onClick={handleNavigationJumpClick}>重复跳转</Button> */}
 		</View>
