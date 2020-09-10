@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import useThrottle from '@/hooks/useThrottle'
-import useCheckLogin from '@/hooks/useCheckLogin'
 import memberInfoActions from '@/redux/actions/memberInfo'
 
 import { AtList, AtListItem } from 'taro-ui'
@@ -86,7 +85,7 @@ export default function ModuleList(props: IModuleListProps) {
 						color: 'lightsalmon',
 						value: 'iconfont icon-avatar-show',
 					}}
-					onClick={useThrottle(useCheckLogin(handleAvatarShowClick))}
+					onClick={useThrottle(handleAvatarShowClick)}
 				/>
 				{/* <AtListItem
 					className='item-normal'
@@ -97,7 +96,7 @@ export default function ModuleList(props: IModuleListProps) {
 						color: 'royalblue',
 						value: 'iconfont icon-photo-show',
 					}}
-					onClick={useThrottle(useCheckLogin(handlePhotoShowClick))}
+					onClick={useThrottle(handlePhotoShowClick)}
 				/> */}
 				{/* <AtListItem
 					className='item-normal'
@@ -108,7 +107,7 @@ export default function ModuleList(props: IModuleListProps) {
 						color: 'violet',
 						value: 'iconfont icon-other-moment',
 					}}
-					onClick={useThrottle(useCheckLogin(handleOtherMomentClick))}
+					onClick={useThrottle(handleOtherMomentClick)}
 				/> */}
 				{/* <AtListItem
 					className='item-normal'
@@ -119,7 +118,7 @@ export default function ModuleList(props: IModuleListProps) {
 						color: 'yellowgreen',
 						value: 'iconfont icon-activity-queue',
 					}}
-					onClick={useThrottle(useCheckLogin(handleActivityQueueClick))}
+					onClick={useThrottle(handleActivityQueueClick)}
 				/> */}
 				{/* <AtListItem
 					className='item-normal'
@@ -130,7 +129,7 @@ export default function ModuleList(props: IModuleListProps) {
 						color: 'darkslateblue',
 						value: 'iconfont icon-other-chat',
 					}}
-					onClick={useThrottle(useCheckLogin(handleOtherChatClick))}
+					onClick={useThrottle(handleOtherChatClick)}
 				/> */}
 			</AtList>
 		</View>

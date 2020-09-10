@@ -1,6 +1,7 @@
 import Taro, { useRouter, useShareAppMessage } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import useCheckLogin from '@/hooks/useCheckLogin'
 import useThrottle from '@/hooks/useThrottle'
 
 import { shareType, processSharePath, getHDAvatarUrl } from '@/utils/index'
