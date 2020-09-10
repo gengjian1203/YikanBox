@@ -77,7 +77,7 @@ export default function ButtonBottom(props: IButtonBottomProps) {
 						type='primary'
 						disabled={disabled}
 						circle
-						onClick={useThrottle(handleButtonClick, 5000)}
+						onClick={useThrottle(handleButtonClick, 1000)}
 					>
 						{/* 按钮文案 */}
 						{title}
