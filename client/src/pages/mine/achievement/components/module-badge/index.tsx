@@ -56,6 +56,9 @@ export default function ModuleBadge(props: IModuleBadgeProps) {
 	// 点击徽章
 	const handleItemClick = item => {
 		// console.log('handleItemClick', item)
+		if (!isStateMyself) {
+			return
+		}
 		const nIndex = arrBadgeList.findIndex(itemList => {
 			return itemList.code === item.code
 		})
