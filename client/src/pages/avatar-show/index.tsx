@@ -8,15 +8,24 @@ import useThrottle from '@/hooks/useThrottle'
 import { shareType, processSharePath, getHDAvatarUrl } from '@/utils/index'
 
 import { View, Image, Canvas, ScrollView } from '@tarojs/components'
+import { AtActionSheet, AtActionSheetItem } from 'taro-ui'
 import ButtonBottom from '@/components/ButtonBottom'
 import NavigationHeader from '@/components/NavigationHeader'
 
 import strDefaultAvatarUrl from '@/images/avatar/default.png'
 
+import {
+	CANVAS_WIDTH,
+	CANVAS_HEIGHT,
+	arrJewelryList,
+	arrActionSheetList,
+} from './utils/const'
 import './index.scss'
 
 export default function AvatarShow() {
 	const { path } = useRouter()
+
+	const [isShowActionSheet, setShowActionSheet] = useState<boolean>(false) // 是否展示弹窗
 
 	const [canvas, setCanvas] = useState<any>(null)
 	const [strImageAvatar, setImageAvatar] = useState<string>('') // 头像Url
@@ -29,6 +38,7 @@ export default function AvatarShow() {
 	const [nImageJewelryW_offset, setImageJewelryW_offset] = useState<number>(200) // 饰品width - 偏移
 	const [nImageJewelryH, setImageJewelryH] = useState<number>(200) // 饰品height - 原始
 	const [nImageJewelryH_offset, setImageJewelryH_offset] = useState<number>(200) // 饰品height - 偏移
+	const [strImageText, setImageText] = useState<string>('') // 文字
 
 	const [nTouchStartX, setTouchStartX] = useState<number>(0) // 触摸点坐标X
 	const [nTouchStartY, setTouchStartY] = useState<number>(0) // 触摸点坐标Y
@@ -36,10 +46,29 @@ export default function AvatarShow() {
 	const store = useSelector(state => state)
 	const memberInfo = useSelector(state => state.memberInfo)
 
-	const CANVAS_WIDTH = 300
-	const CANVAS_HEIGHT = 300
-
 	const isLogin = useIsLogin()
+
+	// 选择图片
+	const chooseImage = (
+		sourceType: 'album' | 'camera' | 'user' | 'environment'
+	) => {
+		Taro.chooseImage({
+			count: 1,
+			sizeType: ['original', 'compressed'],
+			sourceType: [sourceType],
+			success: res => {
+				console.log('funToggleCamera', res)
+				const strTempPath = res.tempFilePaths[0]
+				Taro.downloadFile({
+					url: strTempPath,
+					success: res => {
+						console.log('AvatarShow downloadFile', res)
+						setImageAvatar(res.tempFilePath)
+					},
+				})
+			},
+		})
+	}
 
 	// 保存并导出头像
 	const saveAndExportAvatar = () => {
@@ -94,7 +123,7 @@ export default function AvatarShow() {
 			canvas.fillStyle = 'red'
 			canvas.setFontSize(50)
 			canvas.fillText(
-				'Hello',
+				strImageText,
 				nImageJewelryX + nImageJewelryX_offset,
 				nImageJewelryY + nImageJewelryY_offset
 			)
@@ -126,17 +155,7 @@ export default function AvatarShow() {
 		// 设置 canvas 对象
 		setCanvas(Taro.createCanvasContext('canvas'))
 		// 加载头像
-		if (isLogin) {
-			Taro.downloadFile({
-				url: getHDAvatarUrl(memberInfo.user_avatarUrl),
-				success: res => {
-					console.log('AvatarShow downloadFile', res)
-					setImageAvatar(res.tempFilePath)
-				},
-			})
-		} else {
-			setImageAvatar(strDefaultAvatarUrl)
-		}
+		setImageAvatar(strDefaultAvatarUrl)
 	}
 
 	useEffect(() => {
@@ -163,8 +182,31 @@ export default function AvatarShow() {
 		nImageJewelryY_offset,
 		nImageJewelryW_offset,
 		nImageJewelryH_offset,
+		strImageText,
 	])
 
+	// 点击使用自身头像
+	const funToggleAvatar = () => {
+		Taro.downloadFile({
+			url: getHDAvatarUrl(memberInfo.user_avatarUrl),
+			success: res => {
+				console.log('AvatarShow downloadFile', res)
+				setImageAvatar(res.tempFilePath)
+			},
+		})
+	}
+
+	// 点击拍照
+	const funToggleCamera = () => {
+		chooseImage('camera')
+	}
+
+	// 从手机相册选择
+	const funToggleAlbum = () => {
+		chooseImage('album')
+	}
+
+	// Canvas触碰开始
 	const handleCanvasTouchStart = e => {
 		console.log('handleCanvasTouchStart', e)
 		// 初始化数据
@@ -173,6 +215,7 @@ export default function AvatarShow() {
 		setTouchStartY(point.y)
 	}
 
+	// Canvas触碰移动
 	const handleCanvasTouchMove = e => {
 		console.log('handleCanvasTouchMove', e)
 		// drawCanvas()
@@ -181,6 +224,7 @@ export default function AvatarShow() {
 		setImageJewelryY_offset(point.y - nTouchStartY)
 	}
 
+	// Canvas触碰停止
 	const handleCanvasTouchEnd = e => {
 		console.log('handleCanvasTouchEnd', e)
 		// 保存修改数据
@@ -210,55 +254,67 @@ export default function AvatarShow() {
 		}, 0)
 	}
 
-	const handleButtonPhotoClick = () => {
-		console.log('handleButtonPhotoClick')
-		Taro.downloadFile({
-			url: getHDAvatarUrl(memberInfo.user_avatarUrl),
-			success: res => {
-				console.log('AvatarShow downloadFile', res)
-				setImageAvatar(res.tempFilePath)
-			},
-		})
+	// 点击饰品
+	const handleJewelryItemClick = item => {
+		console.log('handleJewelryItemClick', item)
+		setImageJewelryX(item.x)
+		setImageJewelryY(item.y)
+		setImageText(item.name)
 	}
 
+	// 点击更换图片
+	const handleButtonChangeClick = () => {
+		console.log('handleButtonPhotoClick')
+		setShowActionSheet(true)
+	}
+
+	// 点击保存图片
 	const handleButtonSaveClick = () => {
 		console.log('handleButtonSaveClick')
 		saveAndExportAvatar()
 		// Taro.navigateBack()
 	}
 
+	// 底部弹窗的关闭事件
+	const handleActionSheetClose = () => {
+		console.log('handleActionSheetClose')
+		setShowActionSheet(false)
+	}
+
+	// 底部弹窗项的点击事件
+	const handleActionSheetItemClick = item => {
+		console.log('handleActionSheetItemClick', item)
+		switch (item.code) {
+			case 'toggle-avatar':
+				funToggleAvatar()
+				break
+			case 'toggle-camera':
+				funToggleCamera()
+				break
+			case 'toggle-album':
+				funToggleAlbum()
+				break
+			default:
+				break
+		}
+		setShowActionSheet(false)
+	}
+
 	const renderModuleJewelry = () => {
 		return (
 			<View className='avatar-show-jewelry'>
-				{/* <ModuleTitle strTitle='饰品栏' /> */}
 				<ScrollView className='jewelry-content' scrollX>
-					<View className='jewelry-item'>
-						<View className='item-content flex-center'>1</View>
-					</View>
-					<View className='jewelry-item'>
-						<View className='item-content flex-center'>2</View>
-					</View>
-					<View className='jewelry-item'>
-						<View className='item-content flex-center'>3</View>
-					</View>
-					<View className='jewelry-item'>
-						<View className='item-content flex-center'>4</View>
-					</View>
-					<View className='jewelry-item'>
-						<View className='item-content flex-center'>5</View>
-					</View>
-					<View className='jewelry-item'>
-						<View className='item-content flex-center'>6</View>
-					</View>
-					<View className='jewelry-item'>
-						<View className='item-content flex-center'>7</View>
-					</View>
-					<View className='jewelry-item'>
-						<View className='item-content flex-center'>8</View>
-					</View>
-					<View className='jewelry-item'>
-						<View className='item-content flex-center'>9</View>
-					</View>
+					{arrJewelryList.map((item, index) => {
+						return (
+							<View
+								key={index}
+								className='jewelry-item'
+								onClick={() => handleJewelryItemClick(item)}
+							>
+								<View className='item-content flex-center'>{item.name}</View>
+							</View>
+						)
+					})}
 				</ScrollView>
 			</View>
 		)
@@ -287,13 +343,13 @@ export default function AvatarShow() {
 			{/* 底部操作区 */}
 			<View className='avatar-show-bottom'>
 				{/* 饰品栏 */}
-				{/* {renderModuleJewelry()} */}
+				{renderModuleJewelry()}
 				{/* 按钮 */}
 				<ButtonBottom
 					fixed={false}
 					title='更换图片'
 					customPanelClass='bottom-button-panel'
-					onButtonClick={useThrottle(useCheckLogin(handleButtonPhotoClick))}
+					onButtonClick={useThrottle(useCheckLogin(handleButtonChangeClick))}
 				/>
 				{/* 按钮 */}
 				<ButtonBottom
@@ -303,6 +359,25 @@ export default function AvatarShow() {
 					onButtonClick={useThrottle(useCheckLogin(handleButtonSaveClick))}
 				/>
 			</View>
+
+			{/* 弹窗操作区 */}
+			<AtActionSheet
+				isOpened={isShowActionSheet}
+				cancelText='取消'
+				onCancel={handleActionSheetClose}
+				onClose={handleActionSheetClose}
+			>
+				{arrActionSheetList.map((item, index) => {
+					return (
+						<AtActionSheetItem
+							key={index}
+							onClick={() => handleActionSheetItemClick(item)}
+						>
+							{item.name}
+						</AtActionSheetItem>
+					)
+				})}
+			</AtActionSheet>
 		</View>
 	)
 }
