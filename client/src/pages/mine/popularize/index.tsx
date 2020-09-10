@@ -5,12 +5,13 @@ import { shareType, processSharePath, deepClone } from '@/utils/index'
 
 import { View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
-import ModuleTitle from '@/components/ModuleTitle'
 import NavigationHeader from '@/components/NavigationHeader'
 import TipsPanel from '@/components/TipsPanel'
+import ModuleTitle from '@/components/ModuleTitle'
+
+import strShareUrl from '@/images/share.jpg'
 
 import ItemCard from './components/item-card/index'
-import strShareUrl from '@/images/share.jpg'
 
 import './index.scss'
 
@@ -66,9 +67,9 @@ export default function Popularize() {
 				我要邀请
 			</AtButton>
 			{/* 邀请数量 */}
-			{/* <ModuleTitle
+			<ModuleTitle
 				strTitle={`您一共邀请到了 ${arrPopularizeList.length} 位小伙伴加入`}
-			/> */}
+			/>
 			{/* 列表内容 */}
 			{arrPopularizeList && arrPopularizeList.length > 0 ? (
 				arrPopularizeList.map((item, index) => {

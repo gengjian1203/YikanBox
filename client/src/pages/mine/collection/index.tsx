@@ -5,7 +5,9 @@ import { useSelector } from 'react-redux'
 import { Block } from '@tarojs/components'
 import { AtTabs, AtTabsPane } from 'taro-ui'
 import NavigationHeader from '@/components/NavigationHeader'
+
 import ListArticle from './components/list-article/index'
+import ModuleTitle from '@/components/ModuleTitle'
 
 import './index.scss'
 
@@ -51,14 +53,23 @@ export default function Collection() {
 			>
 				{/* 文章 */}
 				<AtTabsPane current={nTabCurrent} index={0}>
+					<ModuleTitle
+						strTitle={`您一共收藏了 ${arrCollectionArticleList.length} 篇文章`}
+					/>
 					<ListArticle arrList={arrCollectionArticleList} />
 				</AtTabsPane>
 				{/* 照片 */}
 				<AtTabsPane current={nTabCurrent} index={1}>
+					<ModuleTitle
+						strTitle={`您一共收藏了 ${arrCollectionPhotoList.length} 张图片`}
+					/>
 					<ListArticle arrList={arrCollectionPhotoList} />
 				</AtTabsPane>
 				{/* 接龙 */}
 				<AtTabsPane current={nTabCurrent} index={2}>
+					<ModuleTitle
+						strTitle={`您一共收藏了 ${arrCollectionQueueList.length} 个接龙`}
+					/>
 					<ListArticle arrList={arrCollectionQueueList} />
 				</AtTabsPane>
 			</AtTabs>
