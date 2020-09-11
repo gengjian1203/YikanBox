@@ -4,40 +4,44 @@ export const CANVAS_HEIGHT = 300
 // 饰品列表
 export const arrJewelryList = [
 	{
-		code: 'toggle-0',
-		name: 'Hello',
-		x: 10,
-		y: 150,
+		type: 'FLAG',
+		name: '旗帜',
+		list: [],
 	},
 	{
-		code: 'toggle-1',
-		name: 'Happy',
-		x: 50,
-		y: 150,
+		type: 'SIGN',
+		name: '标记',
+		list: [
+			{
+				value: '😁',
+			},
+			{
+				value: '🎁',
+			},
+			{
+				value: '🍀',
+			},
+		],
 	},
 	{
-		code: 'toggle-2',
-		name: 'Lucky',
-		x: 80,
-		y: 150,
+		type: 'EMOJI',
+		name: 'emoji',
+		list: [],
 	},
 	{
-		code: 'toggle-3',
-		name: '😁😁😁',
-		x: 120,
-		y: 150,
-	},
-	{
-		code: 'toggle-4',
-		name: '🎁🎁🎁',
-		x: 160,
-		y: 150,
-	},
-	{
-		code: 'toggle-5',
-		name: '🍀🍀🍀',
-		x: 220,
-		y: 150,
+		type: 'TEXT',
+		name: '文字',
+		list: [
+			{
+				value: 'Hello',
+			},
+			{
+				value: 'Happy',
+			},
+			{
+				value: 'Lucky',
+			},
+		],
 	},
 ]
 

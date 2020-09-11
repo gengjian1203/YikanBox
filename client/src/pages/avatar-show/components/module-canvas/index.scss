@@ -1,0 +1,15 @@
+@import '../../../../app.scss';
+
+.avatar-show-content {
+  width: 100%;
+  .avatar-show-canvas {
+    position: relative;
+    margin-top: $border-bold-space;
+
+    .avatar-show-change {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+}
