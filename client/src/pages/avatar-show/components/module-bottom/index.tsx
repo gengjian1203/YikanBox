@@ -46,13 +46,14 @@ export default function ModuleBottom(props: IModuleBottomProps) {
 			success: res => {
 				console.log('funToggleCamera', res)
 				const strTempPath = res.tempFilePaths[0]
-				Taro.downloadFile({
-					url: strTempPath,
-					success: res => {
-						console.log('AvatarShow downloadFile', res)
-						setAvatarImage(res.tempFilePath)
-					},
-				})
+				setAvatarImage(strTempPath)
+				// Taro.downloadFile({
+				// 	url: strTempPath,
+				// 	success: res => {
+				// 		console.log('AvatarShow downloadFile', res)
+				// 		setAvatarImage(res.tempFilePath)
+				// 	},
+				// })
 			},
 		})
 	}
@@ -60,7 +61,7 @@ export default function ModuleBottom(props: IModuleBottomProps) {
 	// 保存并导出头像
 	const saveAndExportAvatar = () => {
 		console.log('exportAndSaveAvatar')
-		Taro.showLoading()
+		// Taro.showLoading()
 		Taro.canvasToTempFilePath({
 			x: 0,
 			y: 0,
@@ -158,8 +159,8 @@ export default function ModuleBottom(props: IModuleBottomProps) {
 				{/* 按钮 */}
 				<ButtonBottom
 					fixed={false}
-					openType='share'
-					title='保存并分享'
+					// openType='share'
+					title='保存'
 					customPanelClass='bottom-button-panel'
 					onButtonClick={useThrottle(useCheckLogin(handleButtonSaveClick))}
 				/>

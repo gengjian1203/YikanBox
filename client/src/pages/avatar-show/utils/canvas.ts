@@ -221,13 +221,13 @@ const drawSelectBorder = (
 	const rectBorderResult = mergeObject(rectBorderBase, rectBorderExtend)
 
 	// 绘制
-	// canvas.strokeStyle = '#ffffff'
-	// canvas.strokeRect(
-	// 	rectBorderResult.x,
-	// 	rectBorderResult.y,
-	// 	rectBorderResult.width,
-	// 	rectBorderResult.height
-	// )
+	canvas.strokeStyle = '#ffffff'
+	canvas.strokeRect(
+		rectBorderResult.x,
+		rectBorderResult.y,
+		rectBorderResult.width,
+		rectBorderResult.height
+	)
 	// 绘制按钮
 	for (let item of arrButtonList) {
 		drawSelectBorderButton(canvas, rectBorderResult, item)
