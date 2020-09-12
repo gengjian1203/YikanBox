@@ -75,7 +75,6 @@ export default function ModuleBottom(props: IModuleBottomProps) {
 					filePath: resToCanvas.tempFilePath,
 					success: resSaveImage => {
 						console.log('resSaveImage', resSaveImage)
-						Taro.hideLoading()
 						Taro.showToast({
 							title: '保存成功',
 							icon: 'success',
@@ -116,6 +115,7 @@ export default function ModuleBottom(props: IModuleBottomProps) {
 	// 点击保存图片
 	const handleButtonSaveClick = () => {
 		console.log('handleButtonSaveClick')
+		setSelectJewelry({})
 		saveAndExportAvatar()
 		// Taro.navigateBack()
 	}
@@ -158,7 +158,8 @@ export default function ModuleBottom(props: IModuleBottomProps) {
 				{/* 按钮 */}
 				<ButtonBottom
 					fixed={false}
-					title='保存'
+					openType='share'
+					title='保存并分享'
 					customPanelClass='bottom-button-panel'
 					onButtonClick={useThrottle(useCheckLogin(handleButtonSaveClick))}
 				/>

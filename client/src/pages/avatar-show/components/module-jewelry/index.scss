@@ -6,9 +6,11 @@
 	padding: 0 $border-bold-space;
 	display: flex;
 	flex-direction: column;
+
 	.jewelry-content {
 		width: 100%;
 		white-space: nowrap;
+		margin-top: $border-bold-space;
 		margin-bottom: $border-bold-space;
 
 		.jewelry-item {
@@ -25,6 +27,10 @@
 			.item-content {
 				width: 100%;
 				height: 100%;
+
+				.content-text {
+					font-size: $f1;
+				}
 			}
 		}
 	}

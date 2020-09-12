@@ -2,7 +2,11 @@ import {
 	INIT_AVATAR_INFO,
 	SET_AVATAR_IMAGE,
 	SET_AVATAR_JEWELRY,
+	SET_SELECT_TYPE,
 	SET_SELECT_JEWELRY,
+	ADD_AVATAR_JEWELRY,
+	REMOVE_AVATAR_JEWELRY,
+	UPDATE_AVATAR_JEWELRY,
 } from '@/redux/constants/avatarShowInfo'
 
 const avatarShowInfoActions = dispatch => {
@@ -28,10 +32,38 @@ const avatarShowInfoActions = dispatch => {
 				payload,
 			})
 		},
+		// 设置操作的类型
+		setSelectType: payload => {
+			dispatch({
+				type: SET_SELECT_TYPE,
+				payload,
+			})
+		},
 		// 设置选中的饰品信息
 		setSelectJewelry: payload => {
 			dispatch({
 				type: SET_SELECT_JEWELRY,
+				payload,
+			})
+		},
+		// 新增头像秀的饰品信息
+		addAvatarJewelry: payload => {
+			dispatch({
+				type: ADD_AVATAR_JEWELRY,
+				payload,
+			})
+		},
+		// 移除头像秀的饰品信息
+		removeAvatarJewelry: payload => {
+			dispatch({
+				type: REMOVE_AVATAR_JEWELRY,
+				payload,
+			})
+		},
+		// 更新头像秀的饰品信息
+		updateAvatarJewelry: payload => {
+			dispatch({
+				type: UPDATE_AVATAR_JEWELRY,
 				payload,
 			})
 		},

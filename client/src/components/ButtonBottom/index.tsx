@@ -8,6 +8,19 @@ import './index.scss'
 
 interface IButtonBottomProps {
 	fixed?: boolean // 是否绝对定位
+	openType?:
+		| 'contact'
+		| 'contactShare'
+		| 'share'
+		| 'getRealnameAuthInfo'
+		| 'getAuthorize'
+		| 'getPhoneNumber'
+		| 'getUserInfo'
+		| 'lifestyle'
+		| 'launchApp'
+		| 'openSetting'
+		| 'feedback'
+		| undefined // 拓展类型
 	title?: string // 按钮文案
 	nTitleSize?: number // 按钮文案字号 单位rpx
 	isSafeBottom?: boolean // 是否开启X机型的底部保护
@@ -26,6 +39,7 @@ export default function ButtonBottom(props: IButtonBottomProps) {
 	const {
 		disabled = false,
 		fixed = true,
+		openType = undefined,
 		title = '保存',
 		nTitleSize = 32,
 		isSafeBottom = false,
@@ -75,6 +89,7 @@ export default function ButtonBottom(props: IButtonBottomProps) {
 				>
 					<AtButton
 						type='primary'
+						openType={openType}
 						disabled={disabled}
 						circle
 						onClick={useThrottle(handleButtonClick, 1000)}

@@ -3,12 +3,14 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import avatarShowInfoActions from '@/redux/actions/avatarShowInfo'
+import { checkObjectEmpty, deepClone } from '@/utils/index'
 import strDefaultAvatarUrl from '@/images/avatar/default.png'
 
 import { View, Block, Canvas } from '@tarojs/components'
 
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../../utils/const'
 import { drawMainCanvas } from '../../utils/canvas'
+import { getSelectType } from '../../utils/index'
 
 import './index.scss'
 
@@ -30,11 +32,14 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 	const {
 		initAvatarInfo,
 		setAvatarImage,
-		setAvatarJewelry,
+		setSelectType,
 		setSelectJewelry,
+		removeAvatarJewelry,
+		updateAvatarJewelry,
 	} = useActions(avatarShowInfoActions)
 
 	useEffect(() => {
+		initAvatarInfo()
 		// 设置 canvas 对象
 		setCanvas(Taro.createCanvasContext('canvas'))
 		// 加载头像
@@ -42,74 +47,109 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 	}, [])
 
 	useEffect(() => {
-		drawMainCanvas(canvas, avatarShowInfo)
-	}, [
-		canvas,
-		avatarShowInfo,
-		// strImageAvatar,
-		// strImageJewelry,
-		// // nImageJewelryX,
-		// // nImageJewelryY,
-		// // nImageJewelryW,
-		// // nImageJewelryH,
-		// nImageJewelryX_offset,
-		// nImageJewelryY_offset,
-		// nImageJewelryW_offset,
-		// nImageJewelryH_offset,
-		// strImageText,
-	])
+		drawMainCanvas(canvas, avatarShowInfo, objTouchPoint)
+	}, [canvas, avatarShowInfo, objTouchPoint])
+
+	// 饰品元素选中框，按钮事件响应
+	const handleJewelryBorderButtonClick = type => {
+		switch (type) {
+			case 'BTN_FLIP':
+				break
+			case 'BTN_DELETE':
+				removeAvatarJewelry(avatarShowInfo.objSelectJewelry)
+				break
+			case 'BTN_ADD':
+				break
+			case 'BTN_RESIZE':
+			case 'MOVE':
+			default:
+				break
+		}
+	}
 
 	// Canvas触碰开始
 	const handleCanvasTouchStart = e => {
 		console.log('handleCanvasTouchStart', e)
 		// 初始化数据
 		const point = e.touches[0]
+		// 获取操作类型
+		const objSelectType = getSelectType(point, avatarShowInfo)
+		console.log('getSelectType', objSelectType)
+		if (!checkObjectEmpty(objSelectType)) {
+			setSelectType(objSelectType.type)
+			const nIndex = avatarShowInfo.arrAvatarJewelry.findIndex(item => {
+				return item.id === objSelectType.id
+			})
+			if (nIndex >= 0) {
+				setSelectJewelry(avatarShowInfo.arrAvatarJewelry[nIndex])
+			}
+			// 点击事件的交互
+			handleJewelryBorderButtonClick(objSelectType.type)
+		} else {
+			setSelectType('')
+			setSelectJewelry({})
+		}
+
+		// 保存触摸的初始坐标
 		setTouchPoint({
-			...objTouchPoint,
 			nTouchStartX: point.x,
 			nTouchStartY: point.y,
+			nTouchStartX_offset: 0,
+			nTouchStartY_offset: 0,
 		})
 	}
 
 	// Canvas触碰移动
 	const handleCanvasTouchMove = e => {
-		console.log('handleCanvasTouchMove', e)
-		const point = e.touches[0]
-		setTouchPoint({
-			...objTouchPoint,
-			nTouchStartX_offset: point.x - objTouchPoint.nTouchStartX,
-			nTouchStartY_offset: point.y - objTouchPoint.nTouchStartY,
-		})
+		if (
+			avatarShowInfo.strSelectType === 'BTN_RESIZE' || // 改变饰品尺寸
+			avatarShowInfo.strSelectType === 'MOVE' // 移动饰品位置
+		) {
+			console.log('handleCanvasTouchMove', e)
+			const point = e.touches[0]
+			setTouchPoint({
+				...objTouchPoint,
+				nTouchStartX_offset: point.x - objTouchPoint.nTouchStartX,
+				nTouchStartY_offset: point.y - objTouchPoint.nTouchStartY,
+			})
+		}
 	}
 
 	// Canvas触碰停止
 	const handleCanvasTouchEnd = e => {
 		console.log('handleCanvasTouchEnd', e)
-		// 保存修改数据
-		// setTimeout(() => {
-		// 	setImageJewelryX(pervX => {
-		// 		return pervX + nImageJewelryX_offset
-		// 	})
-		// 	setImageJewelryX_offset(0)
-		// }, 0)
-		// setTimeout(() => {
-		// 	setImageJewelryY(pervY => {
-		// 		return pervY + nImageJewelryY_offset
-		// 	})
-		// 	setImageJewelryY_offset(0)
-		// }, 0)
-		// setTimeout(() => {
-		// 	setImageJewelryW(pervW => {
-		// 		return pervW + nImageJewelryW_offset
-		// 	})
-		// 	setImageJewelryW_offset(0)
-		// }, 0)
-		// setTimeout(() => {
-		// 	setImageJewelryH(pervH => {
-		// 		return pervH + nImageJewelryH_offset
-		// 	})
-		// 	setImageJewelryH_offset(0)
-		// }, 0)
+		// 移动饰品位置
+		if (avatarShowInfo.strSelectType === 'MOVE') {
+			const objSelectJewelryTmp = {
+				...avatarShowInfo.objSelectJewelry,
+				rect: {
+					x:
+						avatarShowInfo.objSelectJewelry.rect.x +
+						objTouchPoint.nTouchStartX_offset,
+					y:
+						avatarShowInfo.objSelectJewelry.rect.y +
+						objTouchPoint.nTouchStartY_offset,
+					width: avatarShowInfo.objSelectJewelry.rect.width,
+					height: avatarShowInfo.objSelectJewelry.rect.height,
+				},
+			}
+			// 落实饰品位置
+			updateAvatarJewelry(objSelectJewelryTmp)
+		}
+		// 改变饰品尺寸
+		else if (avatarShowInfo.strSelectType === 'BTN_RESIZE') {
+		} else {
+		}
+
+		// 初始化
+		setTimeout(() => {
+			setTouchPoint({
+				nTouchStartX: 0,
+				nTouchStartY: 0,
+				nTouchStartX_offset: 0,
+				nTouchStartY_offset: 0,
+			})
+		}, 0)
 	}
 
 	return (

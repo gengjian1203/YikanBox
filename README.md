@@ -4,7 +4,7 @@
 
 #### 项目简介
 
-Taro + redux + wxcloud 做个工具集合的微信小程序
+Taro + redux + wxcloud + ts 做个工具集合的微信小程序
 
 ![即将放飞理想的工具箱线上码](./resource/qrcode.jpg)
 

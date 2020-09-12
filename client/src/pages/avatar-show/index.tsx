@@ -1,8 +1,6 @@
 import Taro, { useRouter, useShareAppMessage } from '@tarojs/taro'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
-import useActions from '@/hooks/useActions'
-import avatarShowInfoActions from '@/redux/actions/avatarShowInfo'
 import { shareType, processSharePath } from '@/utils/index'
 
 import { View } from '@tarojs/components'
@@ -19,8 +17,6 @@ export default function AvatarShow() {
 
 	const store = useSelector(state => state)
 
-	const { initAvatarInfo } = useActions(avatarShowInfoActions)
-
 	useShareAppMessage(res => {
 		const sharePath = processSharePath(
 			{
@@ -36,14 +32,6 @@ export default function AvatarShow() {
 			path: sharePath,
 		}
 	})
-
-	const onLoad = () => {
-		console.log('AvatarShow onload')
-	}
-
-	useEffect(() => {
-		onLoad()
-	}, [])
 
 	return (
 		<View className='avatar-show-wrap'>

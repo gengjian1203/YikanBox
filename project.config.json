@@ -87,6 +87,13 @@
 					"pathName": "pages/demo/index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "分享头像秀",
+					"pathName": "pages/loading/index",
+					"query": "sourceID=mem-oKFiZ5da9SGMp3mcBS-k0lgpsL3s&shareType=PATH_ARTICLE&sharePath=%2Fpages%2Favatar-show%2Findex%3Ffrom%3Dshare",
+					"scene": null
 				}
 			]
 		}
