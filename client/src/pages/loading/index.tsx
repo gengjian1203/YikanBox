@@ -92,7 +92,11 @@ export default function Loading() {
 		const strMainPath = appInfo.strMainPath
 
 		setBottomBarSelect(appInfo.nBottomBarListSelect)
-		setBottomBarList(appInfo.arrBottomBarList)
+		setBottomBarList(
+			appInfo.arrBottomBarList.filter(item => {
+				return item.enable === true
+			})
+		)
 		setMainPath(strMainPath)
 		setMemberInfo(memberInfo)
 		// console.log('initLoginInfo done.')
