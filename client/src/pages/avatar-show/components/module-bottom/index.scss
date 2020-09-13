@@ -5,9 +5,18 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	margin-bottom: $border-bold-space;
+	margin-left: $border-bold-space;
+	margin-right: $border-bold-space;
+	padding-bottom: $border-bold-space;
+	display: flex;
+	flex-direction: row;
 
-	.bottom-button-panel {
-		height: 120px;
+	.bottom-button {
+		flex: 1;
+		margin-right: $border-bold-space;
+
+		&:last-child {
+			margin-right: 0;
+		}
 	}
 }

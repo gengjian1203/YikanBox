@@ -8,6 +8,7 @@ import NavigationHeader from '@/components/NavigationHeader'
 import ModuleCanvas from './components/module-canvas'
 import ModuleJewelry from './components/module-jewelry'
 import ModuleBottom from './components/module-bottom'
+import ModuleCanvasSave from './components/module-canvas-save'
 
 import './index.scss'
 
@@ -37,6 +38,9 @@ export default function AvatarShow() {
 			<ModuleJewelry />
 			{/* 底部操作区 */}
 			<ModuleBottom />
+
+			{/* 绘制保存的图片 */}
+			<ModuleCanvasSave />
 		</View>
 	)
 }

@@ -158,10 +158,7 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 				<Canvas
 					canvasId='canvas'
 					disableScroll
-					style={
-						`width: ${Taro.pxTransform(CANVAS_WIDTH * 2)}; ` +
-						`height: ${Taro.pxTransform(CANVAS_HEIGHT * 2)}; `
-					}
+					style={`width: ${CANVAS_WIDTH}px; ` + `height: ${CANVAS_HEIGHT}px; `}
 					className='avatar-show-canvas'
 					onTouchStart={handleCanvasTouchStart}
 					onTouchMove={handleCanvasTouchMove}

@@ -8,12 +8,15 @@ import useThrottle from '@/hooks/useThrottle'
 import { getHDAvatarUrl, checkSecurityImage } from '@/utils/index'
 
 import { View, Block } from '@tarojs/components'
-import { AtActionSheet, AtActionSheetItem } from 'taro-ui'
+import { AtButton, AtActionSheet, AtActionSheetItem } from 'taro-ui'
 import ButtonBottom from '@/components/ButtonBottom'
 
+import { drawCanvasSave } from '../../utils/canvasSave'
 import {
 	CANVAS_WIDTH,
 	CANVAS_HEIGHT,
+	CANVAS_SAVE_WIDTH,
+	CANVAS_SAVE_HEIGHT,
 	arrActionSheetList,
 } from '../../utils/const'
 
@@ -25,15 +28,15 @@ export default function ModuleBottom(props: IModuleBottomProps) {
 	const {} = props
 
 	const [isShowActionSheet, setShowActionSheet] = useState<boolean>(false) // 是否展示弹窗
+	const [canvasSave, setCanvasSave] = useState<any>(null)
 
+	const isPhoneX = useSelector(state => state.appInfo.isPhoneX)
 	const memberInfo = useSelector(state => state.memberInfo)
+	const avatarShowInfo = useSelector(state => state.avatarShowInfo)
 
-	const {
-		initAvatarInfo,
-		setAvatarImage,
-		setAvatarJewelry,
-		setSelectJewelry,
-	} = useActions(avatarShowInfoActions)
+	const { initAvatarInfo, setAvatarImage, setSelectJewelry } = useActions(
+		avatarShowInfoActions
+	)
 
 	// 选择图片
 	const chooseImage = (
@@ -64,6 +67,7 @@ export default function ModuleBottom(props: IModuleBottomProps) {
 					success: async resImageInfo => {
 						console.log('chooseImage getImageInfo', resImageInfo)
 						if (await checkSecurityImage(resImageInfo.path)) {
+							initAvatarInfo()
 							setAvatarImage(resImageInfo.path)
 							Taro.hideLoading()
 						} else {
@@ -82,28 +86,47 @@ export default function ModuleBottom(props: IModuleBottomProps) {
 	// 保存并导出头像
 	const saveAndExportAvatar = () => {
 		console.log('exportAndSaveAvatar')
-		// Taro.showLoading()
-		Taro.canvasToTempFilePath({
-			x: 0,
-			y: 0,
-			width: CANVAS_WIDTH,
-			height: CANVAS_HEIGHT,
-			destWidth: CANVAS_WIDTH,
-			destHeight: CANVAS_HEIGHT,
-			canvasId: 'canvas',
-			success: resToCanvas => {
-				console.log('resToCanvas', resToCanvas)
-				Taro.saveImageToPhotosAlbum({
-					filePath: resToCanvas.tempFilePath,
-					success: resSaveImage => {
-						console.log('resSaveImage', resSaveImage)
-						Taro.showToast({
-							title: '保存成功',
-							icon: 'success',
-						})
-					},
-				})
-			},
+		Taro.showLoading({
+			title: '保存中...',
+		})
+		drawCanvasSave(canvasSave, avatarShowInfo)
+		canvasSave.draw(true, () => {
+			Taro.canvasToTempFilePath({
+				x: 0,
+				y: 0,
+				width: CANVAS_WIDTH,
+				height: CANVAS_HEIGHT,
+				destWidth: CANVAS_SAVE_WIDTH,
+				destHeight: CANVAS_SAVE_HEIGHT,
+				fileType: 'jpg',
+				// quality: 0.1,
+				canvasId: 'canvas-save',
+				success: resToCanvas => {
+					console.log('resToCanvas', resToCanvas)
+					Taro.saveImageToPhotosAlbum({
+						filePath: resToCanvas.tempFilePath,
+						success: resSaveImage => {
+							console.log('resSaveImage', resSaveImage)
+							Taro.showToast({
+								title: '保存成功',
+								icon: 'success',
+							})
+						},
+						fail: err => {
+							Taro.showToast({
+								title: '保存失败',
+								icon: 'none',
+							})
+						},
+					})
+				},
+				fail: err => {
+					Taro.showToast({
+						title: '保存失败',
+						icon: 'none',
+					})
+				},
+			})
 		})
 	}
 
@@ -127,6 +150,15 @@ export default function ModuleBottom(props: IModuleBottomProps) {
 	const funToggleAlbum = () => {
 		chooseImage('album')
 	}
+
+	const onLoad = () => {
+		// 设置 canvas 对象
+		setCanvasSave(Taro.createCanvasContext('canvas-save'))
+	}
+
+	useEffect(() => {
+		onLoad()
+	}, [])
 
 	// 点击更换图片
 	const handleButtonChangeClick = () => {
@@ -169,22 +201,25 @@ export default function ModuleBottom(props: IModuleBottomProps) {
 
 	return (
 		<Block>
-			<View className='avatar-show-bottom'>
-				{/* 按钮 */}
-				<ButtonBottom
-					fixed={false}
-					title='更换头像'
-					customPanelClass='bottom-button-panel'
-					onButtonClick={useThrottle(useCheckLogin(handleButtonChangeClick))}
-				/>
-				{/* 按钮 */}
-				<ButtonBottom
-					fixed={false}
-					// openType='share'
-					title='保存'
-					customPanelClass='bottom-button-panel'
-					onButtonClick={useThrottle(useCheckLogin(handleButtonSaveClick))}
-				/>
+			<View
+				className={`avatar-show-bottom ` + `${isPhoneX ? 'safe-bottom ' : ''}`}
+			>
+				<AtButton
+					className='bottom-button'
+					type='secondary'
+					circle
+					onClick={useThrottle(useCheckLogin(handleButtonChangeClick))}
+				>
+					更换头像
+				</AtButton>
+				<AtButton
+					className='bottom-button'
+					type='primary'
+					circle
+					onClick={useThrottle(useCheckLogin(handleButtonSaveClick))}
+				>
+					保存
+				</AtButton>
 			</View>
 
 			{/* 弹窗区 */}

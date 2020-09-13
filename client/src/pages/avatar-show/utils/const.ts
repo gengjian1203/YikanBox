@@ -7,8 +7,10 @@ import strUrlJewelryShengdanmao from '@/images/avatar/jewelry/shengdanmao.png'
 import strUrlJewelryShengdanshu from '@/images/avatar/jewelry/shengdanshu.png'
 import strUrlJewelryXueren from '@/images/avatar/jewelry/xueren.png'
 
-export const CANVAS_WIDTH = 300 // 画布宽
-export const CANVAS_HEIGHT = 300 // 画布高
+export const CANVAS_WIDTH = 350 // 画布宽
+export const CANVAS_HEIGHT = 350 // 画布高
+export const CANVAS_SAVE_WIDTH = 1080 // 保存图片宽度
+export const CANVAS_SAVE_HEIGHT = 1080 // 保存图片高度
 
 export const SIZE_TEXT = 50 // 文字尺寸
 export const SIZE_IMAGE = 128 // 图片尺寸
