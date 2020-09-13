@@ -139,20 +139,18 @@ export default function Loading() {
 			resInitApi,
 			resInitSystemInfo,
 			resInitLoginInfo,
-			resLoadingArticleList,
-		] = await Promise.all([
-			initApi(),
-			initSystemInfo(),
-			initLoginInfo(),
-			prevLoadingArticleList(),
-		])
+		] = await Promise.all([initApi(), initSystemInfo(), initLoginInfo()])
+
+		// 根据后台配置、动态展示文章列表
+		if (resInitLoginInfo.appInfo.isShowArticleList) {
+			await prevLoadingArticleList()
+		}
 
 		console.log(
 			'Loading onLoad',
 			resInitApi,
 			resInitSystemInfo,
-			resInitLoginInfo,
-			resLoadingArticleList
+			resInitLoginInfo
 		)
 		jumpPage(resInitLoginInfo)
 	}

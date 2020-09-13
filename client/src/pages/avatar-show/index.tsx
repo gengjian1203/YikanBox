@@ -1,6 +1,5 @@
 import Taro, { useRouter, useShareAppMessage } from '@tarojs/taro'
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { shareType, processSharePath } from '@/utils/index'
 
 import { View } from '@tarojs/components'
@@ -15,16 +14,11 @@ import './index.scss'
 export default function AvatarShow() {
 	const { path } = useRouter()
 
-	const store = useSelector(state => state)
-
 	useShareAppMessage(res => {
-		const sharePath = processSharePath(
-			{
-				sharePath: path,
-				shareType: shareType.PATH_ARTICLE,
-			},
-			store
-		)
+		const sharePath = processSharePath({
+			sharePath: path,
+			shareType: shareType.PATH_ARTICLE,
+		})
 		console.log('useShareAppMessage', sharePath)
 		return {
 			title: '看我做了一个头像秀，并@了你',

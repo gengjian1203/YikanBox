@@ -28,7 +28,6 @@ export default function ArticleDetail() {
 	const [isCollectionSelect, setCollectionSelect] = useState<boolean>(false)
 	const [objArticleInfo, setArticleInfo] = useState<any>({})
 
-	const store = useSelector(state => state)
 	const memberInfo = useSelector(state => state.memberInfo)
 	const { arrArticleList } = useSelector(state => state.articleInfo)
 
@@ -37,14 +36,11 @@ export default function ArticleDetail() {
 	)
 
 	useShareAppMessage(res => {
-		const sharePath = processSharePath(
-			{
-				sharePath: path,
-				shareType: shareType.PATH_ARTICLE,
-				articleId: articleId,
-			},
-			store
-		)
+		const sharePath = processSharePath({
+			sharePath: path,
+			shareType: shareType.PATH_ARTICLE,
+			articleId: articleId,
+		})
 		console.log('useShareAppMessage', sharePath)
 		return {
 			title: '分享了一篇文章，并@了你',

@@ -20,7 +20,6 @@ export default function Popularize() {
 
 	const [arrPopularizeList, setPopularizeList] = useState<Array<any>>([])
 
-	const store = useSelector(state => state)
 	const data_arrShareChildrenList = useSelector(
 		state => state.memberInfo.data_arrShareChildrenList
 	)
@@ -31,13 +30,10 @@ export default function Popularize() {
 	}
 
 	useShareAppMessage(res => {
-		const sharePath = processSharePath(
-			{
-				sharePath: '/pages/main/index',
-				shareType: shareType.PATH_POPULARIZE,
-			},
-			store
-		)
+		const sharePath = processSharePath({
+			sharePath: '/pages/main/index',
+			shareType: shareType.PATH_POPULARIZE,
+		})
 		console.log('useShareAppMessage', sharePath)
 		return {
 			title: '分享了一个好用的工具箱，并@了你',
