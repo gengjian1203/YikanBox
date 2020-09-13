@@ -35,6 +35,13 @@ Taro + redux + wxcloud + ts 做个工具集合的微信小程序
 
    > 对`头像秀`、`图片秀`中的图片处理之后重新绘制保存。
 
+7. 敏感校验。
+
+   > 通过珊瑚安全接口`msgSecCheck`、`imgSecCheck`，对上传的文字、图片等内容进行敏感校验。
+   > 直接通过云接口上传图片的 ArrayBuffer 会因为上传参数大于 512Kb 导致上传失败。
+   > 所以流程为将图片上传至云存储，获取云存储 ID，云函数通过云存储 ID，下载图片，进而校验图片。
+   > 图片上传云存储 -> 云函数下载云存储的图片 -> 校验结果返回
+
 #### 项目结构
 
 ```bash
@@ -55,12 +62,15 @@ Taro + redux + wxcloud + ts 做个工具集合的微信小程序
 └── cloud                     # 微信云开发项目
     ├── backup                # 数据库备份
     │   └── database
-    ├── fetchArticleInfo      # 文章表-操作信息
+│   ├── checkContent          # 内容校验
+│   │   ├── checkImage        # 校验图片
+│   │   └── checkText         # 校验文字
+    ├── fetchArticleInfo      # 文章表 - 操作信息
     │   ├── queryArticleInfo  # 查询单个文章
     │   └── queryArticleList  # 查询整个文章列表
-    ├── fetchInfo             # 混表-操作信息
+    ├── fetchInfo             # 混表 - 操作信息
     │   └── queryLoginInfo    # 查询登录所需的信息
-    ├── fetchMemberInfo       # 成员表-操作信息
+    ├── fetchMemberInfo       # 成员表 - 操作信息
     │   ├── addCollectionArticle    # 将对应的文章收藏移入
     │   ├── addMemberInfo     # 新增注册成员信息
     │   ├── addMineBadge            # 激活新的徽章
