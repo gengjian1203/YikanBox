@@ -5,7 +5,7 @@ import useActions from '@/hooks/useActions'
 import avatarShowInfoActions from '@/redux/actions/avatarShowInfo'
 import useCheckLogin from '@/hooks/useCheckLogin'
 import useThrottle from '@/hooks/useThrottle'
-import { getHDAvatarUrl } from '@/utils/index'
+import { getHDAvatarUrl, checkSecurityImage } from '@/utils/index'
 
 import { View, Block } from '@tarojs/components'
 import { AtActionSheet, AtActionSheetItem } from 'taro-ui'
@@ -43,17 +43,28 @@ export default function ModuleBottom(props: IModuleBottomProps) {
 			count: 1,
 			sizeType: ['original', 'compressed'],
 			sourceType: [sourceType],
-			success: res => {
-				console.log('funToggleCamera', res)
-				const strTempPath = res.tempFilePaths[0]
-				setAvatarImage(strTempPath)
-				// Taro.downloadFile({
-				// 	url: strTempPath,
-				// 	success: res => {
-				// 		console.log('AvatarShow downloadFile', res)
-				// 		setAvatarImage(res.tempFilePath)
-				// 	},
-				// })
+			success: resChoose => {
+				console.log('funToggleCamera', resChoose)
+				if (
+					resChoose.tempFiles[0] &&
+					resChoose.tempFiles[0].size > 1024 * 1024
+				) {
+					Taro.showToast({
+						title: '图片不能大于1M',
+						icon: 'none',
+					})
+					return
+				}
+				const strTempPath = resChoose.tempFilePaths[0]
+				Taro.getImageInfo({
+					src: strTempPath,
+					success: async resImageInfo => {
+						console.log('chooseImage getImageInfo', resImageInfo)
+						if (await checkSecurityImage(resImageInfo.path)) {
+							setAvatarImage(resImageInfo.path)
+						}
+					},
+				})
 			},
 		})
 	}
