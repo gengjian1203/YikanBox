@@ -44,6 +44,9 @@ export default function ModuleBottom(props: IModuleBottomProps) {
 			sizeType: ['original', 'compressed'],
 			sourceType: [sourceType],
 			success: resChoose => {
+				Taro.showLoading({
+					title: '加载中...',
+				})
 				console.log('funToggleCamera', resChoose)
 				if (
 					resChoose.tempFiles[0] &&
@@ -62,6 +65,13 @@ export default function ModuleBottom(props: IModuleBottomProps) {
 						console.log('chooseImage getImageInfo', resImageInfo)
 						if (await checkSecurityImage(resImageInfo.path)) {
 							setAvatarImage(resImageInfo.path)
+							Taro.hideLoading()
+						} else {
+							Taro.hideLoading()
+							Taro.showToast({
+								title: '图片疑似有敏感内容，请更换其他图片',
+								icon: 'none',
+							})
 						}
 					},
 				})

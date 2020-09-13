@@ -1,4 +1,5 @@
 import { produce } from 'immer'
+import StorageManager from '@/services/StorageManager'
 import {
 	SET_MEMBER_INFO,
 	ADD_COLLECTION_ARTICLE_INFO,
@@ -6,6 +7,8 @@ import {
 	PUSH_MINE_BADGE_LIST,
 	CHANGE_MINE_BORDER_CODE,
 } from '@/redux/constants/memberInfo'
+
+const m_managerStorage = StorageManager.getInstance()
 
 const INITIAL_STATE = {
 	data_strMineBorderCode: '',
@@ -21,6 +24,7 @@ export default function memberInfoReducer(state = INITIAL_STATE, action: any) {
 			// 设置成员信息
 			case SET_MEMBER_INFO:
 				draft = payload
+				m_managerStorage.setStorageSync('memberInfo', payload)
 				return draft
 			// 新增当前人的文章收藏信息
 			case ADD_COLLECTION_ARTICLE_INFO:
