@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useRouter, useDidShow } from '@tarojs/taro'
+import { useRouter } from '@tarojs/taro'
 import { Block, View } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
 import TabbarBottom from '@/components/TabBarBottom'
@@ -17,38 +17,34 @@ export default function Main() {
 
 	const [strNavigationTitle, setNavigationTitle] = useState<string>('')
 
-	const nSelectIndex = useSelector(
-		state => state.appInfo.objBottomBarInfo.nSelectIndex
+	const strBottomBarListSelectCode = useSelector(
+		state => state.appInfo.objBottomBarInfo.strBottomBarListSelectCode
 	)
 	const arrBottomBarList = useSelector(
 		state => state.appInfo.objBottomBarInfo.arrBottomBarList
 	)
-
-	const onShow = async () => {
-		// console.log('Main onShow.')
-	}
 
 	const onLoad = async () => {
 		// console.log('Main onLoad.')
 		Taro.hideShareMenu()
 	}
 
-	// 监听nSelectIndex
+	// 监听底部导航数据变化
 	useEffect(() => {
-		setNavigationTitle(arrBottomBarList[nSelectIndex].title)
-	}, [nSelectIndex])
+		const nIndex = arrBottomBarList.findIndex(item => {
+			return item.code === strBottomBarListSelectCode
+		})
+		if (nIndex >= 0) {
+			setNavigationTitle(arrBottomBarList[nIndex].title)
+		}
+	}, [arrBottomBarList, strBottomBarListSelectCode])
 
 	useEffect(() => {
 		onLoad()
 	}, [])
 
-	useDidShow(() => {
-		onShow()
-	})
-
 	const renderVPage = () => {
-		const code = arrBottomBarList[nSelectIndex].code
-		switch (code) {
+		switch (strBottomBarListSelectCode) {
 			case 'HOME': {
 				return <VPageHome />
 			}

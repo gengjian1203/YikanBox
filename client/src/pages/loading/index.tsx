@@ -24,6 +24,7 @@ export default function Loading() {
 	const {
 		setIsIOS,
 		setIsIphoneX,
+		setAdminList,
 		setMainPath,
 		setBottomBarList,
 		setBottomBarSelect,
@@ -91,12 +92,9 @@ export default function Loading() {
 		const memberInfo = loginInfo.memberInfo
 		const strMainPath = appInfo.strMainPath
 
-		setBottomBarSelect(appInfo.nBottomBarListSelect)
-		setBottomBarList(
-			appInfo.arrBottomBarList.filter(item => {
-				return item.enable === true
-			})
-		)
+		setAdminList(appInfo.arrAdminList)
+		setBottomBarSelect(appInfo.strBottomBarListSelectCode)
+		setBottomBarList(appInfo.arrBottomBarList)
 		setMainPath(strMainPath)
 		setMemberInfo(memberInfo)
 		// console.log('initLoginInfo done.')

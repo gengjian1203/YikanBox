@@ -2,6 +2,7 @@ import { produce } from 'immer'
 import {
 	SET_IS_IOS,
 	SET_IS_IPHONEX,
+	SET_ADMIN_LIST,
 	SET_MAIN_PATH,
 	SET_BOTTOM_BAR_LIST,
 	SET_BOTTOM_BAR_SELECT,
@@ -14,9 +15,10 @@ import {
 const INITIAL_STATE = {
 	isIOS: false,
 	isPhoneX: false,
+	arrAdminList: [],
 	strMainPath: '',
 	objBottomBarInfo: {
-		nSelectIndex: 0,
+		strBottomBarListSelectCode: 0,
 		arrBottomBarList: [],
 	},
 	objAppHeight: {
@@ -38,6 +40,9 @@ export default function appInfoReducer(state = INITIAL_STATE, action) {
 			case SET_IS_IPHONEX:
 				draft.isPhoneX = payload
 				return draft
+			case SET_ADMIN_LIST:
+				draft.arrAdminList = payload
+				return draft
 			case SET_MAIN_PATH:
 				draft.strMainPath = payload
 				return draft
@@ -45,7 +50,7 @@ export default function appInfoReducer(state = INITIAL_STATE, action) {
 				draft.objBottomBarInfo.arrBottomBarList = payload
 				return draft
 			case SET_BOTTOM_BAR_SELECT:
-				draft.objBottomBarInfo.nSelectIndex = payload
+				draft.objBottomBarInfo.strBottomBarListSelectCode = payload
 				return draft
 			case SET_HEIGHT_NAVIGATION:
 				draft.objAppHeight.nHeightNavigation = payload

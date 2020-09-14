@@ -1,6 +1,7 @@
 import {
 	SET_IS_IOS,
 	SET_IS_IPHONEX,
+	SET_ADMIN_LIST,
 	SET_MAIN_PATH,
 	SET_BOTTOM_BAR_LIST,
 	SET_BOTTOM_BAR_SELECT,
@@ -23,6 +24,13 @@ const appInfoActions = dispatch => {
 		setIsIphoneX: payload => {
 			dispatch({
 				type: SET_IS_IPHONEX,
+				payload,
+			})
+		},
+		// 设置管理员列表
+		setAdminList: payload => {
+			dispatch({
+				type: SET_ADMIN_LIST,
 				payload,
 			})
 		},

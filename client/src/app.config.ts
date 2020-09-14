@@ -28,6 +28,7 @@ export default {
 			pages: [
 				'about/index', // 关于我们
 				'achievement/index', // 我的成就
+				'admin/index', // 我的管理
 				'collection/index', // 我的收藏
 				'popularize/index', // 我的邀请
 			],

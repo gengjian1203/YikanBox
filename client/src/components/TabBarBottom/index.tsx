@@ -16,23 +16,42 @@ interface ITabbarBottomProps {}
 export default function TabBarBottom(props: ITabbarBottomProps) {
 	const {} = props
 
-	const objBottomBarInfo = useSelector(state => state.appInfo.objBottomBarInfo)
+	const [nTabBarBottomCurrent, setTabBarBottomCurrent] = useState<number>(0)
+	const [arrTabBarBottomList, setTabBarBottomList] = useState<Array<any>>([])
+
+	const arrBottomBarList = useSelector(
+		state => state.appInfo.objBottomBarInfo.arrBottomBarList
+	)
+	const strBottomBarListSelectCode = useSelector(
+		state => state.appInfo.objBottomBarInfo.strBottomBarListSelectCode
+	)
 	const nHeightTabbar = useSelector(
 		state => state.appInfo.objAppHeight.nHeightTabbar
 	)
 
 	const { setBottomBarSelect } = useActions(appInfoActions)
 
+	useEffect(() => {
+		const arrTabBarBottomListTmp = arrBottomBarList.filter(item => {
+			return item.enable === true
+		})
+		setTabBarBottomList(arrTabBarBottomListTmp)
+		const nIndex = arrTabBarBottomListTmp.findIndex(item => {
+			return item.code === strBottomBarListSelectCode
+		})
+		setTabBarBottomCurrent(nIndex)
+	}, [arrBottomBarList, strBottomBarListSelectCode])
+
 	const handleTabbarSelect = value => {
-		setBottomBarSelect(value)
+		setBottomBarSelect(arrTabBarBottomList[value].code)
 	}
 
 	return (
 		<Block>
 			<AtTabBar
 				fixed
-				tabList={objBottomBarInfo.arrBottomBarList}
-				current={objBottomBarInfo.nSelectIndex}
+				tabList={arrTabBarBottomList}
+				current={nTabBarBottomCurrent}
 				onClick={useSmartClick(handleTabbarSelect)}
 			/>
 			{/* 文档流占位 */}

@@ -3,7 +3,6 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import useThrottle from '@/hooks/useThrottle'
-import useCheckLogin from '@/hooks/useCheckLogin'
 import memberInfoActions from '@/redux/actions/memberInfo'
 
 import { AtList, AtListItem } from 'taro-ui'
@@ -18,9 +17,12 @@ interface IModuleAboutProps {}
 export default function ModuleAbout(props: IModuleAboutProps) {
 	const {} = props
 
+	const appInfo = useSelector(state => state.appInfo)
 	const memberInfo = useSelector(state => state.memberInfo)
 
 	const { setMemberInfo } = useActions(memberInfoActions)
+
+	const isAdmin = appInfo.arrAdminList.indexOf(memberInfo._id) >= 0
 
 	const onLoad = async () => {}
 
@@ -34,6 +36,13 @@ export default function ModuleAbout(props: IModuleAboutProps) {
 		// console.log('handleAboutClick', e)
 		Taro.navigateTo({
 			url: `/pages/mine/about/index`,
+		})
+	}
+
+	// 我的管理
+	const handleAdminClick = e => {
+		Taro.navigateTo({
+			url: `/pages/mine/admin/index`,
 		})
 	}
 
@@ -66,6 +75,19 @@ export default function ModuleAbout(props: IModuleAboutProps) {
 					}}
 					onClick={useThrottle(handleAboutClick)}
 				/>
+				{isAdmin && (
+					<AtListItem
+						className='item-normal'
+						title='我的管理'
+						arrow='right'
+						iconInfo={{
+							size: 25,
+							color: 'deepskyblue',
+							value: 'iconfont icon-mine-about',
+						}}
+						onClick={handleAdminClick}
+					/>
+				)}
 				{memberInfo._id && (
 					<AtListItem
 						className='item-logout'
