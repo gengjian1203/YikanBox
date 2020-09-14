@@ -3,10 +3,9 @@ import { UUID } from '@/utils/index'
 import webApi from '@/api/checkContent'
 
 // 将图片上传到云存储中
-const uploadImage = strImageUrl => {
+const upload = (strImageUrl, strCloudPath) => {
 	const strFileName = UUID()
-	const strSecurityCloudPath = `security/${strFileName}.png`
-	// console.log('uploadImage', strSecurityCloudPath, strImageUrl)
+	const strSecurityCloudPath = `${strCloudPath}${strFileName}.png`
 	return new Promise((resolve, reject) => {
 		Taro.cloud.uploadFile({
 			cloudPath: strSecurityCloudPath,
@@ -32,27 +31,28 @@ const checkImage = strImageId => {
 		const resCheck = await webApi.checkImage(objParam)
 		// console.log('checkSecurityImage checkImage', resCheck)
 		if (resCheck && resCheck.errCode === 0) {
-			resolve(true)
+			resolve(strImageId)
 		} else {
-			resolve(false)
+			resolve('DANGER IMAGE')
 		}
 	})
 }
 
 /**
- * 校验敏感图片
+ * 上传图片
  * @param strImageUrl 图片Url
- * @return true-正常照片 false-敏感照片
+ * @param strCloudPath 存储云端路径
+ * @return 返回ID即为上传成功，返回空即为上传失败，返回'DANGER IMAGE'即为敏感图片
  */
-export const checkSecurityImage = async strImageUrl => {
-	let isResult = false
+export const uploadImage = async (strImageUrl, strCloudPath) => {
+	let strResult = ''
 	// 上传图片
-	const strImageId = await uploadImage(strImageUrl)
-	if (strImageId) {
+	strResult = await upload(strImageUrl, strCloudPath)
+	if (strResult) {
 		// 校验图片
-		isResult = await checkImage(strImageId)
+		strResult = await checkImage(strResult)
 	}
-	return isResult
+	return strResult
 }
 
-export default checkSecurityImage
+export default uploadImage

@@ -8,9 +8,9 @@ import hiddenString from './format/hiddenString'
 import normalDate from './format/normalDate'
 import router2url from './format/router2url'
 import simpleDate from './format/simpleDate'
-import checkSecurityImage from './security/checkSecurityImage'
 import getShareTypeName from './share/getShareTypeName'
 import { shareType, processSharePath } from './share/processSharePath'
+import uploadImage from './upload/uploadImage'
 
 export {
 	shareType,
@@ -24,7 +24,7 @@ export {
 	normalDate,
 	router2url,
 	simpleDate,
-	checkSecurityImage,
 	getShareTypeName,
 	processSharePath,
+	uploadImage,
 }

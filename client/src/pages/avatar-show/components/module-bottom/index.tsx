@@ -5,11 +5,10 @@ import useActions from '@/hooks/useActions'
 import avatarShowInfoActions from '@/redux/actions/avatarShowInfo'
 import useCheckLogin from '@/hooks/useCheckLogin'
 import useThrottle from '@/hooks/useThrottle'
-import { getHDAvatarUrl, checkSecurityImage } from '@/utils/index'
+import { getHDAvatarUrl, uploadImage } from '@/utils/index'
 
 import { View, Block } from '@tarojs/components'
 import { AtButton, AtActionSheet, AtActionSheetItem } from 'taro-ui'
-import ButtonBottom from '@/components/ButtonBottom'
 
 import { drawCanvasSave } from '../../utils/canvasSave'
 import {
@@ -46,7 +45,7 @@ export default function ModuleBottom(props: IModuleBottomProps) {
 			count: 1,
 			sizeType: ['original', 'compressed'],
 			sourceType: [sourceType],
-			success: resChoose => {
+			success: async resChoose => {
 				Taro.showLoading({
 					title: '加载中...',
 				})
@@ -62,23 +61,23 @@ export default function ModuleBottom(props: IModuleBottomProps) {
 					return
 				}
 				const strTempPath = resChoose.tempFilePaths[0]
-				Taro.getImageInfo({
-					src: strTempPath,
-					success: async resImageInfo => {
-						console.log('chooseImage getImageInfo', resImageInfo)
-						if (await checkSecurityImage(resImageInfo.path)) {
-							initAvatarInfo()
-							setAvatarImage(resImageInfo.path)
-							Taro.hideLoading()
-						} else {
-							Taro.hideLoading()
-							Taro.showToast({
-								title: '图片疑似有敏感内容，请更换其他图片',
-								icon: 'none',
-							})
-						}
-					},
-				})
+				const res = await uploadImage(strTempPath, 'temp/')
+				console.log('uploadImage', res)
+				Taro.hideLoading()
+				if (res === '') {
+					Taro.showToast({
+						title: '图片上传失败，请重新上传',
+						icon: 'none',
+					})
+				} else if (res === 'DANGER IMAGE') {
+					Taro.showToast({
+						title: '图片疑似有敏感内容，请更换其他图片',
+						icon: 'none',
+					})
+				} else {
+					initAvatarInfo()
+					setAvatarImage(strTempPath)
+				}
 			},
 		})
 	}
