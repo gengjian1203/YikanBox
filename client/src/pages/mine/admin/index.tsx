@@ -10,7 +10,7 @@ import './index.scss'
 
 export default function Admin() {
 	const arrBottomBarList = useSelector(
-		state => state.appInfo.objBottomBarInfo.arrBottomBarList
+		state => state.appInfo.objAppInfo.arrBottomBarList
 	)
 
 	// 底部导航切换

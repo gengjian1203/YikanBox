@@ -1,26 +1,19 @@
 import { produce } from 'immer'
 import {
+	SET_APP_INFO,
 	SET_IS_IOS,
 	SET_IS_IPHONEX,
-	SET_ADMIN_LIST,
-	SET_MAIN_PATH,
-	SET_BOTTOM_BAR_LIST,
-	SET_BOTTOM_BAR_SELECT,
 	SET_HEIGHT_NAVIGATION,
 	SET_HEIGHT_NAVIGATION_HEADER,
 	SET_HEIGHT_TABBAR,
 	SET_HEIGHT_TABBAR_BOTTOM,
+	SET_BOTTOM_BAR_SELECT,
 } from '@/redux/constants/appInfo'
 
 const INITIAL_STATE = {
+	objAppInfo: {},
 	isIOS: false,
 	isPhoneX: false,
-	arrAdminList: [],
-	strMainPath: '',
-	objBottomBarInfo: {
-		strBottomBarListSelectCode: 0,
-		arrBottomBarList: [],
-	},
 	objAppHeight: {
 		nHeightNavigation: 0,
 		nHeightNavigationHeader: 0,
@@ -34,23 +27,14 @@ export default function appInfoReducer(state = INITIAL_STATE, action) {
 
 	return produce(state, draft => {
 		switch (type) {
+			case SET_APP_INFO:
+				draft.objAppInfo = payload
+				return draft
 			case SET_IS_IOS:
 				draft.isIOS = payload
 				return draft
 			case SET_IS_IPHONEX:
 				draft.isPhoneX = payload
-				return draft
-			case SET_ADMIN_LIST:
-				draft.arrAdminList = payload
-				return draft
-			case SET_MAIN_PATH:
-				draft.strMainPath = payload
-				return draft
-			case SET_BOTTOM_BAR_LIST:
-				draft.objBottomBarInfo.arrBottomBarList = payload
-				return draft
-			case SET_BOTTOM_BAR_SELECT:
-				draft.objBottomBarInfo.strBottomBarListSelectCode = payload
 				return draft
 			case SET_HEIGHT_NAVIGATION:
 				draft.objAppHeight.nHeightNavigation = payload
@@ -63,6 +47,9 @@ export default function appInfoReducer(state = INITIAL_STATE, action) {
 				return draft
 			case SET_HEIGHT_TABBAR_BOTTOM:
 				draft.objAppHeight.nHeightTabbarBottom = payload
+				return draft
+			case SET_BOTTOM_BAR_SELECT:
+				draft.objAppInfo.strBottomBarListSelectCode = payload
 				return draft
 			default:
 				return draft

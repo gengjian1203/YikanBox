@@ -44,7 +44,7 @@ export default function Navigation(props: INavigationProps) {
 		if (objPageInfo.length === 1) {
 			// 首页
 			Taro.reLaunch({
-				url: appInfo.strMainPath,
+				url: appInfo.objAppInfo.strMainPath,
 			})
 		} else {
 			// 返回

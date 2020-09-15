@@ -22,12 +22,9 @@ const m_objAppService = AppService.getInstance()
 export default function Loading() {
 	const { params } = useRouter()
 	const {
+		setAppInfo,
 		setIsIOS,
 		setIsIphoneX,
-		setAdminList,
-		setMainPath,
-		setBottomBarList,
-		setBottomBarSelect,
 		setHeightNavigation,
 		setHeightNavigationHeader,
 		setHeightTabbar,
@@ -90,12 +87,8 @@ export default function Loading() {
 		const loginInfo = await queryLoginInfo()
 		const appInfo = loginInfo.appInfo
 		const memberInfo = loginInfo.memberInfo
-		const strMainPath = appInfo.strMainPath
 
-		setAdminList(appInfo.arrAdminList)
-		setBottomBarSelect(appInfo.strBottomBarListSelectCode)
-		setBottomBarList(appInfo.arrBottomBarList)
-		setMainPath(strMainPath)
+		setAppInfo(appInfo)
 		setMemberInfo(memberInfo)
 		// console.log('initLoginInfo done.')
 		return loginInfo
@@ -141,19 +134,22 @@ export default function Loading() {
 			resInitApi,
 			resInitSystemInfo,
 			resInitLoginInfo,
-		] = await Promise.all([initApi(), initSystemInfo(), initLoginInfo()])
-
-		// 根据后台配置、动态展示文章列表
-		if (resInitLoginInfo.appInfo.isShowArticleList) {
-			await prevLoadingArticleList()
-		}
+			resPrevLoadingArticleList,
+		] = await Promise.all([
+			initApi(),
+			initSystemInfo(),
+			initLoginInfo(),
+			prevLoadingArticleList(),
+		])
 
 		console.log(
 			'Loading onLoad',
 			resInitApi,
 			resInitSystemInfo,
-			resInitLoginInfo
+			resInitLoginInfo,
+			resPrevLoadingArticleList
 		)
+
 		jumpPage(resInitLoginInfo)
 	}
 

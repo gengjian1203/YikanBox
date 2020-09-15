@@ -1,18 +1,23 @@
 import {
+	SET_APP_INFO,
 	SET_IS_IOS,
 	SET_IS_IPHONEX,
-	SET_ADMIN_LIST,
-	SET_MAIN_PATH,
-	SET_BOTTOM_BAR_LIST,
-	SET_BOTTOM_BAR_SELECT,
 	SET_HEIGHT_NAVIGATION,
 	SET_HEIGHT_NAVIGATION_HEADER,
 	SET_HEIGHT_TABBAR,
 	SET_HEIGHT_TABBAR_BOTTOM,
+	SET_BOTTOM_BAR_SELECT,
 } from '@/redux/constants/appInfo'
 
 const appInfoActions = dispatch => {
 	const actions = {
+		// 设置appInfo数据
+		setAppInfo: payload => {
+			dispatch({
+				type: SET_APP_INFO,
+				payload,
+			})
+		},
 		// 设置是否是iOS机型
 		setIsIOS: payload => {
 			dispatch({
@@ -24,34 +29,6 @@ const appInfoActions = dispatch => {
 		setIsIphoneX: payload => {
 			dispatch({
 				type: SET_IS_IPHONEX,
-				payload,
-			})
-		},
-		// 设置管理员列表
-		setAdminList: payload => {
-			dispatch({
-				type: SET_ADMIN_LIST,
-				payload,
-			})
-		},
-		// 设置首页路径
-		setMainPath: payload => {
-			dispatch({
-				type: SET_MAIN_PATH,
-				payload,
-			})
-		},
-		// 设置底部导航列表
-		setBottomBarList: payload => {
-			dispatch({
-				type: SET_BOTTOM_BAR_LIST,
-				payload,
-			})
-		},
-		// 设置底部导航索引值
-		setBottomBarSelect: payload => {
-			dispatch({
-				type: SET_BOTTOM_BAR_SELECT,
 				payload,
 			})
 		},
@@ -80,6 +57,13 @@ const appInfoActions = dispatch => {
 		setHeightTabbarBottom: payload => {
 			dispatch({
 				type: SET_HEIGHT_TABBAR_BOTTOM,
+				payload,
+			})
+		},
+		// 设置底部导航索引值
+		setBottomBarSelect: payload => {
+			dispatch({
+				type: SET_BOTTOM_BAR_SELECT,
 				payload,
 			})
 		},

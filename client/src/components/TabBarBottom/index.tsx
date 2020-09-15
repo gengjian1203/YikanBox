@@ -20,10 +20,10 @@ export default function TabBarBottom(props: ITabbarBottomProps) {
 	const [arrTabBarBottomList, setTabBarBottomList] = useState<Array<any>>([])
 
 	const arrBottomBarList = useSelector(
-		state => state.appInfo.objBottomBarInfo.arrBottomBarList
+		state => state.appInfo.objAppInfo.arrBottomBarList
 	)
 	const strBottomBarListSelectCode = useSelector(
-		state => state.appInfo.objBottomBarInfo.strBottomBarListSelectCode
+		state => state.appInfo.objAppInfo.strBottomBarListSelectCode
 	)
 	const nHeightTabbar = useSelector(
 		state => state.appInfo.objAppHeight.nHeightTabbar

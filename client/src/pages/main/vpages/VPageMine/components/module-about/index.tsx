@@ -22,7 +22,7 @@ export default function ModuleAbout(props: IModuleAboutProps) {
 
 	const { setMemberInfo } = useActions(memberInfoActions)
 
-	const isAdmin = appInfo.arrAdminList.indexOf(memberInfo._id) >= 0
+	const isAdmin = appInfo.objAppInfo.arrAdminList.indexOf(memberInfo._id) >= 0
 
 	const onLoad = async () => {}
 

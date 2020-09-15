@@ -16,10 +16,10 @@ export function useSmartClick(funCallback = (any?: any) => any) {
 	})
 
 	const arrBottomBarList = useSelector(
-		state => state.appInfo.objBottomBarInfo.arrBottomBarList
+		state => state.appInfo.objAppInfo.arrBottomBarList
 	)
 	const strBottomBarListSelectCode = useSelector(
-		state => state.appInfo.objBottomBarInfo.strBottomBarListSelectCode
+		state => state.appInfo.objAppInfo.strBottomBarListSelectCode
 	)
 
 	useEffect(() => {

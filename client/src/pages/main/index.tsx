@@ -18,10 +18,10 @@ export default function Main() {
 	const [strNavigationTitle, setNavigationTitle] = useState<string>('')
 
 	const strBottomBarListSelectCode = useSelector(
-		state => state.appInfo.objBottomBarInfo.strBottomBarListSelectCode
+		state => state.appInfo.objAppInfo.strBottomBarListSelectCode
 	)
 	const arrBottomBarList = useSelector(
-		state => state.appInfo.objBottomBarInfo.arrBottomBarList
+		state => state.appInfo.objAppInfo.arrBottomBarList
 	)
 
 	const onLoad = async () => {
