@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro'
 import Config from '@/config/index'
+import ResourceManager from './ResourceManager'
 
 export default class AppInitDataService {
 	// 单例对象
@@ -21,9 +22,15 @@ export default class AppInitDataService {
 		})
 	}
 
+	initResourceManager = () => {
+		// 初始化资源管理器
+		ResourceManager.getInstance()
+	}
+
 	init() {
 		console.log('AppInitService init start.')
 		this.initCloudInfo()
+		this.initResourceManager()
 		console.log('AppInitService init done.')
 	}
 }

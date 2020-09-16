@@ -2,10 +2,12 @@
 
 .banner-wrap {
 	width: 100%;
-	height: 400px;
+	height: 319px;
 	.banner-item {
+		overflow: hidden;
 		width: 100%;
 		height: 100%;
+		border-radius: $radius-thin;
 		background-color: $color-default;
 		.banner-image {
 			width: 100%;
