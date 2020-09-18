@@ -128,7 +128,15 @@ export default function VPageHome(props: IVPageHomeProps) {
 			></View>
 			{/* banner */}
 			<Banner arrBannerList={arrBannerLocalList} />
-			<Image style='width: 100%; ' mode='widthFix' src={strImg}></Image>
+			<Image
+				style={
+					`width: 100%; ` +
+					`margin-top: ${Taro.pxTransform(10)}; ` +
+					`border-radius: ${Taro.pxTransform(6)};`
+				}
+				mode='widthFix'
+				src={strImg}
+			></Image>
 			{/* <Button onClick={handleCreateArticleClick}>爬取文章</Button> */}
 			{/* <Button onClick={handleLoginClick}>强制登录</Button> */}
 			{/* <Button onClick={handleNavigationJumpClick}>重复跳转</Button> */}

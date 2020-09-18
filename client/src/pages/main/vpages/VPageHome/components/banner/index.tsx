@@ -1,5 +1,7 @@
 import Taro from '@tarojs/taro'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import useThrottle from '@/hooks/useThrottle'
+import useCheckLogin from '@/hooks/useCheckLogin'
 
 import { View, Image, Swiper, SwiperItem } from '@tarojs/components'
 
@@ -41,10 +43,10 @@ export default function Banner(props: IBannerProps) {
 					<SwiperItem key={index}>
 						<View
 							className='banner-item flex-center'
-							onClick={() => handleBannerClick(item)}
+							onClick={useThrottle(
+								useCheckLogin(() => handleBannerClick(item))
+							)}
 						>
-							{/* <View>====|||{item.strImageUrl}</View>
-							<View>====|||{item.strNavUrl}</View> */}
 							<Image
 								className='banner-image'
 								src={item.strImageUrl}

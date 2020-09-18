@@ -82,8 +82,8 @@ export default function ModuleAbout(props: IModuleAboutProps) {
 						arrow='right'
 						iconInfo={{
 							size: 25,
-							color: 'deepskyblue',
-							value: 'iconfont icon-mine-about',
+							color: 'firebrick',
+							value: 'iconfont icon-mine-admin',
 						}}
 						onClick={handleAdminClick}
 					/>

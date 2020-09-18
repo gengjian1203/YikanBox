@@ -8,7 +8,7 @@ import shareInfoActions from '@/redux/actions/shareInfo'
 import articleInfoActions from '@/redux/actions/articleInfo'
 import { SIZE_PAGE_DISCOVER } from '@/redux/constants/articleInfo'
 
-import webApiLoginInfo from '@/api/loginInfo'
+import webApiAppInfo from '@/api/appInfo'
 import webApiArticleInfo from '@/api/articleInfo'
 import AppService from '@/services/AppService'
 
@@ -29,6 +29,7 @@ export default function Loading() {
 		setHeightNavigationHeader,
 		setHeightTabbar,
 		setHeightTabbarBottom,
+		setBottomBarSelect,
 	} = useActions(appInfoActions)
 	const { setMemberInfo } = useActions(memberInfoActions)
 	const { setSystemInfo } = useActions(systemInfoActions)
@@ -37,7 +38,7 @@ export default function Loading() {
 
 	// 查询小程序信息以及用户信息
 	const queryLoginInfo: any = async () => {
-		const res = await webApiLoginInfo.queryLoginInfo()
+		const res = await webApiAppInfo.queryLoginInfo()
 		// console.log('queryLoginInfo', res)
 		return {
 			appInfo: res.appInfo.data[0],
@@ -87,8 +88,20 @@ export default function Loading() {
 		const loginInfo = await queryLoginInfo()
 		const appInfo = loginInfo.appInfo
 		const memberInfo = loginInfo.memberInfo
+		let strBottomBarListSelectCodeTmp = 'MINE'
+		try {
+			for (let item of appInfo.arrBottomBarList) {
+				if (item.enable) {
+					strBottomBarListSelectCodeTmp = item.code
+					break
+				}
+			}
+		} catch (e) {
+			console.error('initLoginInfo strBottomBarListSelectCodeTmp', e)
+		}
 
 		setAppInfo(appInfo)
+		setBottomBarSelect(strBottomBarListSelectCodeTmp)
 		setMemberInfo(memberInfo)
 		// console.log('initLoginInfo done.')
 		return loginInfo
