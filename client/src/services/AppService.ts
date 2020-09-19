@@ -25,6 +25,7 @@ export default class AppInitDataService {
 	initResourceManager = () => {
 		// 初始化资源管理器
 		ResourceManager.getInstance()
+		ResourceManager.loadingAllResource()
 	}
 
 	init() {

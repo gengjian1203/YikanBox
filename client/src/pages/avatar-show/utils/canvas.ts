@@ -1,16 +1,20 @@
+import Config from '@/config/index'
 import { checkObjectEmpty, mergeObject } from '@/utils/index'
-
-import strUrlButtonAdd from '@/images/avatar/button/add.png'
-import strUrlButtonDelete from '@/images/avatar/button/delete.png'
-import strUrlButtonFlip from '@/images/avatar/button/flip.png'
-import strUrlButtonResize from '@/images/avatar/button/resize.png'
+import ResourceManager from '@/services/ResourceManager'
 
 import {
 	CANVAS_WIDTH,
 	CANVAS_HEIGHT,
+	BORDER_COLOR,
 	BORDER_BUTTON_SIZE,
-	BORDER_BUTTON_OFFSET,
+	BORDER_BUTTON_RADIUS,
 } from './const'
+
+const strUrlButtonAdd = Config.cloudPath + '/avatar/button/add.png'
+const strUrlButtonDelete = Config.cloudPath + '/avatar/button/delete.png'
+const strUrlButtonFlip = Config.cloudPath + '/avatar/button/flip.png'
+const strUrlButtonResize = Config.cloudPath + '/avatar/button/resize.png'
+// const strUrlButtonResize = Config.cloudPath + '/avatar/jewelry/shengdanlaoren.png'
 
 /**
  * 绘制头像底图
@@ -70,7 +74,7 @@ const getRectJewelryExtend = (
  * @param objSelectJewelry
  * @param objTouchPoint
  */
-const drawAvatarJewelry = (
+const drawAvatarJewelry = async (
 	canvas,
 	strSelectType,
 	arrAvatarJewelry,
@@ -127,7 +131,7 @@ const drawAvatarJewelry = (
  * @param canvas
  * @param type
  */
-const drawSelectBorderButton = (canvas, rectBorder, type) => {
+const drawSelectBorderButton = async (canvas, rectBorder, type) => {
 	// 处理数据
 	let ptButtonPosition = {
 		x: 10,
@@ -137,42 +141,55 @@ const drawSelectBorderButton = (canvas, rectBorder, type) => {
 	switch (type) {
 		case 'FLIP':
 			ptButtonPosition = {
-				x: rectBorder.x + BORDER_BUTTON_OFFSET,
-				y: rectBorder.y + BORDER_BUTTON_OFFSET,
+				x: rectBorder.x,
+				y: rectBorder.y,
 			}
 			strButtonUrl = strUrlButtonFlip
 			break
 		case 'ADD':
 			ptButtonPosition = {
-				x: rectBorder.x + BORDER_BUTTON_OFFSET,
-				y: rectBorder.y + rectBorder.height + BORDER_BUTTON_OFFSET,
+				x: rectBorder.x,
+				y: rectBorder.y + rectBorder.height,
 			}
 			strButtonUrl = strUrlButtonAdd
 			break
 		case 'DELETE':
 			ptButtonPosition = {
-				x: rectBorder.x + rectBorder.width + BORDER_BUTTON_OFFSET,
-				y: rectBorder.y + BORDER_BUTTON_OFFSET,
+				x: rectBorder.x + rectBorder.width,
+				y: rectBorder.y,
 			}
 			strButtonUrl = strUrlButtonDelete
 			break
 		case 'RESIZE':
 			ptButtonPosition = {
-				x: rectBorder.x + rectBorder.width + BORDER_BUTTON_OFFSET,
-				y: rectBorder.y + rectBorder.height + BORDER_BUTTON_OFFSET,
+				x: rectBorder.x + rectBorder.width,
+				y: rectBorder.y + rectBorder.height,
 			}
 			strButtonUrl = strUrlButtonResize
 			break
 		default:
 			return
 	}
-	canvas.drawImage(
-		strButtonUrl,
+	// strButtonUrl = await ResourceManager.getStaticUrl(strButtonUrl)
+	// console.log('drawSelectBorderButton', strButtonUrl, ptButtonPosition)
+	// canvas.drawImage(
+	// 	strButtonUrl,
+	// 	ptButtonPosition.x,
+	// 	ptButtonPosition.y,
+	// 	BORDER_BUTTON_SIZE,
+	// 	BORDER_BUTTON_SIZE
+	// )
+	canvas.beginPath()
+	canvas.arc(
 		ptButtonPosition.x,
 		ptButtonPosition.y,
-		BORDER_BUTTON_SIZE,
-		BORDER_BUTTON_SIZE
+		BORDER_BUTTON_RADIUS,
+		0,
+		(360 * Math.PI) / 180
 	)
+	canvas.fillStyle = BORDER_COLOR
+	canvas.fill()
+	canvas.stroke()
 }
 
 /**
@@ -221,13 +238,16 @@ const drawSelectBorder = (
 	const rectBorderResult = mergeObject(rectBorderBase, rectBorderExtend)
 
 	// 绘制
-	canvas.strokeStyle = '#ffffff'
+	canvas.strokeStyle = BORDER_COLOR
 	canvas.strokeRect(
 		rectBorderResult.x,
 		rectBorderResult.y,
 		rectBorderResult.width,
 		rectBorderResult.height
 	)
+	// canvas.beginPath()
+	// canvas.arc(100, 100, 100, 0, (360 * Math.PI) / 180)
+	// canvas.stroke()
 	// 绘制按钮
 	for (let item of arrButtonList) {
 		drawSelectBorderButton(canvas, rectBorderResult, item)
@@ -264,6 +284,7 @@ export const drawMainCanvas = (canvas, avatarShowInfo, objTouchPoint) => {
 		if (!checkObjectEmpty(objSelectJewelry)) {
 			drawSelectBorder(canvas, strSelectType, objSelectJewelry, objTouchPoint)
 		}
+
 		// 绘制
 		canvas.draw()
 	} else {

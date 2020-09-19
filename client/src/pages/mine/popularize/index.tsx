@@ -9,7 +9,7 @@ import NavigationHeader from '@/components/NavigationHeader'
 import TipsPanel from '@/components/TipsPanel'
 import ModuleTitle from '@/components/ModuleTitle'
 
-import strShareUrl from '@/images/share.jpg'
+import Config from '@/config/index'
 
 import ItemCard from './components/item-card/index'
 
@@ -23,6 +23,8 @@ export default function Popularize() {
 	const data_arrShareChildrenList = useSelector(
 		state => state.memberInfo.data_arrShareChildrenList
 	)
+
+	const strShareUrl = Config.cloudPath + '/common/share.jpg'
 
 	const onLoad = () => {
 		const arrListTmp = deepClone(data_arrShareChildrenList)

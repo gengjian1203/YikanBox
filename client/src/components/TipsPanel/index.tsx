@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Image } from '@tarojs/components'
 
-import strEmptyUrl from '@/images/empty.png'
+import Config from '@/config/index'
 
 import './index.scss'
 
@@ -11,6 +11,8 @@ interface IComLoadingProps {
 
 export default function TipsPanel(props: IComLoadingProps) {
 	const { strType } = props
+
+	const strEmptyUrl = Config.cloudPath + '/common/empty.png'
 
 	const readerPanel = () => {
 		switch (strType) {

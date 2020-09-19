@@ -49,7 +49,7 @@ class CWXClouldAdaptor implements IResourceAdaptorType {
 					resolve(res.tempFilePath)
 				},
 				fail: err => {
-					console.error('CWXClouldAdaptor3', err)
+					console.error('CWXClouldAdaptor3', strUrl, err)
 					resolve(strUrl)
 				},
 			})

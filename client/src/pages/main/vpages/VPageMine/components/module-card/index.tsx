@@ -7,14 +7,6 @@ import useThrottle from '@/hooks/useThrottle'
 
 import { View, Image } from '@tarojs/components'
 
-import strAvatarBorderUrl_01 from '@/images/mine/border_01.png'
-import strAvatarBorderUrl_02 from '@/images/mine/border_02.png'
-import strAvatarBorderUrl_03 from '@/images/mine/border_03.png'
-import strAvatarBorderUrl_04 from '@/images/mine/border_04.png'
-import strAvatarBorderUrl_05 from '@/images/mine/border_05.png'
-import strAvatarBorderUrl_06 from '@/images/mine/border_06.png'
-import strAvatarBorderUrl_07 from '@/images/mine/border_07.png'
-
 import { getBadgeUrl } from '../../utils/index'
 
 import './index.scss'

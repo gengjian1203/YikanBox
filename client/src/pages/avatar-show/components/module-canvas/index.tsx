@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import avatarShowInfoActions from '@/redux/actions/avatarShowInfo'
-import { checkObjectEmpty, deepClone } from '@/utils/index'
-import strDefaultAvatarUrl from '@/images/avatar/default.png'
+import Config from '@/config/index'
+import { checkObjectEmpty } from '@/utils/index'
+import ResourceManager from '@/services/ResourceManager'
 
 import { View, Block, Canvas } from '@tarojs/components'
 
@@ -38,12 +39,18 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 		updateAvatarJewelry,
 	} = useActions(avatarShowInfoActions)
 
-	useEffect(() => {
+	const strDefaultAvatarUrl = Config.cloudPath + '/avatar/default.png'
+
+	const onLoad = async () => {
 		initAvatarInfo()
 		// 设置 canvas 对象
 		setCanvas(Taro.createCanvasContext('canvas'))
 		// 加载头像
-		setAvatarImage(strDefaultAvatarUrl)
+		setAvatarImage(await ResourceManager.getUrl(strDefaultAvatarUrl))
+	}
+
+	useEffect(() => {
+		onLoad()
 	}, [])
 
 	useEffect(() => {

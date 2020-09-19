@@ -1,11 +1,16 @@
-import strUrlJewelryDangqi from '@/images/avatar/jewelry/dangqi.png'
-import strUrlJewelryGuoqi from '@/images/avatar/jewelry/guoqi.png'
-import strUrlJewelryHongdian from '@/images/avatar/jewelry/hongdian.png'
-import strUrlJewelryShanchu from '@/images/avatar/jewelry/shanchu.png'
-import strUrlJewelryShengdanlaoren from '@/images/avatar/jewelry/shengdanlaoren.png'
-import strUrlJewelryShengdanmao from '@/images/avatar/jewelry/shengdanmao.png'
-import strUrlJewelryShengdanshu from '@/images/avatar/jewelry/shengdanshu.png'
-import strUrlJewelryXueren from '@/images/avatar/jewelry/xueren.png'
+import Config from '@/config/index'
+
+const strUrlJewelryDangqi = Config.cloudPath + '/avatar/jewelry/dangqi.png'
+const strUrlJewelryGuoqi = Config.cloudPath + '/avatar/jewelry/guoqi.png'
+const strUrlJewelryHongdian = Config.cloudPath + '/avatar/jewelry/hongdian.png'
+const strUrlJewelryShanchu = Config.cloudPath + '/avatar/jewelry/shanchu.png'
+const strUrlJewelryShengdanlaoren =
+	Config.cloudPath + '/avatar/jewelry/shengdanlaoren.png'
+const strUrlJewelryShengdanmao =
+	Config.cloudPath + '/avatar/jewelry/shengdanmao.png'
+const strUrlJewelryShengdanshu =
+	Config.cloudPath + '/avatar/jewelry/shengdanshu.png'
+const strUrlJewelryXueren = Config.cloudPath + '/avatar/jewelry/xueren.png'
 
 export const CANVAS_WIDTH = 350 // 画布宽
 export const CANVAS_HEIGHT = 350 // 画布高
@@ -15,8 +20,9 @@ export const CANVAS_SAVE_HEIGHT = 1080 // 保存图片高度
 export const SIZE_TEXT = 50 // 文字尺寸
 export const SIZE_IMAGE = 128 // 图片尺寸
 
+export const BORDER_COLOR = '#ffffff'
 export const BORDER_BUTTON_SIZE = 20 // 选中框按钮尺寸
-export const BORDER_BUTTON_OFFSET = -10 // 选中框按钮尺寸
+export const BORDER_BUTTON_RADIUS = (BORDER_BUTTON_SIZE / 2)
 
 // 饰品列表
 export const arrJewelryList = [

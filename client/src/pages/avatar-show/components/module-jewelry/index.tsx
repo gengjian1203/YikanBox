@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import avatarShowInfoActions from '@/redux/actions/avatarShowInfo'
 import { UUID } from '@/utils/index'
+import ResourceManager from '@/services/ResourceManager'
 
 import { View, Image, ScrollView } from '@tarojs/components'
 import { AtTabs, AtTabsPane } from 'taro-ui'
@@ -24,12 +25,13 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 	const { addAvatarJewelry } = useActions(avatarShowInfoActions)
 
 	// 点击饰品
-	const handleJewelryCellClick = item => {
+	const handleJewelryCellClick = async item => {
 		console.log('handleJewelryCellClick', item)
 		// setImageText(item.name)
 		const objJewelry = {
-			id: UUID(),
 			...item,
+			id: UUID(),
+			value: await ResourceManager.getUrl(item.value),
 		}
 		addAvatarJewelry(objJewelry)
 	}

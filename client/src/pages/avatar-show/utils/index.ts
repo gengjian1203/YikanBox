@@ -1,6 +1,6 @@
 import { checkObjectEmpty } from '@/utils/index'
 
-import { BORDER_BUTTON_SIZE, BORDER_BUTTON_OFFSET } from './const'
+import { BORDER_BUTTON_SIZE, BORDER_BUTTON_RADIUS } from './const'
 
 /**
  * 校验是否点击边框按钮上
@@ -10,26 +10,26 @@ import { BORDER_BUTTON_SIZE, BORDER_BUTTON_OFFSET } from './const'
 const checkBorderButtonClick = (point, objSelectJewelry) => {
 	const rect = objSelectJewelry.rect
 	const rectButtonUpLeft = {
-		x: rect.x + BORDER_BUTTON_OFFSET,
-		y: rect.y + BORDER_BUTTON_OFFSET,
+		x: rect.x - BORDER_BUTTON_RADIUS,
+		y: rect.y - BORDER_BUTTON_RADIUS,
 		width: BORDER_BUTTON_SIZE,
 		height: BORDER_BUTTON_SIZE,
 	}
 	const rectButtonUpRight = {
-		x: rect.x + rect.width + BORDER_BUTTON_OFFSET,
-		y: rect.y + BORDER_BUTTON_OFFSET,
+		x: rect.x + rect.width - BORDER_BUTTON_RADIUS,
+		y: rect.y - BORDER_BUTTON_RADIUS,
 		width: BORDER_BUTTON_SIZE,
 		height: BORDER_BUTTON_SIZE,
 	}
 	const rectButtonDownLeft = {
-		x: rect.x + BORDER_BUTTON_OFFSET,
-		y: rect.y + rect.height + BORDER_BUTTON_OFFSET,
+		x: rect.x - BORDER_BUTTON_RADIUS,
+		y: rect.y + rect.height - BORDER_BUTTON_RADIUS,
 		width: BORDER_BUTTON_SIZE,
 		height: BORDER_BUTTON_SIZE,
 	}
 	const rectButtonDownRight = {
-		x: rect.x + rect.width + BORDER_BUTTON_OFFSET,
-		y: rect.y + rect.height + BORDER_BUTTON_OFFSET,
+		x: rect.x + rect.width - BORDER_BUTTON_RADIUS,
+		y: rect.y + rect.height - BORDER_BUTTON_RADIUS,
 		width: BORDER_BUTTON_SIZE,
 		height: BORDER_BUTTON_SIZE,
 	}
