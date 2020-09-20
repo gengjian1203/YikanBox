@@ -10,7 +10,7 @@ Taro + redux + wxcloud + ts 做个工具集合的微信小程序
 
 #### 相关技术
 
-1. Taro + taro ui
+1. Taro + TypeScript + taro ui
 
 2. wxCloud 微信云开发
 
@@ -61,35 +61,40 @@ Taro + redux + wxcloud + ts 做个工具集合的微信小程序
 │       ├── components        # 公共组件
 │       ├── config            # 应用级配置
 │       ├── hooks             # 自定义 Hook
-│       ├── images            # 打包进代码的静态资源
+│       ├── images            # 打包进代码的静态资源（改用云存储）
 │       ├── pages             # 小程序页面
 │       ├── redux             # Redux
 │       ├── scss              # 公共样式
 │       ├── services          # 封装服务
 │       └── utils             # 公共方法
-└── cloud                     # 微信云开发项目
-    ├── backup                # 数据库备份
-    │   └── database
+├── cloud                     # 微信云开发项目
+│   ├── backup                # 数据库备份
+│   │   └── database
 │   ├── checkContent          # 内容校验
 │   │   ├── checkImage        # 校验图片
 │   │   └── checkText         # 校验文字
-    ├── fetchArticleInfo      # 文章表 - 操作信息
-    │   ├── queryArticleInfo  # 查询单个文章
-    │   └── queryArticleList  # 查询整个文章列表
-    ├── fetchInfo             # 混表 - 操作信息
-    │   └── queryLoginInfo    # 查询登录所需的信息
-    ├── fetchMemberInfo       # 成员表 - 操作信息
-    │   ├── addCollectionArticle    # 将对应的文章收藏移入
-    │   ├── addMemberInfo     # 新增注册成员信息
-    │   ├── addMineBadge            # 激活新的徽章
-    │   ├── queryMemberInfo   # 查询跟 MemberInfo 相关的信息
-    │   ├── removeCollectionArticle # 将对应的文章收藏移除
-    │   └── updateMineBorderCode    # 更新使用中的头像框
-    └── spiderArticleInfo     # 爬取文章接口
-        └── spiderZhiHuInfo   # 爬取知乎文章
-
-30 directories
-
+│   ├── fetchArticleInfo      # 文章表 - 操作信息
+│   │   ├── queryArticleInfo  # 查询单个文章
+│   │   └── queryArticleList  # 查询整个文章列表
+│   ├── fetchInfo             # 混表 - 操作信息
+│   │   ├── queryLoginInfo    # 查询登录所需的信息
+│   │   ├── updateAdminList     # 更新管理员列表
+│   │   └── updateBottomBarList # 更新底部导航列表
+│   ├── fetchMemberInfo       # 成员表 - 操作信息
+│   │   ├── addCollectionArticle    # 将对应的文章收藏移入
+│   │   ├── addMemberInfo     # 新增注册成员信息
+│   │   ├── addMineBadge            # 激活新的徽章
+│   │   ├── queryMemberInfo   # 查询跟 MemberInfo 相关的信息
+│   │   ├── removeCollectionArticle # 将对应的文章收藏移除
+│   │   └── updateMineBorderCode    # 更新使用中的头像框
+│   └── spiderArticleInfo     # 爬取文章接口
+│       └── spiderZhiHuInfo   # 爬取知乎文章
+└── resource                  # 小程序所用资源。云存储的静态资源备份
+    ├── avatar                # 头像秀相关
+    ├── banner                # banner图相关
+    ├── common                # 通用
+    ├── mine                  # 我的页面
+    └── psd                   # ps底稿
 ```
 
 ```bash
@@ -104,18 +109,18 @@ tree -d -L 3 -I "node_modules|dist" > tree.md
   封装常用的公共 UI 组件。  
   以此运用并实现“我的”页面的功能。
 
-- V1.0.1
+- V1.1.0
 
-  - 实现发现文章功能
+  - 发现文章、收藏文章功能
   - 推广裂变玩法
   - 徽章头像框荣誉墙系统
-
-- V1.0.2
-
   - 实现我的头像秀
-    - canvas 装饰头像
 
-- V1.0.3
+- V1.2.0
+
+  - 我的接龙玩法
+
+- V1.3.0
 
   - 实现我的图片秀
     - 刷礼物、弹幕
@@ -131,7 +136,7 @@ tree -d -L 3 -I "node_modules|dist" > tree.md
 5. 我的收藏文章功能 ✅
 6. 推广裂变玩法 ✅
 7. 徽章头像框荣誉墙系统 ✅
-8. 我的头像秀-装饰玩法 🚧
+8. 我的头像秀-装饰玩法 ✅
 9. 我的图片秀-迷雾图片玩法 🚧
 10. 我的达人圈-复刻朋友圈玩法 🚧
 11. 我的 AI 好友- 🚧
