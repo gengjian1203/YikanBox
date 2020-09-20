@@ -11,6 +11,8 @@ interface INavigationHeaderProps {
 	isShowLeftIcon?: boolean // 是否展示左上角按钮
 	isTransparent?: boolean // 是否是透明导航样式
 	strNavigationTitle?: string // 导航名称
+	colorBackgroud?: string // 背景颜色
+	colorTitle?: string // 文本颜色
 }
 
 const nNavPadding = 200 // Navigation填补空白高度
@@ -23,6 +25,8 @@ export default function NavigationHeader(props: INavigationHeaderProps) {
 		isShowLeftIcon = true,
 		isTransparent = false,
 		strNavigationTitle = '',
+		colorBackgroud = '#ffffff',
+		colorTitle = '#000000',
 	} = props
 
 	const [nOpacityTransparent, setOpacityTransparent] = useState<number>(1)
@@ -78,15 +82,15 @@ export default function NavigationHeader(props: INavigationHeaderProps) {
 		}
 	})
 
-	useEffect(() => {
-		// console.log(
-		// 	'nOpacityTransparent',
-		// 	nOpacityTransparent,
-		// 	'nOpacityColor',
-		// 	nOpacityColor
-		// )
-		return () => {}
-	}, [nOpacityColor, nOpacityTransparent])
+	// useEffect(() => {
+	// 	console.log(
+	// 		'nOpacityTransparent',
+	// 		nOpacityTransparent,
+	// 		'nOpacityColor',
+	// 		nOpacityColor
+	// 	)
+	// 	return () => {}
+	// }, [nOpacityColor, nOpacityTransparent])
 
 	return (
 		<View className='navigation-header-wrap'>
@@ -100,7 +104,11 @@ export default function NavigationHeader(props: INavigationHeaderProps) {
 						)}; ` + `opacity: ${nOpacityTransparent}; `
 					}
 				>
-					<Navigation isShowLeftIcon={isShowLeftIcon} />
+					<Navigation
+						isShowLeftIcon={isShowLeftIcon}
+						colorBackgroud={colorBackgroud}
+						colorTitle={colorTitle}
+					/>
 				</View>
 			)}
 			{/* 实体底色导航实现模块 */}
@@ -115,6 +123,8 @@ export default function NavigationHeader(props: INavigationHeaderProps) {
 				<Navigation
 					isShowLeftIcon={isShowLeftIcon}
 					strNavigationTitle={strNavigationTitle}
+					colorBackgroud={colorBackgroud}
+					colorTitle={colorTitle}
 				/>
 			</View>
 			{/* 下拉占位展示区 */}

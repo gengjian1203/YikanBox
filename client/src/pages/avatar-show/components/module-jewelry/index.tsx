@@ -7,7 +7,7 @@ import { UUID } from '@/utils/index'
 import ResourceManager from '@/services/ResourceManager'
 
 import { View, Image, ScrollView } from '@tarojs/components'
-import { AtTabs, AtTabsPane } from 'taro-ui'
+import { AtButton, AtTabs, AtTabsPane } from 'taro-ui'
 
 import { arrJewelryList } from '../../utils/const'
 
@@ -20,9 +20,16 @@ interface IModuleJewelryProps {
 export default function ModuleJewelry(props: IModuleJewelryProps) {
 	const {} = props
 
+	const [isShowJewelryState, setShowJewelryState] = useState<boolean>(true)
 	const [nTabCurrent, setTabCurrent] = useState<number>(0)
 
 	const { addAvatarJewelry } = useActions(avatarShowInfoActions)
+
+	const handleJewelryStateSwitch = () => {
+		setShowJewelryState(prevState => {
+			return !prevState
+		})
+	}
 
 	// 点击饰品
 	const handleJewelryCellClick = async item => {
@@ -55,7 +62,51 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 	}
 
 	return (
-		<View className='avatar-show-jewelry'>
+		<View
+			className={
+				`avatar-show-jewelry ` +
+				`${
+					isShowJewelryState
+						? 'fade-in-from-bottom-avatar-show-jewelry-header'
+						: 'fade-out-from-bottom-avatar-show-jewelry-header'
+				}`
+			}
+		>
+			{/* 操作区 */}
+			<View className='jewelry-header'>
+				<View className='header-module'>
+					<AtButton
+						circle
+						size='small'
+						className='header-item flex-center iconfont icon-arrow-back'
+					/>
+					<AtButton
+						circle
+						size='small'
+						className='header-item flex-center iconfont icon-arrow-return'
+					/>
+					<AtButton
+						circle
+						size='small'
+						className='header-item flex-center iconfont icon-arrow-clean'
+					/>
+				</View>
+				<View className='header-module'>
+					<AtButton
+						circle
+						size='small'
+						className={
+							`header-item ` +
+							`flex-center ` +
+							`iconfont ` +
+							`${isShowJewelryState ? 'icon-arrow-down ' : 'icon-arrow-up '}`
+						}
+						onClick={handleJewelryStateSwitch}
+					/>
+				</View>
+			</View>
+			{/* 饰品区 */}
+
 			<AtTabs
 				tabList={arrJewelryList}
 				current={nTabCurrent}

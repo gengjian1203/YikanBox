@@ -23,7 +23,7 @@ import './index.scss'
 
 interface IModuleBottomProps {}
 
-export default function ModuleBottom(props: IModuleBottomProps) {
+export default function ModuleButton(props: IModuleBottomProps) {
 	const {} = props
 
 	const [isShowActionSheet, setShowActionSheet] = useState<boolean>(false) // 是否展示弹窗
@@ -201,7 +201,7 @@ export default function ModuleBottom(props: IModuleBottomProps) {
 	return (
 		<Block>
 			<View
-				className={`avatar-show-bottom ` + `${isPhoneX ? 'safe-bottom ' : ''}`}
+				className={`avatar-show-button ` + `${isPhoneX ? 'safe-bottom ' : ''}`}
 			>
 				<AtButton
 					className='bottom-button'
@@ -217,7 +217,7 @@ export default function ModuleBottom(props: IModuleBottomProps) {
 					circle
 					onClick={useThrottle(useCheckLogin(handleButtonSaveClick))}
 				>
-					保存
+					分享保存
 				</AtButton>
 			</View>
 

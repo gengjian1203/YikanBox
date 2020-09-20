@@ -21,7 +21,11 @@ export default function Login() {
 
 	return (
 		<View>
-			<NavigationHeader isShowLeftIcon isTransparent />
+			<NavigationHeader
+				isShowLeftIcon
+				isTransparent
+				colorBackgroud='transparent'
+			/>
 			<ModuleSky />
 			<ModuleLogin />
 			<ModuleAgreement />

@@ -1,13 +1,11 @@
 @import '../../../../app.scss';
 
-.avatar-show-bottom {
-	position: fixed;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	margin-left: $border-bold-space;
-	margin-right: $border-bold-space;
-	padding-bottom: $border-bold-space;
+.avatar-show-button {
+	z-index: 1;
+	box-sizing: border-box;
+	width: 100%;
+	padding: $border-bold-space;
+	background-color: $color-white;
 	display: flex;
 	flex-direction: row;
 

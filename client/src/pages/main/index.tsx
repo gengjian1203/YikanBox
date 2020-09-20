@@ -66,6 +66,7 @@ export default function Main() {
 			<NavigationHeader
 				isShowLeftIcon={false}
 				isTransparent
+				colorBackgroud='transparent'
 				strNavigationTitle={strNavigationTitle}
 			/>
 			{/* 渲染对应内容 */}

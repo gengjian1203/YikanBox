@@ -8,10 +8,17 @@ import './index.scss'
 interface INavigationProps {
 	isShowLeftIcon?: boolean
 	strNavigationTitle?: string
+	colorBackgroud?: string // 背景颜色
+	colorTitle?: string // 文本颜色
 }
 
 export default function Navigation(props: INavigationProps) {
-	const { isShowLeftIcon = false, strNavigationTitle = '' } = props
+	const {
+		isShowLeftIcon = false,
+		strNavigationTitle = '',
+		colorBackgroud = '#ffffff',
+		colorTitle = '#000000',
+	} = props
 
 	const [strLeftIcon, setLeftIcon] = useState<string>('')
 	const [objPageInfo, setPageInfo] = useState<any>({})
@@ -53,7 +60,10 @@ export default function Navigation(props: INavigationProps) {
 	}
 
 	return (
-		<View className='navigation-wrap'>
+		<View
+			className='navigation-wrap'
+			style={`background-color: ${colorBackgroud}; ` + `color: ${colorTitle}; `}
+		>
 			<View className='navigation-left' onClick={handleLeftIconClick}>
 				<View className={strLeftIcon}></View>
 			</View>

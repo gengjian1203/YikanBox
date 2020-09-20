@@ -6,3 +6,7 @@
 @import './scss/scheme.scss';
 // 基础套路样式
 @import './scss/base.scss';
+
+page {
+	display: flex;
+}
