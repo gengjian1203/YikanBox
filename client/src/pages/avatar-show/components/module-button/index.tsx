@@ -31,7 +31,12 @@ export default function ModuleButton(props: IModuleBottomProps) {
 
 	const isPhoneX = useSelector(state => state.appInfo.isPhoneX)
 	const memberInfo = useSelector(state => state.memberInfo)
-	const avatarShowInfo = useSelector(state => state.avatarShowInfo)
+	const avatarShowInfo = useSelector(
+		state =>
+			state.avatarShowInfo.arrAvatarShowList[
+				state.avatarShowInfo.nAvatarShowListPoint
+			]
+	)
 
 	const { initAvatarInfo, setAvatarImage, setSelectJewelry } = useActions(
 		avatarShowInfoActions

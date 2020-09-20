@@ -20,16 +20,56 @@ interface IModuleJewelryProps {
 export default function ModuleJewelry(props: IModuleJewelryProps) {
 	const {} = props
 
+	const [isDisableBtnBack, setDisableBtnBack] = useState<boolean>(false)
+	const [isDisableBtnReturn, setDisableBtnReturn] = useState<boolean>(false)
+	const [isDisableBtnClean, setDisableBtnClean] = useState<boolean>(false)
 	const [isShowJewelryState, setShowJewelryState] = useState<boolean>(true)
 	const [nTabCurrent, setTabCurrent] = useState<number>(0)
 
-	const { initAvatarInfo, addAvatarJewelry } = useActions(avatarShowInfoActions)
+	const nAvatarShowListPoint = useSelector(
+		state => state.avatarShowInfo.nAvatarShowListPoint
+	)
+	const arrAvatarShowList = useSelector(
+		state => state.avatarShowInfo.arrAvatarShowList
+	)
+
+	const {
+		setAvatarImage,
+		setAvatarShowListPoint,
+		addAvatarJewelry,
+	} = useActions(avatarShowInfoActions)
+
+	useEffect(() => {
+		const isDisableBtnBackTmp = !(nAvatarShowListPoint > 0)
+		const isDisableBtnReturnTmp = !(
+			nAvatarShowListPoint <
+			arrAvatarShowList.length - 1
+		)
+		const isDisableBtnCleanTmp = !(
+			arrAvatarShowList[nAvatarShowListPoint].arrAvatarJewelry.length > 0
+		)
+		setDisableBtnBack(isDisableBtnBackTmp)
+		setDisableBtnReturn(isDisableBtnReturnTmp)
+		setDisableBtnClean(isDisableBtnCleanTmp)
+	}, [nAvatarShowListPoint, arrAvatarShowList])
 
 	// 撤销操作
-	const handleJewelryBackClick = () => {}
+	const handleJewelryBackClick = () => {
+		if (nAvatarShowListPoint > 0) {
+			setAvatarShowListPoint(nAvatarShowListPoint - 1)
+		} else {
+			console.log('handleJewelryBackClick limit.')
+		}
+	}
 
-	// 重复操作
-	const handleJewelryReturnClick = () => {}
+	// 恢复操作
+	const handleJewelryReturnClick = () => {
+		if (nAvatarShowListPoint < arrAvatarShowList.length - 1) {
+			setAvatarShowListPoint(nAvatarShowListPoint + 1)
+		} else {
+			console.log('handleJewelryReturnClick limit.')
+		}
+	}
 
 	// 清除饰品的所有操作
 	const handleJewelryCleanClick = () => {
@@ -38,7 +78,9 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 			content: '是否要清除所有装饰？',
 			success: res => {
 				if (res.confirm) {
-					initAvatarInfo()
+					const strAvatarImage =
+						arrAvatarShowList[nAvatarShowListPoint].strAvatarImage
+					setAvatarImage(strAvatarImage)
 				}
 			},
 		})
@@ -112,7 +154,7 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 						type='secondary'
 						circle
 						size='small'
-						disabled={true}
+						disabled={isDisableBtnBack}
 						className='header-item flex-center iconfont icon-arrow-back'
 						onClick={handleJewelryBackClick}
 					/>
@@ -120,6 +162,7 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 						type='secondary'
 						circle
 						size='small'
+						disabled={isDisableBtnReturn}
 						className='header-item flex-center iconfont icon-arrow-return'
 						onClick={handleJewelryReturnClick}
 					/>
@@ -127,6 +170,7 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 						type='secondary'
 						circle
 						size='small'
+						disabled={isDisableBtnClean}
 						className='header-item flex-center iconfont icon-arrow-clean'
 						onClick={handleJewelryCleanClick}
 					/>

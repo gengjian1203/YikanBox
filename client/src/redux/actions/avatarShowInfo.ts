@@ -1,7 +1,7 @@
 import {
 	INIT_AVATAR_INFO,
+	SET_AVATAR_SHOW_LIST_POINT,
 	SET_AVATAR_IMAGE,
-	SET_AVATAR_JEWELRY,
 	SET_SELECT_TYPE,
 	SET_SELECT_JEWELRY,
 	ADD_AVATAR_JEWELRY,
@@ -18,17 +18,17 @@ const avatarShowInfoActions = dispatch => {
 				payload,
 			})
 		},
+		// 设置操作记录指针
+		setAvatarShowListPoint: payload => {
+			dispatch({
+				type: SET_AVATAR_SHOW_LIST_POINT,
+				payload,
+			})
+		},
 		// 设置头像秀的背景图片
 		setAvatarImage: payload => {
 			dispatch({
 				type: SET_AVATAR_IMAGE,
-				payload,
-			})
-		},
-		// 设置头像秀的饰品信息
-		setAvatarJewelry: payload => {
-			dispatch({
-				type: SET_AVATAR_JEWELRY,
 				payload,
 			})
 		},

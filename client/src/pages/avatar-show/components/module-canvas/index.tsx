@@ -28,7 +28,12 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 		nTouchStartY_offset: 0, // 触摸点Y偏移
 	})
 
-	const avatarShowInfo = useSelector(state => state.avatarShowInfo)
+	const avatarShowInfo = useSelector(
+		state =>
+			state.avatarShowInfo.arrAvatarShowList[
+				state.avatarShowInfo.nAvatarShowListPoint
+			]
+	)
 
 	const {
 		initAvatarInfo,
