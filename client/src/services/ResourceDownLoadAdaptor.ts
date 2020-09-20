@@ -5,7 +5,7 @@ import Taro from '@tarojs/taro'
  */
 interface IResourceAdaptorType {
 	support: (strUrl: string) => boolean
-	resolve: (strUrl: string) => string
+	resolve: (strUrl: string) => Promise<any> | string
 }
 
 // 微信头像适配器
@@ -20,7 +20,7 @@ class CWXThirdAdaptor implements IResourceAdaptorType {
 			Taro.downloadFile({
 				url: strUrl,
 				success: res => {
-					console.log('CWXThirdAdaptor', res)
+					// console.log('CWXThirdAdaptor', res)
 					resolve(res.tempFilePath)
 				},
 				fail: err => {
@@ -44,8 +44,7 @@ class CWXClouldAdaptor implements IResourceAdaptorType {
 			Taro.cloud.downloadFile({
 				fileID: strUrl,
 				success: res => {
-					// get temp file path
-					console.log('CWXClouldAdaptor2', res)
+					// console.log('CWXClouldAdaptor2', res)
 					resolve(res.tempFilePath)
 				},
 				fail: err => {
@@ -60,7 +59,6 @@ class CWXClouldAdaptor implements IResourceAdaptorType {
 // 兜底适配器
 class COtherAdaptor implements IResourceAdaptorType {
 	support = (strUrl: string) => {
-		// console.log('COtherAdaptor', strUrl)
 		return true
 	}
 	resolve = (strUrl: string) => {

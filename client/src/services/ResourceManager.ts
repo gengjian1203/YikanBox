@@ -60,7 +60,7 @@ export default class ResourceManager {
 		}
 	}
 
-	static async getStaticUrl(strSourceUrl) {
+	static getStaticUrl(strSourceUrl) {
 		const strUrl = this._mapResource.get(strSourceUrl)
 		return strUrl ? strUrl : ''
 	}

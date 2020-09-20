@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import avatarShowInfoActions from '@/redux/actions/avatarShowInfo'
 import Config from '@/config/index'
-import { checkObjectEmpty } from '@/utils/index'
+import { checkObjectEmpty, UUID } from '@/utils/index'
 import ResourceManager from '@/services/ResourceManager'
 
 import { View, Block, Canvas } from '@tarojs/components'
@@ -35,11 +35,26 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 		setAvatarImage,
 		setSelectType,
 		setSelectJewelry,
+		addAvatarJewelry,
 		removeAvatarJewelry,
 		updateAvatarJewelry,
 	} = useActions(avatarShowInfoActions)
 
 	const strDefaultAvatarUrl = Config.cloudPath + '/avatar/default.png'
+
+	const addSameAvatarJewelry = async objJewelry => {
+		const objJewelryTmp = {
+			...objJewelry,
+			id: UUID(),
+			rect: {
+				...objJewelry.rect,
+				x: objJewelry.rect.x + 10,
+				y: objJewelry.rect.y + 10,
+			},
+		}
+		addAvatarJewelry(objJewelryTmp)
+		setSelectJewelry(objJewelryTmp)
+	}
 
 	const onLoad = async () => {
 		initAvatarInfo()
@@ -66,8 +81,10 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 				removeAvatarJewelry(avatarShowInfo.objSelectJewelry)
 				break
 			case 'BTN_ADD':
+				addSameAvatarJewelry(avatarShowInfo.objSelectJewelry)
 				break
 			case 'BTN_RESIZE':
+			// ... 交互在拖拽出实现
 			case 'MOVE':
 			default:
 				break
@@ -76,7 +93,7 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 
 	// Canvas触碰开始
 	const handleCanvasTouchStart = e => {
-		console.log('handleCanvasTouchStart', e)
+		// console.log('handleCanvasTouchStart', e)
 		// 初始化数据
 		const point = e.touches[0]
 		// 获取操作类型
@@ -112,7 +129,7 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 			avatarShowInfo.strSelectType === 'BTN_RESIZE' || // 改变饰品尺寸
 			avatarShowInfo.strSelectType === 'MOVE' // 移动饰品位置
 		) {
-			console.log('handleCanvasTouchMove', e)
+			// console.log('handleCanvasTouchMove', e)
 			const point = e.touches[0]
 			setTouchPoint({
 				...objTouchPoint,
@@ -124,10 +141,11 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 
 	// Canvas触碰停止
 	const handleCanvasTouchEnd = e => {
-		console.log('handleCanvasTouchEnd', e)
+		// console.log('handleCanvasTouchEnd', e)
+		let objSelectJewelryTmp = {}
 		// 移动饰品位置
 		if (avatarShowInfo.strSelectType === 'MOVE') {
-			const objSelectJewelryTmp = {
+			objSelectJewelryTmp = {
 				...avatarShowInfo.objSelectJewelry,
 				rect: {
 					x:
@@ -140,13 +158,27 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 					height: avatarShowInfo.objSelectJewelry.rect.height,
 				},
 			}
-			// 落实饰品位置
-			updateAvatarJewelry(objSelectJewelryTmp)
 		}
 		// 改变饰品尺寸
 		else if (avatarShowInfo.strSelectType === 'BTN_RESIZE') {
+			const nMaxOffsett =
+				objTouchPoint.nTouchStartX_offset > objTouchPoint.nTouchStartY_offset
+					? objTouchPoint.nTouchStartX_offset
+					: objTouchPoint.nTouchStartY_offset
+
+			objSelectJewelryTmp = {
+				...avatarShowInfo.objSelectJewelry,
+				rect: {
+					x: avatarShowInfo.objSelectJewelry.rect.x,
+					y: avatarShowInfo.objSelectJewelry.rect.y,
+					width: avatarShowInfo.objSelectJewelry.rect.width + nMaxOffsett,
+					height: avatarShowInfo.objSelectJewelry.rect.height + nMaxOffsett,
+				},
+			}
 		} else {
 		}
+		// 落实饰品位置
+		updateAvatarJewelry(objSelectJewelryTmp)
 
 		// 初始化
 		setTimeout(() => {

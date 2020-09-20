@@ -22,7 +22,7 @@ export const SIZE_IMAGE = 128 // 图片尺寸
 
 export const BORDER_COLOR = '#ffffff'
 export const BORDER_BUTTON_SIZE = 20 // 选中框按钮尺寸
-export const BORDER_BUTTON_RADIUS = (BORDER_BUTTON_SIZE / 2)
+export const BORDER_BUTTON_RADIUS = BORDER_BUTTON_SIZE / 2
 
 // 饰品列表
 export const arrJewelryList = [
@@ -33,8 +33,6 @@ export const arrJewelryList = [
 				type: 'TEXT',
 				value: '😁',
 				rect: {
-					x: 50,
-					y: 50,
 					width: SIZE_TEXT,
 					height: SIZE_TEXT,
 				},
@@ -43,8 +41,6 @@ export const arrJewelryList = [
 				type: 'TEXT',
 				value: '🎁',
 				rect: {
-					x: 50,
-					y: 50,
 					width: SIZE_TEXT,
 					height: SIZE_TEXT,
 				},
@@ -53,8 +49,6 @@ export const arrJewelryList = [
 				type: 'TEXT',
 				value: '🍀',
 				rect: {
-					x: 50,
-					y: 50,
 					width: SIZE_TEXT,
 					height: SIZE_TEXT,
 				},
@@ -68,8 +62,6 @@ export const arrJewelryList = [
 				type: 'TEXT',
 				value: '🐭',
 				rect: {
-					x: 50,
-					y: 50,
 					width: SIZE_TEXT,
 					height: SIZE_TEXT,
 				},
@@ -78,8 +70,6 @@ export const arrJewelryList = [
 				type: 'TEXT',
 				value: '🐂',
 				rect: {
-					x: 50,
-					y: 50,
 					width: SIZE_TEXT,
 					height: SIZE_TEXT,
 				},
@@ -88,8 +78,6 @@ export const arrJewelryList = [
 				type: 'TEXT',
 				value: '🐯',
 				rect: {
-					x: 50,
-					y: 50,
 					width: SIZE_TEXT,
 					height: SIZE_TEXT,
 				},
@@ -98,8 +86,6 @@ export const arrJewelryList = [
 				type: 'TEXT',
 				value: '🐰',
 				rect: {
-					x: 50,
-					y: 50,
 					width: SIZE_TEXT,
 					height: SIZE_TEXT,
 				},
@@ -108,8 +94,6 @@ export const arrJewelryList = [
 				type: 'TEXT',
 				value: '🐉',
 				rect: {
-					x: 50,
-					y: 50,
 					width: SIZE_TEXT,
 					height: SIZE_TEXT,
 				},
@@ -118,8 +102,6 @@ export const arrJewelryList = [
 				type: 'TEXT',
 				value: '🐍',
 				rect: {
-					x: 50,
-					y: 50,
 					width: SIZE_TEXT,
 					height: SIZE_TEXT,
 				},
@@ -128,8 +110,6 @@ export const arrJewelryList = [
 				type: 'TEXT',
 				value: '🐴',
 				rect: {
-					x: 50,
-					y: 50,
 					width: SIZE_TEXT,
 					height: SIZE_TEXT,
 				},
@@ -138,8 +118,6 @@ export const arrJewelryList = [
 				type: 'TEXT',
 				value: '🐑',
 				rect: {
-					x: 50,
-					y: 50,
 					width: SIZE_TEXT,
 					height: SIZE_TEXT,
 				},
@@ -148,8 +126,6 @@ export const arrJewelryList = [
 				type: 'TEXT',
 				value: '🐵',
 				rect: {
-					x: 50,
-					y: 50,
 					width: SIZE_TEXT,
 					height: SIZE_TEXT,
 				},
@@ -158,8 +134,6 @@ export const arrJewelryList = [
 				type: 'TEXT',
 				value: '🐔',
 				rect: {
-					x: 50,
-					y: 50,
 					width: SIZE_TEXT,
 					height: SIZE_TEXT,
 				},
@@ -168,8 +142,6 @@ export const arrJewelryList = [
 				type: 'TEXT',
 				value: '🐩',
 				rect: {
-					x: 50,
-					y: 50,
 					width: SIZE_TEXT,
 					height: SIZE_TEXT,
 				},
@@ -178,8 +150,6 @@ export const arrJewelryList = [
 				type: 'TEXT',
 				value: '🐷',
 				rect: {
-					x: 50,
-					y: 50,
 					width: SIZE_TEXT,
 					height: SIZE_TEXT,
 				},
@@ -193,20 +163,20 @@ export const arrJewelryList = [
 				type: 'IMAGE',
 				value: strUrlJewelryHongdian,
 				rect: {
-					x: 50,
-					y: 50,
-					width: SIZE_IMAGE,
-					height: SIZE_IMAGE,
+					x: CANVAS_WIDTH - 50,
+					y: 0,
+					width: 50,
+					height: 50,
 				},
 			},
 			{
 				type: 'IMAGE',
 				value: strUrlJewelryShanchu,
 				rect: {
-					x: 50,
-					y: 50,
-					width: SIZE_IMAGE,
-					height: SIZE_IMAGE,
+					x: 0,
+					y: 0,
+					width: 50,
+					height: 50,
 				},
 			},
 		],
@@ -218,8 +188,6 @@ export const arrJewelryList = [
 				type: 'IMAGE',
 				value: strUrlJewelryShengdanlaoren,
 				rect: {
-					x: 50,
-					y: 50,
 					width: SIZE_IMAGE,
 					height: SIZE_IMAGE,
 				},
@@ -228,8 +196,6 @@ export const arrJewelryList = [
 				type: 'IMAGE',
 				value: strUrlJewelryShengdanmao,
 				rect: {
-					x: 50,
-					y: 50,
 					width: SIZE_IMAGE,
 					height: SIZE_IMAGE,
 				},
@@ -238,8 +204,6 @@ export const arrJewelryList = [
 				type: 'IMAGE',
 				value: strUrlJewelryShengdanshu,
 				rect: {
-					x: 50,
-					y: 50,
 					width: SIZE_IMAGE,
 					height: SIZE_IMAGE,
 				},
@@ -248,8 +212,6 @@ export const arrJewelryList = [
 				type: 'IMAGE',
 				value: strUrlJewelryXueren,
 				rect: {
-					x: 50,
-					y: 50,
 					width: SIZE_IMAGE,
 					height: SIZE_IMAGE,
 				},

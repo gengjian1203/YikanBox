@@ -9,7 +9,7 @@ import ResourceManager from '@/services/ResourceManager'
 import { View, Image, ScrollView } from '@tarojs/components'
 import { AtButton, AtTabs, AtTabsPane } from 'taro-ui'
 
-import { arrJewelryList } from '../../utils/const'
+import { CANVAS_WIDTH, CANVAS_HEIGHT, arrJewelryList } from '../../utils/const'
 
 import './index.scss'
 
@@ -23,8 +23,28 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 	const [isShowJewelryState, setShowJewelryState] = useState<boolean>(true)
 	const [nTabCurrent, setTabCurrent] = useState<number>(0)
 
-	const { addAvatarJewelry } = useActions(avatarShowInfoActions)
+	const { initAvatarInfo, addAvatarJewelry } = useActions(avatarShowInfoActions)
 
+	// 撤销操作
+	const handleJewelryBackClick = () => {}
+
+	// 重复操作
+	const handleJewelryReturnClick = () => {}
+
+	// 清除饰品的所有操作
+	const handleJewelryCleanClick = () => {
+		Taro.showModal({
+			title: '提示',
+			content: '是否要清除所有装饰？',
+			success: res => {
+				if (res.confirm) {
+					initAvatarInfo()
+				}
+			},
+		})
+	}
+
+	// 切换饰品栏展示/隐藏状态
 	const handleJewelryStateSwitch = () => {
 		setShowJewelryState(prevState => {
 			return !prevState
@@ -33,11 +53,19 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 
 	// 点击饰品
 	const handleJewelryCellClick = async item => {
-		console.log('handleJewelryCellClick', item)
-		// setImageText(item.name)
+		// console.log('handleJewelryCellClick', item)
+		const nRandomX = Math.random() * CANVAS_WIDTH - item.rect.width
+		const nRandomY = Math.random() * CANVAS_HEIGHT - item.rect.height
 		const objJewelry = {
 			...item,
 			id: UUID(),
+			rect: {
+				...item.rect,
+				x:
+					item.rect.x !== undefined ? item.rect.x : nRandomX < 0 ? 0 : nRandomX,
+				y:
+					item.rect.y !== undefined ? item.rect.y : nRandomY < 0 ? 0 : nRandomY,
+			},
 			value: await ResourceManager.getUrl(item.value),
 		}
 		addAvatarJewelry(objJewelry)
@@ -76,23 +104,31 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 			<View className='jewelry-header'>
 				<View className='header-module'>
 					<AtButton
+						type='secondary'
 						circle
 						size='small'
+						disabled={true}
 						className='header-item flex-center iconfont icon-arrow-back'
+						onClick={handleJewelryBackClick}
 					/>
 					<AtButton
+						type='secondary'
 						circle
 						size='small'
 						className='header-item flex-center iconfont icon-arrow-return'
+						onClick={handleJewelryReturnClick}
 					/>
 					<AtButton
+						type='secondary'
 						circle
 						size='small'
 						className='header-item flex-center iconfont icon-arrow-clean'
+						onClick={handleJewelryCleanClick}
 					/>
 				</View>
 				<View className='header-module'>
 					<AtButton
+						type='secondary'
 						circle
 						size='small'
 						className={

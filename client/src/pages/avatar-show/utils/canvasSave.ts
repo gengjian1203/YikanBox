@@ -9,7 +9,7 @@ const drawAvatarImage = (canvas, strAvatarImage) => {
 	if (strAvatarImage) {
 		canvas.drawImage(strAvatarImage, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
 	} else {
-		console.log('drawMainCanvas strAvatarImage is null.')
+		// console.error('drawMainCanvas strAvatarImage is null.')
 	}
 }
 

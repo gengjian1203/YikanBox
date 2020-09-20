@@ -24,7 +24,9 @@ export default function avatarShowInfoReducer(state = INITIAL_STATE, action) {
 		switch (type) {
 			// 初始化头像秀的信息
 			case INIT_AVATAR_INFO:
-				draft = INITIAL_STATE
+				draft.arrAvatarJewelry = []
+				draft.strSelectType = ''
+				draft.objSelectJewelry = {}
 				return draft
 			// 设置头像秀的背景图片
 			case SET_AVATAR_IMAGE:

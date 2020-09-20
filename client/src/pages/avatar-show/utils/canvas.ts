@@ -7,14 +7,12 @@ import {
 	CANVAS_HEIGHT,
 	BORDER_COLOR,
 	BORDER_BUTTON_SIZE,
-	BORDER_BUTTON_RADIUS,
 } from './const'
 
 const strUrlButtonAdd = Config.cloudPath + '/avatar/button/add.png'
 const strUrlButtonDelete = Config.cloudPath + '/avatar/button/delete.png'
 const strUrlButtonFlip = Config.cloudPath + '/avatar/button/flip.png'
 const strUrlButtonResize = Config.cloudPath + '/avatar/button/resize.png'
-// const strUrlButtonResize = Config.cloudPath + '/avatar/jewelry/shengdanlaoren.png'
 
 /**
  * 绘制头像底图
@@ -25,7 +23,7 @@ const drawAvatarImage = (canvas, strAvatarImage) => {
 	if (strAvatarImage) {
 		canvas.drawImage(strAvatarImage, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
 	} else {
-		console.log('drawMainCanvas strAvatarImage is null.')
+		// console.error('drawMainCanvas strAvatarImage is null.')
 	}
 }
 
@@ -46,9 +44,19 @@ const getRectJewelryExtend = (
 	if (item.id === objSelectJewelry.id) {
 		switch (strSelectType) {
 			// 改变选中框尺寸
-			case 'BTN_RESIZE':
-				rectJewelryExtend = { x: 0, y: 0, width: 0, height: 0 }
+			case 'BTN_RESIZE': {
+				const nMaxOffsett =
+					objTouchPoint.nTouchStartX_offset > objTouchPoint.nTouchStartY_offset
+						? objTouchPoint.nTouchStartX_offset
+						: objTouchPoint.nTouchStartY_offset
+				rectJewelryExtend = {
+					x: 0,
+					y: 0,
+					width: nMaxOffsett,
+					height: nMaxOffsett,
+				}
 				break
+			}
 			// 移动选中框
 			case 'MOVE':
 				rectJewelryExtend = {
@@ -89,14 +97,14 @@ const drawAvatarJewelry = async (
 			width: item.rect.width,
 			height: item.rect.height,
 		}
-		let rectJewelryExtend = getRectJewelryExtend(
+		const rectJewelryExtend = getRectJewelryExtend(
 			strSelectType,
 			item,
 			objSelectJewelry,
 			objTouchPoint
 		)
 		const rectJewelryResult = mergeObject(rectJewelryBase, rectJewelryExtend)
-		console.log('drawAvatarJewelry', rectJewelryResult)
+		// console.log('drawAvatarJewelry', rectJewelryResult)
 
 		switch (item.type) {
 			case 'TEXT':
@@ -131,7 +139,8 @@ const drawAvatarJewelry = async (
  * @param canvas
  * @param type
  */
-const drawSelectBorderButton = async (canvas, rectBorder, type) => {
+const drawSelectBorderButton = (canvas, rectBorder, type) => {
+	const nRadius = Math.floor(BORDER_BUTTON_SIZE / 2)
 	// 处理数据
 	let ptButtonPosition = {
 		x: 10,
@@ -141,85 +150,69 @@ const drawSelectBorderButton = async (canvas, rectBorder, type) => {
 	switch (type) {
 		case 'FLIP':
 			ptButtonPosition = {
-				x: rectBorder.x,
-				y: rectBorder.y,
+				x: rectBorder.x - nRadius,
+				y: rectBorder.y - nRadius,
 			}
 			strButtonUrl = strUrlButtonFlip
 			break
 		case 'ADD':
 			ptButtonPosition = {
-				x: rectBorder.x,
-				y: rectBorder.y + rectBorder.height,
+				x: rectBorder.x - nRadius,
+				y: rectBorder.y + rectBorder.height - nRadius,
 			}
 			strButtonUrl = strUrlButtonAdd
 			break
 		case 'DELETE':
 			ptButtonPosition = {
-				x: rectBorder.x + rectBorder.width,
-				y: rectBorder.y,
+				x: rectBorder.x + rectBorder.width - nRadius,
+				y: rectBorder.y - nRadius,
 			}
 			strButtonUrl = strUrlButtonDelete
 			break
 		case 'RESIZE':
 			ptButtonPosition = {
-				x: rectBorder.x + rectBorder.width,
-				y: rectBorder.y + rectBorder.height,
+				x: rectBorder.x + rectBorder.width - nRadius,
+				y: rectBorder.y + rectBorder.height - nRadius,
 			}
 			strButtonUrl = strUrlButtonResize
 			break
 		default:
 			return
 	}
-	// strButtonUrl = await ResourceManager.getStaticUrl(strButtonUrl)
-	// console.log('drawSelectBorderButton', strButtonUrl, ptButtonPosition)
-	// canvas.drawImage(
+	strButtonUrl = ResourceManager.getStaticUrl(strButtonUrl)
+	// console.log(
+	// 	'drawSelectBorderButton',
 	// 	strButtonUrl,
-	// 	ptButtonPosition.x,
-	// 	ptButtonPosition.y,
-	// 	BORDER_BUTTON_SIZE,
+	// 	ptButtonPosition,
 	// 	BORDER_BUTTON_SIZE
 	// )
-	canvas.beginPath()
-	canvas.arc(
+	canvas.drawImage(
+		strButtonUrl,
 		ptButtonPosition.x,
 		ptButtonPosition.y,
-		BORDER_BUTTON_RADIUS,
-		0,
-		(360 * Math.PI) / 180
+		BORDER_BUTTON_SIZE,
+		BORDER_BUTTON_SIZE
 	)
-	canvas.fillStyle = BORDER_COLOR
-	canvas.fill()
-	canvas.stroke()
 }
 
-/**
- * 绘制选中栏
- * @param canvas
- * @param strSelectType
- * @param objSelectJewelry
- * @param objTouchPoint
- */
-const drawSelectBorder = (
-	canvas,
-	strSelectType,
-	objSelectJewelry,
-	objTouchPoint
-) => {
-	const arrButtonList = ['FLIP', 'ADD', 'DELETE', 'RESIZE']
-	// 边框基础属性
-	const rectBorderBase = {
-		x: objSelectJewelry.rect.x,
-		y: objSelectJewelry.rect.y,
-		width: objSelectJewelry.rect.width,
-		height: objSelectJewelry.rect.height,
-	}
+const getRectBorderExtend = (strSelectType, objTouchPoint) => {
 	// 边框拓展属性
 	let rectBorderExtend = { x: 0, y: 0, width: 0, height: 0 }
 	switch (strSelectType) {
 		// 改变选中框尺寸
-		case 'BTN_RESIZE':
-			rectBorderExtend = { x: 0, y: 0, width: 0, height: 0 }
+		case 'BTN_RESIZE': {
+			const nMaxOffsett =
+				objTouchPoint.nTouchStartX_offset > objTouchPoint.nTouchStartY_offset
+					? objTouchPoint.nTouchStartX_offset
+					: objTouchPoint.nTouchStartY_offset
+			rectBorderExtend = {
+				x: 0,
+				y: 0,
+				width: nMaxOffsett,
+				height: nMaxOffsett,
+			}
 			break
+		}
 		// 移动选中框
 		case 'MOVE':
 			rectBorderExtend = {
@@ -233,7 +226,36 @@ const drawSelectBorder = (
 			rectBorderExtend = { x: 0, y: 0, width: 0, height: 0 }
 			break
 	}
-	console.log('drawSelectBorder', strSelectType, rectBorderBase, objTouchPoint)
+	// console.log('drawSelectBorder', strSelectType, objTouchPoint)
+	return rectBorderExtend
+}
+/**
+ * 绘制选中栏
+ * @param canvas
+ * @param strSelectType
+ * @param objSelectJewelry
+ * @param objTouchPoint
+ */
+const drawSelectBorder = (
+	canvas,
+	strSelectType,
+	objSelectJewelry,
+	objTouchPoint
+) => {
+	const arrButtonList = [
+		// 'FLIP',
+		'ADD',
+		'DELETE',
+		'RESIZE',
+	]
+	// 边框基础属性
+	const rectBorderBase = {
+		x: objSelectJewelry.rect.x,
+		y: objSelectJewelry.rect.y,
+		width: objSelectJewelry.rect.width,
+		height: objSelectJewelry.rect.height,
+	}
+	const rectBorderExtend = getRectBorderExtend(strSelectType, objTouchPoint)
 	// 边框最终属性
 	const rectBorderResult = mergeObject(rectBorderBase, rectBorderExtend)
 
@@ -245,9 +267,6 @@ const drawSelectBorder = (
 		rectBorderResult.width,
 		rectBorderResult.height
 	)
-	// canvas.beginPath()
-	// canvas.arc(100, 100, 100, 0, (360 * Math.PI) / 180)
-	// canvas.stroke()
 	// 绘制按钮
 	for (let item of arrButtonList) {
 		drawSelectBorderButton(canvas, rectBorderResult, item)
@@ -261,7 +280,7 @@ const drawSelectBorder = (
  * @param objTouchPoint
  */
 export const drawMainCanvas = (canvas, avatarShowInfo, objTouchPoint) => {
-	console.log('drawMainCanvas.')
+	// console.log('drawMainCanvas.')
 	const {
 		strAvatarImage,
 		arrAvatarJewelry,
@@ -288,7 +307,7 @@ export const drawMainCanvas = (canvas, avatarShowInfo, objTouchPoint) => {
 		// 绘制
 		canvas.draw()
 	} else {
-		console.log('drawMainCanvas canvas is null.')
+		console.error('drawMainCanvas canvas is null.')
 	}
 }
 
