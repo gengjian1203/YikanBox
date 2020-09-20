@@ -96,17 +96,15 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 	// 点击饰品
 	const handleJewelryCellClick = async item => {
 		// console.log('handleJewelryCellClick', item)
-		const nRandomX = Math.random() * CANVAS_WIDTH - item.rect.width
-		const nRandomY = Math.random() * CANVAS_HEIGHT - item.rect.height
+		const nRandomX = Math.random() * (CANVAS_WIDTH - item.rect.width)
+		const nRandomY = Math.random() * (CANVAS_HEIGHT - item.rect.height)
 		const objJewelry = {
 			...item,
 			id: UUID(),
 			rect: {
 				...item.rect,
-				x:
-					item.rect.x !== undefined ? item.rect.x : nRandomX < 0 ? 0 : nRandomX,
-				y:
-					item.rect.y !== undefined ? item.rect.y : nRandomY < 0 ? 0 : nRandomY,
+				x: item.rect.x !== undefined ? item.rect.x : nRandomX,
+				y: item.rect.y !== undefined ? item.rect.y : nRandomY,
 			},
 			value: await ResourceManager.getUrl(item.value),
 		}
@@ -191,7 +189,6 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 				</View>
 			</View>
 			{/* 饰品区 */}
-
 			<AtTabs
 				tabList={arrJewelryList}
 				current={nTabCurrent}
