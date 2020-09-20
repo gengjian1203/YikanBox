@@ -40,7 +40,7 @@ const checkBorderButtonClick = (point, objSelectJewelry) => {
 		point.y > rectButtonUpLeft.y &&
 		point.y <= rectButtonUpLeft.y + rectButtonUpLeft.height
 	) {
-		console.log('checkBorderButtonClick ', 'BTN_FLIP')
+		// console.log('checkBorderButtonClick ', 'BTN_FLIP')
 		return 'BTN_FLIP'
 	} else if (
 		point.x > rectButtonUpRight.x &&
@@ -48,7 +48,7 @@ const checkBorderButtonClick = (point, objSelectJewelry) => {
 		point.y > rectButtonUpRight.y &&
 		point.y <= rectButtonUpRight.y + rectButtonUpRight.height
 	) {
-		console.log('checkBorderButtonClick ', 'BTN_DELETE')
+		// console.log('checkBorderButtonClick ', 'BTN_DELETE')
 		return 'BTN_DELETE'
 	} else if (
 		point.x > rectButtonDownLeft.x &&
@@ -56,7 +56,7 @@ const checkBorderButtonClick = (point, objSelectJewelry) => {
 		point.y > rectButtonDownLeft.y &&
 		point.y <= rectButtonDownLeft.y + rectButtonDownLeft.height
 	) {
-		console.log('checkBorderButtonClick ', 'BTN_ADD')
+		// console.log('checkBorderButtonClick ', 'BTN_ADD')
 		return 'BTN_ADD'
 	} else if (
 		point.x > rectButtonDownRight.x &&
@@ -64,10 +64,10 @@ const checkBorderButtonClick = (point, objSelectJewelry) => {
 		point.y > rectButtonDownRight.y &&
 		point.y <= rectButtonDownRight.y + rectButtonDownRight.height
 	) {
-		console.log('checkBorderButtonClick ', 'BTN_RESIZE')
+		// console.log('checkBorderButtonClick ', 'BTN_RESIZE')
 		return 'BTN_RESIZE'
 	} else {
-		console.log('checkBorderButtonClick ', '')
+		// console.log('checkBorderButtonClick ', '')
 		return ''
 	}
 }

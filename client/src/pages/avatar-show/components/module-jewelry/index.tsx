@@ -73,7 +73,7 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 
 	// 切换tab
 	const handleSelectTabClick = current => {
-		console.log('handleSelectTabClick', current)
+		// console.log('handleSelectTabClick', current)
 		setTabCurrent(current)
 	}
 
@@ -83,7 +83,12 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 			case 'TEXT':
 				return <View className='content-text'>{itemCell.value}</View>
 			case 'IMAGE':
-				return <Image src={itemCell.value} mode='widthFix' />
+				return (
+					<Image
+						src={itemCell.valueEG ? itemCell.valueEG : itemCell.value}
+						mode='widthFix'
+					/>
+				)
 			default:
 				return <View>{itemCell.value}</View>
 		}

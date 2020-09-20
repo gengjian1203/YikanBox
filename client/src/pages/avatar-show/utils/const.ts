@@ -1,7 +1,5 @@
 import Config from '@/config/index'
 
-const strUrlJewelryDangqi = Config.cloudPath + '/avatar/jewelry/dangqi.png'
-const strUrlJewelryGuoqi = Config.cloudPath + '/avatar/jewelry/guoqi.png'
 const strUrlJewelryHongdian = Config.cloudPath + '/avatar/jewelry/hongdian.png'
 const strUrlJewelryShanchu = Config.cloudPath + '/avatar/jewelry/shanchu.png'
 const strUrlJewelryShengdanlaoren =
@@ -11,6 +9,9 @@ const strUrlJewelryShengdanmao =
 const strUrlJewelryShengdanshu =
 	Config.cloudPath + '/avatar/jewelry/shengdanshu.png'
 const strUrlJewelryXueren = Config.cloudPath + '/avatar/jewelry/xueren.png'
+
+const strUrlJewelryHongdianEG = Config.cloudPath + '/avatar/eg/hongdian.jpg'
+const strUrlJewelryShanchuEG = Config.cloudPath + '/avatar/eg/shanchu.jpg'
 
 export const CANVAS_WIDTH = 350 // 画布宽
 export const CANVAS_HEIGHT = 350 // 画布高
@@ -31,7 +32,31 @@ export const arrJewelryList = [
 		list: [
 			{
 				type: 'TEXT',
-				value: '😁',
+				value: '🍀',
+				rect: {
+					width: SIZE_TEXT,
+					height: SIZE_TEXT,
+				},
+			},
+			{
+				type: 'TEXT',
+				value: '💗',
+				rect: {
+					width: SIZE_TEXT,
+					height: SIZE_TEXT,
+				},
+			},
+			{
+				type: 'TEXT',
+				value: '💄',
+				rect: {
+					width: SIZE_TEXT,
+					height: SIZE_TEXT,
+				},
+			},
+			{
+				type: 'TEXT',
+				value: '✨',
 				rect: {
 					width: SIZE_TEXT,
 					height: SIZE_TEXT,
@@ -47,7 +72,39 @@ export const arrJewelryList = [
 			},
 			{
 				type: 'TEXT',
-				value: '🍀',
+				value: '💩',
+				rect: {
+					width: SIZE_TEXT,
+					height: SIZE_TEXT,
+				},
+			},
+			{
+				type: 'TEXT',
+				value: '😙',
+				rect: {
+					width: SIZE_TEXT,
+					height: SIZE_TEXT,
+				},
+			},
+			{
+				type: 'TEXT',
+				value: '😎',
+				rect: {
+					width: SIZE_TEXT,
+					height: SIZE_TEXT,
+				},
+			},
+			{
+				type: 'TEXT',
+				value: '😁',
+				rect: {
+					width: SIZE_TEXT,
+					height: SIZE_TEXT,
+				},
+			},
+			{
+				type: 'TEXT',
+				value: '👿',
 				rect: {
 					width: SIZE_TEXT,
 					height: SIZE_TEXT,
@@ -162,21 +219,23 @@ export const arrJewelryList = [
 			{
 				type: 'IMAGE',
 				value: strUrlJewelryHongdian,
+				valueEG: strUrlJewelryHongdianEG,
 				rect: {
-					x: CANVAS_WIDTH - 50,
+					x: CANVAS_WIDTH - 80,
 					y: 0,
-					width: 50,
-					height: 50,
+					width: 80,
+					height: 80,
 				},
 			},
 			{
 				type: 'IMAGE',
 				value: strUrlJewelryShanchu,
+				valueEG: strUrlJewelryShanchuEG,
 				rect: {
 					x: 0,
 					y: 0,
-					width: 50,
-					height: 50,
+					width: 100,
+					height: 100,
 				},
 			},
 		],

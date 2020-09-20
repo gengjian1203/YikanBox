@@ -98,7 +98,7 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 		const point = e.touches[0]
 		// 获取操作类型
 		const objSelectType = getSelectType(point, avatarShowInfo)
-		console.log('getSelectType', objSelectType)
+		// console.log('getSelectType', objSelectType)
 		if (!checkObjectEmpty(objSelectType)) {
 			setSelectType(objSelectType.type)
 			const nIndex = avatarShowInfo.arrAvatarJewelry.findIndex(item => {

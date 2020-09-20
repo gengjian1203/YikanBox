@@ -307,7 +307,7 @@ export const drawMainCanvas = (canvas, avatarShowInfo, objTouchPoint) => {
 		// 绘制
 		canvas.draw()
 	} else {
-		console.error('drawMainCanvas canvas is null.')
+		// console.error('drawMainCanvas canvas is null.')
 	}
 }
 
