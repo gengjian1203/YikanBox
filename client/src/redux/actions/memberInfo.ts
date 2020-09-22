@@ -4,6 +4,7 @@ import {
 	REMOVE_COLLECTION_ARTICLE_INFO,
 	PUSH_MINE_BADGE_LIST,
 	CHANGE_MINE_BORDER_CODE,
+	UPDATE_AVATAR_URL,
 } from '@/redux/constants/memberInfo'
 
 const memberInfoActions = dispatch => {
@@ -40,6 +41,13 @@ const memberInfoActions = dispatch => {
 		changeMineBorderCode: payload => {
 			dispatch({
 				type: CHANGE_MINE_BORDER_CODE,
+				payload,
+			})
+		},
+		// 更新头像url
+		updateAvatarUrl: payload => {
+			dispatch({
+				type: UPDATE_AVATAR_URL,
 				payload,
 			})
 		},

@@ -6,11 +6,13 @@ import {
 	REMOVE_COLLECTION_ARTICLE_INFO,
 	PUSH_MINE_BADGE_LIST,
 	CHANGE_MINE_BORDER_CODE,
+	UPDATE_AVATAR_URL,
 } from '@/redux/constants/memberInfo'
 
 const m_managerStorage = StorageManager.getInstance()
 
 const INITIAL_STATE = {
+	user_avatarUrl: '',
 	data_strMineBorderCode: '',
 	data_arrCollectionArticleList: [],
 	data_arrMineBadgeList: [],
@@ -44,6 +46,10 @@ export default function memberInfoReducer(state = INITIAL_STATE, action: any) {
 			// 切换使用的头像框
 			case CHANGE_MINE_BORDER_CODE:
 				draft.data_strMineBorderCode = payload
+				return draft
+			// 更新头像url
+			case UPDATE_AVATAR_URL:
+				draft.user_avatarUrl = payload
 				return draft
 			default:
 				return draft

@@ -3,9 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import avatarShowInfoActions from '@/redux/actions/avatarShowInfo'
+import memberActions from '@/redux/actions/memberInfo'
+import webApi from '@/api/memberInfo'
 import useCheckLogin from '@/hooks/useCheckLogin'
 import useThrottle from '@/hooks/useThrottle'
-import { getHDAvatarUrl, uploadImage } from '@/utils/index'
+import { checkObjectEmpty, getHDAvatarUrl, uploadImage } from '@/utils/index'
 
 import { View, Block } from '@tarojs/components'
 import { AtButton, AtActionSheet, AtActionSheetItem } from 'taro-ui'
@@ -41,6 +43,7 @@ export default function ModuleButton(props: IModuleBottomProps) {
 	const { initAvatarInfo, setAvatarImage, setSelectJewelry } = useActions(
 		avatarShowInfoActions
 	)
+	const { updateAvatarUrl } = useActions(memberActions)
 
 	// 选择图片
 	const chooseImage = (
@@ -164,9 +167,19 @@ export default function ModuleButton(props: IModuleBottomProps) {
 		onLoad()
 	}, [])
 
-	// 点击更换图片
-	const handleButtonChangeClick = () => {
-		console.log('handleButtonPhotoClick')
+	// 授权回调，无论是否同意都弹出弹窗。同意则拉取最新头像url，如果有变化同步更新Redux、异步更新数据库数据
+	const handleGetUserInfo = async e => {
+		const objUserInfo = e.detail.userInfo
+		if (objUserInfo && !checkObjectEmpty(objUserInfo)) {
+			console.log('handleGetUserInfo', objUserInfo)
+			if (objUserInfo.avatarUrl !== memberInfo.user_avatarUrl) {
+				updateAvatarUrl(objUserInfo.avatarUrl)
+				const param = {
+					user_avatarUrl: objUserInfo.avatarUrl,
+				}
+				webApi.updateAvatarUrl(param)
+			}
+		}
 		setShowActionSheet(true)
 	}
 
@@ -211,8 +224,9 @@ export default function ModuleButton(props: IModuleBottomProps) {
 				<AtButton
 					className='bottom-button'
 					type='secondary'
+					openType='getUserInfo'
 					circle
-					onClick={useThrottle(useCheckLogin(handleButtonChangeClick))}
+					onGetUserInfo={handleGetUserInfo}
 				>
 					更换头像
 				</AtButton>

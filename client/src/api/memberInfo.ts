@@ -39,6 +39,10 @@ interface IUpdateMineBorderCodeType {
 	strMineBorderCode: string // 头像框（徽章）Code码
 }
 
+interface IUpdateAvatarUrlType {
+	user_avatarUrl: string // 新头像url
+}
+
 /**
  * 新增注册成员信息
  * @return
@@ -110,7 +114,7 @@ const addMineBadge = async (objParams?: IAddMineBadgeType) => {
 }
 
 /**
- * updateMineBorderCode
+ * 更新头像框
  * @param objParams
  */
 const updateMineBorderCode = async (objParams?: IUpdateMineBorderCodeType) => {
@@ -123,6 +127,20 @@ const updateMineBorderCode = async (objParams?: IUpdateMineBorderCodeType) => {
 	return res.data
 }
 
+/**
+ * 更新头像url
+ * @param objParams
+ */
+const updateAvatarUrl = async (objParams?: IUpdateAvatarUrlType) => {
+	const params = {
+		type: 'UPDATE_AVATAR_URL',
+		data: objParams,
+	}
+	const res = await CloudFetch.callFunction('fetchMemberInfo', params)
+	console.log('updateAvatarUrl', res)
+	return res.data
+}
+
 export default {
 	addMemberInfo,
 	queryMemberInfo,
@@ -130,4 +148,5 @@ export default {
 	removeCollectionArticle,
 	addMineBadge,
 	updateMineBorderCode,
+	updateAvatarUrl,
 }
