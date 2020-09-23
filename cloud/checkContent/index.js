@@ -27,6 +27,9 @@ exports.main = async (event, context) => {
 	const { OPENID, APPID, UNIONID } = cloud.getWXContext()
 
 	let objResult = {}
+
+	const strMemberId = `mem-${OPENID}`
+	console.log('请求人:', strMemberId, event.type)
 	// console.log('checkContent.', event.type, event.data)
 
 	switch (event.type) {

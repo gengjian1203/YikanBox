@@ -1,5 +1,5 @@
-import Taro, { useRouter, useDidShow } from '@tarojs/taro'
-import React, { useEffect } from 'react'
+import Taro, { useRouter } from '@tarojs/taro'
+import React, { useEffect, useState } from 'react'
 import useActions from '@/hooks/useActions'
 import appInfoActions from '@/redux/actions/appInfo'
 import memberInfoActions from '@/redux/actions/memberInfo'
@@ -11,16 +11,21 @@ import { SIZE_PAGE_DISCOVER } from '@/redux/constants/articleInfo'
 import webApiAppInfo from '@/api/appInfo'
 import webApiArticleInfo from '@/api/articleInfo'
 import AppService from '@/services/AppService'
+import StorageManager from '@/services/StorageManager'
 
-import { View } from '@tarojs/components'
+import { Block, View } from '@tarojs/components'
 import TipsPanel from '@/components/TipsPanel'
 
 import './index.scss'
 
 const m_objAppService = AppService.getInstance()
+const m_managerStorage = StorageManager.getInstance()
 
 export default function Loading() {
 	const { params } = useRouter()
+
+	const [isBlockMember, setBlockMember] = useState<boolean>(false)
+
 	const {
 		setAppInfo,
 		setIsIOS,
@@ -36,14 +41,27 @@ export default function Loading() {
 	const { setShareInfo } = useActions(shareInfoActions)
 	const { setArticleList } = useActions(articleInfoActions)
 
+	// 校验该用户是否为黑名单用户
+	const checkIsBlackMember = (appInfo, strMemberId) => {
+		console.log('checkIsBlackMember', strMemberId)
+		console.log('checkIsBlackMember', appInfo.arrBlackList)
+		const nIndex = appInfo.arrBlackList.findIndex(item => {
+			return item === strMemberId
+		})
+		m_managerStorage.setStorageSync('isBlackMember', nIndex >= 0)
+	}
+
 	// 查询小程序信息以及用户信息
 	const queryLoginInfo: any = async () => {
 		const res = await webApiAppInfo.queryLoginInfo()
 		// console.log('queryLoginInfo', res)
-		return {
-			appInfo: res.appInfo.data[0],
-			memberInfo: res.memberInfo.data,
-		}
+		return res
+			? {
+					strMemberId: res.strMemberId,
+					appInfo: res.appInfo.data[0],
+					memberInfo: res.memberInfo.data,
+			  }
+			: null
 	}
 
 	// 初始化Api基本信息
@@ -86,24 +104,26 @@ export default function Loading() {
 	const initLoginInfo = async () => {
 		// 配置小程序级别变量
 		const loginInfo = await queryLoginInfo()
-		const appInfo = loginInfo.appInfo
-		const memberInfo = loginInfo.memberInfo
-		let strBottomBarListSelectCodeTmp = 'MINE'
-		try {
-			for (let item of appInfo.arrBottomBarList) {
-				if (item.enable) {
-					strBottomBarListSelectCodeTmp = item.code
-					break
+		if (loginInfo) {
+			const { strMemberId, appInfo, memberInfo } = loginInfo
+			let strBottomBarListSelectCodeTmp = 'MINE'
+			try {
+				for (let item of appInfo.arrBottomBarList) {
+					if (item.enable) {
+						strBottomBarListSelectCodeTmp = item.code
+						break
+					}
 				}
+			} catch (e) {
+				console.error('initLoginInfo strBottomBarListSelectCodeTmp', e)
 			}
-		} catch (e) {
-			console.error('initLoginInfo strBottomBarListSelectCodeTmp', e)
-		}
 
-		setAppInfo(appInfo)
-		setBottomBarSelect(strBottomBarListSelectCodeTmp)
-		setMemberInfo(memberInfo)
-		// console.log('initLoginInfo done.')
+			checkIsBlackMember(appInfo, strMemberId)
+			setAppInfo(appInfo)
+			setBottomBarSelect(strBottomBarListSelectCodeTmp)
+			setMemberInfo(memberInfo)
+			// console.log('initLoginInfo done.')
+		}
 		return loginInfo
 	}
 
@@ -114,7 +134,7 @@ export default function Loading() {
 			nPageSize: SIZE_PAGE_DISCOVER,
 		}
 		const res = await webApiArticleInfo.queryArticleList(objParams)
-		setArticleList(res.data)
+		setArticleList(res ? res.data : [])
 		// console.log('prevLoadingData done.')
 	}
 
@@ -147,13 +167,9 @@ export default function Loading() {
 			resInitApi,
 			resInitSystemInfo,
 			resInitLoginInfo,
-			resPrevLoadingArticleList,
-		] = await Promise.all([
-			initApi(),
-			initSystemInfo(),
-			initLoginInfo(),
-			prevLoadingArticleList(),
-		])
+		] = await Promise.all([initApi(), initSystemInfo(), initLoginInfo()])
+
+		const resPrevLoadingArticleList = await prevLoadingArticleList()
 
 		console.log(
 			'Loading onLoad',
@@ -162,8 +178,12 @@ export default function Loading() {
 			resInitLoginInfo,
 			resPrevLoadingArticleList
 		)
+		const isBlockMemberTmp = m_managerStorage.getStorageSync('isBlackMember')
+		setBlockMember(isBlockMemberTmp)
 
-		jumpPage(resInitLoginInfo)
+		if (!isBlockMemberTmp) {
+			jumpPage(resInitLoginInfo)
+		}
 	}
 
 	useEffect(() => {
@@ -172,8 +192,21 @@ export default function Loading() {
 
 	return (
 		<View className='loading-page-wrap flex-center-v'>
-			<TipsPanel strType='LOADING' />
-			<View className='loading-page-text flex-center'>Loading...</View>
+			{isBlockMember ? (
+				<Block>
+					<View className='loading-page-text flex-center'>
+						您的帐号由于违规操作而被封，
+					</View>
+					<View className='loading-page-text flex-center'>
+						目前无权限进行该操作。
+					</View>
+				</Block>
+			) : (
+				<Block>
+					<TipsPanel strType='LOADING' />
+					<View className='loading-page-text flex-center'>Loading...</View>
+				</Block>
+			)}
 		</View>
 	)
 }

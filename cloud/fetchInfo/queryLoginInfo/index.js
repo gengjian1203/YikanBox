@@ -85,6 +85,7 @@ async function queryLoginInfo(event, db, strMemberId) {
 	objResult = {
 		code: 200,
 		data: {
+			strMemberId: strMemberId,
 			appInfo: objAppInfo,
 			memberInfo: objMemberInfo,
 		},

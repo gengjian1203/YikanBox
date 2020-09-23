@@ -62,7 +62,15 @@ export default class ResourceManager {
 
 	static getStaticUrl(strSourceUrl) {
 		const strUrl = this._mapResource.get(strSourceUrl)
-		return strUrl ? strUrl : ''
+		if (strUrl) {
+			return strUrl
+		} else {
+			setTimeout(async () => {
+				const strResult = await ResourceDownLoadAdaptor.apply(strSourceUrl)
+				this._mapResource.set(strSourceUrl, strResult)
+			}, 0)
+			return ''
+		}
 	}
 
 	static async getUrl(strSourceUrl) {

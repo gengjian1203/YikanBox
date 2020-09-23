@@ -1,6 +1,9 @@
 import Taro from '@tarojs/taro'
 import Config from '@/config/index'
-import ResourceManager from './ResourceManager'
+import StorageManager from '@/services/StorageManager'
+import ResourceManager from '@/services/ResourceManager'
+
+const m_managerStorage = StorageManager.getInstance()
 
 export default class AppInitDataService {
 	// 单例对象
@@ -24,8 +27,11 @@ export default class AppInitDataService {
 
 	initResourceManager = () => {
 		// 初始化资源管理器
-		ResourceManager.getInstance()
-		ResourceManager.loadingAllResource()
+		const isBlockMember = m_managerStorage.getStorageSync('isBlackMember')
+		if (!isBlockMember) {
+			ResourceManager.getInstance()
+			ResourceManager.loadingAllResource()
+		}
 	}
 
 	init() {

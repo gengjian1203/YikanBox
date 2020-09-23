@@ -33,6 +33,7 @@ exports.main = async (event, context) => {
 
 	const db = cloud.database()
 	const strMemberId = `mem-${OPENID}`
+	console.log('请求人:', strMemberId, event.type)
 
 	let objResult = {}
 

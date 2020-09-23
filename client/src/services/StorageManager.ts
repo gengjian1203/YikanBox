@@ -16,7 +16,7 @@ export default class StorageManager {
 	}
 
 	// 同步存缓存
-	setStorageSync(key: string, data: object) {
+	setStorageSync(key: string, data: any) {
 		const strKey = `SM-${key}`
 		Taro.setStorageSync(strKey, data)
 		return true
