@@ -43,8 +43,8 @@ export default function Loading() {
 
 	// 校验该用户是否为黑名单用户
 	const checkIsBlackMember = (appInfo, strMemberId) => {
-		console.log('checkIsBlackMember', strMemberId)
-		console.log('checkIsBlackMember', appInfo.arrBlackList)
+		// console.log('checkIsBlackMember', strMemberId)
+		// console.log('checkIsBlackMember', appInfo.arrBlackList)
 		const nIndex = appInfo.arrBlackList.findIndex(item => {
 			return item === strMemberId
 		})

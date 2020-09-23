@@ -147,10 +147,9 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 	// Canvas触碰停止
 	const handleCanvasTouchEnd = e => {
 		// console.log('handleCanvasTouchEnd', e)
-		let objSelectJewelryTmp = {}
 		// 移动饰品位置
 		if (avatarShowInfo.strSelectType === 'MOVE') {
-			objSelectJewelryTmp = {
+			const objSelectJewelryTmp = {
 				...avatarShowInfo.objSelectJewelry,
 				rect: {
 					x:
@@ -163,6 +162,8 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 					height: avatarShowInfo.objSelectJewelry.rect.height,
 				},
 			}
+			// 落实饰品位置
+			updateAvatarJewelry(objSelectJewelryTmp)
 		}
 		// 改变饰品尺寸
 		else if (avatarShowInfo.strSelectType === 'BTN_RESIZE') {
@@ -171,7 +172,7 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 					? objTouchPoint.nTouchStartX_offset
 					: objTouchPoint.nTouchStartY_offset
 
-			objSelectJewelryTmp = {
+			const objSelectJewelryTmp = {
 				...avatarShowInfo.objSelectJewelry,
 				rect: {
 					x: avatarShowInfo.objSelectJewelry.rect.x,
@@ -180,10 +181,10 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 					height: avatarShowInfo.objSelectJewelry.rect.height + nMaxOffsett,
 				},
 			}
+			// 落实饰品位置
+			updateAvatarJewelry(objSelectJewelryTmp)
 		} else {
 		}
-		// 落实饰品位置
-		updateAvatarJewelry(objSelectJewelryTmp)
 
 		// 初始化
 		setTimeout(() => {

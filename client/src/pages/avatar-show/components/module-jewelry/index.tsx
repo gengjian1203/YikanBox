@@ -34,6 +34,7 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 	)
 
 	const {
+		initAvatarInfo,
 		setAvatarImage,
 		setAvatarShowListPoint,
 		addAvatarJewelry,
@@ -80,6 +81,7 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 				if (res.confirm) {
 					const strAvatarImage =
 						arrAvatarShowList[nAvatarShowListPoint].strAvatarImage
+					initAvatarInfo()
 					setAvatarImage(strAvatarImage)
 				}
 			},
