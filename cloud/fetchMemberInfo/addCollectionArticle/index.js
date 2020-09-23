@@ -32,9 +32,12 @@ async function addCollectionArticle(data, db, strMemberId) {
 
 	try {
 		const objAddArticle = {
-			...data,
+			_id: data._id,
 			collectDate: date,
 			collectTime: time,
+			title: data.title,
+			author: data.author,
+			posterImg: data.posterImg,
 		}
 		// 更新收藏信息
 		const res = await db

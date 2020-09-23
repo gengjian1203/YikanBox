@@ -11,7 +11,6 @@ interface IItemCardProps {
 	strAuthor?: string
 	strCollectTime?: string
 	strPosterImg?: string
-	strSource?: string
 	onClick?: any
 }
 
@@ -21,7 +20,6 @@ export default function ItemCard(props: IItemCardProps) {
 		strAuthor = '',
 		strCollectTime = '',
 		strPosterImg = '',
-		strSource = '',
 		onClick = (any?: any) => any,
 	} = props
 

@@ -41,7 +41,6 @@ export default function ListArticle(props: IListArticleProps) {
 							strAuthor={item.author}
 							strCollectTime={item.collectTime}
 							strPosterImg={item.posterImg}
-							strSource={item.source}
 							onClick={() => handleArticleDetailClick(item)}
 						/>
 					)
