@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Image } from '@tarojs/components'
+import strLoadingUrl from '@/images/loading.gif'
 
 import Config from '@/config/index'
 
@@ -19,11 +20,7 @@ export default function TipsPanel(props: IComLoadingProps) {
 			case 'LOADING':
 				return (
 					<View className='loading-wrap flex-center-h'>
-						<View className='loading-item'></View>
-						<View className='loading-item'></View>
-						<View className='loading-item'></View>
-						<View className='loading-item'></View>
-						<View className='loading-item'></View>
+						<Image className='loading-content' src={strLoadingUrl} mode='widthFix' />
 					</View>
 				)
 			case 'EMPTY':

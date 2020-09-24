@@ -168,15 +168,14 @@ export default function Loading() {
 			resInitSystemInfo,
 			resInitLoginInfo,
 		] = await Promise.all([initApi(), initSystemInfo(), initLoginInfo()])
-
-		const resPrevLoadingArticleList = await prevLoadingArticleList()
+		// 异步预加载文章数据
+		prevLoadingArticleList()
 
 		console.log(
 			'Loading onLoad',
 			resInitApi,
 			resInitSystemInfo,
-			resInitLoginInfo,
-			resPrevLoadingArticleList
+			resInitLoginInfo
 		)
 		const isBlockMemberTmp = m_managerStorage.getStorageSync('isBlackMember')
 		setBlockMember(isBlockMemberTmp)
@@ -204,7 +203,6 @@ export default function Loading() {
 			) : (
 				<Block>
 					<TipsPanel strType='LOADING' />
-					<View className='loading-page-text flex-center'>Loading...</View>
 				</Block>
 			)}
 		</View>
