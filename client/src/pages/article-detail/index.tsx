@@ -1,4 +1,4 @@
-import Taro, { useRouter, useShareAppMessage } from '@tarojs/taro'
+import Taro, { useRouter } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
@@ -9,10 +9,12 @@ import useCheckLogin from '@/hooks/useCheckLogin'
 import webApiArticleInfo from '@/api/articleInfo'
 import webApiMemberInfo from '@/api/memberInfo'
 import { shareType, processSharePath, getArticleTagName } from '@/utils/index'
+import ResourceManager from '@/services/ResourceManager'
 
 import { AtButton } from 'taro-ui'
 import { Block, View, Text } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
+import PanelShare from '@/components/PanelShare'
 import Tag from '@/components/Tag'
 
 import { checkCollectionArticle } from './utils/index'
@@ -25,7 +27,8 @@ export default function ArticleDetail() {
 		params: { articleId = '', from = '' },
 	} = useRouter()
 
-	const [isCollectionSelect, setCollectionSelect] = useState<boolean>(false)
+	const [isCollectionSelect, setCollectionSelect] = useState<boolean>(false) // 是否已收藏
+	const [isShowPanelShare, setShowPanelShare] = useState<boolean>(false) // 是否展示分享面板
 	const [objArticleInfo, setArticleInfo] = useState<any>({})
 
 	const memberInfo = useSelector(state => state.memberInfo)
@@ -34,20 +37,6 @@ export default function ArticleDetail() {
 	const { addCollectionArticleInfo, removeCollectionArticleInfo } = useActions(
 		memberInfoActions
 	)
-
-	useShareAppMessage(res => {
-		const sharePath = processSharePath({
-			sharePath: path,
-			shareType: shareType.PATH_ARTICLE,
-			articleId: articleId,
-		})
-		console.log('useShareAppMessage', sharePath)
-		return {
-			title: '分享了一篇文章，并@了你',
-			imageUrl: objArticleInfo.posterImg,
-			path: sharePath,
-		}
-	})
 
 	useEffect(() => {
 		// console.log(
@@ -65,33 +54,38 @@ export default function ArticleDetail() {
 
 	const onLoad = async () => {
 		// console.log('onLoad... ', from, articleId)
+		let objArticleInfoTmp = {}
 		// 直接进来不用调取接口，分享进来的需要调取接口
 		if (from === 'share') {
 			const objParams = {
 				articleId: articleId,
 			}
 			const res = await webApiArticleInfo.queryArticleInfo(objParams)
-			setArticleInfo(res.data)
+			objArticleInfoTmp = res.data
 		} else {
 			const nIndex = arrArticleList.findIndex(item => {
 				return articleId === item._id
 			})
 			if (nIndex >= 0) {
-				setArticleInfo(arrArticleList[nIndex])
+				objArticleInfoTmp = arrArticleList[nIndex]
 			} else {
 				const objParams = {
 					articleId: articleId,
 				}
 				const res = await webApiArticleInfo.queryArticleInfo(objParams)
-				setArticleInfo(res.data)
+				objArticleInfoTmp = res.data
 			}
 		}
+		setArticleInfo(objArticleInfoTmp)
+		// 缓存下载缩略图
+		ResourceManager.getStaticUrl(objArticleInfoTmp.posterImg)
 	}
 
 	useEffect(() => {
 		onLoad()
 	}, [])
 
+	// 点击收藏
 	const handleCollectionClick = async () => {
 		// console.log('handleCollectionClick', objArticleInfo)
 		const isCollectionSelectTmp = !isCollectionSelect
@@ -106,6 +100,16 @@ export default function ArticleDetail() {
 			// console.log('removeCollectionArticle', res)
 			removeCollectionArticleInfo(objArticleInfo)
 		}
+	}
+
+	// 点击分享
+	const handleShareClick = () => {
+		setShowPanelShare(true)
+	}
+
+	// 分享弹窗反馈
+	const handleShowPanelShare = isShow => {
+		setShowPanelShare(isShow)
 	}
 
 	return (
@@ -151,7 +155,7 @@ export default function ArticleDetail() {
 						className='float-btn-icon'
 						onClick={useThrottle(useCheckLogin(handleCollectionClick))}
 					>
-						<View className={`iconfont ` + `icon-collection-select `}>
+						<View className={`iconfont ` + `icon-collection `}>
 							<View
 								className={
 									`iconfont ` +
@@ -166,10 +170,27 @@ export default function ArticleDetail() {
 						</View>
 					</AtButton>
 					{/* 分享 */}
-					<AtButton className='float-btn-icon' openType='share'>
-						<View className='iconfont icon-share-select'></View>
+					<AtButton
+						className='float-btn-icon'
+						onClick={useThrottle(useCheckLogin(handleShareClick))}
+					>
+						<View className='iconfont icon-share'></View>
 					</AtButton>
 				</View>
+
+				{/* 分享面板 */}
+				<PanelShare
+					isShowPanelShare={isShowPanelShare}
+					strShareTitle='分享了一篇文章，并@了你'
+					strShareImage={objArticleInfo.posterImg}
+					strSharePath={processSharePath({
+						sharePath: path,
+						shareType: shareType.PATH_ARTICLE,
+						articleId: articleId,
+					})}
+					strContentUrl={objArticleInfo.posterImg}
+					onShowPanelShare={handleShowPanelShare}
+				/>
 			</View>
 		</Block>
 	)

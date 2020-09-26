@@ -28,7 +28,7 @@ interface IModuleBottomProps {
 }
 
 export default function ModuleButton(props: IModuleBottomProps) {
-	const { onShowPanelShare = (any: any) => true } = props
+	const { onShowPanelShare = () => true } = props
 
 	const [isShowActionSheet, setShowActionSheet] = useState<boolean>(false) // 是否展示弹窗
 	const [canvasSave, setCanvasSave] = useState<any>(null)

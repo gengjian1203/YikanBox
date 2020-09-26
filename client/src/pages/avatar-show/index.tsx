@@ -1,10 +1,10 @@
-import Taro from '@tarojs/taro'
+import Taro, { useRouter } from '@tarojs/taro'
 import React, { useState } from 'react'
 
 import { View } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
 import PanelShare from '@/components/PanelShare'
-import { shareType } from '@/utils/index'
+import { shareType, processSharePath } from '@/utils/index'
 
 import ModuleCanvas from './components/module-canvas'
 import ModuleJewelry from './components/module-jewelry'
@@ -14,13 +14,17 @@ import ModuleCanvasSave from './components/module-canvas-save'
 import './index.scss'
 
 export default function AvatarShow() {
-	const [isShowPanelShare, setShowPanelShare] = useState<boolean>(false) // 是否展示分享
+	const { path } = useRouter()
+
+	const [isShowPanelShare, setShowPanelShare] = useState<boolean>(false) // 是否展示分享面板
 	const [strShareContentUrl, setShareContentUrl] = useState<string>('')
 
 	// 分享弹窗
 	const handleShowPanelShare = (isShow, strContentUrl) => {
 		setShowPanelShare(isShow)
-		setShareContentUrl(strContentUrl)
+		if (strContentUrl) {
+			setShareContentUrl(strContentUrl)
+		}
 	}
 
 	return (
@@ -47,8 +51,12 @@ export default function AvatarShow() {
 			{/* 分享面板 */}
 			<PanelShare
 				isShowPanelShare={isShowPanelShare}
-				strShareType={shareType.PATH_ARTICLE}
 				strShareTitle='看我做了一个头像秀，并@了你'
+				strShareImage=''
+				strSharePath={processSharePath({
+					sharePath: path,
+					shareType: shareType.PATH_AVATAR_SHOW,
+				})}
 				strContentUrl={strShareContentUrl}
 				onShowPanelShare={handleShowPanelShare}
 			/>

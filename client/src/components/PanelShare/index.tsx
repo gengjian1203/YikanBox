@@ -1,8 +1,7 @@
-import Taro, { useRouter, useShareAppMessage } from '@tarojs/taro'
+import Taro, { useShareAppMessage } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { View, Image, Block, Canvas } from '@tarojs/components'
 import { AtButton, AtCurtain } from 'taro-ui'
-import { processSharePath } from '@/utils/index'
 import { PANEL_SHARE_WIDTH, PANEL_SHARE_HEIGHT } from './utils/config'
 import { drawCanvasShare } from './utils/index'
 
@@ -10,21 +9,19 @@ import './index.scss'
 
 interface IPanelShareProps {
 	isShowPanelShare: boolean
-	strShareType: string
-	strShareTitle?: string
-	strShareImage?: string
+	strShareTitle: string
+	strShareImage: string
+	strSharePath: string
 	strContentUrl: string
 	onShowPanelShare: any
 }
 
 export default function PanelShare(props: IPanelShareProps) {
-	const { path } = useRouter()
-
 	const {
 		isShowPanelShare = false,
-		strShareType = '',
 		strShareTitle = '',
 		strShareImage = '',
+		strSharePath = '',
 		strContentUrl = '',
 		onShowPanelShare = () => true,
 	} = props
@@ -72,15 +69,15 @@ export default function PanelShare(props: IPanelShareProps) {
 	}, [isShowPanelShare, strContentUrl])
 
 	useShareAppMessage(res => {
-		const sharePath = processSharePath({
-			sharePath: path,
-			shareType: strShareType,
-		})
-		console.log('useShareAppMessage', sharePath)
+		// const sharePath = processSharePath({
+		// 	sharePath: path,
+		// 	shareType: strShareType,
+		// })
+		console.log('useShareAppMessage', strSharePath)
 		return {
 			title: strShareTitle,
 			imageUrl: strShareImage,
-			path: sharePath,
+			path: strSharePath,
 		}
 	})
 

@@ -91,7 +91,7 @@ export const CanvasShareConfig: Array<IConfigType> = [
 			nExtendY: 760,
 			nExtendFontSize: 28,
 			strExtendColor: '#0e0e0e',
-			strExtendText: '邀请你一起过来嗨皮~',
+			strExtendText: '邀请你一起来嗨皮~',
 		},
 	},
 ]

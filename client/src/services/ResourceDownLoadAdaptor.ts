@@ -39,16 +39,40 @@ class CWXClouldAdaptor implements IResourceAdaptorType {
 		// console.log('CWXClouldAdaptor', strUrl)
 		return strUrl.startsWith('cloud://')
 	}
-	resolve = async (strUrl: string) => {
+	resolve = async (strFileID: string) => {
 		return new Promise((resolve, reject) => {
 			Taro.cloud.downloadFile({
-				fileID: strUrl,
+				fileID: strFileID,
 				success: res => {
 					// console.log('CWXClouldAdaptor2', res)
 					resolve(res.tempFilePath)
 				},
 				fail: err => {
-					console.error('CWXClouldAdaptor3', strUrl, err)
+					console.error('CWXClouldAdaptor3', strFileID, err)
+					resolve(strFileID)
+				},
+			})
+		})
+	}
+}
+
+// 第三方网络图片适配器
+class CHttpsAdaptor implements IResourceAdaptorType {
+	support = (strUrl: string) => {
+		// https://pic1.zhimg.com/v2-f172d4ce0e20dcd50614c9a5373ee7d3.jpg?source=8673f162
+		// console.log('CHttpsAdaptor', strUrl)
+		return strUrl.startsWith('https://')
+	}
+	resolve = async (strUrl: string) => {
+		return new Promise((resolve, reject) => {
+			Taro.downloadFile({
+				url: strUrl,
+				success: res => {
+					console.log('CHttpsAdaptor2', res)
+					resolve(res.tempFilePath)
+				},
+				fail: err => {
+					console.error('CHttpsAdaptor3', strUrl, err)
 					resolve(strUrl)
 				},
 			})
@@ -71,6 +95,7 @@ class COtherAdaptor implements IResourceAdaptorType {
 const arrAdaptors = [
 	new CWXThirdAdaptor(),
 	new CWXClouldAdaptor(),
+	new CHttpsAdaptor(),
 	new COtherAdaptor(),
 ]
 
@@ -79,9 +104,8 @@ const checkAdaptor = async strUrl => {
 
 	for (let adaptor of arrAdaptors) {
 		if (adaptor.support(strUrl)) {
-			// console.log('ResourceDownLoadAdaptor1111', strUrl)
 			strResult = await adaptor.resolve(strUrl)
-			// console.log('ResourceDownLoadAdaptor222', strResult)
+			// console.log('ResourceDownLoadAdaptor2', strResult)
 			break
 		}
 	}
@@ -92,8 +116,7 @@ const checkAdaptor = async strUrl => {
 export const ResourceDownLoadAdaptor = {
 	apply: async strUrl => {
 		const strResult = await checkAdaptor(strUrl)
-		// console.log('ResourceDownLoadAdaptor333', strResult)
-
+		// console.log('ResourceDownLoadAdaptor3', strResult)
 		return strResult
 	},
 }

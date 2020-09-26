@@ -50,7 +50,7 @@ const drawShareContent = (
 
 	if (strContentUrl) {
 		canvas.drawImage(
-			strContentUrl,
+			ResourceManager.getStaticUrl(strContentUrl),
 			objConfigContent.nContentX,
 			objConfigContent.nContentY,
 			objConfigContent.nContentWidth,
