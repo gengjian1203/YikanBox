@@ -1,11 +1,14 @@
-import Taro, { useRouter, useShareAppMessage } from '@tarojs/taro'
+import Taro, { useRouter } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import useThrottle from '@/hooks/useThrottle'
+import useCheckLogin from '@/hooks/useCheckLogin'
 import { shareType, processSharePath, deepClone } from '@/utils/index'
 
 import { View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 import NavigationHeader from '@/components/NavigationHeader'
+import PanelShare from '@/components/PanelShare'
 import PanelTips from '@/components/PanelTips'
 import ModuleTitle from '@/components/ModuleTitle'
 
@@ -18,6 +21,7 @@ import './index.scss'
 export default function Popularize() {
 	const {} = useRouter()
 
+	const [isShowPanelShare, setShowPanelShare] = useState<boolean>(false) // 是否展示分享面板
 	const [arrPopularizeList, setPopularizeList] = useState<Array<any>>([])
 
 	const data_arrShareChildrenList = useSelector(
@@ -31,24 +35,17 @@ export default function Popularize() {
 		setPopularizeList(arrListTmp.reverse())
 	}
 
-	useShareAppMessage(res => {
-		const sharePath = processSharePath({
-			sharePath: '/pages/main/index',
-			shareType: shareType.PATH_POPULARIZE,
-		})
-		console.log('useShareAppMessage', sharePath)
-		return {
-			title: '分享了一个好用的工具箱，并@了你',
-			imageUrl: strShareUrl,
-			path: sharePath,
-		}
-	})
-
 	useEffect(() => {
 		onLoad()
 		return () => {}
 	}, [data_arrShareChildrenList])
 
+	// 点击分享
+	const handleShareClick = () => {
+		setShowPanelShare(true)
+	}
+
+	// 跳转到对方成就
 	const handleMemberDetailClick = item => {
 		// console.log('handleMemberDetailClick', item)
 		Taro.navigateTo({
@@ -56,12 +53,21 @@ export default function Popularize() {
 		})
 	}
 
+	// 分享弹窗反馈
+	const handleShowPanelShare = isShow => {
+		setShowPanelShare(isShow)
+	}
+
 	return (
 		<View className='popularize-wrap flex-center-v'>
 			{/* 顶部导航 */}
 			<NavigationHeader isShowLeftIcon strNavigationTitle='我的邀请' />
 			{/* 我要邀请 */}
-			<AtButton type='primary' full openType='share'>
+			<AtButton
+				type='primary'
+				full
+				onClick={useThrottle(useCheckLogin(handleShareClick))}
+			>
 				我要邀请
 			</AtButton>
 			{/* 邀请数量 */}
@@ -81,7 +87,9 @@ export default function Popularize() {
 							nickName={item.nickName}
 							shareType={item.shareType}
 							sharePath={item.sharePath}
-							onClick={() => handleMemberDetailClick(item)}
+							onClick={useThrottle(
+								useCheckLogin(() => handleMemberDetailClick(item))
+							)}
 						/>
 					)
 				})
@@ -90,6 +98,19 @@ export default function Popularize() {
 					<PanelTips strType='EMPTY' />
 				</View>
 			)}
+
+			{/* 分享面板 */}
+			<PanelShare
+				isShowPanelShare={isShowPanelShare}
+				strShareTitle='分享了一个好用的小程序，并@了你'
+				strShareImage={strShareUrl}
+				strSharePath={processSharePath({
+					sharePath: '/pages/main/index',
+					shareType: shareType.PATH_POPULARIZE,
+				})}
+				strContentUrl={strShareUrl}
+				onShowPanelShare={handleShowPanelShare}
+			/>
 		</View>
 	)
 }
