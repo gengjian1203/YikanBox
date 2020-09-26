@@ -5,6 +5,7 @@ import useActions from '@/hooks/useActions'
 import avatarShowInfoActions from '@/redux/actions/avatarShowInfo'
 import memberActions from '@/redux/actions/memberInfo'
 import webApi from '@/api/memberInfo'
+import useCheckAuthorize from '@/hooks/useCheckAuthorize'
 import useCheckLogin from '@/hooks/useCheckLogin'
 import useThrottle from '@/hooks/useThrottle'
 import { checkObjectEmpty, getHDAvatarUrl, uploadImage } from '@/utils/index'
@@ -190,7 +191,6 @@ export default function ModuleButton(props: IModuleBottomProps) {
 	// 点击保存图片
 	const handleButtonSaveClick = () => {
 		console.log('handleButtonSaveClick')
-		setSelectJewelry({})
 		saveAndExportAvatar()
 	}
 
@@ -237,7 +237,11 @@ export default function ModuleButton(props: IModuleBottomProps) {
 					className='bottom-button'
 					type='primary'
 					circle
-					onClick={useThrottle(useCheckLogin(handleButtonSaveClick))}
+					onClick={useThrottle(
+						useCheckLogin(
+							useCheckAuthorize('scope.writePhotosAlbum', handleButtonSaveClick)
+						)
+					)}
 				>
 					保存分享
 				</AtButton>

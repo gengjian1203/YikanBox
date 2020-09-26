@@ -61,30 +61,39 @@ export default class ResourceManager {
 	}
 
 	static getStaticUrl(strSourceUrl) {
-		const strUrl = this._mapResource.get(strSourceUrl)
-		if (strUrl) {
-			return strUrl
+		if (strSourceUrl.startsWith('http://tmp/')) {
+			return strSourceUrl
 		} else {
-			setTimeout(async () => {
-				const strResult = await ResourceDownLoadAdaptor.apply(strSourceUrl)
-				this._mapResource.set(strSourceUrl, strResult)
-				// console.log('ResourceManager getUrl3', this._mapResource)
-			}, 0)
-			return ''
+			const strUrl = this._mapResource.get(strSourceUrl)
+			// console.log('getStaticUrl', strSourceUrl, this._mapResource, strUrl)
+			if (strUrl) {
+				return strUrl
+			} else {
+				setTimeout(async () => {
+					const strResult = await ResourceDownLoadAdaptor.apply(strSourceUrl)
+					this._mapResource.set(strSourceUrl, strResult)
+					// console.log('ResourceManager getUrl3', this._mapResource)
+				}, 0)
+				return ''
+			}
 		}
 	}
 
 	static async getUrl(strSourceUrl) {
-		const strUrl = this._mapResource.get(strSourceUrl)
-		// console.log('ResourceManager getUrl', strSourceUrl, strUrl)
-		if (strUrl) {
-			return strUrl
+		if (strSourceUrl.startsWith('http://tmp/')) {
+			return strSourceUrl
 		} else {
-			const strResult = await ResourceDownLoadAdaptor.apply(strSourceUrl)
-			this._mapResource.set(strSourceUrl, strResult)
-			// console.log('ResourceManager getUrl2', strResult)
-			// console.log('ResourceManager getUrl3', this._mapResource)
-			return strResult
+			const strUrl = this._mapResource.get(strSourceUrl)
+			// console.log('ResourceManager getUrl', strSourceUrl, strUrl)
+			if (strUrl) {
+				return strUrl
+			} else {
+				const strResult = await ResourceDownLoadAdaptor.apply(strSourceUrl)
+				this._mapResource.set(strSourceUrl, strResult)
+				// console.log('ResourceManager getUrl2', strResult)
+				// console.log('ResourceManager getUrl3', this._mapResource)
+				return strResult
+			}
 		}
 	}
 }

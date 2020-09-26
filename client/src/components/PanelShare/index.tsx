@@ -2,6 +2,10 @@ import Taro, { useShareAppMessage } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { View, Image, Block, Canvas } from '@tarojs/components'
 import { AtButton, AtCurtain } from 'taro-ui'
+
+import useCheckAuthorize from '@/hooks/useCheckAuthorize'
+import useThrottle from '@/hooks/useThrottle'
+
 import { PANEL_SHARE_WIDTH, PANEL_SHARE_HEIGHT } from './utils/config'
 import { drawCanvasShare } from './utils/index'
 
@@ -99,10 +103,12 @@ export default function PanelShare(props: IPanelShareProps) {
 				})
 			},
 			fail: err => {
-				Taro.showToast({
-					title: '保存失败',
-					icon: 'none',
-				})
+				console.log('handleDownloadClick', err)
+				if ('saveImageToPhotosAlbum:fail auth deny')
+					Taro.showToast({
+						title: '保存失败',
+						icon: 'none',
+					})
 			},
 		})
 	}
@@ -139,7 +145,9 @@ export default function PanelShare(props: IPanelShareProps) {
 					<View className='share-button flex-between-v'>
 						<AtButton
 							className='float-btn-icon flex-center bk-blue'
-							onClick={handleDownloadClick}
+							onClick={useThrottle(
+								useCheckAuthorize('scope.writePhotosAlbum', handleDownloadClick)
+							)}
 						>
 							<View className='iconfont icon-share-download'></View>
 						</AtButton>
@@ -148,7 +156,7 @@ export default function PanelShare(props: IPanelShareProps) {
 					<View className='share-button flex-between-v'>
 						<AtButton
 							className='float-btn-icon flex-center bk-yellow'
-							onClick={handlePanelShareClose}
+							onClick={useThrottle(handlePanelShareClose)}
 						>
 							<View className='iconfont icon-share-close'></View>
 						</AtButton>

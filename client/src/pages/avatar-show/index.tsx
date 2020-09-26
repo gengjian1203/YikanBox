@@ -22,6 +22,7 @@ export default function AvatarShow() {
 	// 分享弹窗
 	const handleShowPanelShare = (isShow, strContentUrl) => {
 		setShowPanelShare(isShow)
+		console.log('handleShowPanelShare', strContentUrl)
 		if (strContentUrl) {
 			setShareContentUrl(strContentUrl)
 		}
