@@ -28,6 +28,33 @@ export const BORDER_BUTTON_RADIUS = BORDER_BUTTON_SIZE / 2
 // 饰品列表
 export const arrJewelryList = [
 	{
+		title: '贴纸',
+		list: [
+			{
+				type: 'IMAGE',
+				value: strUrlJewelryHongdian,
+				valueEG: strUrlJewelryHongdianEG,
+				rect: {
+					x: CANVAS_WIDTH - 80,
+					y: 0,
+					width: 80,
+					height: 80,
+				},
+			},
+			{
+				type: 'IMAGE',
+				value: strUrlJewelryShanchu,
+				valueEG: strUrlJewelryShanchuEG,
+				rect: {
+					x: 0,
+					y: 0,
+					width: 100,
+					height: 100,
+				},
+			},
+		],
+	},
+	{
 		title: 'emoji',
 		list: [
 			{
@@ -209,33 +236,6 @@ export const arrJewelryList = [
 				rect: {
 					width: SIZE_TEXT,
 					height: SIZE_TEXT,
-				},
-			},
-		],
-	},
-	{
-		title: '贴纸',
-		list: [
-			{
-				type: 'IMAGE',
-				value: strUrlJewelryHongdian,
-				valueEG: strUrlJewelryHongdianEG,
-				rect: {
-					x: CANVAS_WIDTH - 80,
-					y: 0,
-					width: 80,
-					height: 80,
-				},
-			},
-			{
-				type: 'IMAGE',
-				value: strUrlJewelryShanchu,
-				valueEG: strUrlJewelryShanchuEG,
-				rect: {
-					x: 0,
-					y: 0,
-					width: 100,
-					height: 100,
 				},
 			},
 		],

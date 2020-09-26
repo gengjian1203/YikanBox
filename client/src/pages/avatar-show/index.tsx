@@ -31,12 +31,7 @@ export default function AvatarShow() {
 	return (
 		<View className='avatar-show-wrap'>
 			{/* 顶部导航 */}
-			<NavigationHeader
-				isShowLeftIcon
-				strNavigationTitle='我的头像秀'
-				colorBackgroud='#000000'
-				colorTitle='#ffffff'
-			/>
+			<NavigationHeader isShowLeftIcon strNavigationTitle='我的头像秀' />
 			{/* 头像主页面 */}
 			<ModuleCanvas isShowPanelShare={isShowPanelShare} />
 			{/* 底部操作区 */}
