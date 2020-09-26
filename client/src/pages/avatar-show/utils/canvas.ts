@@ -1,6 +1,6 @@
 import Config from '@/config/index'
-import { checkObjectEmpty, mergeObject } from '@/utils/index'
 import ResourceManager from '@/services/ResourceManager'
+import { checkObjectEmpty, mergeObject } from '@/utils/index'
 
 import {
 	CANVAS_WIDTH,
@@ -289,6 +289,7 @@ export const drawMainCanvas = (canvas, avatarShowInfo, objTouchPoint) => {
 	} = avatarShowInfo
 
 	if (canvas) {
+
 		// 绘制头像底图
 		drawAvatarImage(canvas, strAvatarImage)
 		// 绘制饰品表

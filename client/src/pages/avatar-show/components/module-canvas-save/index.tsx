@@ -17,8 +17,8 @@ export default function ModuleCanvasSave(props: IModuleCanvasSaveProps) {
 			disableScroll
 			style={
 				`position: fixed; ` +
-				`top: -999px; ` +
-				`left: -999px; ` +
+				`top: -9999px; ` +
+				`left: -9999px; ` +
 				`width: ${Taro.pxTransform(CANVAS_WIDTH * 2)}; ` +
 				`height: ${Taro.pxTransform(CANVAS_HEIGHT * 2)}; `
 			}

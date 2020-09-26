@@ -1,38 +1,36 @@
-import Taro from '@tarojs/taro'
+import Taro, { useRouter, useShareAppMessage } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { View, Image, Block, Canvas } from '@tarojs/components'
 import { AtButton, AtCurtain } from 'taro-ui'
-import {
-	PANEL_SHARE_WIDTH,
-	PANEL_SHARE_HEIGHT,
-	drawCanvasShare,
-} from '@/utils/index'
+import { processSharePath } from '@/utils/index'
+import { PANEL_SHARE_WIDTH, PANEL_SHARE_HEIGHT } from './utils/config'
+import { drawCanvasShare } from './utils/index'
 
 import './index.scss'
 
 interface IPanelShareProps {
 	isShowPanelShare: boolean
-	strQRCodeUrl: string
+	strShareType: string
+	strShareTitle?: string
+	strShareImage?: string
+	strContentUrl: string
 	onShowPanelShare: any
 }
 
 export default function PanelShare(props: IPanelShareProps) {
+	const { path } = useRouter()
+
 	const {
 		isShowPanelShare = false,
-		strQRCodeUrl = '',
-		onShowPanelShare = (any: any) => true,
+		strShareType = '',
+		strShareTitle = '',
+		strShareImage = '',
+		strContentUrl = '',
+		onShowPanelShare = () => true,
 	} = props
 
 	const [strSharePhotoUrl, setSharePhotoUrl] = useState<string>('')
 	const [canvasShare, setCanvasShare] = useState<any>(null)
-
-	const avatarShowInfo = useSelector(
-		state =>
-			state.avatarShowInfo.arrAvatarShowList[
-				state.avatarShowInfo.nAvatarShowListPoint
-			]
-	)
 
 	const onLoad = () => {
 		// 设置 canvas 对象
@@ -45,16 +43,16 @@ export default function PanelShare(props: IPanelShareProps) {
 
 	useEffect(() => {
 		console.log('PanelShare', isShowPanelShare)
-		if (isShowPanelShare) {
-			drawCanvasShare(canvasShare, avatarShowInfo)
+		if (isShowPanelShare && strContentUrl !== '') {
+			drawCanvasShare(canvasShare, strContentUrl, 0)
 			canvasShare.draw(true, () => {
 				Taro.canvasToTempFilePath({
 					x: 0,
 					y: 0,
-					width: PANEL_SHARE_WIDTH,
-					height: PANEL_SHARE_HEIGHT,
-					destWidth: PANEL_SHARE_WIDTH,
-					destHeight: PANEL_SHARE_HEIGHT,
+					width: PANEL_SHARE_WIDTH * 2,
+					height: PANEL_SHARE_HEIGHT * 2,
+					destWidth: PANEL_SHARE_WIDTH * 2,
+					destHeight: PANEL_SHARE_HEIGHT * 2,
 					fileType: 'jpg',
 					canvasId: 'canvas-share',
 					success: resToCanvas => {
@@ -71,7 +69,20 @@ export default function PanelShare(props: IPanelShareProps) {
 			})
 		}
 		return () => {}
-	}, [isShowPanelShare])
+	}, [isShowPanelShare, strContentUrl])
+
+	useShareAppMessage(res => {
+		const sharePath = processSharePath({
+			sharePath: path,
+			shareType: strShareType,
+		})
+		console.log('useShareAppMessage', sharePath)
+		return {
+			title: strShareTitle,
+			imageUrl: strShareImage,
+			path: sharePath,
+		}
+	})
 
 	// 关闭分享幕帘
 	const handlePanelShareClose = () => {
@@ -110,6 +121,9 @@ export default function PanelShare(props: IPanelShareProps) {
 			>
 				<Image
 					className='share-img'
+					style={
+						`width: ${PANEL_SHARE_WIDTH}px;` + `height: ${PANEL_SHARE_WIDTH}px;`
+					}
 					src={strSharePhotoUrl}
 					mode='widthFix'
 					showMenuByLongpress
@@ -154,8 +168,8 @@ export default function PanelShare(props: IPanelShareProps) {
 					`position: fixed; ` +
 					`top: -999px; ` +
 					`left: -999px; ` +
-					`width: ${PANEL_SHARE_WIDTH}px; ` +
-					`height: ${PANEL_SHARE_HEIGHT}px; `
+					`width: ${PANEL_SHARE_WIDTH * 2}px; ` +
+					`height: ${PANEL_SHARE_HEIGHT * 2}px; `
 				}
 			/>
 		</Block>

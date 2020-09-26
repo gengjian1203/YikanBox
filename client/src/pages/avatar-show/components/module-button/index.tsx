@@ -108,10 +108,12 @@ export default function ModuleButton(props: IModuleBottomProps) {
 				destWidth: CANVAS_SAVE_WIDTH,
 				destHeight: CANVAS_SAVE_HEIGHT,
 				fileType: 'jpg',
-				// quality: 0.1,
 				canvasId: 'canvas-save',
 				success: resToCanvas => {
 					console.log('resToCanvas', resToCanvas)
+					// 打开分享面板
+					onShowPanelShare(true, resToCanvas.tempFilePath)
+					// 保存到相册
 					Taro.saveImageToPhotosAlbum({
 						filePath: resToCanvas.tempFilePath,
 						success: resSaveImage => {
@@ -190,8 +192,6 @@ export default function ModuleButton(props: IModuleBottomProps) {
 		console.log('handleButtonSaveClick')
 		setSelectJewelry({})
 		saveAndExportAvatar()
-		// 打开分享面板
-		onShowPanelShare(true)
 	}
 
 	// 底部弹窗的关闭事件

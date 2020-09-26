@@ -15,10 +15,12 @@ import { getSelectType } from '../../utils/index'
 
 import './index.scss'
 
-interface IModuleCanvasProps {}
+interface IModuleCanvasProps {
+	isShowPanelShare: boolean
+}
 
 export default function ModuleCanvas(props: IModuleCanvasProps) {
-	const {} = props
+	const { isShowPanelShare = false } = props
 
 	const [canvas, setCanvas] = useState<any>(null)
 	const [objTouchPoint, setTouchPoint] = useState<any>({
@@ -203,7 +205,13 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 				<Canvas
 					canvasId='canvas'
 					disableScroll
-					style={`width: ${CANVAS_WIDTH}px; ` + `height: ${CANVAS_HEIGHT}px; `}
+					style={
+						`${isShowPanelShare ? 'position: fixed; ' : ''}` +
+						`${isShowPanelShare ? 'top: -9999px; ' : ''}` +
+						`${isShowPanelShare ? 'left: -9999px; ' : ''}` +
+						`width: ${CANVAS_WIDTH}px; ` +
+						`height: ${CANVAS_HEIGHT}px; `
+					}
 					className='avatar-show-canvas'
 					onTouchStart={handleCanvasTouchStart}
 					onTouchMove={handleCanvasTouchMove}

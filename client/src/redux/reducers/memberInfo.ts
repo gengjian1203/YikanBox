@@ -1,5 +1,7 @@
 import { produce } from 'immer'
 import StorageManager from '@/services/StorageManager'
+import ResourceManager from '@/services/ResourceManager'
+
 import {
 	SET_MEMBER_INFO,
 	ADD_COLLECTION_ARTICLE_INFO,
@@ -27,6 +29,7 @@ export default function memberInfoReducer(state = INITIAL_STATE, action: any) {
 			case SET_MEMBER_INFO:
 				draft = payload
 				m_managerStorage.setStorageSync('memberInfo', payload)
+				ResourceManager.getStaticUrl(payload.user_avatarUrl)
 				return draft
 			// 新增当前人的文章收藏信息
 			case ADD_COLLECTION_ARTICLE_INFO:

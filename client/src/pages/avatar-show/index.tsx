@@ -1,10 +1,10 @@
-import Taro, { useRouter, useShareAppMessage } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import React, { useState } from 'react'
-import { shareType, processSharePath } from '@/utils/index'
 
 import { View } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
 import PanelShare from '@/components/PanelShare'
+import { shareType } from '@/utils/index'
 
 import ModuleCanvas from './components/module-canvas'
 import ModuleJewelry from './components/module-jewelry'
@@ -14,26 +14,13 @@ import ModuleCanvasSave from './components/module-canvas-save'
 import './index.scss'
 
 export default function AvatarShow() {
-	const { path } = useRouter()
-
 	const [isShowPanelShare, setShowPanelShare] = useState<boolean>(false) // 是否展示分享
-
-	useShareAppMessage(res => {
-		const sharePath = processSharePath({
-			sharePath: path,
-			shareType: shareType.PATH_ARTICLE,
-		})
-		console.log('useShareAppMessage', sharePath)
-		return {
-			title: '看我做了一个头像秀，并@了你',
-			imageUrl: '',
-			path: sharePath,
-		}
-	})
+	const [strShareContentUrl, setShareContentUrl] = useState<string>('')
 
 	// 分享弹窗
-	const handleShowPanelShare = isShow => {
+	const handleShowPanelShare = (isShow, strContentUrl) => {
 		setShowPanelShare(isShow)
+		setShareContentUrl(strContentUrl)
 	}
 
 	return (
@@ -46,7 +33,7 @@ export default function AvatarShow() {
 				colorTitle='#ffffff'
 			/>
 			{/* 头像主页面 */}
-			<ModuleCanvas />
+			<ModuleCanvas isShowPanelShare={isShowPanelShare} />
 			{/* 底部操作区 */}
 			<View className='avatar-show-bottom'>
 				{/* 饰品栏 */}
@@ -60,7 +47,9 @@ export default function AvatarShow() {
 			{/* 分享面板 */}
 			<PanelShare
 				isShowPanelShare={isShowPanelShare}
-				strQRCodeUrl=''
+				strShareType={shareType.PATH_ARTICLE}
+				strShareTitle='看我做了一个头像秀，并@了你'
+				strContentUrl={strShareContentUrl}
 				onShowPanelShare={handleShowPanelShare}
 			/>
 		</View>

@@ -68,6 +68,7 @@ export default class ResourceManager {
 			setTimeout(async () => {
 				const strResult = await ResourceDownLoadAdaptor.apply(strSourceUrl)
 				this._mapResource.set(strSourceUrl, strResult)
+				// console.log('ResourceManager getUrl3', this._mapResource)
 			}, 0)
 			return ''
 		}
