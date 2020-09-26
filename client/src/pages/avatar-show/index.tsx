@@ -1,9 +1,10 @@
 import Taro, { useRouter, useShareAppMessage } from '@tarojs/taro'
-import React from 'react'
+import React, { useState } from 'react'
 import { shareType, processSharePath } from '@/utils/index'
 
 import { View } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
+import PanelShare from '@/components/PanelShare'
 
 import ModuleCanvas from './components/module-canvas'
 import ModuleJewelry from './components/module-jewelry'
@@ -14,6 +15,8 @@ import './index.scss'
 
 export default function AvatarShow() {
 	const { path } = useRouter()
+
+	const [isShowPanelShare, setShowPanelShare] = useState<boolean>(false) // 是否展示分享
 
 	useShareAppMessage(res => {
 		const sharePath = processSharePath({
@@ -27,6 +30,11 @@ export default function AvatarShow() {
 			path: sharePath,
 		}
 	})
+
+	// 分享弹窗
+	const handleShowPanelShare = isShow => {
+		setShowPanelShare(isShow)
+	}
 
 	return (
 		<View className='avatar-show-wrap'>
@@ -44,11 +52,17 @@ export default function AvatarShow() {
 				{/* 饰品栏 */}
 				<ModuleJewelry />
 				{/* 按钮区 */}
-				<ModuleButton />
+				<ModuleButton onShowPanelShare={handleShowPanelShare} />
 			</View>
 
 			{/* 屏外绘制保存的图片 */}
 			<ModuleCanvasSave />
+			{/* 分享面板 */}
+			<PanelShare
+				isShowPanelShare={isShowPanelShare}
+				strQRCodeUrl=''
+				onShowPanelShare={handleShowPanelShare}
+			/>
 		</View>
 	)
 }

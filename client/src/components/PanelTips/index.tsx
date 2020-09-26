@@ -6,11 +6,11 @@ import Config from '@/config/index'
 
 import './index.scss'
 
-interface IComLoadingProps {
+interface IPanelTipsProps {
 	strType: 'LOADING' | 'EMPTY'
 }
 
-export default function TipsPanel(props: IComLoadingProps) {
+export default function PanelTips(props: IPanelTipsProps) {
 	const { strType } = props
 
 	const strEmptyUrl = Config.cloudPath + '/common/empty.png'
@@ -20,7 +20,11 @@ export default function TipsPanel(props: IComLoadingProps) {
 			case 'LOADING':
 				return (
 					<View className='loading-wrap flex-center-h'>
-						<Image className='loading-content' src={strLoadingUrl} mode='widthFix' />
+						<Image
+							className='loading-content'
+							src={strLoadingUrl}
+							mode='widthFix'
+						/>
 					</View>
 				)
 			case 'EMPTY':
@@ -34,5 +38,6 @@ export default function TipsPanel(props: IComLoadingProps) {
 				return <View></View>
 		}
 	}
+
 	return readerPanel()
 }

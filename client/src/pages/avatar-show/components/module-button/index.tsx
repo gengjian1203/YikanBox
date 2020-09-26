@@ -23,10 +23,12 @@ import {
 
 import './index.scss'
 
-interface IModuleBottomProps {}
+interface IModuleBottomProps {
+	onShowPanelShare: any
+}
 
 export default function ModuleButton(props: IModuleBottomProps) {
-	const {} = props
+	const { onShowPanelShare = (any: any) => true } = props
 
 	const [isShowActionSheet, setShowActionSheet] = useState<boolean>(false) // 是否展示弹窗
 	const [canvasSave, setCanvasSave] = useState<any>(null)
@@ -188,7 +190,8 @@ export default function ModuleButton(props: IModuleBottomProps) {
 		console.log('handleButtonSaveClick')
 		setSelectJewelry({})
 		saveAndExportAvatar()
-		// Taro.navigateBack()
+		// 打开分享面板
+		onShowPanelShare(true)
 	}
 
 	// 底部弹窗的关闭事件
@@ -236,7 +239,7 @@ export default function ModuleButton(props: IModuleBottomProps) {
 					circle
 					onClick={useThrottle(useCheckLogin(handleButtonSaveClick))}
 				>
-					分享保存
+					保存分享
 				</AtButton>
 			</View>
 

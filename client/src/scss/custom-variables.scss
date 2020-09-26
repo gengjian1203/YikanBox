@@ -5,3 +5,7 @@ $color-brand-dark: #f7b500;
 
 // 改变taro-ui的默认样式
 @import 'taro-ui/dist/style/index.scss';
+
+.at-curtain {
+	background-color: rgba(0, 0, 0, 0.8);
+}

@@ -7,7 +7,7 @@ import { SIZE_PAGE_DISCOVER } from '@/redux/constants/articleInfo'
 import webApi from '@/api/articleInfo'
 
 import { View, Swiper, SwiperItem } from '@tarojs/components'
-import TipsPanel from '@/components/TipsPanel'
+import PanelTips from '@/components/PanelTips'
 
 import ModuleArticle from './components/module-article'
 
@@ -86,7 +86,7 @@ export default function VPageDiscover(props: IVPageDiscoverProps) {
 						(nHeightNavigationHeader + nHeightTabbarBottom) * 2
 					)}); `}
 				>
-					<TipsPanel strType='EMPTY' />
+					<PanelTips strType='EMPTY' />
 				</View>
 			)}
 		</View>

@@ -47,6 +47,34 @@
 	align-items: center;
 }
 
+.flex-between-h {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.flex-between-v {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.flex-around-h {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.flex-around-v {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+
 .text-ellipsis {
 	display: block;
 	width: 100%;

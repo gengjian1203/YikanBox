@@ -6,7 +6,7 @@ import { shareType, processSharePath, deepClone } from '@/utils/index'
 import { View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 import NavigationHeader from '@/components/NavigationHeader'
-import TipsPanel from '@/components/TipsPanel'
+import PanelTips from '@/components/PanelTips'
 import ModuleTitle from '@/components/ModuleTitle'
 
 import Config from '@/config/index'
@@ -87,7 +87,7 @@ export default function Popularize() {
 				})
 			) : (
 				<View className='list-empty flex-center'>
-					<TipsPanel strType='EMPTY' />
+					<PanelTips strType='EMPTY' />
 				</View>
 			)}
 		</View>

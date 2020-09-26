@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import React, { useState, useEffect } from 'react'
 
 import { View } from '@tarojs/components'
-import TipsPanel from '@/components/TipsPanel'
+import PanelTips from '@/components/PanelTips'
 
 import { deepClone } from '@/utils/index'
 
@@ -47,7 +47,7 @@ export default function ListArticle(props: IListArticleProps) {
 				})
 			) : (
 				<View className='list-empty flex-center'>
-					<TipsPanel strType='EMPTY' />
+					<PanelTips strType='EMPTY' />
 				</View>
 			)}
 		</View>

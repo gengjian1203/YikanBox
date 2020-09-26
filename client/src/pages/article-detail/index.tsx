@@ -151,7 +151,7 @@ export default function ArticleDetail() {
 						className='float-btn-icon'
 						onClick={useThrottle(useCheckLogin(handleCollectionClick))}
 					>
-						<View className={`iconfont ` + `icon-collection `}>
+						<View className={`iconfont ` + `icon-collection-select `}>
 							<View
 								className={
 									`iconfont ` +
@@ -167,7 +167,7 @@ export default function ArticleDetail() {
 					</AtButton>
 					{/* 分享 */}
 					<AtButton className='float-btn-icon' openType='share'>
-						<View className='iconfont icon-share'></View>
+						<View className='iconfont icon-share-select'></View>
 					</AtButton>
 				</View>
 			</View>

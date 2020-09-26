@@ -1,0 +1,69 @@
+@import '../../app.scss';
+
+.panel-share-wrap {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+
+	.share-img {
+		width: 600px;
+		height: 800px;
+	}
+
+	.share-text {
+		margin-top: $border-bold-space;
+		text-align: center;
+		font-size: $f6;
+		color: $color-white;
+	}
+
+	.share-button-wrap {
+		margin-top: $border-bold-space;
+		.share-button {
+			.float-btn-icon {
+				position: relative;
+				width: 100px;
+				height: 100px;
+				border: none;
+				border-radius: 50%;
+				box-shadow: 0 5px 5px $color-white;
+
+				&:after {
+					border: none;
+				}
+
+				.iconfont {
+					position: absolute;
+					top: 58%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					width: 100%;
+					height: 100%;
+					font-size: 60px;
+					color: $color-white;
+				}
+			}
+
+			.bk-green {
+				background-image: linear-gradient(135deg, #04be02, 80%, $color-white);
+			}
+
+			.bk-blue {
+				background-image: linear-gradient(135deg, #0084ff, 80%, $color-white);
+			}
+
+			.bk-yellow {
+				background-image: linear-gradient(135deg, #f7b500, 80%, $color-white);
+			}
+
+			.btn-text {
+				margin-top: $border-thin-space;
+				font-size: $f7;
+				color: $color-white;
+				white-space: nowrap;
+				text-align: center;
+			}
+		}
+	}
+}

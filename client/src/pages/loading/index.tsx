@@ -14,7 +14,7 @@ import AppService from '@/services/AppService'
 import StorageManager from '@/services/StorageManager'
 
 import { Block, View } from '@tarojs/components'
-import TipsPanel from '@/components/TipsPanel'
+import PanelTips from '@/components/PanelTips'
 
 import './index.scss'
 
@@ -202,7 +202,7 @@ export default function Loading() {
 				</Block>
 			) : (
 				<Block>
-					<TipsPanel strType='LOADING' />
+					<PanelTips strType='LOADING' />
 				</Block>
 			)}
 		</View>
