@@ -5,6 +5,7 @@ import { AtButton, AtCurtain } from 'taro-ui'
 
 import useCheckAuthorize from '@/hooks/useCheckAuthorize'
 import useThrottle from '@/hooks/useThrottle'
+import QRCodeManager from '@/services/QRCodeManager'
 
 import { PANEL_SHARE_WIDTH, PANEL_SHARE_HEIGHT } from './utils/config'
 import { drawCanvasShare } from './utils/index'
@@ -33,6 +34,40 @@ export default function PanelShare(props: IPanelShareProps) {
 	const [strSharePhotoUrl, setSharePhotoUrl] = useState<string>('')
 	const [canvasShare, setCanvasShare] = useState<any>(null)
 
+	// 更新海报canvas
+	const updateCanvasShare = async () => {
+		Taro.showLoading({
+			title: '生成海报中',
+			mask: true,
+		})
+		const strQRCodeUrl = await QRCodeManager.getQRCode(strSharePath)
+		console.log('updateCanvasShare strQRCodeUrl', strQRCodeUrl)
+		drawCanvasShare(canvasShare, strContentUrl, strQRCodeUrl, 0)
+		canvasShare.draw(true, () => {
+			Taro.hideLoading()
+			Taro.canvasToTempFilePath({
+				x: 0,
+				y: 0,
+				width: PANEL_SHARE_WIDTH * 2,
+				height: PANEL_SHARE_HEIGHT * 2,
+				destWidth: PANEL_SHARE_WIDTH * 2,
+				destHeight: PANEL_SHARE_HEIGHT * 2,
+				fileType: 'jpg',
+				canvasId: 'canvas-share',
+				success: resToCanvas => {
+					console.log('resToCanvas', resToCanvas)
+					setSharePhotoUrl(resToCanvas.tempFilePath)
+				},
+				fail: err => {
+					Taro.showToast({
+						title: '生成海报失败',
+						icon: 'none',
+					})
+				},
+			})
+		})
+	}
+
 	const onLoad = () => {
 		// 设置 canvas 对象
 		setCanvasShare(Taro.createCanvasContext('canvas-share'))
@@ -45,29 +80,7 @@ export default function PanelShare(props: IPanelShareProps) {
 	useEffect(() => {
 		console.log('PanelShare', isShowPanelShare)
 		if (isShowPanelShare && strContentUrl !== '') {
-			drawCanvasShare(canvasShare, strContentUrl, 0)
-			canvasShare.draw(true, () => {
-				Taro.canvasToTempFilePath({
-					x: 0,
-					y: 0,
-					width: PANEL_SHARE_WIDTH * 2,
-					height: PANEL_SHARE_HEIGHT * 2,
-					destWidth: PANEL_SHARE_WIDTH * 2,
-					destHeight: PANEL_SHARE_HEIGHT * 2,
-					fileType: 'jpg',
-					canvasId: 'canvas-share',
-					success: resToCanvas => {
-						console.log('resToCanvas', resToCanvas)
-						setSharePhotoUrl(resToCanvas.tempFilePath)
-					},
-					fail: err => {
-						Taro.showToast({
-							title: '生成海报失败',
-							icon: 'none',
-						})
-					},
-				})
-			})
+			updateCanvasShare()
 		}
 		return () => {}
 	}, [isShowPanelShare, strContentUrl])

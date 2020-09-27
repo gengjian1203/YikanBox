@@ -5,6 +5,9 @@ export const config = {
 	cloudPath: prod
 		? 'cloud://online-z8369.6f6e-online-z8369-1259256375/resource'
 		: 'cloud://online-z8369.6f6e-online-z8369-1259256375/resource',
+	cloudPathQRCode: prod
+		? 'cloud://online-z8369.6f6e-online-z8369-1259256375/'
+		: 'cloud://online-z8369.6f6e-online-z8369-1259256375/',
 }
 
 export default config

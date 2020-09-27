@@ -109,13 +109,16 @@ const drawShareSource = (canvas: Taro.CanvasContext, config: IConfigType) => {
  * @param canvas
  * @param config
  */
-const drawShareQRCode = (canvas: Taro.CanvasContext, config: IConfigType) => {
-	const strQRCodeUrl = ''
+const drawShareQRCode = (
+	canvas: Taro.CanvasContext,
+	config: IConfigType,
+	strQRCodeUrl: string
+) => {
 	const objConfigQRCode = config.objQRCode
 
 	if (strQRCodeUrl) {
 		canvas.drawImage(
-			strQRCodeUrl,
+			ResourceManager.getStaticUrl(strQRCodeUrl),
 			objConfigQRCode.nQRCodeX,
 			objConfigQRCode.nQRCodeY,
 			objConfigQRCode.nQRCodeWidth,
@@ -152,11 +155,13 @@ const drawShareExtend = (canvas: Taro.CanvasContext, config: IConfigType) => {
  * 绘制canvas分享图主函数
  * @param canvas
  * @param strContentUrl
+ * @param strQRCodeUrl
  * @param index
  */
 export const drawCanvasShare = (
 	canvas: Taro.CanvasContext,
 	strContentUrl: string = '',
+	strQRCodeUrl: string = '',
 	index: number = 0
 ) => {
 	console.log('drawCanvasShare.')
@@ -170,7 +175,7 @@ export const drawCanvasShare = (
 		// 绘制分享人身份
 		drawShareSource(canvas, config)
 		// 绘制二维码
-		drawShareQRCode(canvas, config)
+		drawShareQRCode(canvas, config, strQRCodeUrl)
 		// 绘制附属内容
 		drawShareExtend(canvas, config)
 	} else {

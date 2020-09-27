@@ -1,7 +1,8 @@
 import Taro from '@tarojs/taro'
 import Config from '@/config/index'
-import StorageManager from '@/services/StorageManager'
+import QRCodeManager from '@/services/QRCodeManager'
 import ResourceManager from '@/services/ResourceManager'
+import StorageManager from '@/services/StorageManager'
 
 const m_managerStorage = StorageManager.getInstance()
 
@@ -31,6 +32,7 @@ export default class AppInitDataService {
 		if (!isBlockMember) {
 			ResourceManager.getInstance()
 			ResourceManager.loadingAllResource()
+			QRCodeManager.getInstance()
 		}
 	}
 
