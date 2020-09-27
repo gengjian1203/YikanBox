@@ -42,7 +42,7 @@ export default function PanelShare(props: IPanelShareProps) {
 		})
 		const strQRCodeUrl = await QRCodeManager.getQRCode(strSharePath)
 		console.log('updateCanvasShare strQRCodeUrl', strQRCodeUrl)
-		drawCanvasShare(canvasShare, strContentUrl, strQRCodeUrl, 0)
+		drawCanvasShare(canvasShare, strContentUrl, strQRCodeUrl, 2)
 		canvasShare.draw(true, () => {
 			Taro.hideLoading()
 			Taro.canvasToTempFilePath({
@@ -135,15 +135,30 @@ export default function PanelShare(props: IPanelShareProps) {
 				closeBtnPosition='bottom'
 				onClose={handlePanelShareClose}
 			>
-				<Image
-					className='share-img'
+				<View
+					className='share-content'
 					style={
-						`width: ${PANEL_SHARE_WIDTH}px;` + `height: ${PANEL_SHARE_WIDTH}px;`
+						`width: ${PANEL_SHARE_WIDTH}px;` +
+						`height: ${PANEL_SHARE_HEIGHT}px;`
 					}
-					src={strSharePhotoUrl}
-					mode='widthFix'
-					showMenuByLongpress
-				/>
+				>
+					<Image
+						className='share-img'
+						style={
+							`width: ${PANEL_SHARE_WIDTH}px;` +
+							`height: ${PANEL_SHARE_HEIGHT}px;`
+						}
+						src={strSharePhotoUrl}
+						mode='widthFix'
+						showMenuByLongpress
+					/>
+					{/* <AtButton className='content-btn-icon flex-center content-btn-left'>
+						<View className='iconfont icon-arrow-left'></View>
+					</AtButton>
+					<AtButton className='content-btn-icon flex-center content-btn-right'>
+						<View className='iconfont icon-arrow-right'></View>
+					</AtButton> */}
+				</View>
 				<View className='share-text'>长按图片，可快捷转发哦！</View>
 				<View className='share-button-wrap flex-around-h'>
 					<View className='share-button flex-between-v'>

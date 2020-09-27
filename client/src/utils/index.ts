@@ -4,6 +4,7 @@ import deepClone from './base/deepClone'
 import getHDAvatarUrl from './base/getHDAvatarUrl'
 import mergeObject from './base/mergeObject'
 import UUID from './base/UUID'
+import ellipsisString from './format/ellipsisString'
 import hiddenString from './format/hiddenString'
 import normalDate from './format/normalDate'
 import router2url from './format/router2url'
@@ -20,6 +21,7 @@ export {
 	getHDAvatarUrl,
 	mergeObject,
 	UUID,
+	ellipsisString,
 	hiddenString,
 	normalDate,
 	router2url,

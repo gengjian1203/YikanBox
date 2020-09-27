@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro'
 import StorageManager from '@/services/StorageManager'
 import ResourceManager from '@/services/ResourceManager'
+import { ellipsisString } from '@/utils/index'
 
 import {
 	PANEL_SHARE_WIDTH,
@@ -95,7 +96,7 @@ const drawShareSource = (canvas: Taro.CanvasContext, config: IConfigType) => {
 		canvas.strokeStyle = objConfigSource.strSourceNameColor
 		canvas.setFontSize(objConfigSource.nSourceNameFontSize)
 		canvas.fillText(
-			objMemberInfo.user_nickName,
+			ellipsisString(objMemberInfo.user_nickName, 18),
 			objConfigSource.nSourceNameX,
 			objConfigSource.nSourceNameY
 		)

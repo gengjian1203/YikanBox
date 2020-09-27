@@ -35,6 +35,11 @@ const arrAllResource = [
 	'/mine/border_05.png',
 	'/mine/border_06.png',
 	'/mine/border_07.png',
+	'/share/share_01.jpg',
+	'/share/share_02.jpg',
+	'/share/share_03.jpg',
+	'/share/share_04.jpg',
+	'/share/share_05.jpg',
 ]
 /**
  * 资源加载器
