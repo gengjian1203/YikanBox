@@ -3,6 +3,7 @@
  * 新增二维码信息
  * @param {*} event
  * @param {*} db
+ * @param {*} cloud
  * @returns
  */
 
