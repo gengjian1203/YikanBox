@@ -6,6 +6,7 @@ import { AtButton, AtCurtain } from 'taro-ui'
 import useCheckAuthorize from '@/hooks/useCheckAuthorize'
 import useThrottle from '@/hooks/useThrottle'
 import QRCodeManager from '@/services/QRCodeManager'
+import ResourceManager from '@/services/ResourceManager'
 
 import { PANEL_SHARE_WIDTH, PANEL_SHARE_HEIGHT } from './utils/config'
 import { drawCanvasShare } from './utils/index'
@@ -40,7 +41,9 @@ export default function PanelShare(props: IPanelShareProps) {
 			title: '生成海报中',
 			mask: true,
 		})
-		const strQRCodeUrl = await QRCodeManager.getQRCode(strSharePath)
+		const strQRCodeUrl = await ResourceManager.getUrl(
+			await QRCodeManager.getQRCode(strSharePath)
+		)
 		console.log('updateCanvasShare strQRCodeUrl', strQRCodeUrl)
 		drawCanvasShare(canvasShare, strContentUrl, strQRCodeUrl, 2)
 		canvasShare.draw(true, () => {
