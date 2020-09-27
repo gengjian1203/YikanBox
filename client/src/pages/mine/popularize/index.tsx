@@ -1,8 +1,6 @@
 import Taro, { useRouter } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import useThrottle from '@/hooks/useThrottle'
-import useCheckLogin from '@/hooks/useCheckLogin'
 import { shareType, processSharePath, deepClone } from '@/utils/index'
 
 import { View } from '@tarojs/components'
@@ -63,11 +61,7 @@ export default function Popularize() {
 			{/* 顶部导航 */}
 			<NavigationHeader isShowLeftIcon strNavigationTitle='我的邀请' />
 			{/* 我要邀请 */}
-			<AtButton
-				type='primary'
-				full
-				onClick={useThrottle(useCheckLogin(handleShareClick))}
-			>
+			<AtButton type='primary' full onClick={handleShareClick}>
 				我要邀请
 			</AtButton>
 			{/* 邀请数量 */}
@@ -87,9 +81,7 @@ export default function Popularize() {
 							nickName={item.nickName}
 							shareType={item.shareType}
 							sharePath={item.sharePath}
-							onClick={useThrottle(
-								useCheckLogin(() => handleMemberDetailClick(item))
-							)}
+							onClick={() => handleMemberDetailClick(item)}
 						/>
 					)
 				})

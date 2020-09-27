@@ -29,7 +29,9 @@ export default function memberInfoReducer(state = INITIAL_STATE, action: any) {
 			case SET_MEMBER_INFO:
 				draft = payload
 				m_managerStorage.setStorageSync('memberInfo', payload)
-				ResourceManager.getStaticUrl(payload.user_avatarUrl)
+				if (payload && payload.user_avatarUrl) {
+					ResourceManager.getStaticUrl(payload.user_avatarUrl)
+				}
 				return draft
 			// 新增当前人的文章收藏信息
 			case ADD_COLLECTION_ARTICLE_INFO:

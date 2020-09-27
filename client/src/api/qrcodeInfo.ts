@@ -18,7 +18,7 @@ const createQRCode = async (objParams?: ICreateQRCodeType) => {
 }
 
 interface IQueryQRCodeType {
-	strScene?: string // 二维码ID
+	strQRCodeId?: string // 二维码ID
 }
 /**
  * 查询二维码信息

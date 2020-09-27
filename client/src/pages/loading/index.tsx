@@ -10,11 +10,15 @@ import { SIZE_PAGE_DISCOVER } from '@/redux/constants/articleInfo'
 
 import webApiAppInfo from '@/api/appInfo'
 import webApiArticleInfo from '@/api/articleInfo'
+import webApiQrcodeInfo from '@/api/qrcodeInfo'
 import AppService from '@/services/AppService'
 import StorageManager from '@/services/StorageManager'
+import { router2param } from '@/utils/index'
 
 import { Block, View } from '@tarojs/components'
 import PanelTips from '@/components/PanelTips'
+
+import { changeQRCodeParam } from './utils/index'
 
 import './index.scss'
 
@@ -141,7 +145,23 @@ export default function Loading() {
 	// 跳转页面逻辑
 	const jumpPage = async objLoginInfo => {
 		const appInfo = objLoginInfo.appInfo
-		if (params.sharePath) {
+		if (params.scene) {
+			// 分享二维码进入的
+			const paramQueryQRCode = {
+				strQRCodeId: params.scene,
+			}
+			const res = await webApiQrcodeInfo.queryQRCode(paramQueryQRCode)
+			// console.log('Loading jumpPage', res)
+			const paramResult = changeQRCodeParam(router2param(res.data.strSharePath))
+			const shareInfoTmp = {
+				...paramResult,
+				sharePath: decodeURIComponent(paramResult.sharePath),
+			}
+			setShareInfo(shareInfoTmp)
+			Taro.reLaunch({
+				url: shareInfoTmp.sharePath,
+			})
+		} else if (params.sharePath) {
 			// 分享进入的
 			const shareInfoTmp = {
 				...params,
@@ -173,6 +193,7 @@ export default function Loading() {
 
 		console.log(
 			'Loading onLoad',
+			params,
 			resInitApi,
 			resInitSystemInfo,
 			resInitLoginInfo
