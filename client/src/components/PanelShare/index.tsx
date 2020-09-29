@@ -41,11 +41,16 @@ export default function PanelShare(props: IPanelShareProps) {
 			title: '生成海报中',
 			mask: true,
 		})
-		const strQRCodeUrl = await ResourceManager.getUrl(
+		const strQRCodeUrlTmp = await ResourceManager.getUrl(
 			await QRCodeManager.getQRCode(strSharePath)
 		)
-		console.log('updateCanvasShare strQRCodeUrl', strQRCodeUrl)
-		drawCanvasShare(canvasShare, strContentUrl, strQRCodeUrl, 2)
+		const strContentUrlTmp = await ResourceManager.getUrl(strContentUrl)
+		console.log(
+			'updateCanvasShare strQRCodeUrl',
+			strQRCodeUrlTmp,
+			strContentUrlTmp
+		)
+		drawCanvasShare(canvasShare, strContentUrlTmp, strQRCodeUrlTmp, 2)
 		canvasShare.draw(true, () => {
 			Taro.hideLoading()
 			Taro.canvasToTempFilePath({
