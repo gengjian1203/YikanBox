@@ -1,6 +1,7 @@
 import Taro, { useRouter } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import * as imagesLocal from '@/services/ResourceImage'
 import { shareType, processSharePath, deepClone } from '@/utils/index'
 
 import { View } from '@tarojs/components'
@@ -9,8 +10,6 @@ import NavigationHeader from '@/components/NavigationHeader'
 import PanelShare from '@/components/PanelShare'
 import PanelTips from '@/components/PanelTips'
 import ModuleTitle from '@/components/ModuleTitle'
-
-import Config from '@/config/index'
 
 import ItemCard from './components/item-card/index'
 
@@ -25,8 +24,6 @@ export default function Popularize() {
 	const data_arrShareChildrenList = useSelector(
 		state => state.memberInfo.data_arrShareChildrenList
 	)
-
-	const strShareUrl = Config.cloudPath + '/common/share.jpg'
 
 	const onLoad = () => {
 		const arrListTmp = deepClone(data_arrShareChildrenList)
@@ -95,12 +92,12 @@ export default function Popularize() {
 			<PanelShare
 				isShowPanelShare={isShowPanelShare}
 				strShareTitle='分享了一个好用的小程序，并@了你'
-				strShareImage={strShareUrl}
+				strShareImage={imagesLocal.strUrlImageCommonShare}
 				strSharePath={processSharePath({
 					sharePath: '/pages/main/index',
 					shareType: shareType.PATH_POPULARIZE,
 				})}
-				strContentUrl={strShareUrl}
+				strContentUrl={imagesLocal.strUrlImageCommonShare}
 				onShowPanelShare={handleShowPanelShare}
 			/>
 		</View>

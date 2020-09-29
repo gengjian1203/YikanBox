@@ -1,47 +1,4 @@
-import Config from '@/config/index'
-
-// Draw
-const strUrlJewelryZhongqiu00 =
-	Config.cloudPath + '/avatar/jewelry/zhongqiu_00.png'
-const strUrlJewelryZhongqiu01 =
-	Config.cloudPath + '/avatar/jewelry/zhongqiu_01.png'
-
-const strUrlJewelryGuoqing00 =
-	Config.cloudPath + '/avatar/jewelry/guoqing_00.png'
-const strUrlJewelryGuoqing01 =
-	Config.cloudPath + '/avatar/jewelry/guoqing_01.png'
-const strUrlJewelryGuoqing02 =
-	Config.cloudPath + '/avatar/jewelry/guoqing_02.png'
-const strUrlJewelryGuoqing03 =
-	Config.cloudPath + '/avatar/jewelry/guoqing_03.png'
-const strUrlJewelryGuoqing04 =
-	Config.cloudPath + '/avatar/jewelry/guoqing_04.png'
-
-const strUrlJewelryHongdian = Config.cloudPath + '/avatar/jewelry/hongdian.png'
-const strUrlJewelryShanchu = Config.cloudPath + '/avatar/jewelry/shanchu.png'
-const strUrlJewelryShengdanlaoren =
-	Config.cloudPath + '/avatar/jewelry/shengdanlaoren.png'
-const strUrlJewelryShengdanmao =
-	Config.cloudPath + '/avatar/jewelry/shengdanmao.png'
-const strUrlJewelryShengdanshu =
-	Config.cloudPath + '/avatar/jewelry/shengdanshu.png'
-const strUrlJewelryXueren = Config.cloudPath + '/avatar/jewelry/xueren.png'
-
-// EG
-
-const strUrlJewelryZhongqiu00EG =
-	Config.cloudPath + '/avatar/eg/zhongqiu_00.jpg'
-const strUrlJewelryZhongqiu01EG =
-	Config.cloudPath + '/avatar/eg/zhongqiu_01.jpg'
-
-const strUrlJewelryGuoqing00EG = Config.cloudPath + '/avatar/eg/guoqing_00.jpg'
-const strUrlJewelryGuoqing01EG = Config.cloudPath + '/avatar/eg/guoqing_01.jpg'
-const strUrlJewelryGuoqing02EG = Config.cloudPath + '/avatar/eg/guoqing_02.jpg'
-const strUrlJewelryGuoqing03EG = Config.cloudPath + '/avatar/eg/guoqing_03.jpg'
-const strUrlJewelryGuoqing04EG = Config.cloudPath + '/avatar/eg/guoqing_04.jpg'
-
-const strUrlJewelryHongdianEG = Config.cloudPath + '/avatar/eg/hongdian.jpg'
-const strUrlJewelryShanchuEG = Config.cloudPath + '/avatar/eg/shanchu.jpg'
+import * as imagesLocal from '@/services/ResourceImage'
 
 export const CANVAS_WIDTH = 350 // 画布宽
 export const CANVAS_HEIGHT = 350 // 画布高
@@ -62,8 +19,8 @@ export const arrJewelryList = [
 		list: [
 			{
 				type: 'IMAGE',
-				value: strUrlJewelryZhongqiu00,
-				valueEG: strUrlJewelryZhongqiu00EG,
+				value: imagesLocal.strUrlImageAvatarJewelryZhongqiu00,
+				valueEG: imagesLocal.strUrlImageAvatarEgZhongqiu00,
 				rect: {
 					x: CANVAS_WIDTH - 100,
 					y: 0,
@@ -73,8 +30,8 @@ export const arrJewelryList = [
 			},
 			{
 				type: 'IMAGE',
-				value: strUrlJewelryZhongqiu01,
-				valueEG: strUrlJewelryZhongqiu01EG,
+				value: imagesLocal.strUrlImageAvatarJewelryZhongqiu01,
+				valueEG: imagesLocal.strUrlImageAvatarEgZhongqiu01,
 				rect: {
 					x: CANVAS_WIDTH - 120,
 					y: CANVAS_HEIGHT - 120,
@@ -89,8 +46,8 @@ export const arrJewelryList = [
 		list: [
 			{
 				type: 'IMAGE',
-				value: strUrlJewelryGuoqing00,
-				valueEG: strUrlJewelryGuoqing00EG,
+				value: imagesLocal.strUrlImageAvatarJewelryGuoqing00,
+				valueEG: imagesLocal.strUrlImageAvatarEgGuoqing00,
 				rect: {
 					x: 0,
 					y: 0,
@@ -100,8 +57,8 @@ export const arrJewelryList = [
 			},
 			{
 				type: 'IMAGE',
-				value: strUrlJewelryGuoqing01,
-				valueEG: strUrlJewelryGuoqing01EG,
+				value: imagesLocal.strUrlImageAvatarJewelryGuoqing01,
+				valueEG: imagesLocal.strUrlImageAvatarEgGuoqing01,
 				rect: {
 					x: 0,
 					y: CANVAS_HEIGHT - Math.floor((CANVAS_WIDTH / 300) * 116),
@@ -111,8 +68,8 @@ export const arrJewelryList = [
 			},
 			{
 				type: 'IMAGE',
-				value: strUrlJewelryGuoqing02,
-				valueEG: strUrlJewelryGuoqing02EG,
+				value: imagesLocal.strUrlImageAvatarJewelryGuoqing02,
+				valueEG: imagesLocal.strUrlImageAvatarEgGuoqing02,
 				rect: {
 					x: 0,
 					y: CANVAS_HEIGHT - Math.floor((CANVAS_WIDTH / 300) * 86),
@@ -122,8 +79,8 @@ export const arrJewelryList = [
 			},
 			{
 				type: 'IMAGE',
-				value: strUrlJewelryGuoqing03,
-				valueEG: strUrlJewelryGuoqing03EG,
+				value: imagesLocal.strUrlImageAvatarJewelryGuoqing03,
+				valueEG: imagesLocal.strUrlImageAvatarEgGuoqing03,
 				rect: {
 					x: CANVAS_WIDTH - 120,
 					y: CANVAS_HEIGHT - 120,
@@ -133,8 +90,8 @@ export const arrJewelryList = [
 			},
 			{
 				type: 'IMAGE',
-				value: strUrlJewelryGuoqing04,
-				valueEG: strUrlJewelryGuoqing04EG,
+				value: imagesLocal.strUrlImageAvatarJewelryGuoqing04,
+				valueEG: imagesLocal.strUrlImageAvatarEgGuoqing04,
 				rect: {
 					x: CANVAS_WIDTH - 120,
 					y: CANVAS_HEIGHT - 109,
@@ -149,8 +106,8 @@ export const arrJewelryList = [
 		list: [
 			{
 				type: 'IMAGE',
-				value: strUrlJewelryHongdian,
-				valueEG: strUrlJewelryHongdianEG,
+				value: imagesLocal.strUrlImageAvatarJewelryHongdian,
+				valueEG: imagesLocal.strUrlImageAvatarEgHongdian,
 				rect: {
 					x: CANVAS_WIDTH - 80,
 					y: 0,
@@ -160,8 +117,8 @@ export const arrJewelryList = [
 			},
 			{
 				type: 'IMAGE',
-				value: strUrlJewelryShanchu,
-				valueEG: strUrlJewelryShanchuEG,
+				value: imagesLocal.strUrlImageAvatarJewelryShanchu,
+				valueEG: imagesLocal.strUrlImageAvatarEgShanchu,
 				rect: {
 					x: 0,
 					y: 0,
@@ -362,7 +319,7 @@ export const arrJewelryList = [
 		list: [
 			{
 				type: 'IMAGE',
-				value: strUrlJewelryShengdanlaoren,
+				value: imagesLocal.strUrlImageAvatarJewelryShengdanlaoren,
 				rect: {
 					width: SIZE_IMAGE,
 					height: SIZE_IMAGE,
@@ -370,7 +327,7 @@ export const arrJewelryList = [
 			},
 			{
 				type: 'IMAGE',
-				value: strUrlJewelryShengdanmao,
+				value: imagesLocal.strUrlImageAvatarJewelryShengdanmao,
 				rect: {
 					width: SIZE_IMAGE,
 					height: SIZE_IMAGE,
@@ -378,7 +335,7 @@ export const arrJewelryList = [
 			},
 			{
 				type: 'IMAGE',
-				value: strUrlJewelryShengdanshu,
+				value: imagesLocal.strUrlImageAvatarJewelryShengdanshu,
 				rect: {
 					width: SIZE_IMAGE,
 					height: SIZE_IMAGE,
@@ -386,7 +343,7 @@ export const arrJewelryList = [
 			},
 			{
 				type: 'IMAGE',
-				value: strUrlJewelryXueren,
+				value: imagesLocal.strUrlImageAvatarJewelryXueren,
 				rect: {
 					width: SIZE_IMAGE,
 					height: SIZE_IMAGE,

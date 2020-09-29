@@ -5,6 +5,7 @@ import useActions from '@/hooks/useActions'
 import avatarShowInfoActions from '@/redux/actions/avatarShowInfo'
 import Config from '@/config/index'
 import { checkObjectEmpty, UUID } from '@/utils/index'
+import * as imagesLocal from '@/services/ResourceImage'
 import ResourceManager from '@/services/ResourceManager'
 
 import { View, Block, Canvas } from '@tarojs/components'
@@ -47,8 +48,6 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 		updateAvatarJewelry,
 	} = useActions(avatarShowInfoActions)
 
-	const strDefaultAvatarUrl = Config.cloudPath + '/avatar/default.png'
-
 	const addSameAvatarJewelry = async objJewelry => {
 		const objJewelryTmp = {
 			...objJewelry,
@@ -68,7 +67,9 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 		// 设置 canvas 对象
 		setCanvas(Taro.createCanvasContext('canvas'))
 		// 加载头像
-		setAvatarImage(await ResourceManager.getUrl(strDefaultAvatarUrl))
+		setAvatarImage(
+			await ResourceManager.getUrl(imagesLocal.strUrlImageAvatarDefault)
+		)
 	}
 
 	useEffect(() => {

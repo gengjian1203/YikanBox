@@ -1,4 +1,4 @@
-import Config from '@/config/index'
+import * as imagesLocal from '@/services/ResourceImage'
 
 export const PANEL_SHARE_WIDTH = 300
 export const PANEL_SHARE_HEIGHT = 400
@@ -58,7 +58,7 @@ export interface IConfigType {
 export const CanvasShareConfig: Array<IConfigType> = [
 	{
 		objBackground: {
-			strBackgroundUrl: Config.cloudPath + '/share/share_01.jpg',
+			strBackgroundUrl: imagesLocal.strUrlImageShareBg01,
 			nBackgroundX: 0,
 			nBackgroundY: 0,
 			nBackgroundWidth: PANEL_SHARE_WIDTH * 2,
@@ -96,7 +96,7 @@ export const CanvasShareConfig: Array<IConfigType> = [
 	},
 	{
 		objBackground: {
-			strBackgroundUrl: Config.cloudPath + '/share/share_02.jpg',
+			strBackgroundUrl: imagesLocal.strUrlImageShareBg02,
 			nBackgroundX: 0,
 			nBackgroundY: 0,
 			nBackgroundWidth: PANEL_SHARE_WIDTH * 2,
@@ -134,7 +134,7 @@ export const CanvasShareConfig: Array<IConfigType> = [
 	},
 	{
 		objBackground: {
-			strBackgroundUrl: Config.cloudPath + '/share/share_03.jpg',
+			strBackgroundUrl: imagesLocal.strUrlImageShareBg03,
 			nBackgroundX: 0,
 			nBackgroundY: 0,
 			nBackgroundWidth: PANEL_SHARE_WIDTH * 2,
@@ -172,7 +172,7 @@ export const CanvasShareConfig: Array<IConfigType> = [
 	},
 	{
 		objBackground: {
-			strBackgroundUrl: Config.cloudPath + '/share/share_04.jpg',
+			strBackgroundUrl: imagesLocal.strUrlImageShareBg04,
 			nBackgroundX: 0,
 			nBackgroundY: 0,
 			nBackgroundWidth: PANEL_SHARE_WIDTH * 2,
@@ -210,7 +210,7 @@ export const CanvasShareConfig: Array<IConfigType> = [
 	},
 	{
 		objBackground: {
-			strBackgroundUrl: Config.cloudPath + '/share/share_05.jpg',
+			strBackgroundUrl: imagesLocal.strUrlImageShareBg05,
 			nBackgroundX: 0,
 			nBackgroundY: 0,
 			nBackgroundWidth: PANEL_SHARE_WIDTH * 2,

@@ -6,7 +6,9 @@
 
 Taro + redux + wxcloud + ts 做个工具集合的微信小程序
 
-![即将放飞理想的工具箱线上码](./resource/qrcode.jpg)
+<!-- ![即将放飞理想的工具箱线上码](./resource/qrcode.jpg) -->
+
+![即将放飞理想的工具箱线上码](https://6f6e-online-z8369-1259256375.tcb.qcloud.la/resource/qrcode.jpg?sign=6a1b80a44dfdea9fb6dc21402bb9cc76&t=1601384295)
 
 #### 相关技术
 

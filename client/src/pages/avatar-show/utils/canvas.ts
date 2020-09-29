@@ -1,5 +1,5 @@
-import Config from '@/config/index'
 import ResourceManager from '@/services/ResourceManager'
+import * as imagesLocal from '@/services/ResourceImage'
 import { checkObjectEmpty, mergeObject } from '@/utils/index'
 
 import {
@@ -8,11 +8,6 @@ import {
 	BORDER_COLOR,
 	BORDER_BUTTON_SIZE,
 } from './const'
-
-const strUrlButtonAdd = Config.cloudPath + '/avatar/button/add.png'
-const strUrlButtonDelete = Config.cloudPath + '/avatar/button/delete.png'
-const strUrlButtonFlip = Config.cloudPath + '/avatar/button/flip.png'
-const strUrlButtonResize = Config.cloudPath + '/avatar/button/resize.png'
 
 /**
  * 绘制头像底图
@@ -153,28 +148,28 @@ const drawSelectBorderButton = (canvas, rectBorder, type) => {
 				x: rectBorder.x - nRadius,
 				y: rectBorder.y - nRadius,
 			}
-			strButtonUrl = strUrlButtonFlip
+			strButtonUrl = imagesLocal.strUrlImageAvatarButtonFlip
 			break
 		case 'ADD':
 			ptButtonPosition = {
 				x: rectBorder.x - nRadius,
 				y: rectBorder.y + rectBorder.height - nRadius,
 			}
-			strButtonUrl = strUrlButtonAdd
+			strButtonUrl = imagesLocal.strUrlImageAvatarButtonAdd
 			break
 		case 'DELETE':
 			ptButtonPosition = {
 				x: rectBorder.x + rectBorder.width - nRadius,
 				y: rectBorder.y - nRadius,
 			}
-			strButtonUrl = strUrlButtonDelete
+			strButtonUrl = imagesLocal.strUrlImageAvatarButtonDelete
 			break
 		case 'RESIZE':
 			ptButtonPosition = {
 				x: rectBorder.x + rectBorder.width - nRadius,
 				y: rectBorder.y + rectBorder.height - nRadius,
 			}
-			strButtonUrl = strUrlButtonResize
+			strButtonUrl = imagesLocal.strUrlImageAvatarButtonResize
 			break
 		default:
 			return
@@ -289,7 +284,6 @@ export const drawMainCanvas = (canvas, avatarShowInfo, objTouchPoint) => {
 	} = avatarShowInfo
 
 	if (canvas) {
-
 		// 绘制头像底图
 		drawAvatarImage(canvas, strAvatarImage)
 		// 绘制饰品表

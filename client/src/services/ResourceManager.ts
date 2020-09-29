@@ -1,60 +1,6 @@
-import Config from '@/config/index'
-import ResourceDownLoadAdaptor from './ResourceDownLoadAdaptor'
+import ResourceDownLoadAdaptor from '@/services/ResourceDownLoadAdaptor'
+import * as imagesLocal from '@/services/ResourceImage'
 
-const arrAllResource = [
-	'/avatar/button/add.png',
-	'/avatar/button/delete.png',
-	'/avatar/button/flip.png',
-	'/avatar/button/resize.png',
-	'/avatar/default.png',
-	'/avatar/jewelry/guoqing_00.png',
-	'/avatar/jewelry/guoqing_01.png',
-	'/avatar/jewelry/guoqing_02.png',
-	'/avatar/jewelry/guoqing_03.png',
-	'/avatar/jewelry/guoqing_04.png',
-	'/avatar/jewelry/hongdian.png',
-	'/avatar/jewelry/shanchu.png',
-	'/avatar/jewelry/shengdanlaoren.png',
-	'/avatar/jewelry/shengdanmao.png',
-	'/avatar/jewelry/shengdanshu.png',
-	'/avatar/jewelry/xueren.png',
-	'/avatar/jewelry/zhongqiu_00.png',
-	'/avatar/jewelry/zhongqiu_01.png',
-	'/avatar/eg/guoqing_00.jpg',
-	'/avatar/eg/guoqing_01.jpg',
-	'/avatar/eg/guoqing_02.jpg',
-	'/avatar/eg/guoqing_03.jpg',
-	'/avatar/eg/guoqing_04.jpg',
-	'/avatar/eg/hongdian.jpg',
-	'/avatar/eg/shanchu.jpg',
-	'/avatar/eg/zhongqiu_00.jpg',
-	'/avatar/eg/zhongqiu_01.jpg',
-	'/banner/banner_00.jpg',
-	'/banner/banner_01.jpg',
-	'/banner/banner_02.jpg',
-	'/banner/banner_03.jpg',
-	'/common/empty.png',
-	'/common/share.jpg',
-	'/mine/badge_01.png',
-	'/mine/badge_02.png',
-	'/mine/badge_03.png',
-	'/mine/badge_04.png',
-	'/mine/badge_05.png',
-	'/mine/badge_06.png',
-	'/mine/badge_07.png',
-	'/mine/border_01.png',
-	'/mine/border_02.png',
-	'/mine/border_03.png',
-	'/mine/border_04.png',
-	'/mine/border_05.png',
-	'/mine/border_06.png',
-	'/mine/border_07.png',
-	'/share/share_01.jpg',
-	'/share/share_02.jpg',
-	'/share/share_03.jpg',
-	'/share/share_04.jpg',
-	'/share/share_05.jpg',
-]
 /**
  * 资源加载器
  */
@@ -74,8 +20,8 @@ export default class ResourceManager {
 	}
 
 	static loadingAllResource() {
-		for (let item of arrAllResource) {
-			this.getUrl(Config.cloudPath + item)
+		for (let item in imagesLocal) {
+			this.getStaticUrl(imagesLocal[item])
 		}
 	}
 
@@ -84,14 +30,15 @@ export default class ResourceManager {
 			return strSourceUrl
 		} else {
 			const strUrl = this._mapResource.get(strSourceUrl)
-			// console.log('getStaticUrl', strSourceUrl, this._mapResource, strUrl)
 			if (strUrl) {
 				return strUrl
 			} else {
 				setTimeout(async () => {
 					const strResult = await ResourceDownLoadAdaptor.apply(strSourceUrl)
-					this._mapResource.set(strSourceUrl, strResult)
-					// console.log('ResourceManager getUrl3', this._mapResource)
+					if (strResult !== 'url-unknown') {
+						this._mapResource.set(strSourceUrl, strResult)
+						// console.log('getStaticUrl', this._mapResource)
+					}
 				}, 0)
 				return ''
 			}
@@ -103,15 +50,16 @@ export default class ResourceManager {
 			return strSourceUrl
 		} else {
 			const strUrl = this._mapResource.get(strSourceUrl)
-			// console.log('ResourceManager getUrl', strSourceUrl, strUrl)
 			if (strUrl) {
 				return strUrl
 			} else {
 				const strResult = await ResourceDownLoadAdaptor.apply(strSourceUrl)
-				this._mapResource.set(strSourceUrl, strResult)
-				// console.log('ResourceManager getUrl2', strResult)
-				// console.log('ResourceManager getUrl3', this._mapResource)
-				return strResult
+				if (strResult !== 'url-unknown') {
+					this._mapResource.set(strSourceUrl, strResult)
+					return strResult
+				} else {
+					return strSourceUrl
+				}
 			}
 		}
 	}
