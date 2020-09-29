@@ -38,6 +38,7 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 		setAvatarImage,
 		setAvatarShowListPoint,
 		addAvatarJewelry,
+		setSelectJewelry,
 	} = useActions(avatarShowInfoActions)
 
 	useEffect(() => {
@@ -111,6 +112,7 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 			value: await ResourceManager.getUrl(item.value),
 		}
 		addAvatarJewelry(objJewelry)
+		setSelectJewelry(objJewelry)
 	}
 
 	// 切换tab

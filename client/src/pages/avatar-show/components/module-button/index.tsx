@@ -112,8 +112,6 @@ export default function ModuleButton(props: IModuleBottomProps) {
 				canvasId: 'canvas-save',
 				success: resToCanvas => {
 					console.log('resToCanvas', resToCanvas)
-					// 打开分享面板
-					onShowPanelShare(true, resToCanvas.tempFilePath)
 					// 保存到相册
 					Taro.saveImageToPhotosAlbum({
 						filePath: resToCanvas.tempFilePath,
@@ -122,12 +120,20 @@ export default function ModuleButton(props: IModuleBottomProps) {
 							Taro.showToast({
 								title: '保存成功',
 								icon: 'success',
+								complete: res => {
+									// 打开分享面板
+									onShowPanelShare(true, resToCanvas.tempFilePath)
+								},
 							})
 						},
 						fail: err => {
 							Taro.showToast({
 								title: '保存失败',
 								icon: 'none',
+								complete: res => {
+									// 打开分享面板
+									onShowPanelShare(true, resToCanvas.tempFilePath)
+								},
 							})
 						},
 					})
@@ -191,6 +197,7 @@ export default function ModuleButton(props: IModuleBottomProps) {
 	// 点击保存图片
 	const handleButtonSaveClick = () => {
 		console.log('handleButtonSaveClick')
+		setSelectJewelry({})
 		saveAndExportAvatar()
 	}
 
