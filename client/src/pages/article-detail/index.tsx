@@ -9,7 +9,6 @@ import useCheckLogin from '@/hooks/useCheckLogin'
 import webApiArticleInfo from '@/api/articleInfo'
 import webApiMemberInfo from '@/api/memberInfo'
 import { shareType, processSharePath, getArticleTagName } from '@/utils/index'
-import ResourceManager from '@/services/ResourceManager'
 
 import { AtButton } from 'taro-ui'
 import { Block, View, Text } from '@tarojs/components'
@@ -77,8 +76,6 @@ export default function ArticleDetail() {
 			}
 		}
 		setArticleInfo(objArticleInfoTmp)
-		// 缓存下载缩略图
-		ResourceManager.getStaticUrl(objArticleInfoTmp.posterImg)
 	}
 
 	useEffect(() => {

@@ -1,5 +1,6 @@
 import Taro, { useShareAppMessage } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { View, Image, Block, Canvas } from '@tarojs/components'
 import { AtButton, AtCurtain } from 'taro-ui'
 
@@ -34,6 +35,10 @@ export default function PanelShare(props: IPanelShareProps) {
 
 	const [strSharePhotoUrl, setSharePhotoUrl] = useState<string>('')
 	const [canvasShare, setCanvasShare] = useState<any>(null)
+
+	const isEnableSharePoster = useSelector(
+		state => state.appInfo.objAppInfo.isEnableSharePoster
+	)
 
 	// 更新海报canvas
 	const updateCanvasShare = async () => {
@@ -86,12 +91,17 @@ export default function PanelShare(props: IPanelShareProps) {
 	}, [])
 
 	useEffect(() => {
-		console.log('PanelShare', isShowPanelShare)
-		if (isShowPanelShare && strContentUrl !== '') {
+		console.log(
+			'PanelShare',
+			isEnableSharePoster,
+			isShowPanelShare,
+			strContentUrl
+		)
+		if (isEnableSharePoster && isShowPanelShare && strContentUrl !== '') {
 			updateCanvasShare()
 		}
 		return () => {}
-	}, [isShowPanelShare, strContentUrl])
+	}, [isEnableSharePoster, isShowPanelShare, strContentUrl])
 
 	useShareAppMessage(res => {
 		// const sharePath = processSharePath({
@@ -143,62 +153,83 @@ export default function PanelShare(props: IPanelShareProps) {
 				closeBtnPosition='bottom'
 				onClose={handlePanelShareClose}
 			>
-				<View
-					className='share-content'
-					style={
-						`width: ${PANEL_SHARE_WIDTH}px;` +
-						`height: ${PANEL_SHARE_HEIGHT}px;`
-					}
-				>
-					<Image
-						className='share-img'
-						style={
-							`width: ${PANEL_SHARE_WIDTH}px;` +
-							`height: ${PANEL_SHARE_HEIGHT}px;`
-						}
-						src={strSharePhotoUrl}
-						mode='widthFix'
-						showMenuByLongpress
-					/>
-					{/* <AtButton className='content-btn-icon flex-center content-btn-left'>
-						<View className='iconfont icon-arrow-left'></View>
-					</AtButton>
-					<AtButton className='content-btn-icon flex-center content-btn-right'>
-						<View className='iconfont icon-arrow-right'></View>
-					</AtButton> */}
-				</View>
-				<View className='share-text'>长按图片，可快捷转发哦！</View>
-				<View className='share-button-wrap flex-around-h'>
-					<View className='share-button flex-between-v'>
-						<AtButton
-							className='float-btn-icon flex-center bk-green'
-							openType='share'
+				{isEnableSharePoster ? (
+					<Block>
+						<View
+							className={`share-content `}
+							style={
+								`width: ${PANEL_SHARE_WIDTH}px;` +
+								`height: ${PANEL_SHARE_HEIGHT}px;`
+							}
 						>
-							<View className='iconfont icon-share-wechat'></View>
-						</AtButton>
-						<View className='btn-text'>分享链接</View>
+							<Image
+								className='share-img'
+								style={
+									`width: ${PANEL_SHARE_WIDTH}px;` +
+									`height: ${PANEL_SHARE_HEIGHT}px;`
+								}
+								src={strSharePhotoUrl}
+								mode='widthFix'
+								showMenuByLongpress
+							/>
+							{/* <AtButton className='content-btn-icon flex-center content-btn-left'>
+								<View className='iconfont icon-arrow-left'></View>
+							</AtButton>
+							<AtButton className='content-btn-icon flex-center content-btn-right'>
+								<View className='iconfont icon-arrow-right'></View>
+							</AtButton> */}
+						</View>
+						<View className='share-text'>长按图片，可快捷转发哦！</View>
+						<View className='share-button-wrap flex-around-h'>
+							<View className='share-button flex-between-v'>
+								<AtButton
+									className='float-btn-icon flex-center bk-green'
+									openType='share'
+								>
+									<View className='iconfont icon-share-wechat'></View>
+								</AtButton>
+								<View className='btn-text'>分享链接</View>
+							</View>
+							<View className='share-button flex-between-v'>
+								<AtButton
+									className='float-btn-icon flex-center bk-blue'
+									onClick={useThrottle(
+										useCheckAuthorize(
+											'scope.writePhotosAlbum',
+											handleDownloadClick
+										)
+									)}
+								>
+									<View className='iconfont icon-share-download'></View>
+								</AtButton>
+								<View className='btn-text'>保存海报</View>
+							</View>
+							<View className='share-button flex-between-v'>
+								<AtButton
+									className='float-btn-icon flex-center bk-yellow'
+									onClick={useThrottle(handlePanelShareClose)}
+								>
+									<View className='iconfont icon-share-close'></View>
+								</AtButton>
+								<View className='btn-text'>关闭</View>
+							</View>
+						</View>
+					</Block>
+				) : (
+					<View className='share-content'>
+						<View className='share-button-wrap flex-around-h'>
+							<View className='share-button flex-between-v'>
+								<AtButton
+									className='float-btn-icon flex-center bk-green'
+									openType='share'
+								>
+									<View className='iconfont icon-share-wechat'></View>
+								</AtButton>
+								<View className='btn-text'>分享链接</View>
+							</View>
+						</View>
 					</View>
-					<View className='share-button flex-between-v'>
-						<AtButton
-							className='float-btn-icon flex-center bk-blue'
-							onClick={useThrottle(
-								useCheckAuthorize('scope.writePhotosAlbum', handleDownloadClick)
-							)}
-						>
-							<View className='iconfont icon-share-download'></View>
-						</AtButton>
-						<View className='btn-text'>保存海报</View>
-					</View>
-					<View className='share-button flex-between-v'>
-						<AtButton
-							className='float-btn-icon flex-center bk-yellow'
-							onClick={useThrottle(handlePanelShareClose)}
-						>
-							<View className='iconfont icon-share-close'></View>
-						</AtButton>
-						<View className='btn-text'>关闭</View>
-					</View>
-				</View>
+				)}
 			</AtCurtain>
 
 			{/* 屏外绘制分享的海报 */}

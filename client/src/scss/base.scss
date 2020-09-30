@@ -27,6 +27,12 @@
 	display: none;
 }
 
+.hidden-far {
+	position: relative;
+	top: -9999px;
+	left: -9999px;
+}
+
 .flex-center {
 	display: flex;
 	justify-content: center;
