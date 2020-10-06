@@ -9,6 +9,7 @@ import useCheckLogin from '@/hooks/useCheckLogin'
 import webApiArticleInfo from '@/api/articleInfo'
 import webApiMemberInfo from '@/api/memberInfo'
 import { shareType, processSharePath, getArticleTagName } from '@/utils/index'
+import ResourceManager from '@/services/ResourceManager'
 
 import { AtButton } from 'taro-ui'
 import { Block, View, Text } from '@tarojs/components'
@@ -28,6 +29,7 @@ export default function ArticleDetail() {
 
 	const [isCollectionSelect, setCollectionSelect] = useState<boolean>(false) // 是否已收藏
 	const [isShowPanelShare, setShowPanelShare] = useState<boolean>(false) // 是否展示分享面板
+	const [strContentUrl, setContentUrl] = useState<string>('')
 	const [objArticleInfo, setArticleInfo] = useState<any>({})
 
 	const memberInfo = useSelector(state => state.memberInfo)
@@ -100,7 +102,8 @@ export default function ArticleDetail() {
 	}
 
 	// 点击分享
-	const handleShareClick = () => {
+	const handleShareClick = async () => {
+		setContentUrl(await ResourceManager.getUrl(objArticleInfo.posterImg))
 		setShowPanelShare(true)
 	}
 
@@ -185,7 +188,7 @@ export default function ArticleDetail() {
 						shareType: shareType.PATH_ARTICLE,
 						articleId: articleId,
 					})}
-					strContentUrl={objArticleInfo.posterImg}
+					strContentUrl={strContentUrl}
 					onShowPanelShare={handleShowPanelShare}
 				/>
 			</View>
