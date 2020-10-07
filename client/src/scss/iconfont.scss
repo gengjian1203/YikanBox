@@ -1,13 +1,13 @@
 // iconfont样式
 @font-face {
 	font-family: 'iconfont'; /* project id 1883488 */
-	src: url('//at.alicdn.com/t/font_1883488_jiy57xiowz8.eot');
-	src: url('//at.alicdn.com/t/font_1883488_jiy57xiowz8.eot?#iefix')
+	src: url('//at.alicdn.com/t/font_1883488_m04xgi9pifg.eot');
+	src: url('//at.alicdn.com/t/font_1883488_m04xgi9pifg.eot?#iefix')
 			format('embedded-opentype'),
-		url('//at.alicdn.com/t/font_1883488_jiy57xiowz8.woff2') format('woff2'),
-		url('//at.alicdn.com/t/font_1883488_jiy57xiowz8.woff') format('woff'),
-		url('//at.alicdn.com/t/font_1883488_jiy57xiowz8.ttf') format('truetype'),
-		url('//at.alicdn.com/t/font_1883488_jiy57xiowz8.svg#iconfont') format('svg');
+		url('//at.alicdn.com/t/font_1883488_m04xgi9pifg.woff2') format('woff2'),
+		url('//at.alicdn.com/t/font_1883488_m04xgi9pifg.woff') format('woff'),
+		url('//at.alicdn.com/t/font_1883488_m04xgi9pifg.ttf') format('truetype'),
+		url('//at.alicdn.com/t/font_1883488_m04xgi9pifg.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -164,4 +164,8 @@
 
 .icon-share-close::before {
 	content: '\e62a';
+}
+
+.icon-more::before {
+	content: '\e626';
 }

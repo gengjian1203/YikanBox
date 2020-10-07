@@ -1,0 +1,74 @@
+@import '../../../app.scss';
+
+.moments-wrap {
+	.moments-item {
+		padding: $border-thin-space $border-bold-space;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: flex-start;
+
+		.item-left {
+			flex: 0 0 84px;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: center;
+
+			.item-logo {
+				width: 100%;
+				height: auto;
+				border-radius: $radius-sm;
+			}
+		}
+
+		.item-right {
+			flex: 1 1 auto;
+			margin-left: $border-thin-space;
+
+			.item-author {
+				margin-bottom: $border-li-space;
+				width: 100%;
+				font-size: $f5;
+				font-weight: bold;
+				color: $color-feed-author;
+			}
+
+			.item-content {
+				margin-bottom: $border-li-space;
+				width: 100%;
+				font-size: $f5;
+				color: $color-feed-content;
+				text-align: justify;
+			}
+
+			.item-media {
+				margin-bottom: $border-li-space;
+				width: 100%;
+			}
+
+			.item-adress {
+				margin-bottom: $border-li-space;
+				width: 100%;
+				font-size: $f6;
+				color: $color-feed-address;
+			}
+
+			.item-bottom {
+				width: 100%;
+				.item-time {
+					font-size: $f6;
+					color: $color-feed-time;
+				}
+				.item-options {
+					width: 50px;
+					height: 30px;
+					font-size: 30px;
+					border-radius: $radius-sm;
+					color: $color-feed-options-color;
+					background-color: $color-feed-options-bg;
+				}
+			}
+		}
+	}
+}

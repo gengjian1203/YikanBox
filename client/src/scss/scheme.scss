@@ -11,6 +11,8 @@ $f8: 18px; // 十分小
 
 $height-line-title: 50px;
 
+$border-li-space: 4px;
+$border-sm-space: 8px;
 $border-thin-space: 16px;
 $border-bold-space: 32px;
 
@@ -55,3 +57,11 @@ $color-error-press: lighten($color-error-normal, 10%);
 $color-error-disable: lighten($color-error-normal, 20%);
 
 $color-careful: #e64340; // 注意用色
+
+// feed流 相关变量
+$color-feed-author: rgb(100, 100, 140);
+$color-feed-content: $color-text-long;
+$color-feed-address: $color-link-normal;
+$color-feed-time: $color-text-secondary;
+$color-feed-options-color: rgb(100, 100, 140);
+$color-feed-options-bg: $color-bg;

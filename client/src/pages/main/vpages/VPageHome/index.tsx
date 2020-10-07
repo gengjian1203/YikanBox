@@ -6,6 +6,7 @@ import { deepClone, uploadImage } from '@/utils/index'
 import ResourceManager from '@/services/ResourceManager'
 
 import { View, Image, Button } from '@tarojs/components'
+import ListFeed from '@/components/ListFeed'
 import Banner from './components/banner'
 
 import './index.scss'
@@ -24,6 +25,7 @@ export default function VPageHome(props: IVPageHomeProps) {
 	const { nHeightNavigationHeader } = useSelector(
 		state => state.appInfo.objAppHeight
 	)
+	const { arrArticleList } = useSelector(state => state.articleInfo)
 
 	const loadBanner = async itemBanner => {
 		const strImageUrlTmp = await ResourceManager.getUrl(itemBanner.strImageId)
@@ -122,6 +124,12 @@ export default function VPageHome(props: IVPageHomeProps) {
 
 	return (
 		<View className='vpage-home-wrap'>
+			{/* 临时操作 */}
+			{/* <Button onClick={handleCreateArticleClick}>爬取文章</Button> */}
+			{/* <Button onClick={handleLoginClick}>强制登录</Button> */}
+			{/* <Button onClick={handleNavigationJumpClick}>重复跳转</Button> */}
+			{/* <Button onClick={handleUploadImageClick}>上传图片</Button> */}
+
 			{/* 占位栏 */}
 			<View
 				style={`height: ${Taro.pxTransform(nHeightNavigationHeader * 2)}`}
@@ -137,10 +145,8 @@ export default function VPageHome(props: IVPageHomeProps) {
 				mode='widthFix'
 				src={strImg}
 			></Image>
-			{/* <Button onClick={handleCreateArticleClick}>爬取文章</Button> */}
-			{/* <Button onClick={handleLoginClick}>强制登录</Button> */}
-			{/* <Button onClick={handleNavigationJumpClick}>重复跳转</Button> */}
-			{/* <Button onClick={handleUploadImageClick}>上传图片</Button> */}
+			{/* feed流 */}
+			<ListFeed strType='MOMENTS' arrList={arrArticleList} />
 		</View>
 	)
 }
