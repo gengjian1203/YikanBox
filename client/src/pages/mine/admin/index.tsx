@@ -50,10 +50,28 @@ export default function Admin() {
 	}
 
 	// 点击管理员列表
-	const handleAdminListItemClick = item => {
-		console.log('handleAdminListItemClick', item)
-		if (item.detail.value) {
+	const handleAdminListItemClick = itemAdmin => {
+		console.log('handleAdminListItemClick', itemAdmin)
+		if (itemAdmin.isLock) {
+			return
 		}
+		Taro.showActionSheet({
+			itemList: ['删除'],
+			success: res => {
+				if (res.tapIndex === 0) {
+					setAdminListLocal(prevList => {
+						const prevListTmp = deepClone(prevList)
+						const nIndex = prevListTmp.findIndex(item => {
+							return item.id === itemAdmin.id
+						})
+						if (nIndex >= 0) {
+							prevListTmp.splice(nIndex, 1)
+						}
+						return prevListTmp
+					})
+				}
+			},
+		})
 	}
 
 	// 底部导航数值改变
