@@ -14,4 +14,14 @@
 			color: $color-text-long;
 		}
 	}
+
+	.admin-list-add {
+		height: 100%;
+		padding-right: $border-bold-space;
+		color: $color-primary;
+
+		.icon-add {
+			font-size: 40px;
+		}
+	}
 }

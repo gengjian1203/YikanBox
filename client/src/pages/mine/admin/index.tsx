@@ -19,7 +19,7 @@ interface IBottomBarItemType {
 }
 
 export default function Admin() {
-	const [arrAdminListLocal, setAdminListLocal] = useState<Array<string>>([])
+	const [arrAdminListLocal, setAdminListLocal] = useState<Array<any>>([])
 	const [isEnableSharePosterLocal, setEnableSharePoster] = useState<boolean>(
 		false
 	)
@@ -43,6 +43,11 @@ export default function Admin() {
 		onLoad()
 		return () => {}
 	}, [])
+
+	// 添加管理员
+	const handleAddAdminListClick = () => {
+		console.log('handleAddAdminListClick')
+	}
 
 	// 点击管理员列表
 	const handleAdminListItemClick = item => {
@@ -75,6 +80,11 @@ export default function Admin() {
 	// 保存管理
 	const handleButtonSaveClick = async () => {
 		console.log('handleButtonSaveClick')
+		// 比较管理员列表
+		if (!deepCompare(arrAdminListLocal, arrAdminList)) {
+			const res = await webApi.updateAdminList(arrAdminListLocal)
+			console.log('updateAdminList', res)
+		}
 		// 比较提审设置
 		if (!deepCompare(isEnableSharePosterLocal, isEnableSharePoster)) {
 			const res = await webApi.updateEnableSharePoster(isEnableSharePosterLocal)
@@ -90,18 +100,33 @@ export default function Admin() {
 		})
 	}
 
+	const renderAdminListExtend = () => {
+		return (
+			<View
+				className='admin-list-add flex-center-h'
+				onClick={handleAddAdminListClick}
+			>
+				<View className='iconfont icon-add'></View>
+				添加
+			</View>
+		)
+	}
+
 	return (
 		<View className='admin-wrap'>
 			{/* 顶部导航 */}
 			<NavigationHeader isShowLeftIcon strNavigationTitle='我的管理' />
-			<ModuleTitle strTitle={`管理员设置`} />
+			<ModuleTitle
+				strTitle={`管理员设置`}
+				renderExtend={renderAdminListExtend}
+			/>
 			<AtList className='base-list'>
 				{arrAdminListLocal.map((item, index) => {
 					return (
 						<AtListItem
 							key={index}
 							className='item-normal'
-							title={item}
+							title={item.id}
 							onClick={() => handleAdminListItemClick(item)}
 						/>
 					)
