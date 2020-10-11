@@ -41,8 +41,23 @@ const updateBottomBarList = async arrBottomBarList => {
 	return res.data
 }
 
+/**
+ * 更新是否展示分享海报
+ * @param isEnableSharePoster
+ */
+const updateEnableSharePoster = async isEnableSharePoster => {
+	const params = {
+		type: 'UPDATE_ENABLE_SHARE_POSTER',
+		isEnableSharePoster,
+	}
+	const res = await CloudFetch.callFunction('fetchInfo', params)
+	console.log('updateEnableSharePoster', res)
+	return res.data
+}
+
 export default {
 	queryLoginInfo,
 	updateAdminList,
 	updateBottomBarList,
+	updateEnableSharePoster,
 }

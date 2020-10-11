@@ -1,6 +1,7 @@
 import getArticleTagName from './article/getArticleTagName'
 import checkObjectEmpty from './base/checkObjectEmpty'
 import deepClone from './base/deepClone'
+import deepCompare from './base/deepCompare'
 import getHDAvatarUrl from './base/getHDAvatarUrl'
 import mergeObject from './base/mergeObject'
 import UUID from './base/UUID'
@@ -19,6 +20,7 @@ export {
 	getArticleTagName,
 	checkObjectEmpty,
 	deepClone,
+	deepCompare,
 	getHDAvatarUrl,
 	mergeObject,
 	UUID,

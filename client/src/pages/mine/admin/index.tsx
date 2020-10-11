@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import webApi from '@/api/appInfo'
 import useThrottle from '@/hooks/useThrottle'
-import { deepClone } from '@/utils/index'
+import { deepClone, deepCompare } from '@/utils/index'
 import { View } from '@tarojs/components'
 import { AtList, AtListItem } from 'taro-ui'
 import NavigationHeader from '@/components/NavigationHeader'
@@ -20,19 +20,22 @@ interface IBottomBarItemType {
 
 export default function Admin() {
 	const [arrAdminListLocal, setAdminListLocal] = useState<Array<string>>([])
+	const [isEnableSharePosterLocal, setEnableSharePoster] = useState<boolean>(
+		false
+	)
 	const [arrBottomBarListLocal, setBottomBarListLocal] = useState<
 		Array<IBottomBarItemType>
 	>([])
 
-	const arrAdminList = useSelector(
-		state => state.appInfo.objAppInfo.arrAdminList
-	)
-	const arrBottomBarList = useSelector(
-		state => state.appInfo.objAppInfo.arrBottomBarList
-	)
+	const objAppInfo = useSelector(state => state.appInfo.objAppInfo)
+
+	const arrAdminList = objAppInfo.arrAdminList
+	const isEnableSharePoster = objAppInfo.isEnableSharePoster
+	const arrBottomBarList = objAppInfo.arrBottomBarList
 
 	const onLoad = () => {
 		setAdminListLocal(arrAdminList)
+		setEnableSharePoster(isEnableSharePoster)
 		setBottomBarListLocal(arrBottomBarList)
 	}
 
@@ -44,6 +47,8 @@ export default function Admin() {
 	// 点击管理员列表
 	const handleAdminListItemClick = item => {
 		console.log('handleAdminListItemClick', item)
+		if (item.detail.value) {
+		}
 	}
 
 	// 底部导航数值改变
@@ -61,11 +66,25 @@ export default function Admin() {
 		})
 	}
 
+	// 海报分享开关
+	const handleSharePanelItemChange = e => {
+		console.log('handleSharePanelItemChange', e)
+		setEnableSharePoster(e.detail.value)
+	}
+
 	// 保存管理
 	const handleButtonSaveClick = async () => {
 		console.log('handleButtonSaveClick')
-		const res = await webApi.updateBottomBarList(arrBottomBarListLocal)
-		console.log('handleButtonSaveClick', res)
+		// 比较提审设置
+		if (!deepCompare(isEnableSharePosterLocal, isEnableSharePoster)) {
+			const res = await webApi.updateEnableSharePoster(isEnableSharePosterLocal)
+			console.log('updateBottomBarList', res)
+		}
+		// 比较底部导航
+		if (!deepCompare(arrBottomBarListLocal, arrBottomBarList)) {
+			const res = await webApi.updateBottomBarList(arrBottomBarListLocal)
+			console.log('updateBottomBarList', res)
+		}
 		Taro.reLaunch({
 			url: '/pages/loading/index',
 		})
@@ -87,6 +106,17 @@ export default function Admin() {
 						/>
 					)
 				})}
+			</AtList>
+			{/* 提审设置 */}
+			<ModuleTitle strTitle={`提审设置`} />
+			<AtList className='base-list'>
+				<AtListItem
+					className='item-normal'
+					isSwitch
+					title='海报分享开关'
+					switchIsCheck={isEnableSharePoster}
+					onSwitchChange={handleSharePanelItemChange}
+				/>
 			</AtList>
 			{/* 底部导航 */}
 			<ModuleTitle strTitle={`底部导航设置`} />
