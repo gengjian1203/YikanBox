@@ -64,6 +64,7 @@ async function spiderZhiHuInfo(db, superagent, cheerio, entities) {
 			)
 			objInfo.author = author // 作者
 			objInfo.content = content // 内容
+			objInfo.arrCollectionList = [] // 点赞列表
 
 			arrResultList.push(objInfo)
 		}

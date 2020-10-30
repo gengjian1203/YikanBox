@@ -19,25 +19,58 @@
  * @returns
  */
 
+// 更新人物的收藏信息
+const updateMemberCollection = async (data, db, strMemberId) => {
+	// 更新收藏信息
+	const res = await db
+		.collection('memberInfo')
+		.doc(strMemberId)
+		.update({
+			data: {
+				data_arrCollectionArticleList: db.command.pull({
+					_id: db.command.eq(data._id),
+				}),
+			},
+		})
+	return res
+}
+
+// 更新文章的收藏信息
+const updateArticleCollection = async (data, db, strMemberId) => {
+	// 更新收藏信息
+	const res = await db
+		.collection('articleInfo')
+		.doc(data._id)
+		.update({
+			data: {
+				arrCollectionList: db.command.pull({
+					memberId: db.command.eq(strMemberId),
+				}),
+			},
+		})
+	return res
+}
+
 async function removeCollectionArticle(data, db, strMemberId) {
 	let objResult = {}
 
 	try {
-		// 更新收藏信息
-		const res = await db
-			.collection('memberInfo')
-			.doc(strMemberId)
-			.update({
-				data: {
-					data_arrCollectionArticleList: db.command.pull({
-						_id: db.command.eq(data._id),
-					}),
-				},
+		Promise.all([
+			updateMemberCollection(data, db, strMemberId),
+			updateArticleCollection(data, db, strMemberId),
+		])
+			.then(res => {
+				objResult = {
+					code: 200,
+					data: res,
+				}
 			})
-		objResult = {
-			code: 200,
-			data: { data: res },
-		}
+			.catch(err => {
+				objResult = {
+					code: 500,
+					data: err,
+				}
+			})
 	} catch (e) {
 		objResult = {
 			code: 500,

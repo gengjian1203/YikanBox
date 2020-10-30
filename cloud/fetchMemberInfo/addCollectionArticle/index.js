@@ -19,6 +19,46 @@
  * @returns
  */
 
+// 更新人物的收藏信息
+const updateMemberCollection = async (data, db, strMemberId, date, time) => {
+	const objAddArticle = {
+		_id: data._id,
+		collectDate: date,
+		collectTime: time,
+		title: data.title,
+		author: data.author,
+		posterImg: data.posterImg,
+	}
+
+	const res = await db
+		.collection('memberInfo')
+		.doc(strMemberId)
+		.update({
+			data: {
+				data_arrCollectionArticleList: db.command.addToSet(objAddArticle),
+			},
+		})
+	return res
+}
+
+// 更新文章的收藏信息
+const updateArticleCollection = async (data, db, strMemberId, date, time) => {
+	const objAddCollection = {
+		memberId: strMemberId,
+		collectDate: date,
+		collectTime: time,
+	}
+	const res = await db
+		.collection('articleInfo')
+		.doc(data._id)
+		.update({
+			data: {
+				arrCollectionList: db.command.addToSet(objAddCollection),
+			},
+		})
+	return res
+}
+
 async function addCollectionArticle(data, db, strMemberId) {
 	let objResult = {}
 	const date = new Date()
@@ -31,27 +71,22 @@ async function addCollectionArticle(data, db, strMemberId) {
 	const time = `${YYYY}-${MM}-${DD} ${hh}:${mm}:${ss}`
 
 	try {
-		const objAddArticle = {
-			_id: data._id,
-			collectDate: date,
-			collectTime: time,
-			title: data.title,
-			author: data.author,
-			posterImg: data.posterImg,
-		}
-		// 更新收藏信息
-		const res = await db
-			.collection('memberInfo')
-			.doc(strMemberId)
-			.update({
-				data: {
-					data_arrCollectionArticleList: db.command.addToSet(objAddArticle),
-				},
+		Promise.all([
+			updateMemberCollection(data, db, strMemberId, date, time),
+			updateArticleCollection(data, db, strMemberId, date, time),
+		])
+			.then(res => {
+				objResult = {
+					code: 200,
+					data: res,
+				}
 			})
-		objResult = {
-			code: 200,
-			data: { data: objAddArticle },
-		}
+			.catch(err => {
+				objResult = {
+					code: 500,
+					data: err,
+				}
+			})
 	} catch (e) {
 		objResult = {
 			code: 500,
