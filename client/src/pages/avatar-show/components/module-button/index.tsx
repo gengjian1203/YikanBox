@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import avatarShowInfoActions from '@/redux/actions/avatarShowInfo'
 import memberActions from '@/redux/actions/memberInfo'
-import webApi from '@/api/memberInfo'
+import webApi from '@/api'
 import useCheckAuthorize from '@/hooks/useCheckAuthorize'
 import useCheckLogin from '@/hooks/useCheckLogin'
 import useThrottle from '@/hooks/useThrottle'
@@ -188,7 +188,7 @@ export default function ModuleButton(props: IModuleBottomProps) {
 				const param = {
 					user_avatarUrl: objUserInfo.avatarUrl,
 				}
-				webApi.updateAvatarUrl(param)
+				webApi.memberInfo.updateAvatarUrl(param)
 			}
 		}
 		setShowActionSheet(true)

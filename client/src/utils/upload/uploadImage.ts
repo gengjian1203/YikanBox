@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
 import { UUID } from '@/utils/index'
-import webApi from '@/api/checkContent'
+import webApi from '@/api'
 
 // 将图片上传到云存储中
 const upload = (strImageUrl, strCloudPath) => {
@@ -28,7 +28,7 @@ const checkImage = strImageId => {
 		const objParam = {
 			value: strImageId,
 		}
-		const resCheck = await webApi.checkImage(objParam)
+		const resCheck = await webApi.checkContent.checkImage(objParam)
 		// console.log('checkSecurityImage checkImage', resCheck)
 		if (resCheck && resCheck.errCode === 0) {
 			resolve(strImageId)

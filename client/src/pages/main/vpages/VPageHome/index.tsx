@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import webApi from '@/api/testInfo'
+import webApi from '@/api'
 import { deepClone, uploadImage } from '@/utils/index'
 import ResourceManager from '@/services/ResourceManager'
 
@@ -62,7 +62,7 @@ export default function VPageHome(props: IVPageHomeProps) {
 	}, [])
 
 	const handleCreateArticleClick = async e => {
-		const res = await webApi.spiderArticleInfo()
+		const res = await webApi.testInfo.spiderArticleInfo()
 		console.log('handleTestClick', res)
 	}
 

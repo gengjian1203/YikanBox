@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import memberInfoActions from '@/redux/actions/memberInfo'
 import useThrottle from '@/hooks/useThrottle'
-import webApi from '@/api/memberInfo'
+import webApi from '@/api'
 import { hiddenString, simpleDate } from '@/utils/index'
 
 import { AtList, AtListItem, AtFloatLayout } from 'taro-ui'
@@ -37,7 +37,7 @@ export default function ModuleBase(props: IModuleBaseProps) {
 		const param = {
 			strMineBorderCode,
 		}
-		webApi.updateMineBorderCode(param)
+		webApi.memberInfo.updateMineBorderCode(param)
 	}
 
 	// 应用选中头像框数据

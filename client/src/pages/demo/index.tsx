@@ -6,8 +6,7 @@ import memberInfoActions from '@/redux/actions/memberInfo'
 import useThrottle from '@/hooks/useThrottle'
 import useCheckLogin from '@/hooks/useCheckLogin'
 
-import webApiArticleInfo from '@/api/articleInfo'
-import webApiMemberInfo from '@/api/memberInfo'
+import webApi from '@/api'
 import { shareType, processSharePath, getArticleTagName } from '@/utils/index'
 
 import { Block, View, Text } from '@tarojs/components'

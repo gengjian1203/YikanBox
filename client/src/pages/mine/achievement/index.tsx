@@ -2,7 +2,7 @@ import Taro, { useRouter } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import webApi from '@/api/memberInfo'
+import webApi from '@/api'
 
 import { Block, View } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
@@ -35,7 +35,7 @@ export default function Achievement() {
 			const param = {
 				_id: memberId,
 			}
-			const res = await webApi.queryMemberInfo(param)
+			const res = await webApi.memberInfo.queryMemberInfo(param)
 			// console.log('queryMemberInfo')
 			setMemberInfo(res.data)
 		}

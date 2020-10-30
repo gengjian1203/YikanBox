@@ -6,8 +6,7 @@ import memberInfoActions from '@/redux/actions/memberInfo'
 import useThrottle from '@/hooks/useThrottle'
 import useCheckLogin from '@/hooks/useCheckLogin'
 
-import webApiArticleInfo from '@/api/articleInfo'
-import webApiMemberInfo from '@/api/memberInfo'
+import webApi from '@/api'
 import { shareType, processSharePath, getArticleTagName } from '@/utils/index'
 import ResourceManager from '@/services/ResourceManager'
 
@@ -61,7 +60,7 @@ export default function ArticleDetail() {
 			const objParams = {
 				articleId: articleId,
 			}
-			const res = await webApiArticleInfo.queryArticleInfo(objParams)
+			const res = await webApi.articleInfo.queryArticleInfo(objParams)
 			objArticleInfoTmp = res.data
 		} else {
 			const nIndex = arrArticleList.findIndex(item => {
@@ -73,7 +72,7 @@ export default function ArticleDetail() {
 				const objParams = {
 					articleId: articleId,
 				}
-				const res = await webApiArticleInfo.queryArticleInfo(objParams)
+				const res = await webApi.articleInfo.queryArticleInfo(objParams)
 				objArticleInfoTmp = res.data
 			}
 		}
@@ -91,11 +90,13 @@ export default function ArticleDetail() {
 		setCollectionSelect(isCollectionSelectTmp)
 
 		if (isCollectionSelectTmp) {
-			const res = await webApiMemberInfo.addCollectionArticle(objArticleInfo)
+			const res = await webApi.memberInfo.addCollectionArticle(objArticleInfo)
 			// console.log('addCollectionArticle', res.data)
 			addCollectionArticleInfo(res.data)
 		} else {
-			const res = await webApiMemberInfo.removeCollectionArticle(objArticleInfo)
+			const res = await webApi.memberInfo.removeCollectionArticle(
+				objArticleInfo
+			)
 			// console.log('removeCollectionArticle', res)
 			removeCollectionArticleInfo(objArticleInfo)
 		}

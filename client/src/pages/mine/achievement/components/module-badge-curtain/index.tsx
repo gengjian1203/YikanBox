@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import memberInfoActions from '@/redux/actions/memberInfo'
 import useThrottle from '@/hooks/useThrottle'
-import webApi from '@/api/memberInfo'
+import webApi from '@/api'
 
 import { View, Image } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
@@ -14,7 +14,7 @@ import { checkBadgeActivate } from '../../utils/index'
 import './index.scss'
 
 interface IBadgeCurtainInfoType {
-	code?: string
+	code: string
 	urlBadge?: string
 	name?: string
 	describe?: string
@@ -26,7 +26,7 @@ interface IModuleBadgeCurtainProps {
 }
 
 export default function ModuleBadgeCurtain(props: IModuleBadgeCurtainProps) {
-	const { objBadge = {} } = props
+	const { objBadge } = props
 
 	const [isActivating, setActivating] = useState<boolean>(false) // 激活中状态
 	const [isNewActivate, setNewActivate] = useState<boolean>(false) // 新激活状态
@@ -49,7 +49,7 @@ export default function ModuleBadgeCurtain(props: IModuleBadgeCurtainProps) {
 		const param = {
 			strBadgeCode: objBadge.code,
 		}
-		const res = await webApi.addMineBadge(param)
+		const res = await webApi.memberInfo.addMineBadge(param)
 		setActivating(false)
 		setNewActivate(true)
 		pushMineBadgeList({

@@ -1,8 +1,7 @@
 import Taro from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import webApi from '@/api/appInfo'
-import useThrottle from '@/hooks/useThrottle'
+import webApi from '@/api'
 import { deepClone, deepCompare } from '@/utils/index'
 import { View } from '@tarojs/components'
 import { AtList, AtListItem } from 'taro-ui'
@@ -100,17 +99,21 @@ export default function Admin() {
 		console.log('handleButtonSaveClick')
 		// 比较管理员列表
 		if (!deepCompare(arrAdminListLocal, arrAdminList)) {
-			const res = await webApi.updateAdminList(arrAdminListLocal)
+			const res = await webApi.appInfo.updateAdminList(arrAdminListLocal)
 			console.log('updateAdminList', res)
 		}
 		// 比较提审设置
 		if (!deepCompare(isEnableSharePosterLocal, isEnableSharePoster)) {
-			const res = await webApi.updateEnableSharePoster(isEnableSharePosterLocal)
+			const res = await webApi.appInfo.updateEnableSharePoster(
+				isEnableSharePosterLocal
+			)
 			console.log('updateBottomBarList', res)
 		}
 		// 比较底部导航
 		if (!deepCompare(arrBottomBarListLocal, arrBottomBarList)) {
-			const res = await webApi.updateBottomBarList(arrBottomBarListLocal)
+			const res = await webApi.appInfo.updateBottomBarList(
+				arrBottomBarListLocal
+			)
 			console.log('updateBottomBarList', res)
 		}
 		Taro.reLaunch({

@@ -8,9 +8,7 @@ import shareInfoActions from '@/redux/actions/shareInfo'
 import articleInfoActions from '@/redux/actions/articleInfo'
 import { SIZE_PAGE_DISCOVER } from '@/redux/constants/articleInfo'
 
-import webApiAppInfo from '@/api/appInfo'
-import webApiArticleInfo from '@/api/articleInfo'
-import webApiQrcodeInfo from '@/api/qrcodeInfo'
+import webApi from '@/api'
 import AppService from '@/services/AppService'
 import StorageManager from '@/services/StorageManager'
 import { router2param } from '@/utils/index'
@@ -57,7 +55,7 @@ export default function Loading() {
 
 	// 查询小程序信息以及用户信息
 	const queryLoginInfo: any = async () => {
-		const res = await webApiAppInfo.queryLoginInfo()
+		const res = await webApi.appInfo.queryLoginInfo()
 		// console.log('queryLoginInfo', res)
 		return res
 			? {
@@ -137,7 +135,7 @@ export default function Loading() {
 			nPageNum: 0,
 			nPageSize: SIZE_PAGE_DISCOVER,
 		}
-		const res = await webApiArticleInfo.queryArticleList(objParams)
+		const res = await webApi.articleInfo.queryArticleList(objParams)
 		setArticleList(res ? res.data : [])
 		// console.log('prevLoadingData done.')
 	}
@@ -150,7 +148,7 @@ export default function Loading() {
 			const paramQueryQRCode = {
 				strQRCodeId: params.scene,
 			}
-			const res = await webApiQrcodeInfo.queryQRCode(paramQueryQRCode)
+			const res = await webApi.qrcodeInfo.queryQRCode(paramQueryQRCode)
 			// console.log('Loading jumpPage', res)
 			const paramResult = changeQRCodeParam(router2param(res.data.strSharePath))
 			const shareInfoTmp = {

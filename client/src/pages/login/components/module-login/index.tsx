@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import memberInfoActions from '@/redux/actions/memberInfo'
 
-import webApi from '@/api/memberInfo'
+import webApi from '@/api'
 import { checkObjectEmpty } from '@/utils/index'
 
 import { View } from '@tarojs/components'
@@ -38,7 +38,7 @@ export default function ModuleLogin(props: IModuleLoginProps) {
 			objUserInfo.share_sourceID = shareInfo.sourceID
 			objUserInfo.share_shareType = shareInfo.shareType
 			objUserInfo.share_sharePath = shareInfo.sharePath
-			const res = await webApi.addMemberInfo(objUserInfo)
+			const res = await webApi.memberInfo.addMemberInfo(objUserInfo)
 			// console.log('handleGetUserInfo addMemberInfo', res)
 			setMemberInfo(res.data)
 			setLogining(false)

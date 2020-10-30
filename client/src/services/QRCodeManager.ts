@@ -1,4 +1,4 @@
-import webApi from '@/api/qrcodeInfo'
+import webApi from '@/api'
 import Config from '@/config/index'
 import ResourceManager from '@/services/ResourceManager'
 
@@ -7,7 +7,7 @@ const createQRCode = async strSharePath => {
 	const objParam = {
 		strSharePath: strSharePath,
 	}
-	const res = await webApi.createQRCode(objParam)
+	const res = await webApi.qrcodeInfo.createQRCode(objParam)
 	console.log('createQRCode', res)
 	const strQRCodeFileId = res.strQRCodeFileId
 	const strQRCodeUrl = await ResourceManager.getUrl(

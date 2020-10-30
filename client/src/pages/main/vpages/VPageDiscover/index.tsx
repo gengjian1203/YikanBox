@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import articleInfoActions from '@/redux/actions/articleInfo'
 import { SIZE_PAGE_DISCOVER } from '@/redux/constants/articleInfo'
-import webApi from '@/api/articleInfo'
+import webApi from '@/api'
 
 import { View, Swiper, SwiperItem } from '@tarojs/components'
 import PanelTips from '@/components/PanelTips'
@@ -50,7 +50,7 @@ export default function VPageDiscover(props: IVPageDiscoverProps) {
 				nPageNum: nPageNum,
 				nPageSize: SIZE_PAGE_DISCOVER,
 			}
-			const res = await webApi.queryArticleList(objParams)
+			const res = await webApi.articleInfo.queryArticleList(objParams)
 			updateArticleListSplice({
 				nPageNum,
 				arrDataList: res.data,
