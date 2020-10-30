@@ -35,7 +35,7 @@ exports.main = async (event, context) => {
 
 	switch (event.type) {
 		case 'CREATE_QRCODE':
-			objResult = await createQRCode(event.data, db, cloud)
+			objResult = await createQRCode(event.data, db, cloud, strMemberId)
 			break
 		case 'QUERY_QRCODE':
 			objResult = await queryQRCode(event.data, db, cloud)

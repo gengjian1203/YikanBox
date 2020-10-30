@@ -4,10 +4,23 @@
  * @param {*} event
  * @param {*} db
  * @param {*} cloud
+ * @param {*} strMemberId
  * @returns
  */
 
-async function createQRCode(data, db, cloud) {
+const getNowTime = () => {
+	const date = new Date()
+	const YYYY = date.getFullYear()
+	const MM = date.getMonth() + 1
+	const DD = date.getDate()
+	const hh = date.getHours()
+	const mm = date.getMinutes()
+	const ss = date.getSeconds()
+	const time = `${YYYY}-${MM}-${DD} ${hh}:${mm}:${ss}`
+	return time
+}
+
+async function createQRCode(data, db, cloud, strMemberId) {
 	let objResult = {}
 	let objQRCodeInfo = undefined
 	let strId = ''
@@ -33,6 +46,8 @@ async function createQRCode(data, db, cloud) {
 			// 尚未生成过
 			const objQRCode = {
 				...data,
+				strMemberId,
+				strTime: getNowTime(),
 			}
 			const res = await db.collection('qrcodeInfo').add({ data: objQRCode })
 			// console.log('addQRCode', res)
