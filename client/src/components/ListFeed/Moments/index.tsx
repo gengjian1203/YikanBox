@@ -6,16 +6,25 @@ import './index.scss'
 
 interface IMomentsProps {
 	arrList: Array<IItemType>
+	onDetailClick: (any: any) => void
 }
 
 export default function Moments(props: IMomentsProps) {
-	const { arrList = [] } = props
+	const { arrList = [], onDetailClick } = props
+
+	const handleDetailClick = item => {
+		onDetailClick(item)
+	}
 
 	return (
 		<View className='moments-wrap'>
 			{arrList.map((item, index) => {
 				return (
-					<View key={index} className='moments-item border-bottom-line'>
+					<View
+						key={index}
+						className='moments-item border-bottom-line'
+						onClick={() => handleDetailClick(item)}
+					>
 						<View className='item-left'>
 							<Image
 								className='item-logo'

@@ -122,6 +122,13 @@ export default function VPageHome(props: IVPageHomeProps) {
 		})
 	}
 
+	const handleDetailClick = item => {
+		console.log('handleDetailClick', item)
+		Taro.navigateTo({
+			url: `/pages/article-detail/index` + `?articleId=${item._id}`,
+		})
+	}
+
 	return (
 		<View className='vpage-home-wrap'>
 			{/* 临时操作 */}
@@ -136,7 +143,7 @@ export default function VPageHome(props: IVPageHomeProps) {
 			></View>
 			{/* banner */}
 			<Banner arrBannerList={arrBannerLocalList} />
-			<Image
+			{/* <Image
 				style={
 					`width: 100%; ` +
 					`margin-top: ${Taro.pxTransform(10)}; ` +
@@ -144,9 +151,13 @@ export default function VPageHome(props: IVPageHomeProps) {
 				}
 				mode='widthFix'
 				src={strImg}
-			></Image>
+			></Image> */}
 			{/* feed流 */}
-			<ListFeed strType='MOMENTS' arrList={arrArticleList} />
+			<ListFeed
+				strType='MOMENTS'
+				arrList={arrArticleList}
+				onDetailClick={handleDetailClick}
+			/>
 		</View>
 	)
 }

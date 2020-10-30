@@ -22,15 +22,16 @@ interface IListFeedProps {
 		| 'MOMENTS' // 朋友圈类型
 		| ''
 	arrList: Array<IItemType>
+	onDetailClick: (any: any) => void
 }
 
 export default function ListFeed(props: IListFeedProps) {
-	const { strType = '', arrList = [] } = props
+	const { strType = '', arrList = [], onDetailClick } = props
 
 	const readerList = () => {
 		switch (strType) {
 			case 'MOMENTS':
-				return <Moments arrList={arrList} />
+				return <Moments arrList={arrList} onDetailClick={onDetailClick} />
 			default:
 				return <View></View>
 		}
