@@ -42,16 +42,16 @@ const updateBottomBarList = async arrBottomBarList => {
 }
 
 /**
- * 更新是否展示分享海报
- * @param isEnableSharePoster
+ * 更新是否是安全模式
+ * @param isEnableSafeMode
  */
-const updateEnableSharePoster = async isEnableSharePoster => {
+const updateEnableSafeMode = async isEnableSafeMode => {
 	const params = {
-		type: 'UPDATE_ENABLE_SHARE_POSTER',
-		isEnableSharePoster,
+		type: 'UPDATE_ENABLE_SAFE_MODE',
+		isEnableSafeMode,
 	}
 	const res = await CloudFetch.callFunction('fetchInfo', params)
-	console.log('updateEnableSharePoster', res)
+	console.log('updateEnableSafeMode', res)
 	return res.data
 }
 
@@ -59,5 +59,5 @@ export default {
 	queryLoginInfo,
 	updateAdminList,
 	updateBottomBarList,
-	updateEnableSharePoster,
+	updateEnableSafeMode,
 }

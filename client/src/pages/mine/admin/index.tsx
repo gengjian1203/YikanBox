@@ -19,7 +19,7 @@ interface IBottomBarItemType {
 
 export default function Admin() {
 	const [arrAdminListLocal, setAdminListLocal] = useState<Array<any>>([])
-	const [isEnableSharePosterLocal, setEnableSharePoster] = useState<boolean>(
+	const [isEnableSafeModeLocal, setEnableSafeModeLocal] = useState<boolean>(
 		false
 	)
 	const [arrBottomBarListLocal, setBottomBarListLocal] = useState<
@@ -29,12 +29,12 @@ export default function Admin() {
 	const objAppInfo = useSelector(state => state.appInfo.objAppInfo)
 
 	const arrAdminList = objAppInfo.arrAdminList
-	const isEnableSharePoster = objAppInfo.isEnableSharePoster
+	const isEnableSafeMode = objAppInfo.isEnableSafeMode
 	const arrBottomBarList = objAppInfo.arrBottomBarList
 
 	const onLoad = () => {
 		setAdminListLocal(arrAdminList)
-		setEnableSharePoster(isEnableSharePoster)
+		setEnableSafeModeLocal(isEnableSafeMode)
 		setBottomBarListLocal(arrBottomBarList)
 	}
 
@@ -91,7 +91,7 @@ export default function Admin() {
 	// 海报分享开关
 	const handleSharePanelItemChange = e => {
 		console.log('handleSharePanelItemChange', e)
-		setEnableSharePoster(e.detail.value)
+		setEnableSafeModeLocal(e.detail.value)
 	}
 
 	// 保存管理
@@ -102,10 +102,10 @@ export default function Admin() {
 			const res = await webApi.appInfo.updateAdminList(arrAdminListLocal)
 			console.log('updateAdminList', res)
 		}
-		// 比较提审设置
-		if (!deepCompare(isEnableSharePosterLocal, isEnableSharePoster)) {
-			const res = await webApi.appInfo.updateEnableSharePoster(
-				isEnableSharePosterLocal
+		// 比较安全模式设置
+		if (!deepCompare(isEnableSafeModeLocal, isEnableSafeMode)) {
+			const res = await webApi.appInfo.updateEnableSafeMode(
+				isEnableSafeModeLocal
 			)
 			console.log('updateBottomBarList', res)
 		}
@@ -153,14 +153,14 @@ export default function Admin() {
 					)
 				})}
 			</AtList>
-			{/* 提审设置 */}
-			<ModuleTitle strTitle={`提审设置`} />
+			{/* 安全模式设置 */}
+			<ModuleTitle strTitle={`安全模式设置`} />
 			<AtList className='base-list'>
 				<AtListItem
 					className='item-normal'
 					isSwitch
-					title='海报分享开关'
-					switchIsCheck={isEnableSharePoster}
+					title='安全模式开关'
+					switchIsCheck={isEnableSafeMode}
 					onSwitchChange={handleSharePanelItemChange}
 				/>
 			</AtList>

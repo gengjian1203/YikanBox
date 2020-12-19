@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import webApi from '@/api'
 import { deepClone, uploadImage } from '@/utils/index'
+// import Main from '@/utils/test/main'
 import ResourceManager from '@/services/ResourceManager'
 
 import { View, Image, Button } from '@tarojs/components'
@@ -19,6 +20,9 @@ export default function VPageHome(props: IVPageHomeProps) {
 	const [arrBannerLocalList, setBannerLocalList] = useState<Array<any>>([])
 	const [strImg, setImg] = useState<string>('')
 
+	const isEnableSafeMode = useSelector(
+		state => state.appInfo.objAppInfo.isEnableSafeMode
+	)
 	const arrBannerList = useSelector(
 		state => state.appInfo.objAppInfo.arrBannerList
 	)
@@ -60,6 +64,12 @@ export default function VPageHome(props: IVPageHomeProps) {
 		onLoad()
 		return () => {}
 	}, [])
+
+	// const handleTestClick = async () => {
+	// 	// const _main = new Main(4)
+	// 	// const num = _main.calculate(4)
+	// 	// console.log('bbbbbb', num)
+	// }
 
 	const handleCreateArticleClick = async e => {
 		const res = await webApi.testInfo.spiderArticleInfo()
@@ -131,33 +141,35 @@ export default function VPageHome(props: IVPageHomeProps) {
 
 	return (
 		<View className='vpage-home-wrap'>
-			{/* 临时操作 */}
-			{/* <Button onClick={handleCreateArticleClick}>爬取文章</Button> */}
-			{/* <Button onClick={handleLoginClick}>强制登录</Button> */}
-			{/* <Button onClick={handleNavigationJumpClick}>重复跳转</Button> */}
-			{/* <Button onClick={handleUploadImageClick}>上传图片</Button> */}
-
 			{/* 占位栏 */}
 			<View
 				style={`height: ${Taro.pxTransform(nHeightNavigationHeader * 2)}`}
 			></View>
 			{/* banner */}
 			<Banner arrBannerList={arrBannerLocalList} />
-			{/* <Image
-				style={
-					`width: 100%; ` +
-					`margin-top: ${Taro.pxTransform(10)}; ` +
-					`border-radius: ${Taro.pxTransform(6)};`
-				}
-				mode='widthFix'
-				src={strImg}
-			></Image> */}
-			{/* feed流 */}
-			<ListFeed
-				strType='MOMENTS'
-				arrList={arrArticleList}
-				onDetailClick={handleDetailClick}
-			/>
+			{/* 临时操作 */}
+			{/* <Button onClick={handleTestClick}>测试按钮</Button> */}
+			{/* <Button onClick={handleCreateArticleClick}>爬取文章</Button> */}
+			{/* <Button onClick={handleLoginClick}>强制登录</Button> */}
+			{/* <Button onClick={handleNavigationJumpClick}>重复跳转</Button> */}
+			{/* <Button onClick={handleUploadImageClick}>上传图片</Button> */}
+			{isEnableSafeMode ? (
+				<Image
+					style={
+						`width: 100%; ` +
+						`margin-top: ${Taro.pxTransform(10)}; ` +
+						`border-radius: ${Taro.pxTransform(6)};`
+					}
+					mode='widthFix'
+					src={strImg}
+				></Image>
+			) : (
+				<ListFeed
+					strType='MOMENTS'
+					arrList={arrArticleList}
+					onDetailClick={handleDetailClick}
+				/>
+			)}
 		</View>
 	)
 }

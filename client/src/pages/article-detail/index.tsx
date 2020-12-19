@@ -182,7 +182,7 @@ export default function ArticleDetail() {
 				{/* 分享面板 */}
 				<PanelShare
 					isShowPanelShare={isShowPanelShare}
-					strShareTitle='分享了一篇文章，并@了你'
+					strShareTitle={objArticleInfo.title}
 					strShareImage={objArticleInfo.posterImg}
 					strSharePath={processSharePath({
 						sharePath: path,

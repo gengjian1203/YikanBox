@@ -13,6 +13,7 @@ tree.md
 **/static/**
 **/node_modules/**
 **/false/**
+**/src/utils/test/**
 
 #忽略上传的文件
 **/yarn.lock

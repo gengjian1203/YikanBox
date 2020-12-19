@@ -1,12 +1,12 @@
 /**
- * updateEnableSharePoster
- * 更新是否展示分享海报
+ * updateEnableSafeMode
+ * 更新是否安全模式
  * @param {*} data
  * @param {*} db
  * @returns
  */
 
-async function updateEnableSharePoster(data, db) {
+async function updateEnableSafeMode(data, db) {
 	let objResult = {}
 
 	try {
@@ -18,7 +18,7 @@ async function updateEnableSharePoster(data, db) {
 			})
 			.update({
 				data: {
-					isEnableSharePoster: data.isEnableSharePoster,
+					isEnableSafeMode: data.isEnableSafeMode,
 				},
 			})
 		objResult = {
@@ -30,10 +30,10 @@ async function updateEnableSharePoster(data, db) {
 			code: 500,
 			data: e,
 		}
-		console.error('updateEnableSharePoster error.', e)
+		console.error('updateEnableSafeMode error.', e)
 	}
 
 	return objResult
 }
 
-module.exports = updateEnableSharePoster
+module.exports = updateEnableSafeMode

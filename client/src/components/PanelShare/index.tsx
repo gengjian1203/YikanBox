@@ -36,8 +36,8 @@ export default function PanelShare(props: IPanelShareProps) {
 	const [strSharePhotoUrl, setSharePhotoUrl] = useState<string>('')
 	const [canvasShare, setCanvasShare] = useState<any>(null)
 
-	const isEnableSharePoster = useSelector(
-		state => state.appInfo.objAppInfo.isEnableSharePoster
+	const isEnableSafeMode = useSelector(
+		state => state.appInfo.objAppInfo.isEnableSafeMode
 	)
 
 	// 更新海报canvas
@@ -91,17 +91,12 @@ export default function PanelShare(props: IPanelShareProps) {
 	}, [])
 
 	useEffect(() => {
-		console.log(
-			'PanelShare',
-			isEnableSharePoster,
-			isShowPanelShare,
-			strContentUrl
-		)
-		if (isEnableSharePoster && isShowPanelShare && strContentUrl !== '') {
+		console.log('PanelShare', isEnableSafeMode, isShowPanelShare, strContentUrl)
+		if (!isEnableSafeMode && isShowPanelShare && strContentUrl !== '') {
 			updateCanvasShare()
 		}
 		return () => {}
-	}, [isEnableSharePoster, isShowPanelShare, strContentUrl])
+	}, [isEnableSafeMode, isShowPanelShare, strContentUrl])
 
 	useShareAppMessage(res => {
 		// const sharePath = processSharePath({
@@ -153,7 +148,21 @@ export default function PanelShare(props: IPanelShareProps) {
 				closeBtnPosition='bottom'
 				onClose={handlePanelShareClose}
 			>
-				{isEnableSharePoster ? (
+				{isEnableSafeMode ? (
+					<View className='share-content'>
+						<View className='share-button-wrap flex-around-h'>
+							<View className='share-button flex-between-v'>
+								<AtButton
+									className='float-btn-icon flex-center bk-green'
+									openType='share'
+								>
+									<View className='iconfont icon-share-wechat'></View>
+								</AtButton>
+								<View className='btn-text'>分享链接</View>
+							</View>
+						</View>
+					</View>
+				) : (
 					<Block>
 						<View
 							className={`share-content `}
@@ -215,20 +224,6 @@ export default function PanelShare(props: IPanelShareProps) {
 							</View>
 						</View>
 					</Block>
-				) : (
-					<View className='share-content'>
-						<View className='share-button-wrap flex-around-h'>
-							<View className='share-button flex-between-v'>
-								<AtButton
-									className='float-btn-icon flex-center bk-green'
-									openType='share'
-								>
-									<View className='iconfont icon-share-wechat'></View>
-								</AtButton>
-								<View className='btn-text'>分享链接</View>
-							</View>
-						</View>
-					</View>
 				)}
 			</AtCurtain>
 

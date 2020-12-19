@@ -3,7 +3,7 @@ const cloud = require('wx-server-sdk')
 const queryLoginInfo = require('queryLoginInfo/index.js')
 const updateAdminList = require('updateAdminList/index.js')
 const updateBottomBarList = require('updateBottomBarList/index.js')
-const updateEnableSharePoster = require('updateEnableSharePoster/index.js')
+const updateEnableSafeMode = require('updateEnableSafeMode/index.js')
 
 cloud.init({
 	env: cloud.DYNAMIC_CURRENT_ENV, // API 调用都保持和云函数当前所在环境一致
@@ -44,8 +44,8 @@ exports.main = async (event, context) => {
 		case 'UPDATE_BOTTOM_BAR_LIST':
 			objResult = await updateBottomBarList(event, db)
 			break
-		case 'UPDATE_ENABLE_SHARE_POSTER':
-			objResult = await updateEnableSharePoster(event, db)
+		case 'UPDATE_ENABLE_SAFE_MODE':
+			objResult = await updateEnableSafeMode(event, db)
 			break
 		case 'UPDATE':
 			break
