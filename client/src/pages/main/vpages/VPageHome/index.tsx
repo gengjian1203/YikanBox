@@ -65,15 +65,24 @@ export default function VPageHome(props: IVPageHomeProps) {
 		return () => {}
 	}, [])
 
-	// const handleTestClick = async () => {
-	// 	// const _main = new Main(4)
-	// 	// const num = _main.calculate(4)
-	// 	// console.log('bbbbbb', num)
-	// }
+	const handleTestClick = async () => {
+		// const _main = new Main(4)
+		// const num = _main.calculate(4)
+		// console.log('bbbbbb', num)
+		// Taro.navigateToMiniProgram({
+		// 	appId: 'wxbd3e6f9c3b2c9a33',
+		// })
+		// Taro.navigateToMiniProgram({
+		// 	appId: 'wx75fbc7eca5fe2581',
+		// })
+		Taro.navigateTo({
+			url: '/pages/personality-detail/index',
+		})
+	}
 
 	const handleCreateArticleClick = async e => {
 		const res = await webApi.testInfo.spiderArticleInfo()
-		console.log('handleTestClick', res)
+		console.log('handleCreateArticleClick', res)
 	}
 
 	const handleLoginClick = e => {
@@ -148,7 +157,7 @@ export default function VPageHome(props: IVPageHomeProps) {
 			{/* banner */}
 			<Banner arrBannerList={arrBannerLocalList} />
 			{/* 临时操作 */}
-			{/* <Button onClick={handleTestClick}>测试按钮</Button> */}
+			<Button onClick={handleTestClick}>测试按钮</Button>
 			{/* <Button onClick={handleCreateArticleClick}>爬取文章</Button> */}
 			{/* <Button onClick={handleLoginClick}>强制登录</Button> */}
 			{/* <Button onClick={handleNavigationJumpClick}>重复跳转</Button> */}

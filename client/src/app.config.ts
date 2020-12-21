@@ -33,6 +33,10 @@ export default {
 				'popularize/index', // 我的邀请
 			],
 		},
+		{
+			root: 'pages/personality-detail', // 个性秀
+			pages: ['index'],
+		},
 	],
 	preloadRule: {
 		// 加载页预加载：主页子包、登录页子包、
