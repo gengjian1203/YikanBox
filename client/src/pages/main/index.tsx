@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useRouter } from '@tarojs/taro'
 import { Block, View } from '@tarojs/components'
@@ -44,20 +44,25 @@ export default function Main() {
 	}, [])
 
 	const renderVPage = () => {
-		switch (strBottomBarListSelectCode) {
-			case 'HOME': {
-				return <VPageHome />
-			}
-			case 'DISCOVER': {
-				return <VPageDiscover />
-			}
-			case 'MINE': {
-				return <VPageMine />
-			}
-			default: {
-				return <View>未知页面</View>
-			}
-		}
+		return (
+			<Fragment>
+				<VPageHome
+					customWrapStyle={
+						strBottomBarListSelectCode === 'HOME' ? '' : 'display: none; '
+					}
+				/>
+				<VPageDiscover
+					customWrapStyle={
+						strBottomBarListSelectCode === 'DISCOVER' ? '' : 'display: none; '
+					}
+				/>
+				<VPageMine
+					customWrapStyle={
+						strBottomBarListSelectCode === 'MINE' ? '' : 'display: none; '
+					}
+				/>
+			</Fragment>
+		)
 	}
 
 	return (
@@ -71,6 +76,7 @@ export default function Main() {
 			/>
 			{/* 渲染对应内容 */}
 			{renderVPage()}
+
 			{/* 底部导航 */}
 			<TabbarBottom />
 		</Block>

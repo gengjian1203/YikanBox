@@ -1,7 +1,8 @@
-import Taro from '@tarojs/taro'
+import Taro, { useDidShow } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import webApi from '@/api'
+import useQueryPageList from '@/hooks/useQueryPageList'
 import { deepClone, uploadImage } from '@/utils/index'
 // import Main from '@/utils/test/main'
 import ResourceManager from '@/services/ResourceManager'
@@ -12,12 +13,17 @@ import Banner from './components/banner'
 
 import './index.scss'
 
-interface IVPageHomeProps {}
+interface IVPageHomeProps {
+	customWrapClass?: string
+	customWrapStyle?: string
+}
 
 export default function VPageHome(props: IVPageHomeProps) {
-	const {} = props
+	const { customWrapClass = '', customWrapStyle = '' } = props
 
 	const [arrBannerLocalList, setBannerLocalList] = useState<Array<any>>([])
+	const [arrArticleList, setArticleList] = useState<Array<any>>([])
+	const [showBottomLoadingTip, setBottomLoadingTip] = useState<boolean>(false)
 	const [strImg, setImg] = useState<string>('')
 
 	const isEnableSafeMode = useSelector(
@@ -29,7 +35,6 @@ export default function VPageHome(props: IVPageHomeProps) {
 	const { nHeightNavigationHeader } = useSelector(
 		state => state.appInfo.objAppHeight
 	)
-	const { arrArticleList } = useSelector(state => state.articleInfo)
 
 	const loadBanner = async itemBanner => {
 		const strImageUrlTmp = await ResourceManager.getUrl(itemBanner.strImageId)
@@ -64,6 +69,22 @@ export default function VPageHome(props: IVPageHomeProps) {
 		onLoad()
 		return () => {}
 	}, [])
+
+	useQueryPageList(res => {
+		const { state, data } = res
+		switch (state) {
+			case 'RESULT':
+				setArticleList(data)
+				setBottomLoadingTip(false)
+				break
+			case 'LOADING':
+			case 'REACH_BOTTOM':
+				setBottomLoadingTip(true)
+				break
+			default:
+				break
+		}
+	}, webApi.articleInfo.queryArticleList)
 
 	const handleTestClick = async () => {
 		// const _main = new Main(4)
@@ -149,7 +170,10 @@ export default function VPageHome(props: IVPageHomeProps) {
 	}
 
 	return (
-		<View className='vpage-home-wrap'>
+		<View
+			className={`vpage-home-wrap ${customWrapClass}`}
+			style={customWrapStyle}
+		>
 			{/* 占位栏 */}
 			<View
 				style={`height: ${Taro.pxTransform(nHeightNavigationHeader * 2)}`}
@@ -157,7 +181,7 @@ export default function VPageHome(props: IVPageHomeProps) {
 			{/* banner */}
 			<Banner arrBannerList={arrBannerLocalList} />
 			{/* 临时操作 */}
-			<Button onClick={handleTestClick}>测试按钮</Button>
+			{/* <Button onClick={handleTestClick}>测试按钮</Button> */}
 			{/* <Button onClick={handleCreateArticleClick}>爬取文章</Button> */}
 			{/* <Button onClick={handleLoginClick}>强制登录</Button> */}
 			{/* <Button onClick={handleNavigationJumpClick}>重复跳转</Button> */}
@@ -176,6 +200,7 @@ export default function VPageHome(props: IVPageHomeProps) {
 				<ListFeed
 					strType='MOMENTS'
 					arrList={arrArticleList}
+					showBottomLoadingTip={showBottomLoadingTip}
 					onDetailClick={handleDetailClick}
 				/>
 			)}

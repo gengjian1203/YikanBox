@@ -9,10 +9,13 @@ import ModuleAbout from './components/module-about'
 
 import './index.scss'
 
-interface IVPageMineProps {}
+interface IVPageMineProps {
+	customWrapClass?: string
+	customWrapStyle?: string
+}
 
 export default function VPageMine(props: IVPageMineProps) {
-	const {} = props
+	const { customWrapClass = '', customWrapStyle = '' } = props
 
 	const onLoad = async () => {
 		// console.log('VPageMine')
@@ -24,7 +27,10 @@ export default function VPageMine(props: IVPageMineProps) {
 	}, [])
 
 	return (
-		<View className='vpage-mine-wrap'>
+		<View
+			className={`vpage-mine-wrap ${customWrapClass}`}
+			style={customWrapStyle}
+		>
 			{/* 个人信息 */}
 			<ModuleCard />
 			{/* 我的内容 */}

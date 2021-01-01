@@ -13,10 +13,13 @@ import ModuleArticle from './components/module-article'
 
 import './index.scss'
 
-interface IVPageDiscoverProps {}
+interface IVPageDiscoverProps {
+	customWrapClass?: string
+	customWrapStyle?: string
+}
 
 export default function VPageDiscover(props: IVPageDiscoverProps) {
-	const {} = props
+	const { customWrapClass = '', customWrapStyle = '' } = props
 
 	const { nHeightNavigationHeader, nHeightTabbarBottom } = useSelector(
 		state => state.appInfo.objAppHeight
@@ -59,7 +62,10 @@ export default function VPageDiscover(props: IVPageDiscoverProps) {
 	}
 
 	return (
-		<View className='vpage-discover-wrap'>
+		<View
+			className={`vpage-discover-wrap ${customWrapClass}`}
+			style={customWrapStyle}
+		>
 			{arrArticleList.length ? (
 				<Swiper
 					className='module-swiper-wrap'

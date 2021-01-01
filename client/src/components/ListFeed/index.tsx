@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { View, Image } from '@tarojs/components'
 
 import Moments from './Moments'
@@ -22,11 +22,17 @@ interface IListFeedProps {
 		| 'MOMENTS' // 朋友圈类型
 		| ''
 	arrList: Array<IItemType>
+	showBottomLoadingTip: boolean
 	onDetailClick: (any: any) => void
 }
 
 export default function ListFeed(props: IListFeedProps) {
-	const { strType = '', arrList = [], onDetailClick } = props
+	const {
+		strType = '',
+		showBottomLoadingTip = false,
+		arrList = [],
+		onDetailClick,
+	} = props
 
 	const readerList = () => {
 		switch (strType) {
@@ -37,5 +43,12 @@ export default function ListFeed(props: IListFeedProps) {
 		}
 	}
 
-	return readerList()
+	return (
+		<Fragment>
+			{readerList()}
+			{showBottomLoadingTip && (
+				<View className='list-feed-loading-tip'>加载中...</View>
+			)}
+		</Fragment>
+	)
 }
