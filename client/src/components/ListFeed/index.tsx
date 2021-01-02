@@ -22,7 +22,7 @@ interface IListFeedProps {
 		| 'MOMENTS' // 朋友圈类型
 		| ''
 	arrList: Array<IItemType>
-	showBottomLoadingTip: boolean
+	showBottomLoadingTip?: boolean
 	onDetailClick: (any: any) => void
 }
 
@@ -44,11 +44,11 @@ export default function ListFeed(props: IListFeedProps) {
 	}
 
 	return (
-		<Fragment>
+		<View className='list-feed-wrap'>
 			{readerList()}
 			{showBottomLoadingTip && (
-				<View className='list-feed-loading-tip'>加载中...</View>
+				<View className='list-feed-loading-tip'>努力加载中...</View>
 			)}
-		</Fragment>
+		</View>
 	)
 }

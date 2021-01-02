@@ -8,6 +8,7 @@ import { View, Image, Swiper, SwiperItem } from '@tarojs/components'
 import './index.scss'
 
 interface IBannerItemType {
+	strImageId: string
 	strImageUrl: string
 	strNavUrl?: string
 }
@@ -49,7 +50,7 @@ export default function Banner(props: IBannerProps) {
 						>
 							<Image
 								className='banner-image'
-								src={item.strImageUrl}
+								src={item.strImageUrl || item.strImageId}
 								mode='aspectFit'
 							/>
 						</View>

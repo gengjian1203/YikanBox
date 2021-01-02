@@ -39,6 +39,12 @@ export default function VPageMine(props: IVPageMineProps) {
 				<ModuleCommon />
 				{/* 列表模块 */}
 				<ModuleList />
+				{/* 列表模块 */}
+				<ModuleList />
+				{/* 列表模块 */}
+				<ModuleList />
+				{/* 列表模块 */}
+				<ModuleList />
 				{/* 关于模块 */}
 				<ModuleAbout />
 			</View>

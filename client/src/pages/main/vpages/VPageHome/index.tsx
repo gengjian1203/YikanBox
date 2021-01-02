@@ -2,10 +2,8 @@ import Taro, { useDidShow } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import webApi from '@/api'
-import useQueryPageList from '@/hooks/useQueryPageList'
 import { deepClone, uploadImage } from '@/utils/index'
 // import Main from '@/utils/test/main'
-import ResourceManager from '@/services/ResourceManager'
 
 import { View, Image, Button } from '@tarojs/components'
 import ListFeed from '@/components/ListFeed'
@@ -16,75 +14,32 @@ import './index.scss'
 interface IVPageHomeProps {
 	customWrapClass?: string
 	customWrapStyle?: string
+	arrBannerLocalList?: Array<any>
+	arrArticleList?: Array<any>
+	showBottomLoadingTip?: boolean
 }
 
 export default function VPageHome(props: IVPageHomeProps) {
-	const { customWrapClass = '', customWrapStyle = '' } = props
+	const {
+		customWrapClass = '',
+		customWrapStyle = '',
+		arrBannerLocalList = [],
+		arrArticleList = [],
+		showBottomLoadingTip = false,
+	} = props
 
-	const [arrBannerLocalList, setBannerLocalList] = useState<Array<any>>([])
-	const [arrArticleList, setArticleList] = useState<Array<any>>([])
-	const [showBottomLoadingTip, setBottomLoadingTip] = useState<boolean>(false)
-	const [strImg, setImg] = useState<string>('')
+	const {
+		objAppInfo: { isEnableSafeMode },
+		objAppHeight: { nHeightNavigationHeader },
+	} = useSelector(state => state.appInfo)
 
-	const isEnableSafeMode = useSelector(
-		state => state.appInfo.objAppInfo.isEnableSafeMode
-	)
-	const arrBannerList = useSelector(
-		state => state.appInfo.objAppInfo.arrBannerList
-	)
-	const { nHeightNavigationHeader } = useSelector(
-		state => state.appInfo.objAppHeight
-	)
-
-	const loadBanner = async itemBanner => {
-		const strImageUrlTmp = await ResourceManager.getUrl(itemBanner.strImageId)
-		setBannerLocalList(prevBannerLocalList => {
-			const arrListTmp = deepClone(prevBannerLocalList)
-			const nIndex = prevBannerLocalList.findIndex(item => {
-				return item.strImageId === itemBanner.strImageId
-			})
-			if (nIndex >= 0) {
-				arrListTmp[nIndex] = {
-					strImageId: itemBanner.strImageId,
-					strNavUrl: itemBanner.strNavUrl,
-					strImageUrl: strImageUrlTmp,
-				}
-			}
-			return arrListTmp
-		})
-	}
-
-	const onLoad = async () => {
-		const strImgId =
-			'cloud://online-z8369.6f6e-online-z8369-1259256375/resource/banner/img.jpeg'
-		setBannerLocalList(arrBannerList)
-		for (let item of arrBannerList) {
-			loadBanner(item)
-		}
-		setImg(await ResourceManager.getUrl(strImgId))
-		console.log('onLoad arrBannerList')
-	}
+	const strImg =
+		'cloud://online-z8369.6f6e-online-z8369-1259256375/resource/banner/img.jpeg'
 
 	useEffect(() => {
-		onLoad()
+		console.log('VPageHome useEffect')
 		return () => {}
 	}, [])
-
-	useQueryPageList(res => {
-		const { state, data } = res
-		switch (state) {
-			case 'RESULT':
-				setArticleList(data)
-				setBottomLoadingTip(false)
-				break
-			case 'LOADING':
-			case 'REACH_BOTTOM':
-				setBottomLoadingTip(true)
-				break
-			default:
-				break
-		}
-	}, webApi.articleInfo.queryArticleList)
 
 	const handleTestClick = async () => {
 		// const _main = new Main(4)

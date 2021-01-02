@@ -3,11 +3,15 @@ import Taro, {
 	useReachBottom,
 	usePullDownRefresh,
 } from '@tarojs/taro'
-import { useCallback, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
-const PAGE_SIZE = 15
+const PAGE_SIZE = 50
 
-const useQueryPageList = (callback: any, funFetchApi: any, param: any = {}) => {
+const useQueryPageList = (
+	callback: any,
+	funFetchApi: any = null,
+	param: any = {}
+) => {
 	const nPageNum = useRef<number>(0)
 	const arrPageList = useRef<Array<any>>([])
 	const nPageSize = param.nPageSize ? param.nPageSize : PAGE_SIZE
@@ -28,6 +32,9 @@ const useQueryPageList = (callback: any, funFetchApi: any, param: any = {}) => {
 
 	// 初次加载
 	useEffect(() => {
+		if (!funFetchApi) {
+			return
+		}
 		console.log('useQueryPageList useEffect')
 		callback({ state: 'LOADING' })
 		const paramReal = {
@@ -42,7 +49,10 @@ const useQueryPageList = (callback: any, funFetchApi: any, param: any = {}) => {
 	}, [])
 
 	// 触底加载分页
-	useReachBottom(async () => {
+	useReachBottom(() => {
+		if (!funFetchApi) {
+			return
+		}
 		console.log('useQueryPageList useReachBottom')
 		callback({ state: 'REACH_BOTTOM' })
 		nPageNum.current++
@@ -51,13 +61,17 @@ const useQueryPageList = (callback: any, funFetchApi: any, param: any = {}) => {
 			nPageNum: nPageNum.current,
 			nPageSize: nPageSize,
 		}
-		const res = await funFetchApi(paramReal)
-		arrPageList.current = arrPageList.current.concat(res ? res.data : [])
-		callback({ state: 'RESULT', data: arrPageList.current })
+		funFetchApi(paramReal).then(res => {
+			arrPageList.current = arrPageList.current.concat(res ? res.data : [])
+			callback({ state: 'RESULT', data: arrPageList.current })
+		})
 	})
 
 	// 下拉刷新
-	usePullDownRefresh(async () => {
+	usePullDownRefresh(() => {
+		if (!funFetchApi) {
+			return
+		}
 		console.log('useQueryPageList usePullDownRefresh')
 		callback({ state: 'LOADING' })
 		nPageNum.current = 0
@@ -66,9 +80,10 @@ const useQueryPageList = (callback: any, funFetchApi: any, param: any = {}) => {
 			nPageNum: nPageNum.current,
 			nPageSize: nPageSize,
 		}
-		const res = await funFetchApi(paramReal)
-		arrPageList.current = res ? res.data : []
-		callback({ state: 'RESULT', data: arrPageList.current })
+		funFetchApi(paramReal).then(res => {
+			arrPageList.current = res ? res.data : []
+			callback({ state: 'RESULT', data: arrPageList.current })
+		})
 	})
 }
 
