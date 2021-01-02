@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import avatarShowInfoActions from '@/redux/actions/avatarShowInfo'
@@ -10,7 +10,7 @@ import useCheckLogin from '@/hooks/useCheckLogin'
 import useThrottle from '@/hooks/useThrottle'
 import { checkObjectEmpty, getHDAvatarUrl, uploadImage } from '@/utils/index'
 
-import { View, Block } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import { AtButton, AtActionSheet, AtActionSheetItem } from 'taro-ui'
 
 import { drawCanvasSave } from '../../utils/canvasSave'
@@ -227,7 +227,7 @@ export default function ModuleButton(props: IModuleBottomProps) {
 	}
 
 	return (
-		<Block>
+		<Fragment>
 			<View
 				className={`avatar-show-button ` + `${isPhoneX ? 'safe-bottom ' : ''}`}
 			>
@@ -272,6 +272,6 @@ export default function ModuleButton(props: IModuleBottomProps) {
 					)
 				})}
 			</AtActionSheet>
-		</Block>
+		</Fragment>
 	)
 }

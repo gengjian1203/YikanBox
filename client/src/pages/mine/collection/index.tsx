@@ -1,8 +1,7 @@
 import Taro, { useRouter } from '@tarojs/taro'
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import { Block } from '@tarojs/components'
 import { AtTabs, AtTabsPane } from 'taro-ui'
 import NavigationHeader from '@/components/NavigationHeader'
 
@@ -41,7 +40,7 @@ export default function Collection() {
 	}
 
 	return (
-		<Block>
+		<Fragment>
 			{/* 顶部导航 */}
 			<NavigationHeader isShowLeftIcon strNavigationTitle='我的收藏' />
 			{/* 渲染tab */}
@@ -73,6 +72,6 @@ export default function Collection() {
 					<ListArticle arrList={arrCollectionQueueList} />
 				</AtTabsPane>
 			</AtTabs>
-		</Block>
+		</Fragment>
 	)
 }

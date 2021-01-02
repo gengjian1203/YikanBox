@@ -4,8 +4,8 @@ import StorageManager from '@/services/StorageManager'
 const m_managerStorage = StorageManager.getInstance()
 
 const callFunction: any = async (strCloudName: string, objCloudParams: any) => {
-	const isBlockMember = m_managerStorage.getStorageSync('isBlackMember')
-	if (!isBlockMember) {
+	const isBlackMember = m_managerStorage.getStorageSync('isBlackMember')
+	if (!isBlackMember) {
 		return new Promise((resolve, reject) => {
 			Taro.cloud
 				.callFunction({

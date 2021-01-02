@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import avatarShowInfoActions from '@/redux/actions/avatarShowInfo'
@@ -8,7 +8,7 @@ import { checkObjectEmpty, UUID } from '@/utils/index'
 import * as imagesLocal from '@/services/ResourceImage'
 import ResourceManager from '@/services/ResourceManager'
 
-import { View, Block, Canvas } from '@tarojs/components'
+import { View, Canvas } from '@tarojs/components'
 
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../../utils/const'
 import { drawMainCanvas } from '../../utils/canvas'
@@ -201,7 +201,7 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 	}
 
 	return (
-		<Block>
+		<Fragment>
 			<View className='avatar-show-content flex-center'>
 				<Canvas
 					canvasId='canvas'
@@ -219,6 +219,6 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 					onTouchEnd={handleCanvasTouchEnd}
 				/>
 			</View>
-		</Block>
+		</Fragment>
 	)
 }

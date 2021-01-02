@@ -1,5 +1,5 @@
 import Taro, { useRouter } from '@tarojs/taro'
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import memberInfoActions from '@/redux/actions/memberInfo'
@@ -11,7 +11,7 @@ import { shareType, processSharePath, getArticleTagName } from '@/utils/index'
 import ResourceManager from '@/services/ResourceManager'
 
 import { AtButton } from 'taro-ui'
-import { Block, View, Text } from '@tarojs/components'
+import { View, Text } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
 import PanelShare from '@/components/PanelShare'
 import Tag from '@/components/Tag'
@@ -114,7 +114,7 @@ export default function ArticleDetail() {
 	}
 
 	return (
-		<Block>
+		<Fragment>
 			{/* 顶部导航 */}
 			<NavigationHeader isShowLeftIcon strNavigationTitle='文章详情' />
 			<View className='article-detail-wrap'>
@@ -193,6 +193,6 @@ export default function ArticleDetail() {
 					onShowPanelShare={handleShowPanelShare}
 				/>
 			</View>
-		</Block>
+		</Fragment>
 	)
 }

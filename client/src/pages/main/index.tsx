@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import webApi from '@/api'
 import useQueryPageList from '@/hooks/useQueryPageList'
 import { useRouter } from '@tarojs/taro'
-import { Block, View } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
 import TabbarBottom from '@/components/TabBarBottom'
 
@@ -96,7 +96,7 @@ export default function Main() {
 	}
 
 	return (
-		<Block>
+		<Fragment>
 			{/* 顶部导航 */}
 			<NavigationHeader
 				isShowLeftIcon={false}
@@ -108,6 +108,6 @@ export default function Main() {
 			{renderVPage()}
 			{/* 底部导航 */}
 			<TabbarBottom />
-		</Block>
+		</Fragment>
 	)
 }

@@ -28,8 +28,8 @@ export default class AppInitDataService {
 
 	initResourceManager = () => {
 		// 初始化资源管理器
-		const isBlockMember = m_managerStorage.getStorageSync('isBlackMember')
-		if (!isBlockMember) {
+		const isBlackMember = m_managerStorage.getStorageSync('isBlackMember')
+		if (!isBlackMember) {
 			ResourceManager.getInstance()
 			ResourceManager.loadingAllResource()
 			QRCodeManager.getInstance()

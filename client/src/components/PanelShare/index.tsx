@@ -1,7 +1,7 @@
 import Taro, { useShareAppMessage } from '@tarojs/taro'
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { View, Image, Block, Canvas } from '@tarojs/components'
+import { View, Image, Canvas } from '@tarojs/components'
 import { AtButton, AtCurtain } from 'taro-ui'
 
 import useCheckAuthorize from '@/hooks/useCheckAuthorize'
@@ -140,7 +140,7 @@ export default function PanelShare(props: IPanelShareProps) {
 	}
 
 	return (
-		<Block>
+		<Fragment>
 			{/* 幕帘弹窗 */}
 			<AtCurtain
 				className='panel-share-wrap'
@@ -163,7 +163,7 @@ export default function PanelShare(props: IPanelShareProps) {
 						</View>
 					</View>
 				) : (
-					<Block>
+					<Fragment>
 						<View
 							className={`share-content `}
 							style={
@@ -223,7 +223,7 @@ export default function PanelShare(props: IPanelShareProps) {
 								<View className='btn-text'>关闭</View>
 							</View>
 						</View>
-					</Block>
+					</Fragment>
 				)}
 			</AtCurtain>
 
@@ -239,6 +239,6 @@ export default function PanelShare(props: IPanelShareProps) {
 					`height: ${PANEL_SHARE_HEIGHT * 2}px; `
 				}
 			/>
-		</Block>
+		</Fragment>
 	)
 }

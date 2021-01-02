@@ -1,10 +1,10 @@
 import Taro, { useRouter } from '@tarojs/taro'
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import webApi from '@/api'
 
-import { Block, View } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
 import ModuleBase from './components/module-base'
 import ModuleBadge from './components/module-badge'
@@ -56,7 +56,7 @@ export default function Achievement() {
 				strNavigationTitle={strNavigationTitle}
 			/>
 			{isLoadComplete ? (
-				<Block>
+				<Fragment>
 					{/* 基本信息 */}
 					<ModuleBase
 						isStateMyself={isStateMyself}
@@ -67,9 +67,9 @@ export default function Achievement() {
 						isStateMyself={isStateMyself}
 						objMemberInfo={objMemberInfo}
 					/>
-				</Block>
+				</Fragment>
 			) : (
-				<Block></Block>
+				<Fragment></Fragment>
 			)}
 		</View>
 	)

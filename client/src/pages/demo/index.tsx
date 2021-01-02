@@ -1,5 +1,5 @@
 import Taro, { useRouter } from '@tarojs/taro'
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import memberInfoActions from '@/redux/actions/memberInfo'
@@ -9,7 +9,7 @@ import useCheckLogin from '@/hooks/useCheckLogin'
 import webApi from '@/api'
 import { shareType, processSharePath, getArticleTagName } from '@/utils/index'
 
-import { Block, View, Text } from '@tarojs/components'
+import { View, Text } from '@tarojs/components'
 import NavigationHeader from '@/components/NavigationHeader'
 import Tag from '@/components/Tag'
 import { AtButton } from 'taro-ui'
@@ -46,7 +46,7 @@ export default function Demo() {
 	}, [])
 
 	return (
-		<Block>
+		<Fragment>
 			{/* 顶部导航 */}
 			<NavigationHeader isShowLeftIcon strNavigationTitle={strTitle} />
 			{/* 我要邀请 */}
@@ -80,6 +80,6 @@ export default function Demo() {
 				selectable
 				show-with-animation
 			/>
-		</Block>
+		</Fragment>
 	)
 }

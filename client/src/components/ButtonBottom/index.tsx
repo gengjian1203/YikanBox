@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro'
-import React from 'react'
+import React, { Fragment } from 'react'
 import useThrottle from '@/hooks/useThrottle'
-import { Block, View } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 
 import './index.scss'
@@ -47,7 +47,7 @@ export default function ButtonBottom(props: IButtonBottomProps) {
 		customPanelStyle = '',
 		customButtonClass = '',
 		customButtonStyle = '',
-		renderExtra = () => <Block></Block>,
+		renderExtra = () => <Fragment></Fragment>,
 		onButtonClick = () => true,
 	} = props
 
@@ -63,7 +63,7 @@ export default function ButtonBottom(props: IButtonBottomProps) {
 
 	return (
 		// {/* 面板 */}
-		<Block>
+		<Fragment>
 			<View
 				className={
 					`default-style-panel ` +
@@ -107,14 +107,14 @@ export default function ButtonBottom(props: IButtonBottomProps) {
 			)}
 			{/* 占位内容 */}
 			{fixed && (
-				<Block>
+				<Fragment>
 					<View
 						className={`default-style-panel ` + `${customPanelClass}`}
 						style={`${customPanelStyle}`}
 					></View>
 					{isSafeBottom && <View className='safe-bottom'></View>}
-				</Block>
+				</Fragment>
 			)}
-		</Block>
+		</Fragment>
 	)
 }

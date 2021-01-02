@@ -1,5 +1,5 @@
 import Taro, { useRouter } from '@tarojs/taro'
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import useActions from '@/hooks/useActions'
 import appInfoActions from '@/redux/actions/appInfo'
 import memberInfoActions from '@/redux/actions/memberInfo'
@@ -11,7 +11,7 @@ import AppService from '@/services/AppService'
 import StorageManager from '@/services/StorageManager'
 import { router2param } from '@/utils/index'
 
-import { Block, View } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import PanelTips from '@/components/PanelTips'
 
 import { changeQRCodeParam } from './utils/index'
@@ -24,7 +24,7 @@ const m_managerStorage = StorageManager.getInstance()
 export default function Loading() {
 	const { params } = useRouter()
 
-	const [isBlockMember, setBlockMember] = useState<boolean>(false)
+	const [isBlackMember, setBlackMember] = useState<boolean>(false)
 
 	const {
 		setAppInfo,
@@ -180,10 +180,10 @@ export default function Loading() {
 			resInitSystemInfo,
 			resInitLoginInfo
 		)
-		const isBlockMemberTmp = m_managerStorage.getStorageSync('isBlackMember')
-		setBlockMember(isBlockMemberTmp)
+		const isBlackMemberTmp = m_managerStorage.getStorageSync('isBlackMember')
+		setBlackMember(isBlackMemberTmp)
 
-		if (!isBlockMemberTmp) {
+		if (!isBlackMemberTmp) {
 			jumpPage(resInitLoginInfo)
 		}
 	}
@@ -194,19 +194,19 @@ export default function Loading() {
 
 	return (
 		<View className='loading-page-wrap flex-center-v'>
-			{isBlockMember ? (
-				<Block>
+			{isBlackMember ? (
+				<Fragment>
 					<View className='loading-page-text flex-center'>
 						您的帐号由于违规操作而被封，
 					</View>
 					<View className='loading-page-text flex-center'>
 						目前无权限进行该操作。
 					</View>
-				</Block>
+				</Fragment>
 			) : (
-				<Block>
+				<Fragment>
 					<PanelTips strType='LOADING' />
-				</Block>
+				</Fragment>
 			)}
 		</View>
 	)
