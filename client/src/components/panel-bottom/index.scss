@@ -1,0 +1,10 @@
+.panel-bottom-wrap {
+	position: relative;
+
+	.fixed-panel {
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+}
