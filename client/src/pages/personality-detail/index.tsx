@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Taro, { useRouter } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
+import PageContent from '@/components/PageContent'
+
 import './index.less'
 
 export default function PersonalityDetail() {
@@ -18,10 +20,8 @@ export default function PersonalityDetail() {
 	}, [])
 
 	return (
-		isLoadComplete && (
-			<View className='personality-detail-wrap'>
-				<View className='personality-detail-name'>ddddd</View>
-			</View>
-		)
+		<PageContent customClass='personality-detail-wrap'>
+			{isLoadComplete && <View className='personality-detail-name'>ddddd</View>}
+		</PageContent>
 	)
 }

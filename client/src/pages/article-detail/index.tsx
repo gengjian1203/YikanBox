@@ -12,7 +12,7 @@ import ResourceManager from '@/services/ResourceManager'
 
 import { AtButton } from 'taro-ui'
 import { View, Text } from '@tarojs/components'
-import NavigationHeader from '@/components/NavigationHeader'
+import PageContent from '@/components/PageContent'
 import PanelShare from '@/components/PanelShare'
 import Tag from '@/components/Tag'
 
@@ -92,7 +92,7 @@ export default function ArticleDetail() {
 		if (isCollectionSelectTmp) {
 			const res = await webApi.memberInfo.addCollectionArticle(objArticleInfo)
 			// console.log('addCollectionArticle', res.data)
-			addCollectionArticleInfo(res.data)
+			addCollectionArticleInfo(objArticleInfo)
 		} else {
 			const res = await webApi.memberInfo.removeCollectionArticle(
 				objArticleInfo
@@ -114,9 +114,7 @@ export default function ArticleDetail() {
 	}
 
 	return (
-		<Fragment>
-			{/* 顶部导航 */}
-			<NavigationHeader isShowLeftIcon strNavigationTitle='文章详情' />
+		<PageContent isShowLeftIcon strNavigationTitle='文章详情'>
 			<View className='article-detail-wrap'>
 				{/* 标题 */}
 				<View className='article-detail-item'>
@@ -193,6 +191,6 @@ export default function ArticleDetail() {
 					onShowPanelShare={handleShowPanelShare}
 				/>
 			</View>
-		</Fragment>
+		</PageContent>
 	)
 }

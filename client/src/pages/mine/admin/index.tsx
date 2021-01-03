@@ -5,7 +5,7 @@ import webApi from '@/api'
 import { deepClone, deepCompare } from '@/utils/index'
 import { View } from '@tarojs/components'
 import { AtList, AtListItem } from 'taro-ui'
-import NavigationHeader from '@/components/NavigationHeader'
+import PageContent from '@/components/PageContent'
 import ButtonBottom from '@/components/ButtonBottom'
 import ModuleTitle from '@/components/ModuleTitle'
 
@@ -134,9 +134,11 @@ export default function Admin() {
 	}
 
 	return (
-		<View className='admin-wrap'>
-			{/* 顶部导航 */}
-			<NavigationHeader isShowLeftIcon strNavigationTitle='我的管理' />
+		<PageContent
+			customClass='admin-wrap'
+			isShowLeftIcon
+			strNavigationTitle='我的管理'
+		>
 			<ModuleTitle
 				strTitle={`管理员设置`}
 				renderExtend={renderAdminListExtend}
@@ -183,6 +185,6 @@ export default function Admin() {
 			</AtList>
 			{/* 保存按钮 */}
 			<ButtonBottom onButtonClick={handleButtonSaveClick} />
-		</View>
+		</PageContent>
 	)
 }

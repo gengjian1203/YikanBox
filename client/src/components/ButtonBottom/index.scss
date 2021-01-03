@@ -1,5 +1,3 @@
-@import '../../app.scss';
-
 .hidden {
 	display: none;
 }
@@ -8,7 +6,7 @@
 	box-sizing: border-box;
 	height: 192px;
 	width: 100%;
-	padding: 0 $border-bold-space;
+	padding: 0 var(--border-bold-space, 32px);
 }
 
 .default-style-button {

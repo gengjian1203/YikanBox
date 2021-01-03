@@ -1,11 +1,9 @@
-@import '../../app.scss';
-
 .article-detail-wrap {
 	box-sizing: border-box;
 	width: 100%;
 	height: 100%;
 
-	padding: $border-bold-space;
+	padding: var(--border-bold-space, 32px);
 
 	display: flex;
 	flex-direction: column;
@@ -14,22 +12,22 @@
 
 	.article-detail-item {
 		width: 100%;
-		line-height: $height-line-title;
-		margin-bottom: $border-bold-space;
+		line-height: var(--height-line-title, 50px);
+		margin-bottom: var(--border-bold-space, 32px);
 	}
 
 	.item-tag {
 		position: relative;
 		top: -4px;
 		display: inline-block;
-		line-height: $height-line-title;
-		margin-right: $border-thin-space;
+		line-height: var(--height-line-title, 50px);
+		margin-right: var(--border-thin-space, 16px);
 	}
 
 	.item-title {
 		display: inline;
-		line-height: $height-line-title;
-		font-size: $f2;
+		line-height: var(--height-line-title, 50px);
+		font-size: var(--f2);
 		font-weight: bold;
 		text-align: left;
 		word-wrap: break-word;
@@ -37,7 +35,7 @@
 	}
 
 	.item-value {
-		font-size: $f5;
+		font-size: var(--f5);
 		text-align: left;
 	}
 
@@ -70,13 +68,13 @@
 				left: 50%;
 				transform: translate(-50%, -50%);
 				font-size: 100px;
-				color: $color-text-primary;
+				color: var(--color-text-primary, #000000);
 			}
 			.icon-collection-select {
 				position: absolute;
 				top: 0;
 				left: 0;
-				color: $color-careful;
+				color: var(--color-careful, #e64340);
 			}
 		}
 	}

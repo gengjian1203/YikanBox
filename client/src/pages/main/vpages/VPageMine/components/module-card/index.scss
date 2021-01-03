@@ -1,13 +1,11 @@
-@import '../../../../../../app.scss';
-
 .module-card-wrap {
 	width: 100%;
 	height: 460px;
 	margin-bottom: -160px;
 	background-image: linear-gradient(
-		$color-primary,
-		$color-primary,
-		$color-primary,
+		var(--color-primary, #f7b500),
+		var(--color-primary, #f7b500),
+		var(--color-primary, #f7b500),
 		#ffffff
 	);
 
@@ -19,7 +17,8 @@
 	.card-info {
 		box-sizing: border-box;
 		width: 100%;
-		padding: 100px $border-bold-space 100px $border-bold-space;
+		padding: 100px var(--border-bold-space, 32px) 100px
+			var(--border-bold-space, 32px);
 		flex: 1 1 auto;
 		display: flex;
 		flex-direction: row;
@@ -36,15 +35,15 @@
 				width: 140px;
 				height: 140px;
 
-				border: 8px solid $color-tertiary;
-				border-radius: $radius-thin;
-				box-shadow: 5px 5px 5px $color-shadow;
+				border: 8px solid var(--color-primary, #f7b500);
+				border-radius: var(--radius-thin, 20px);
+				box-shadow: 5px 5px 5px var(--color-shadow, #aaaaaa);
 
 				display: flex;
 				justify-content: center;
 				align-items: center;
 				font-size: 120px;
-				color: $color-text-placeholder;
+				color: var(--color-text-placeholder, #dfdfe5);
 
 				.image-avatar {
 					position: absolute;
@@ -55,7 +54,7 @@
 					width: 100%;
 					height: 100%;
 					overflow: hidden;
-					border-radius: $radius-sm;
+					border-radius: var(--radius-sm, 10px);
 				}
 
 				.image-border {
@@ -72,7 +71,7 @@
 			flex: 1 1 auto;
 			width: 0;
 			height: 100%;
-			padding: 0 $border-bold-space;
+			padding: 0 var(--border-bold-space, 32px);
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
@@ -83,15 +82,15 @@
 				overflow: hidden;
 				white-space: nowrap;
 				text-overflow: ellipsis;
-				font-size: $f4;
-				color: $color-text-long;
+				font-size: var(--f4);
+				color: var(--color-text-long, #272637);
 			}
 
 			.mid-level {
 				width: 100%;
-				margin-top: $border-thin-space;
-				font-size: $f4;
-				color: $color-text-long;
+				margin-top: var(--border-thin-space, 16px);
+				font-size: var(--f4);
+				color: var(--color-text-long, #272637);
 			}
 		}
 
@@ -103,8 +102,8 @@
 				width: 100%;
 				height: 50px;
 				border-radius: 25px;
-				background-color: $color-mask;
-				color: $color-white;
+				background-color: var(--color-mask, rgba(0, 0, 0, 0.3));
+				color: var(--color-white, #ffffff);
 			}
 		}
 	}

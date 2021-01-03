@@ -32,7 +32,18 @@ export default function VPageDiscover(props: IVPageDiscoverProps) {
 	)
 
 	const onLoad = async () => {
-		// console.log('VPageDiscover')
+		console.log('VPageDiscover')
+		if (arrArticleList.length === 0) {
+			const objParams = {
+				nPageNum: 0,
+				nPageSize: SIZE_PAGE_DISCOVER,
+			}
+			const res = await webApi.articleInfo.queryArticleList(objParams)
+			updateArticleListSplice({
+				nPageNum: 0,
+				arrDataList: res.data,
+			})
+		}
 	}
 
 	useEffect(() => {

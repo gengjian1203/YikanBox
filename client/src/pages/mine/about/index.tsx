@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { View } from '@tarojs/components'
-import NavigationHeader from '@/components/NavigationHeader'
+import PageContent from '@/components/PageContent'
 
 import './index.scss'
 
@@ -25,9 +25,11 @@ export default function About() {
 	]
 
 	return (
-		<View className='about-wrap'>
-			{/* 顶部导航 */}
-			<NavigationHeader isShowLeftIcon strNavigationTitle='关于我们' />
+		<PageContent
+			customClass='about-wrap'
+			isShowLeftIcon
+			strNavigationTitle='关于我们'
+		>
 			{/* 标题 */}
 			<View className='about-title'></View>
 			{/* 内容 */}
@@ -38,6 +40,6 @@ export default function About() {
 					</View>
 				)
 			})}
-		</View>
+		</PageContent>
 	)
 }

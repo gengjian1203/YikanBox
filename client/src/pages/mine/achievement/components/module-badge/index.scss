@@ -1,10 +1,8 @@
-@import '../../../../../app.scss';
-
 .module-badge-wrap {
 	box-sizing: border-box;
 	width: 100%;
-	background-color: $color-white;
-	margin-bottom: $border-bold-space;
+	background-color: var(--color-white, #ffffff);
+	margin-bottom: var(--border-bold-space, 32px);
 
 	display: flex;
 	flex-direction: column;
@@ -14,7 +12,7 @@
 	.module-badge-content {
 		box-sizing: border-box;
 		width: 100%;
-		padding: 0 $border-bold-space;
+		padding: 0 var(--border-bold-space, 32px);
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;

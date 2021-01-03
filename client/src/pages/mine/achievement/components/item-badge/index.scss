@@ -1,10 +1,8 @@
-@import '../../../../../app.scss';
-
 .badge-item-wrap {
 	position: relative;
 	width: 200px;
 	height: 200px;
-	margin-right: $border-bold-space;
+	margin-right: var(--border-bold-space, 32px);
 	margin-bottom: 100px;
 
 	&:nth-child(3n) {
@@ -25,6 +23,6 @@
 		left: 50%;
 		bottom: 0;
 		transform: translate(-50%, 100%);
-		padding: 0 $border-bold-space;
+		padding: 0 var(--border-bold-space, 32px);
 	}
 }

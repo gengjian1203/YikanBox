@@ -1,5 +1,3 @@
-@import '../../app.scss';
-
 .list-feed-wrap {
 	.border-bottom-line {
 		position: relative;
@@ -11,7 +9,7 @@
 				left: 0;
 				width: 100%;
 				height: 2px;
-				background-color: $color-line;
+				background-color: var(--color-line, #ececec);
 				content: '';
 			}
 		}
@@ -21,7 +19,7 @@
 		width: 100%;
 		height: 80px;
 		line-height: 80px;
-		color: $color-text-secondary;
+		color: var(--color-text-secondary, #888888);
 		font-size: 24px;
 		text-align: center;
 	}

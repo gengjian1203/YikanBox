@@ -1,11 +1,9 @@
-@import '../../../../../../app.scss';
-
 .module-list-wrap {
 	box-sizing: border-box;
 	width: 100%;
 	border-radius: 10px 10px 0 0;
-	background-color: $color-white;
-	margin-bottom: $border-bold-space;
+	background-color: var(--color-white, #ffffff);
+	margin-bottom: var(--border-bold-space, 32px);
 
 	display: flex;
 	flex-direction: column;
@@ -18,12 +16,12 @@
 		.item-normal {
 			width: 100%;
 			height: 100px;
-			color: $color-text-long;
+			color: var(--color-text-long, #272637);
 		}
 		.item-logout {
 			width: 100%;
 			height: 100px;
-			color: $color-careful;
+			color: var(--color-careful, #e64340);
 			text-align: center;
 		}
 	}

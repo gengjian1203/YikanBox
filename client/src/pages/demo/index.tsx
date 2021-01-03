@@ -10,7 +10,7 @@ import webApi from '@/api'
 import { shareType, processSharePath, getArticleTagName } from '@/utils/index'
 
 import { View, Text } from '@tarojs/components'
-import NavigationHeader from '@/components/NavigationHeader'
+import PageContent from '@/components/PageContent'
 import Tag from '@/components/Tag'
 import { AtButton } from 'taro-ui'
 
@@ -46,9 +46,7 @@ export default function Demo() {
 	}, [])
 
 	return (
-		<Fragment>
-			{/* 顶部导航 */}
-			<NavigationHeader isShowLeftIcon strNavigationTitle={strTitle} />
+		<PageContent isShowLeftIcon strNavigationTitle={strTitle}>
 			{/* 我要邀请 */}
 			<AtButton type='primary' full openType='share'>
 				我要邀请
@@ -80,6 +78,6 @@ export default function Demo() {
 				selectable
 				show-with-animation
 			/>
-		</Fragment>
+		</PageContent>
 	)
 }

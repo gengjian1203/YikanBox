@@ -3,7 +3,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { AtTabs, AtTabsPane } from 'taro-ui'
-import NavigationHeader from '@/components/NavigationHeader'
+import PageContent from '@/components/PageContent'
 
 import ListArticle from './components/list-article/index'
 import ModuleTitle from '@/components/ModuleTitle'
@@ -40,9 +40,7 @@ export default function Collection() {
 	}
 
 	return (
-		<Fragment>
-			{/* 顶部导航 */}
-			<NavigationHeader isShowLeftIcon strNavigationTitle='我的收藏' />
+		<PageContent isShowLeftIcon strNavigationTitle='我的收藏'>
 			{/* 渲染tab */}
 			<AtTabs
 				scroll={false}
@@ -72,6 +70,6 @@ export default function Collection() {
 					<ListArticle arrList={arrCollectionQueueList} />
 				</AtTabsPane>
 			</AtTabs>
-		</Fragment>
+		</PageContent>
 	)
 }

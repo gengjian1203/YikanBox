@@ -1,5 +1,3 @@
-@import '../../app.scss';
-
 .loading-page-wrap {
 	position: fixed;
 	top: -160px;
@@ -10,8 +8,8 @@
 	.loading-page-text {
 		width: 100%;
 		height: 60px;
-		font-size: $f3;
+		font-size: var(--f3);
 		font-weight: bold;
-		color: $color-primary;
+		color: var(--color-primary, #f7b500);
 	}
 }

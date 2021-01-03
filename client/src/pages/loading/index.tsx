@@ -12,6 +12,7 @@ import StorageManager from '@/services/StorageManager'
 import { router2param } from '@/utils/index'
 
 import { View } from '@tarojs/components'
+import PageContent from '@/components/PageContent'
 import PanelTips from '@/components/PanelTips'
 
 import { changeQRCodeParam } from './utils/index'
@@ -193,7 +194,7 @@ export default function Loading() {
 	}, [])
 
 	return (
-		<View className='loading-page-wrap flex-center-v'>
+		<PageContent customClass='loading-page-wrap flex-center-v'>
 			{isBlackMember ? (
 				<Fragment>
 					<View className='loading-page-text flex-center'>
@@ -208,6 +209,6 @@ export default function Loading() {
 					<PanelTips strType='LOADING' />
 				</Fragment>
 			)}
-		</View>
+		</PageContent>
 	)
 }

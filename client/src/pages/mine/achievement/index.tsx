@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import webApi from '@/api'
 
 import { View } from '@tarojs/components'
-import NavigationHeader from '@/components/NavigationHeader'
+import PageContent from '@/components/PageContent'
 import ModuleBase from './components/module-base'
 import ModuleBadge from './components/module-badge'
 
@@ -49,12 +49,11 @@ export default function Achievement() {
 	}, [])
 
 	return (
-		<View className='achievement-wrap'>
-			{/* 顶部导航 */}
-			<NavigationHeader
-				isShowLeftIcon
-				strNavigationTitle={strNavigationTitle}
-			/>
+		<PageContent
+			customClass='achievement-wrap'
+			isShowLeftIcon
+			strNavigationTitle={strNavigationTitle}
+		>
 			{isLoadComplete ? (
 				<Fragment>
 					{/* 基本信息 */}
@@ -71,6 +70,6 @@ export default function Achievement() {
 			) : (
 				<Fragment></Fragment>
 			)}
-		</View>
+		</PageContent>
 	)
 }

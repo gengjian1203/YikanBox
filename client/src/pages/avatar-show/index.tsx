@@ -2,7 +2,7 @@ import Taro, { useRouter } from '@tarojs/taro'
 import React, { useState } from 'react'
 
 import { View } from '@tarojs/components'
-import NavigationHeader from '@/components/NavigationHeader'
+import PageContent from '@/components/PageContent'
 import PanelShare from '@/components/PanelShare'
 import { shareType, processSharePath } from '@/utils/index'
 
@@ -29,9 +29,11 @@ export default function AvatarShow() {
 	}
 
 	return (
-		<View className='avatar-show-wrap'>
-			{/* 顶部导航 */}
-			<NavigationHeader isShowLeftIcon strNavigationTitle='我的头像秀' />
+		<PageContent
+			customClass='avatar-show-wrap'
+			isShowLeftIcon
+			strNavigationTitle='我的头像秀'
+		>
 			{/* 头像主页面 */}
 			<ModuleCanvas isShowPanelShare={isShowPanelShare} />
 			{/* 底部操作区 */}
@@ -56,6 +58,6 @@ export default function AvatarShow() {
 				strContentUrl={strShareContentUrl}
 				onShowPanelShare={handleShowPanelShare}
 			/>
-		</View>
+		</PageContent>
 	)
 }

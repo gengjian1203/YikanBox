@@ -1,8 +1,6 @@
-@import '../../../app.scss';
-
 .moments-wrap {
 	.moments-item {
-		padding: $border-thin-space $border-bold-space;
+		padding: var(--border-thin-space, 16px) var(--border-bold-space, 32px);
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-start;
@@ -18,55 +16,55 @@
 			.item-logo {
 				width: 100%;
 				height: auto;
-				border-radius: $radius-sm;
+				border-radius: var(--radius-sm, 10px);
 			}
 		}
 
 		.item-right {
 			flex: 1 1 auto;
-			margin-left: $border-thin-space;
+			margin-left: var(--border-thin-space, 16px);
 
 			.item-author {
-				margin-bottom: $border-li-space;
+				margin-bottom: var(--border-li-space, 4px);
 				width: 100%;
-				font-size: $f5;
+				font-size: var(--f5);
 				font-weight: bold;
-				color: $color-feed-author;
+				color: var(--color-feed-author, rgb(100, 100, 140));
 			}
 
 			.item-content {
-				margin-bottom: $border-li-space;
+				margin-bottom: var(--border-li-space, 4px);
 				width: 100%;
-				font-size: $f5;
-				color: $color-feed-content;
+				font-size: var(--f5);
+				color: var(--color-text-long, #272637);
 				text-align: justify;
 			}
 
 			.item-media {
-				margin-bottom: $border-li-space;
+				margin-bottom: var(--border-li-space, 4px);
 				width: 100%;
 			}
 
 			.item-adress {
-				margin-bottom: $border-li-space;
+				margin-bottom: var(--border-li-space, 4px);
 				width: 100%;
-				font-size: $f6;
-				color: $color-feed-address;
+				font-size: var(--f6);
+				color: var(--color-link-normal, #576b96);
 			}
 
 			.item-bottom {
 				width: 100%;
 				.item-time {
-					font-size: $f6;
-					color: $color-feed-time;
+					font-size: var(--f6);
+					color: var(--color-text-secondary, #888888);
 				}
 				.item-options {
 					width: 50px;
 					height: 30px;
 					font-size: 30px;
-					border-radius: $radius-sm;
-					color: $color-feed-options-color;
-					background-color: $color-feed-options-bg;
+					border-radius: var(--radius-sm, 10px);
+					color: var(--color-feed-options-color, rgb(100, 100, 140));
+					background-color: var(--color-bg, #ebebeb);
 				}
 			}
 		}

@@ -6,7 +6,7 @@ import { shareType, processSharePath, deepClone } from '@/utils/index'
 
 import { View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
-import NavigationHeader from '@/components/NavigationHeader'
+import PageContent from '@/components/PageContent'
 import PanelShare from '@/components/PanelShare'
 import PanelTips from '@/components/PanelTips'
 import ModuleTitle from '@/components/ModuleTitle'
@@ -54,9 +54,11 @@ export default function Popularize() {
 	}
 
 	return (
-		<View className='popularize-wrap flex-center-v'>
-			{/* 顶部导航 */}
-			<NavigationHeader isShowLeftIcon strNavigationTitle='我的邀请' />
+		<PageContent
+			customClass='popularize-wrap flex-center-v'
+			isShowLeftIcon
+			strNavigationTitle='我的邀请'
+		>
 			{/* 我要邀请 */}
 			<AtButton type='primary' full onClick={handleShareClick}>
 				我要邀请
@@ -100,6 +102,6 @@ export default function Popularize() {
 				strContentUrl={imagesLocal.strUrlImageCommonShare}
 				onShowPanelShare={handleShowPanelShare}
 			/>
-		</View>
+		</PageContent>
 	)
 }

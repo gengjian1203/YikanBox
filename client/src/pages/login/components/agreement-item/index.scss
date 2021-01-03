@@ -1,9 +1,7 @@
-@import '../../../../app.scss';
-
 .item-content-wrap {
 	margin-bottom: 20px;
-	font-size: $f5;
-	color: $color-text-long;
+	font-size: var(--f5);
+	color: var(--color-text-long, #272637);
 
 	// &:after {
 	// 	content: '';

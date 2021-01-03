@@ -1,5 +1,3 @@
-@import '../../../../../app.scss';
-
 .list-article-wrap {
 	width: 100%;
 	height: 100%;
@@ -12,7 +10,7 @@
 		box-sizing: border-box;
 		width: 100%;
 		height: 100px;
-		padding: 0 $border-bold-space;
+		padding: 0 var(--border-bold-space, 32px);
 	}
 
 	.list-empty {

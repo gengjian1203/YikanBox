@@ -1,7 +1,7 @@
 /* 改变主题变量，具体变量名可查看 taro-ui/dist/style/variables/default.scss 文件 */
-$color-brand: #f7b500;
-$color-brand-light: #f7b500;
-$color-brand-dark: #f7b500;
+$color-brand: var(--color-primary, #f7b500);
+$color-brand-light: var(--color-primary, #f7b500);
+$color-brand-dark: var(--color-primary, #f7b500);
 
 // 改变taro-ui的默认样式
 @import 'taro-ui/dist/style/index.scss';

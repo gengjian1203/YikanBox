@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import React, { useEffect } from 'react'
 
 import { View } from '@tarojs/components'
-import NavigationHeader from '@/components/NavigationHeader'
+import PageContent from '@/components/PageContent'
 import ModuleSky from './components/module-sky'
 import ModuleLogin from './components/module-login'
 import ModuleAgreement from './components/module-agreement'
@@ -20,16 +20,11 @@ export default function Login() {
 	}, [])
 
 	return (
-		<View>
-			<NavigationHeader
-				isShowLeftIcon
-				isTransparent
-				colorBackgroud='transparent'
-			/>
+		<PageContent isShowLeftIcon isTransparent colorBackgroud='transparent'>
 			<ModuleSky />
 			<ModuleLogin />
 			<ModuleAgreement />
 			<ModuleWave />
-		</View>
+		</PageContent>
 	)
 }

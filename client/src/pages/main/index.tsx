@@ -5,7 +5,7 @@ import webApi from '@/api'
 import useQueryPageList from '@/hooks/useQueryPageList'
 import { useRouter } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import NavigationHeader from '@/components/NavigationHeader'
+import PageContent from '@/components/PageContent'
 import TabbarBottom from '@/components/TabBarBottom'
 
 import VPageHome from './vpages/VPageHome/index'
@@ -96,18 +96,16 @@ export default function Main() {
 	}
 
 	return (
-		<Fragment>
-			{/* 顶部导航 */}
-			<NavigationHeader
-				isShowLeftIcon={false}
-				isTransparent
-				colorBackgroud='transparent'
-				strNavigationTitle={strNavigationTitle}
-			/>
+		<PageContent
+			isShowLeftIcon={false}
+			isTransparent
+			colorBackgroud='transparent'
+			strNavigationTitle={strNavigationTitle}
+		>
 			{/* 渲染对应内容 */}
 			{renderVPage()}
 			{/* 底部导航 */}
 			<TabbarBottom />
-		</Fragment>
+		</PageContent>
 	)
 }

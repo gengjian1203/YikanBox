@@ -1,5 +1,3 @@
-@import '../../../../../../app.scss';
-
 .banner-wrap {
 	width: 100%;
 	height: 319px;
@@ -7,8 +5,8 @@
 		overflow: hidden;
 		width: 100%;
 		height: 100%;
-		border-radius: $radius-thin;
-		background-color: $color-default;
+		border-radius: var(--radius-thin, 20px);
+		background-color: var(--color-default, #dfdfe5);
 		.banner-image {
 			width: 100%;
 			height: 100%;

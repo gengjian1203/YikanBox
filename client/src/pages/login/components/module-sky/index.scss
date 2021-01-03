@@ -1,5 +1,3 @@
-@import '../../../../app.scss';
-
 .module-sky-wrap {
 	position: relative;
 	align-items: center;
@@ -20,7 +18,7 @@
 		left: 20%;
 		width: 2800px;
 		height: 2800px;
-		background-color: $color-primary; //rgb(118, 218, 255);
+		background-color: var(--color-primary, #f7b500); //rgb(118, 218, 255);
 		animation-name: rotate;
 		animation-iteration-count: infinite;
 		animation-timing-function: linear;
@@ -43,7 +41,7 @@
 		position: relative;
 		z-index: 500;
 		margin-bottom: 60rpx;
-		font-size: $f2;
+		font-size: var(--f2);
 		color: #ffffff;
 	}
 }

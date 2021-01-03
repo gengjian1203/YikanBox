@@ -1,5 +1,3 @@
-@import '../../app.scss';
-
 .panel-share-wrap {
 	display: flex;
 	flex-direction: column;
@@ -14,13 +12,13 @@
 			height: 50px;
 			background-image: linear-gradient(
 				135deg,
-				$color-shadow,
+				var(--color-shadow, #aaaaaa),
 				80%,
-				$color-white
+				var(--color-white, #ffffff)
 			);
 			border: none;
 			border-radius: 50%;
-			box-shadow: 0 5px 5px $color-white;
+			box-shadow: 0 5px 5px var(--color-white, #ffffff);
 
 			&:after {
 				border: none;
@@ -34,7 +32,7 @@
 				width: 100%;
 				height: 100%;
 				font-size: 50px;
-				color: $color-white;
+				color: var(--color-white, #ffffff);
 			}
 		}
 
@@ -52,14 +50,14 @@
 	}
 
 	.share-text {
-		margin-top: $border-bold-space;
+		margin-top: var(--border-bold-space, 32px);
 		text-align: center;
-		font-size: $f6;
-		color: $color-white;
+		font-size: var(--f6);
+		color: var(--color-white, #ffffff);
 	}
 
 	.share-button-wrap {
-		margin-top: $border-bold-space;
+		margin-top: var(--border-bold-space, 32px);
 		.share-button {
 			.float-btn-icon {
 				position: relative;
@@ -67,7 +65,7 @@
 				height: 100px;
 				border: none;
 				border-radius: 50%;
-				box-shadow: 0 5px 5px $color-white;
+				box-shadow: 0 5px 5px var(--color-white, #ffffff);
 
 				&:after {
 					border: none;
@@ -81,26 +79,41 @@
 					width: 100%;
 					height: 100%;
 					font-size: 60px;
-					color: $color-white;
+					color: var(--color-white, #ffffff);
 				}
 			}
 
 			.bk-green {
-				background-image: linear-gradient(135deg, #04be02, 80%, $color-white);
+				background-image: linear-gradient(
+					135deg,
+					#04be02,
+					80%,
+					var(--color-white, #ffffff)
+				);
 			}
 
 			.bk-blue {
-				background-image: linear-gradient(135deg, #0084ff, 80%, $color-white);
+				background-image: linear-gradient(
+					135deg,
+					#0084ff,
+					80%,
+					var(--color-white, #ffffff)
+				);
 			}
 
 			.bk-yellow {
-				background-image: linear-gradient(135deg, #f7b500, 80%, $color-white);
+				background-image: linear-gradient(
+					135deg,
+					#f7b500,
+					80%,
+					var(--color-white, #ffffff)
+				);
 			}
 
 			.btn-text {
-				margin-top: $border-thin-space;
-				font-size: $f7;
-				color: $color-white;
+				margin-top: var(--border-thin-space, 16px);
+				font-size: var(--f7);
+				color: var(--color-white, #ffffff);
 				white-space: nowrap;
 				text-align: center;
 			}

@@ -1,5 +1,3 @@
-@import '../../../../app.scss';
-
 .module-agreement-wrap {
 	box-sizing: border-box;
 	width: 100%;
@@ -11,12 +9,12 @@
 	align-items: center;
 
 	.agreement-content {
-		font-size: $f7;
+		font-size: var(--f7);
 		.content-text {
-			color: $color-text-long;
+			color: var(--color-text-long, #272637);
 		}
 		.content-file {
-			color: $color-link-normal;
+			color: var(--color-link-normal, #576b96);
 		}
 	}
 
@@ -24,6 +22,6 @@
 		box-sizing: border-box;
 		width: 100%;
 		height: 100%;
-		padding: $border-thin-space;
+		padding: var(--border-thin-space, 16px);
 	}
 }
