@@ -6,10 +6,10 @@ import { shareType, processSharePath, deepClone } from '@/utils/index'
 
 import { View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
-import PageContent from '@/components/PageContent'
-import PanelShare from '@/components/PanelShare'
-import PanelTips from '@/components/PanelTips'
-import ModuleTitle from '@/components/ModuleTitle'
+import PageContent from '@/components/page-content'
+import PanelShare from '@/components/panel-share'
+import PanelTips from '@/components/panel-tips'
+import ModuleTitle from '@/components/module-title'
 
 import ItemCard from './components/item-card/index'
 

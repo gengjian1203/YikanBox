@@ -1,8 +1,9 @@
-import Taro from '@tarojs/taro'
 import React from 'react'
 import { View } from '@tarojs/components'
-import NavigationHeader from '@/components/NavigationHeader'
+import NavigationHeader from '@/components/navigation-header'
 
+import './animation.scss'
+import './base.scss'
 import './index.scss'
 
 interface IPageContentParam {

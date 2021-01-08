@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { View } from '@tarojs/components'
-import PageContent from '@/components/PageContent'
+import PageContent from '@/components/page-content'
 
 import './index.scss'
 

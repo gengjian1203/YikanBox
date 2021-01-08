@@ -7,7 +7,7 @@ import { SIZE_PAGE_DISCOVER } from '@/redux/constants/articleInfo'
 import webApi from '@/api'
 
 import { View, Swiper, SwiperItem } from '@tarojs/components'
-import PanelTips from '@/components/PanelTips'
+import PanelTips from '@/components/panel-tips'
 
 import ModuleArticle from './components/module-article'
 

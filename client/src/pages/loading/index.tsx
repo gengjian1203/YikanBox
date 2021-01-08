@@ -12,8 +12,8 @@ import StorageManager from '@/services/StorageManager'
 import { router2param } from '@/utils/index'
 
 import { View } from '@tarojs/components'
-import PageContent from '@/components/PageContent'
-import PanelTips from '@/components/PanelTips'
+import PageContent from '@/components/page-content'
+import PanelTips from '@/components/panel-tips'
 
 import { changeQRCodeParam } from './utils/index'
 

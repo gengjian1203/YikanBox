@@ -8,7 +8,7 @@ import memberInfoActions from '@/redux/actions/memberInfo'
 import { AtList, AtListItem } from 'taro-ui'
 import { View } from '@tarojs/components'
 
-import ModuleTitle from '@/components/ModuleTitle'
+import ModuleTitle from '@/components/module-title'
 
 import './index.scss'
 

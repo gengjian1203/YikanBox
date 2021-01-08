@@ -9,7 +9,7 @@ import { hiddenString, simpleDate } from '@/utils/index'
 
 import { AtList, AtListItem, AtFloatLayout } from 'taro-ui'
 import { View } from '@tarojs/components'
-import ModuleTitle from '@/components/ModuleTitle'
+import ModuleTitle from '@/components/module-title'
 
 import { convertBadgeList, getBadgeName } from '../../utils/index'
 import ItemBorder from '../item-border'

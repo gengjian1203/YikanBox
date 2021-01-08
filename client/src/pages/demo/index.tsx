@@ -10,8 +10,8 @@ import webApi from '@/api'
 import { shareType, processSharePath, getArticleTagName } from '@/utils/index'
 
 import { View, Text } from '@tarojs/components'
-import PageContent from '@/components/PageContent'
-import Tag from '@/components/Tag'
+import PageContent from '@/components/page-content'
+import Tag from '@/components/tag'
 import { AtButton } from 'taro-ui'
 
 import './index.scss'

@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import React, { useState, useEffect } from 'react'
 
 import { View } from '@tarojs/components'
-import PanelTips from '@/components/PanelTips'
+import PanelTips from '@/components/panel-tips'
 
 import { deepClone } from '@/utils/index'
 

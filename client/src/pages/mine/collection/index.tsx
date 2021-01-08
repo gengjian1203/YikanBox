@@ -3,10 +3,10 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { AtTabs, AtTabsPane } from 'taro-ui'
-import PageContent from '@/components/PageContent'
+import PageContent from '@/components/page-content'
 
 import ListArticle from './components/list-article/index'
-import ModuleTitle from '@/components/ModuleTitle'
+import ModuleTitle from '@/components/module-title'
 
 import './index.scss'
 

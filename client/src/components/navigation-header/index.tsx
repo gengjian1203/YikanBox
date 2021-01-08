@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import { View } from '@tarojs/components'
-import Navigation from '@/components/Navigation'
+import Navigation from '@/components/navigation'
 
 import './index.scss'
 

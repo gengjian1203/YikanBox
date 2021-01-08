@@ -4,8 +4,8 @@ import { Provider } from 'react-redux'
 import configStore from '@/redux/store'
 
 import './app.scss'
-// 改变taro-ui的默认样式
-import './scss/custom-variables.scss'
+import './scss/iconfont.scss'
+import './scss/custom-variables.scss' // 改变taro-ui的默认样式
 
 const store = configStore()
 

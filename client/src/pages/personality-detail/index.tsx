@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Taro, { useRouter } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
-import PageContent from '@/components/PageContent'
+import PageContent from '@/components/page-content'
 
 import BottomWidget from './components/bottom-widget'
 

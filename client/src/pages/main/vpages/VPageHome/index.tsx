@@ -6,7 +6,7 @@ import { deepClone, uploadImage } from '@/utils/index'
 // import Main from '@/utils/test/main'
 
 import { View, Image, Button } from '@tarojs/components'
-import ListFeed from '@/components/ListFeed'
+import ListFeed from '@/components/list-feed'
 import Banner from './components/banner'
 
 import './index.scss'

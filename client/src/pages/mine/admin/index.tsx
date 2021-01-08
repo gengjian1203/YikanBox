@@ -5,9 +5,9 @@ import webApi from '@/api'
 import { deepClone, deepCompare } from '@/utils/index'
 import { View } from '@tarojs/components'
 import { AtList, AtListItem } from 'taro-ui'
-import PageContent from '@/components/PageContent'
-import ButtonBottom from '@/components/ButtonBottom'
-import ModuleTitle from '@/components/ModuleTitle'
+import PageContent from '@/components/page-content'
+import ButtonBottom from '@/components/button-bottom'
+import ModuleTitle from '@/components/module-title'
 
 import './index.scss'
 

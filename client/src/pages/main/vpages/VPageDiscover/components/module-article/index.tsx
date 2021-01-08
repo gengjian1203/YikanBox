@@ -5,7 +5,7 @@ import useThrottle from '@/hooks/useThrottle'
 import { getArticleTagName } from '@/utils/index'
 
 import { View, Image, Text } from '@tarojs/components'
-import Tag from '@/components/Tag'
+import Tag from '@/components/tag'
 
 import './index.scss'
 

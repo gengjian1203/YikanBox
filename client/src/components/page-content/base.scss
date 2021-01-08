@@ -81,6 +81,20 @@
 	align-items: center;
 }
 
+.flex-start-h {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.flex-start-v {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+
 .text-ellipsis {
 	display: block;
 	width: 100%;

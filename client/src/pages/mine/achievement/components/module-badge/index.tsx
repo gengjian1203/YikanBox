@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 import { View } from '@tarojs/components'
 import { AtCurtain } from 'taro-ui'
-import ModuleTitle from '@/components/ModuleTitle'
+import ModuleTitle from '@/components/module-title'
 
 import { convertBadgeList } from '../../utils/index'
 import ItemBadge from '../item-badge'

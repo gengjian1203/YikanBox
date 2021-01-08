@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import webApi from '@/api'
 
 import { View } from '@tarojs/components'
-import PageContent from '@/components/PageContent'
+import PageContent from '@/components/page-content'
 import ModuleBase from './components/module-base'
 import ModuleBadge from './components/module-badge'
 

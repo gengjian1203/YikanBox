@@ -12,9 +12,9 @@ import ResourceManager from '@/services/ResourceManager'
 
 import { AtButton } from 'taro-ui'
 import { View, Text } from '@tarojs/components'
-import PageContent from '@/components/PageContent'
-import PanelShare from '@/components/PanelShare'
-import Tag from '@/components/Tag'
+import PageContent from '@/components/page-content'
+import PanelShare from '@/components/panel-share'
+import Tag from '@/components/tag'
 
 import { checkCollectionArticle } from './utils/index'
 

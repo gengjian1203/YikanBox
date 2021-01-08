@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import React, { useEffect } from 'react'
 
 import { View } from '@tarojs/components'
-import PageContent from '@/components/PageContent'
+import PageContent from '@/components/page-content'
 import ModuleSky from './components/module-sky'
 import ModuleLogin from './components/module-login'
 import ModuleAgreement from './components/module-agreement'

@@ -2,8 +2,8 @@ import Taro, { useRouter } from '@tarojs/taro'
 import React, { useState } from 'react'
 
 import { View } from '@tarojs/components'
-import PageContent from '@/components/PageContent'
-import PanelShare from '@/components/PanelShare'
+import PageContent from '@/components/page-content'
+import PanelShare from '@/components/panel-share'
 import { shareType, processSharePath } from '@/utils/index'
 
 import ModuleCanvas from './components/module-canvas'

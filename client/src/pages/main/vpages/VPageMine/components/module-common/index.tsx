@@ -5,7 +5,7 @@ import useThrottle from '@/hooks/useThrottle'
 import useCheckLogin from '@/hooks/useCheckLogin'
 
 import { View, ScrollView } from '@tarojs/components'
-import ModuleTitle from '@/components/ModuleTitle'
+import ModuleTitle from '@/components/module-title'
 
 import './index.scss'
 interface IModuleCommonProps {}
