@@ -6,5 +6,7 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
+		box-sizing: border-box;
+		padding: var(--border-bold-space, 32px);
 	}
 }
