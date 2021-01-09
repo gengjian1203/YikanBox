@@ -30,19 +30,13 @@ export default function PanelBottom(props: IPanelBottomProps) {
 		<View className='panel-bottom-wrap'>
 			{/* 实际内容 */}
 			{true && (
-				<Fragment>
-					<View
-						className={
-							`panel-box ` +
-							`${customClass} ` +
-							`${fixed ? 'fixed-panel ' : ''}`
-						}
-						style={`background-color: ${backgroundColor}; ` + `${customStyle}`}
-					>
-						{children}
-					</View>
+				<View
+					className={`${fixed ? 'fixed-panel ' : ''}`}
+					style={`background-color: ${backgroundColor}; ` + `${customStyle}`}
+				>
+					<View className={`panel-box ` + `${customClass} `}>{children}</View>
 					{isSafeBottom && <View className='safe-bottom'></View>}
-				</Fragment>
+				</View>
 			)}
 			{/* 占位内容 */}
 			{fixed && (

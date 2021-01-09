@@ -8,34 +8,42 @@ import './index.less'
 
 interface IBottomWidgetParam {
 	arrIconList?: Array<any>
+	nCurrentDetail?: number
 	onIconClick?: any
 }
 
 export default function BottomWidget(props: IBottomWidgetParam) {
 	const {
 		arrIconList = [], // 图标列表
+		nCurrentDetail = 0, // 选中图标
 		onIconClick, // 点击图标响应事件
 	} = props
 
-	const handleIconClick = item => {
-		onIconClick(item)
+	const handleIconClick = (item, index) => {
+		onIconClick(index)
 	}
 
 	return (
 		<PanelBottom
 			backgroundColor='var(--color-default)'
-			customClass='bottom-widget-wrap flex-around-h'
+			customClass={`bottom-widget-wrap ` + `flex-around-h `}
 		>
 			{arrIconList.map((item, index) => (
-				<View
-					className='widget-item-icon flex-center-v'
-					style={`background: ${item.color}; `}
+				<AtButton
+					className='widget-item'
 					key={index}
-					onClick={() => handleIconClick(item)}
+					onClick={() => handleIconClick(item, index)}
 				>
-					<View className={`iconfont ${item.icon}`}></View>
-					<View>{item.title}</View>
-				</View>
+					<View
+						className={
+							`flex-center-v ` +
+							`iconfont ` +
+							`${item.icon} ` +
+							`widget-item-icon `
+						}
+						style={`background: ${item.color};`}
+					></View>
+				</AtButton>
 			))}
 		</PanelBottom>
 	)
