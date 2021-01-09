@@ -35,10 +35,10 @@ export default function Main() {
 	}
 
 	const processHomePageList = res => {
-		const { state, data } = res
+		const { state, list } = res
 		switch (state) {
 			case 'RESULT':
-				setArticleList(data)
+				setArticleList(list)
 				setBottomLoadingTip(false)
 				break
 			case 'LOADING':
