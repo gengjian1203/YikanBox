@@ -1,10 +1,11 @@
 import Taro from '@tarojs/taro'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import useThrottle from '@/hooks/useThrottle'
 import useCheckLogin from '@/hooks/useCheckLogin'
 
 import { View, ScrollView } from '@tarojs/components'
+import ButtonIcon from '@/components/button-icon'
 import ModuleTitle from '@/components/module-title'
 
 import './index.scss'
@@ -15,65 +16,69 @@ export default function ModuleCommon(props: IModuleCommonProps) {
 
 	const memberInfo = useSelector(state => state.memberInfo)
 
-	const onLoad = async () => {}
+	const arrCommonList = [
+		{
+			name: 'collection',
+			icon: 'icon-collection',
+			size: 80,
+			color: 'green',
+			title: '我的收藏',
+		},
+		{
+			name: 'achievement',
+			icon: 'icon-achievement',
+			size: 70,
+			color: 'orange',
+			title: '我的成就',
+		},
+		{
+			name: 'popularize',
+			icon: 'icon-popularize',
+			size: 80,
+			color: 'cadetblue',
+			title: '我的邀请',
+		},
+	]
 
-	useEffect(() => {
-		onLoad()
-		return () => {}
-	}, [])
-
-	// 我的收藏
-	const handleCollectionClick = e => {
-		Taro.navigateTo({
-			url: `/pages/mine/collection/index`,
-		})
-	}
-
-	// 我的成就
-	const handleAchievementClick = e => {
-		Taro.navigateTo({
-			url: `/pages/mine/achievement/index` + `?memberId=${memberInfo._id}`,
-		})
-	}
-
-	// 我的邀请
-	const handlePopularizeClick = e => {
-		Taro.navigateTo({
-			url: `/pages/mine/popularize/index`,
-		})
+	const handleIconClick = item => {
+		switch (item.name) {
+			// 我的收藏
+			case 'collection':
+				Taro.navigateTo({
+					url: `/pages/mine/collection/index`,
+				})
+				break
+			// 我的成就
+			case 'achievement':
+				Taro.navigateTo({
+					url: `/pages/mine/achievement/index` + `?memberId=${memberInfo._id}`,
+				})
+				break
+			// 我的邀请
+			case 'popularize':
+				Taro.navigateTo({
+					url: `/pages/mine/popularize/index`,
+				})
+				break
+			default:
+				break
+		}
 	}
 
 	return (
-		<View className='module-common-wrap flex-center-v'>
+		<View className='flex-center-v module-common-wrap'>
 			<ModuleTitle strTitle='常用功能' />
-			<ScrollView className='module-common-content' scrollX>
-				<View
-					className='common-item'
-					onClick={useThrottle(useCheckLogin(handleCollectionClick))}
-				>
-					<View className='flex-center-v'>
-						<View className='common-item-icon flex-center iconfont icon-collection'></View>
-						<View className='common-item-name'>我的收藏</View>
+			<ScrollView className='flex-start-h module-common-content' scrollX>
+				{arrCommonList.map((item, index) => (
+					<View
+						key={index}
+						className='flex-center-v common-item'
+						onClick={useThrottle(useCheckLogin(() => handleIconClick(item)))}
+					>
+						<ButtonIcon value={item.icon} size={item.size} color={item.color} />
+						<View className='common-item-name'>{item.title}</View>
 					</View>
-				</View>
-				<View
-					className='common-item'
-					onClick={useThrottle(useCheckLogin(handleAchievementClick))}
-				>
-					<View className='flex-center-v'>
-						<View className='common-item-icon flex-center iconfont icon-achievement'></View>
-						<View className='common-item-name'>我的成就</View>
-					</View>
-				</View>
-				<View
-					className='common-item'
-					onClick={useThrottle(useCheckLogin(handlePopularizeClick))}
-				>
-					<View className='flex-center-v'>
-						<View className='common-item-icon flex-center iconfont icon-popularize'></View>
-						<View className='common-item-name'>我的邀请</View>
-					</View>
-				</View>
+				))}
 			</ScrollView>
 		</View>
 	)

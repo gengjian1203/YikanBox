@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { View } from '@tarojs/components'
 
-import { AtButton } from 'taro-ui'
+import ButtonIcon from '@/components/button-icon'
 import PanelBottom from '@/components/panel-bottom'
 
 import './index.less'
@@ -29,21 +29,12 @@ export default function BottomWidget(props: IBottomWidgetParam) {
 			customClass={`bottom-widget-wrap ` + `flex-around-h `}
 		>
 			{arrIconList.map((item, index) => (
-				<AtButton
-					className='widget-item'
+				<ButtonIcon
 					key={index}
+					value={item.icon}
+					color={item.color}
 					onClick={() => handleIconClick(item, index)}
-				>
-					<View
-						className={
-							`flex-center-v ` +
-							`iconfont ` +
-							`${item.icon} ` +
-							`widget-item-icon `
-						}
-						style={`background: ${item.color};`}
-					></View>
-				</AtButton>
+				/>
 			))}
 		</PanelBottom>
 	)
