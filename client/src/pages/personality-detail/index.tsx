@@ -3,6 +3,8 @@ import Taro, { useRouter } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
 import PageContent from '@/components/page-content'
+import PanelShare from '@/components/panel-share'
+import { shareType, processSharePath, getArticleTagName } from '@/utils/index'
 
 import BottomWidget from './components/bottom-widget'
 import DetailContent from './components/detail-content'
@@ -80,6 +82,17 @@ export default function PersonalityDetail() {
 						arrIconList={arrIconList}
 						nCurrentDetail={nCurrentDetail}
 						onIconClick={handleIconClick}
+					/>
+					{/* 分享面板 */}
+					<PanelShare
+						isShowPanelShare={false}
+						strShareTitle=''
+						strShareImage=''
+						strSharePath={processSharePath({
+							sharePath: path,
+							shareType: shareType.PATH_PERSONALITY.name,
+							personalityId: personalityId,
+						})}
 					/>
 				</Fragment>
 			)}

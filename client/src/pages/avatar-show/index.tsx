@@ -53,7 +53,7 @@ export default function AvatarShow() {
 				strShareImage=''
 				strSharePath={processSharePath({
 					sharePath: path,
-					shareType: shareType.PATH_AVATAR_SHOW,
+					shareType: shareType.PATH_AVATAR_SHOW.name,
 				})}
 				strContentUrl={strShareContentUrl}
 				onShowPanelShare={handleShowPanelShare}

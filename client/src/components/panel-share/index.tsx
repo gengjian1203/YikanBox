@@ -15,12 +15,12 @@ import { drawCanvasShare } from './utils/index'
 import './index.scss'
 
 interface IPanelShareProps {
-	isShowPanelShare: boolean
-	strShareTitle: string
-	strShareImage: string
-	strSharePath: string
-	strContentUrl: string
-	onShowPanelShare: any
+	isShowPanelShare?: boolean
+	strShareTitle?: string
+	strShareImage?: string
+	strSharePath?: string
+	strContentUrl?: string
+	onShowPanelShare?: any
 }
 
 export default function PanelShare(props: IPanelShareProps) {

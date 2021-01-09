@@ -1,38 +1,51 @@
-import { shareType } from '@/utils/index'
+export const shareType = {
+	MINIPROGRAM: {
+		name: 'MINIPROGRAM',
+		title: '搜索小程序',
+	},
+	PATH_POPULARIZE: {
+		name: 'PATH_POPULARIZE',
+		title: '分享邀请链接',
+	},
+	QRCODE_POPULARIZE: {
+		name: 'QRCODE_POPULARIZE',
+		title: '分享邀请二维码',
+	},
+	PATH_ARTICLE: {
+		name: 'PATH_ARTICLE',
+		title: '分享文章链接',
+	},
+	QRCODE_ARTICLE: {
+		name: 'QRCODE_ARTICLE',
+		title: '分享文章二维码',
+	},
+	PATH_AVATAR_SHOW: {
+		name: 'PATH_AVATAR_SHOW',
+		title: '分享头像秀链接',
+	},
+	QRCODE_AVATAR_SHOW: {
+		name: 'QRCODE_AVATAR_SHOW',
+		title: '分享头像秀二维码',
+	},
+	PATH_PERSONALITY: {
+		name: 'PATH_PERSONALITY',
+		title: '分享个性链接',
+	},
+	QRCODE_PERSONALITY: {
+		name: 'QRCODE_PERSONALITY',
+		title: '分享个性二维码',
+	},
+}
+
 /**
  * 解析分享途径枚举
  * @param strShareType
  * @return
  */
-export const getShareTypeName = strShareType => {
-	let strResult = ''
-	switch (strShareType) {
-		case shareType.MINIPROGRAM:
-			strResult = `搜索小程序`
-			break
-		case shareType.PATH_POPULARIZE:
-			strResult = `分享邀请链接`
-			break
-		case shareType.QRCODE_POPULARIZE:
-			strResult = `分享邀请二维码`
-			break
-		case shareType.PATH_ARTICLE:
-			strResult = `分享文章链接`
-			break
-		case shareType.QRCODE_ARTICLE:
-			strResult = `分享文章二维码`
-			break
-		case shareType.PATH_AVATAR_SHOW:
-			strResult = `分享头像秀链接`
-			break
-		case shareType.QRCODE_AVATAR_SHOW:
-			strResult = `分享头像秀二维码`
-			break
-		default:
-			strResult = `未知-${strShareType}`
-			break
-	}
-	return strResult
+export const getShareTypeName = (strShareType: string) => {
+	const strResult = shareType[strShareType]?.title
+
+	return strResult ? strResult : `未知-${strShareType}`
 }
 
-export default getShareTypeName
+export default { shareType, getShareTypeName }

@@ -27,14 +27,14 @@ export default function ModuleCommon(props: IModuleCommonProps) {
 		{
 			name: 'achievement',
 			icon: 'icon-achievement',
-			size: 70,
+			size: 60,
 			color: 'orange',
 			title: '我的成就',
 		},
 		{
 			name: 'popularize',
 			icon: 'icon-popularize',
-			size: 80,
+			size: 70,
 			color: 'cadetblue',
 			title: '我的邀请',
 		},

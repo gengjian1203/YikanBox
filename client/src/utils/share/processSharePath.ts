@@ -1,15 +1,5 @@
 import StorageManager from '@/services/StorageManager'
 
-export enum shareType {
-	MINIPROGRAM = 'MINIPROGRAM', // 搜索小程序
-	PATH_POPULARIZE = 'PATH_POPULARIZE', // 分享邀请链接
-	QRCODE_POPULARIZE = 'QRCODE_POPULARIZE', // 分享邀请二维码
-	PATH_ARTICLE = 'PATH_ARTICLE', // 分享文章链接
-	QRCODE_ARTICLE = 'QRCODE_ARTICLE', // 分享文章二维码
-	PATH_AVATAR_SHOW = 'PATH_AVATAR_SHOW', // 分享头像秀链接
-	QRCODE_AVATAR_SHOW = 'QRCODE_AVATAR_SHOW', // 分享头像秀二维码
-}
-
 const m_managerStorage = StorageManager.getInstance()
 
 interface ISharePathType {
@@ -28,7 +18,7 @@ export function processSharePath(objParams: ISharePathType) {
 	let strBaseUrl =
 		`/pages/loading/index` + // 分享中转页
 		`?sourceID=${memberInfo._id ? memberInfo._id : ''}` + // 分享人ID
-		`&shareType=${objParams.shareType}` + // 分享途径类型
+		`&shareType=${objParams.shareType ? objParams.shareType : 'MINIPROGRAM'}` + // 分享途径类型
 		`&sharePath=`
 	// 分享路径所需参数
 	let strExtendUrl = `${objParams.sharePath}?from=share`
@@ -41,4 +31,4 @@ export function processSharePath(objParams: ISharePathType) {
 	return strBaseUrl + encodeURIComponent(strExtendUrl)
 }
 
-export default { shareType, processSharePath }
+export default processSharePath

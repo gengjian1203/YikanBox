@@ -184,7 +184,7 @@ export default function ArticleDetail() {
 					strShareImage={objArticleInfo.posterImg}
 					strSharePath={processSharePath({
 						sharePath: path,
-						shareType: shareType.PATH_ARTICLE,
+						shareType: shareType.PATH_ARTICLE.name,
 						articleId: articleId,
 					})}
 					strContentUrl={strContentUrl}

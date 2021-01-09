@@ -11,8 +11,8 @@ import normalDate from './format/normalDate'
 import router2param from './format/router2param'
 import router2url from './format/router2url'
 import simpleDate from './format/simpleDate'
-import getShareTypeName from './share/getShareTypeName'
-import { shareType, processSharePath } from './share/processSharePath'
+import { shareType, getShareTypeName } from './share/getShareTypeName'
+import processSharePath from './share/processSharePath'
 import uploadImage from './upload/uploadImage'
 
 export {

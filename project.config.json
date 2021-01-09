@@ -94,6 +94,13 @@
 					"pathName": "pages/loading/index",
 					"query": "sourceID=mem-oKFiZ5da9SGMp3mcBS-k0lgpsL3s&shareType=PATH_ARTICLE&sharePath=%2Fpages%2Favatar-show%2Findex%3Ffrom%3Dshare",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "分享详情",
+					"pathName": "pages/loading/index",
+					"query": "sourceID=mem-oKFiZ5WUDQsrZTKoo_OZ4bhnYfJA&shareType=PATH_PERSONALITY&sharePath=%2Fpages%2Fpersonality-detail%2Findex%3Ffrom%3Dshare%26personalityId%3Dmem-oKFiZ5WUDQsrZTKoo_OZ4bhnYfJA",
+					"scene": null
 				}
 			]
 		}

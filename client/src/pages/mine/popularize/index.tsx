@@ -97,7 +97,7 @@ export default function Popularize() {
 				strShareImage={imagesLocal.strUrlImageCommonShare}
 				strSharePath={processSharePath({
 					sharePath: '/pages/main/index',
-					shareType: shareType.PATH_POPULARIZE,
+					shareType: shareType.PATH_POPULARIZE.name,
 				})}
 				strContentUrl={imagesLocal.strUrlImageCommonShare}
 				onShowPanelShare={handleShowPanelShare}
