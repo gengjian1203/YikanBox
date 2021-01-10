@@ -127,7 +127,7 @@ export default function Admin() {
 				className='admin-list-add flex-center-h'
 				onClick={handleAddAdminListClick}
 			>
-				<View className='iconfont icon-add'></View>
+				<View className='iconfont iconadd-select'></View>
 				添加
 			</View>
 		)

@@ -74,7 +74,7 @@ export default function ModuleCard(props: IModuleCardProps) {
 							)}
 						</View>
 					) : (
-						<View className='left-avatar iconfont icon-default-avatar'></View>
+						<View className='left-avatar iconfont iconbussiness-man-fill'></View>
 					)}
 				</View>
 				{/* 中间 */}

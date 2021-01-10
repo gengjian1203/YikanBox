@@ -32,7 +32,7 @@ export default function PersonalityDetail() {
 		setIconList([
 			{
 				title: 'AAAA',
-				icon: 'icon-mine',
+				icon: 'iconbussiness-man',
 				color: 'red',
 				code: 'AAAA',
 			},

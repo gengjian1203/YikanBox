@@ -154,11 +154,11 @@ export default function ArticleDetail() {
 						className='float-btn-icon'
 						onClick={useThrottle(useCheckLogin(handleCollectionClick))}
 					>
-						<View className={`iconfont ` + `icon-collection `}>
+						<View className={`iconfont ` + `iconcollection `}>
 							<View
 								className={
 									`iconfont ` +
-									`icon-collection-select ` +
+									`iconcollection-fill ` +
 									`${
 										isCollectionSelect
 											? 'fade-in-from-scale'
@@ -173,7 +173,7 @@ export default function ArticleDetail() {
 						className='float-btn-icon'
 						onClick={useThrottle(useCheckLogin(handleShareClick))}
 					>
-						<View className='iconfont icon-share'></View>
+						<View className='iconfont iconresonserate'></View>
 					</AtButton>
 				</View>
 

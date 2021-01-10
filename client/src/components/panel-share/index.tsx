@@ -156,7 +156,7 @@ export default function PanelShare(props: IPanelShareProps) {
 									className='float-btn-icon flex-center bk-green'
 									openType='share'
 								>
-									<View className='iconfont icon-share-wechat'></View>
+									<View className='iconfont iconweixin'></View>
 								</AtButton>
 								<View className='btn-text'>分享链接</View>
 							</View>
@@ -182,10 +182,10 @@ export default function PanelShare(props: IPanelShareProps) {
 								showMenuByLongpress
 							/>
 							{/* <AtButton className='content-btn-icon flex-center content-btn-left'>
-								<View className='iconfont icon-arrow-left'></View>
+								<View className='iconfont iconicon-test1'></View>
 							</AtButton>
 							<AtButton className='content-btn-icon flex-center content-btn-right'>
-								<View className='iconfont icon-arrow-right'></View>
+								<View className='iconfont iconicon-test3'></View>
 							</AtButton> */}
 						</View>
 						<View className='share-text'>长按图片，可快捷转发哦！</View>
@@ -195,7 +195,7 @@ export default function PanelShare(props: IPanelShareProps) {
 									className='float-btn-icon flex-center bk-green'
 									openType='share'
 								>
-									<View className='iconfont icon-share-wechat'></View>
+									<View className='iconfont iconweixin'></View>
 								</AtButton>
 								<View className='btn-text'>分享链接</View>
 							</View>
@@ -209,7 +209,7 @@ export default function PanelShare(props: IPanelShareProps) {
 										)
 									)}
 								>
-									<View className='iconfont icon-share-download'></View>
+									<View className='iconfont iconxiazai'></View>
 								</AtButton>
 								<View className='btn-text'>保存海报</View>
 							</View>
@@ -218,7 +218,7 @@ export default function PanelShare(props: IPanelShareProps) {
 									className='float-btn-icon flex-center bk-yellow'
 									onClick={useThrottle(handlePanelShareClose)}
 								>
-									<View className='iconfont icon-share-close'></View>
+									<View className='iconfont iconshanchu2'></View>
 								</AtButton>
 								<View className='btn-text'>关闭</View>
 							</View>

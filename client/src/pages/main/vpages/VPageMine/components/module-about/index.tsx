@@ -74,7 +74,7 @@ export default function ModuleAbout(props: IModuleAboutProps) {
 					iconInfo={{
 						size: 25,
 						color: 'deepskyblue',
-						value: 'iconfont icon-mine-about',
+						value: 'iconfont iconguanyu',
 					}}
 					onClick={useThrottle(handleAboutClick)}
 				/>
@@ -86,7 +86,7 @@ export default function ModuleAbout(props: IModuleAboutProps) {
 						iconInfo={{
 							size: 25,
 							color: 'firebrick',
-							value: 'iconfont icon-mine-admin',
+							value: 'iconfont iconguanli',
 						}}
 						onClick={handleAdminClick}
 					/>

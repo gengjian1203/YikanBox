@@ -30,10 +30,10 @@ export default function Navigation(props: INavigationProps) {
 		if (isShowLeftIcon) {
 			if (objPageInfo.length === 1) {
 				// 首页
-				setLeftIcon('left-icon iconfont icon-nav-home')
+				setLeftIcon('left-icon iconfont iconshouye')
 			} else {
 				// 返回
-				setLeftIcon('left-icon iconfont icon-nav-back')
+				setLeftIcon('left-icon iconfont iconarrow-lift')
 			}
 		}
 		setPageInfo(objPageInfo)

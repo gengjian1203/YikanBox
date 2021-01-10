@@ -29,12 +29,36 @@ export default function TabBarBottom(props: ITabbarBottomProps) {
 		state => state.appInfo.objAppHeight.nHeightTabbar
 	)
 
+	const objIconType = {
+		HOME: {
+			iconType: 'iconhome',
+			selectedIconType: 'iconhome-fill',
+		},
+		DISCOVER: {
+			iconType: 'iconfaxian',
+			selectedIconType: 'iconfaxian1',
+		},
+		MINE: {
+			iconType: 'iconbussiness-man',
+			selectedIconType: 'iconbussiness-man-fill',
+		},
+	}
+
 	const { setBottomBarSelect } = useActions(appInfoActions)
 
 	useEffect(() => {
-		const arrTabBarBottomListTmp = arrBottomBarList.filter(item => {
-			return item.enable === true
-		})
+		const arrTabBarBottomListTmp = arrBottomBarList
+			.filter(item => {
+				return item.enable === true
+			})
+			.map(item => {
+				return {
+					...item,
+					iconType: `iconfont ` + `${objIconType[item.code]?.iconType} `,
+					selectedIconType:
+						`iconfont ` + `${objIconType[item.code]?.selectedIconType} `,
+				}
+			})
 		setTabBarBottomList(arrTabBarBottomListTmp)
 		const nIndex = arrTabBarBottomListTmp.findIndex(item => {
 			return item.code === strBottomBarListSelectCode

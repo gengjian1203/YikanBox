@@ -157,7 +157,7 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 						circle
 						size='small'
 						disabled={isDisableBtnBack}
-						className='header-item flex-center iconfont icon-arrow-back'
+						className='header-item flex-center iconfont iconshangyibu'
 						onClick={handleJewelryBackClick}
 					/>
 					<AtButton
@@ -165,7 +165,7 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 						circle
 						size='small'
 						disabled={isDisableBtnReturn}
-						className='header-item flex-center iconfont icon-arrow-return'
+						className='header-item flex-center iconfont iconxiayibu'
 						onClick={handleJewelryReturnClick}
 					/>
 					<AtButton
@@ -173,7 +173,7 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 						circle
 						size='small'
 						disabled={isDisableBtnClean}
-						className='header-item flex-center iconfont icon-arrow-clean'
+						className='header-item flex-center iconfont iconshanchu1'
 						onClick={handleJewelryCleanClick}
 					/>
 				</View>
@@ -186,7 +186,7 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 							`header-item ` +
 							`flex-center ` +
 							`iconfont ` +
-							`${isShowJewelryState ? 'icon-arrow-down ' : 'icon-arrow-up '}`
+							`${isShowJewelryState ? 'iconicon-test2 ' : 'iconicon-test '}`
 						}
 						onClick={handleJewelryStateSwitch}
 					/>

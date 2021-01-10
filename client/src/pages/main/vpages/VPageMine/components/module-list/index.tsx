@@ -83,7 +83,7 @@ export default function ModuleList(props: IModuleListProps) {
 					iconInfo={{
 						size: 25,
 						color: 'lightsalmon',
-						value: 'iconfont icon-avatar-show',
+						value: 'iconfont iconusercenter',
 					}}
 					onClick={useThrottle(handleAvatarShowClick)}
 				/>
@@ -94,7 +94,7 @@ export default function ModuleList(props: IModuleListProps) {
 					iconInfo={{
 						size: 25,
 						color: 'royalblue',
-						value: 'iconfont icon-photo-show',
+						value: 'iconfont icontupian',
 					}}
 					onClick={useThrottle(handlePhotoShowClick)}
 				/> */}
@@ -105,7 +105,7 @@ export default function ModuleList(props: IModuleListProps) {
 					iconInfo={{
 						size: 25,
 						color: 'violet',
-						value: 'iconfont icon-other-moment',
+						value: 'iconfont iconpengyouquan',
 					}}
 					onClick={useThrottle(handleOtherMomentClick)}
 				/> */}
@@ -116,7 +116,7 @@ export default function ModuleList(props: IModuleListProps) {
 					iconInfo={{
 						size: 25,
 						color: 'yellowgreen',
-						value: 'iconfont icon-activity-queue',
+						value: 'iconfont iconlianjieliu',
 					}}
 					onClick={useThrottle(handleActivityQueueClick)}
 				/> */}
@@ -127,7 +127,7 @@ export default function ModuleList(props: IModuleListProps) {
 					iconInfo={{
 						size: 25,
 						color: 'darkslateblue',
-						value: 'iconfont icon-other-chat',
+						value: 'iconfont iconliaotian',
 					}}
 					onClick={useThrottle(handleOtherChatClick)}
 				/> */}

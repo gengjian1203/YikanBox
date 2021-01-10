@@ -19,21 +19,21 @@ export default function ModuleCommon(props: IModuleCommonProps) {
 	const arrCommonList = [
 		{
 			name: 'collection',
-			icon: 'icon-collection',
+			icon: 'iconcollection',
 			size: 80,
 			color: 'green',
 			title: '我的收藏',
 		},
 		{
 			name: 'achievement',
-			icon: 'icon-achievement',
+			icon: 'iconchengjiu',
 			size: 60,
 			color: 'orange',
 			title: '我的成就',
 		},
 		{
 			name: 'popularize',
-			icon: 'icon-popularize',
+			icon: 'iconziyuan',
 			size: 70,
 			color: 'cadetblue',
 			title: '我的邀请',

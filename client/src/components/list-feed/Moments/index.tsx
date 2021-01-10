@@ -43,7 +43,7 @@ export default function Moments(props: IMomentsProps) {
 							)}
 							<View className='item-bottom flex-between-h'>
 								<View className='item-time'>{item.createTime}</View>
-								{/* <View className='item-options flex-center iconfont icon-more'></View> */}
+								{/* <View className='item-options flex-center iconfont icon19'></View> */}
 							</View>
 						</View>
 					</View>
