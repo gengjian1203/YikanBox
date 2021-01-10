@@ -194,7 +194,10 @@ export default function Loading() {
 	}, [])
 
 	return (
-		<PageContent customClass='loading-page-wrap flex-center-v'>
+		<PageContent
+			isShowLeftIcon={false}
+			customClass='loading-page-wrap flex-center-v'
+		>
 			{isBlackMember ? (
 				<Fragment>
 					<View className='loading-page-text flex-center'>

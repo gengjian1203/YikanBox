@@ -33,6 +33,9 @@ export default function BottomWidget(props: IBottomWidgetParam) {
 					key={index}
 					value={item.icon}
 					color={item.color}
+					customStyle={`${
+						nCurrentDetail !== index ? 'filter: brightness(70%); ' : ''
+					}`}
 					onClick={() => handleIconClick(item, index)}
 				/>
 			))}

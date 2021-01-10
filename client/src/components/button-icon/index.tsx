@@ -8,6 +8,7 @@ interface IButtonIconParam {
 	value?: string
 	size?: number
 	color?: string
+	customStyle?: string
 	onClick?: () => void
 }
 
@@ -16,6 +17,7 @@ export default function ButtonIcon(props: IButtonIconParam) {
 		value = '', // 标题
 		size = 80, // 字号
 		color = 'var(--color-primary)', // 按钮背景色
+		customStyle = '',
 		onClick = () => {}, // 点击按钮回调
 	} = props
 
@@ -36,7 +38,8 @@ export default function ButtonIcon(props: IButtonIconParam) {
 					`${color}, ` +
 					`80%, ` +
 					`var(--color-white, #ffffff)); ` +
-					`font-size: ${Taro.pxTransform(size)}; `
+					`font-size: ${Taro.pxTransform(size)}; ` +
+					`${customStyle}; `
 				}
 			></View>
 		</AtButton>

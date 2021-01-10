@@ -1,13 +1,12 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import Taro, { useRouter } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { ScrollView, Swiper, SwiperItem, View } from '@tarojs/components'
 
 import PageContent from '@/components/page-content'
 import PanelShare from '@/components/panel-share'
-import { shareType, processSharePath, getArticleTagName } from '@/utils/index'
+import { shareType, processSharePath } from '@/utils/index'
 
 import BottomWidget from './components/bottom-widget'
-import DetailContent from './components/detail-content'
 
 import './index.less'
 
@@ -33,26 +32,26 @@ export default function PersonalityDetail() {
 		setIconList([
 			{
 				title: 'AAAA',
-				icon: 'icon-avatar',
+				icon: 'icon-mine',
 				color: 'red',
 				code: 'AAAA',
 			},
 			{
 				title: 'BBBB',
-				icon: 'icon-clock-in',
+				icon: 'iconjineng-20',
 				color: 'blue',
 				code: 'BBBB',
 			},
 			{
 				title: 'CCCC',
-				icon: 'icon-photo-show',
-				color: 'yellow',
+				icon: 'icongongzuo',
+				color: 'green',
 				code: 'CCCC',
 			},
 			{
 				title: 'DDDD',
-				icon: 'icon-photo-show',
-				color: 'yellow',
+				icon: 'iconxiangmu1',
+				color: 'purple',
 				code: 'DDDD',
 			},
 		])
@@ -60,7 +59,7 @@ export default function PersonalityDetail() {
 	}, [])
 
 	const handleDetailChange = e => {
-		setCurrentDetail(e)
+		setCurrentDetail(e.detail.current)
 	}
 
 	const handleIconClick = e => {
@@ -72,11 +71,27 @@ export default function PersonalityDetail() {
 			{isLoadComplete && (
 				<Fragment>
 					{/* 内容 */}
-					<DetailContent
-						arrSwiperList={arrSwiperList}
-						nCurrentDetail={nCurrentDetail}
-						onDetailChange={handleDetailChange}
-					/>
+					<Swiper
+						className='detail-content-wrap'
+						indicatorColor='var(--color-shadow)'
+						indicatorActiveColor='var(--color-primary)'
+						current={nCurrentDetail}
+						circular
+						indicatorDots
+						onChange={handleDetailChange}
+					>
+						{arrSwiperList.map((item, index) => (
+							<SwiperItem key={index}>
+								<ScrollView
+									className='detail-content-item'
+									scrollY
+									scrollWithAnimation
+								>
+									{item}
+								</ScrollView>
+							</SwiperItem>
+						))}
+					</Swiper>
 					{/* 底部小组件面板 */}
 					<BottomWidget
 						arrIconList={arrIconList}
