@@ -1,8 +1,8 @@
 .detail-content-wrap {
-	.detail-content-title {
-	}
-	.detail-content-content {
-		.detail-content-value {
+	.detail-content-item {
+		margin-top: var(--border-bold-space);
+		&:first-child {
+			margin-top: 0;
 		}
 	}
 }

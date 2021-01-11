@@ -1,0 +1,16 @@
+.detail-form-wrap {
+	.form-item {
+		margin-top: var(--border-thin-space);
+		width: 100%;
+		font-size: var(--h4);
+		color: var(--color-text-primary);
+		text-align: left;
+		&:first-child {
+			margin-top: 0;
+		}
+		.iconfont {
+			margin-right: var(--border-thin-space);
+			font-size: var(--h4);
+		}
+	}
+}

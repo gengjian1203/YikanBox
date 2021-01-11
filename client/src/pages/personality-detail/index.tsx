@@ -27,7 +27,29 @@ export default function PersonalityDetail() {
 		setSwiperList([
 			{
 				type: 'base',
-				content: JSON.stringify([]),
+				content: JSON.stringify([
+					{
+						type: 'info',
+						data: {
+							url:
+								'https://bkimg.cdn.bcebos.com/pic/42166d224f4a20a4a3ca599795529822730ed08e',
+							name: '哆啦A梦',
+							job: '22 世纪的猫型机器人',
+						},
+					},
+					{
+						type: 'form',
+						data: {
+							year: 'bilibili',
+							sex: '男',
+							email: '202020020202@qq.com',
+							cellphone: '13333333333',
+							github: '1111111@github.com',
+							website: 'https://www.baidu.com',
+							official: '茴的第五种写法',
+						},
+					},
+				]),
 			},
 			{
 				type: 'skill',

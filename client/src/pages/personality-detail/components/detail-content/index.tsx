@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { AtTimeline } from 'taro-ui'
 import { View } from '@tarojs/components'
-
+import DetailInfo from '../detail-info'
+import DetailForm from '../detail-form'
 import './custom-taro-ui.scss'
 import './index.scss'
 
@@ -25,10 +26,12 @@ export default function DetailContent(props: IDetailContentParam) {
 	return (
 		<View className='detail-content-wrap'>
 			{arrContentList.map((item, index) => (
-				<View key={index}>
+				<View key={index} className='detail-content-item'>
 					{
 						{
-							timeline: <AtTimeline items={item.data} />,
+							info: <DetailInfo data={item.data} />,
+							form: <DetailForm data={item.data} />,
+							timeline: <AtTimeline items={Array.from(item.data)} />,
 						}[item.type]
 					}
 				</View>
