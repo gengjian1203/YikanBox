@@ -39,15 +39,43 @@ export default function PersonalityDetail() {
 					},
 					{
 						type: 'form',
-						data: {
-							year: 'bilibili',
-							sex: '男',
-							email: '202020020202@qq.com',
-							cellphone: '13333333333',
-							github: '1111111@github.com',
-							website: 'https://www.baidu.com',
-							official: '茴的第五种写法',
-						},
+						data: [
+							{
+								type: 'year',
+								icon: 'icongongzuonianxian',
+								value: 'bilibili',
+							},
+							{
+								type: 'sex',
+								icon: 'iconxingbienanxianxing',
+								value: '男',
+							},
+							{
+								type: 'email',
+								icon: 'iconyoujian',
+								value: '202020020202@qq.com',
+							},
+							{
+								type: 'cellphone',
+								icon: 'icondianhua',
+								value: '13333333333',
+							},
+							{
+								type: 'github',
+								icon: 'icongithub2',
+								value: '1111111@github.com',
+							},
+							{
+								type: 'website',
+								icon: 'iconwangzhan',
+								value: 'https://www.baidu.com',
+							},
+							{
+								type: 'official',
+								icon: 'icongongzhonghao',
+								value: '茴的第五种写法',
+							},
+						],
 					},
 				]),
 			},

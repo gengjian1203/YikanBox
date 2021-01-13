@@ -8,9 +8,17 @@
 		&:first-child {
 			margin-top: 0;
 		}
-		.iconfont {
+
+		.item-icon {
 			margin-right: var(--border-thin-space);
-			font-size: var(--h4);
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			background-color: var(--color-shadow);
+			.iconfont {
+				font-size: var(--h4);
+				color: var(--color-white);
+			}
 		}
 	}
 }
