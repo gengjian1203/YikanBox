@@ -1,0 +1,23 @@
+.detail-btntext-wrap {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+	.item-left {
+	}
+
+	.item-right {
+		margin-left: 10px;
+		flex: 1 1 auto;
+		.item-title {
+			width: 100%;
+			font-size: var(--h4);
+			color: var(--color-text-long);
+		}
+		.item-content {
+			width: 100%;
+			font-size: var(--h5);
+			color: var(--color-text-secondary);
+		}
+	}
+}

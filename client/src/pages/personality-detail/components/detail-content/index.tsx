@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
+import DetailBtntext from '../detail-btntext'
 import DetailIcontext from '../detail-icontext'
 import DetailInfo from '../detail-info'
 import DetailForm from '../detail-form'
@@ -22,7 +24,18 @@ export default function DetailContent(props: IDetailContentParam) {
 		}
 	}, [content])
 
-	console.log('DetailContent', arrContentList)
+	const handleBtntextBtnClick = data => {
+		console.log('handleBtntextBtnClick', data)
+		switch (data.type) {
+			case 'miniprogram':
+				Taro.navigateToMiniProgram({
+					appId: data.appId,
+				})
+				break
+			default:
+				break
+		}
+	}
 
 	return (
 		<View className='detail-content-wrap'>
@@ -30,6 +43,12 @@ export default function DetailContent(props: IDetailContentParam) {
 				<View key={index} className='detail-content-item'>
 					{
 						{
+							btntext: (
+								<DetailBtntext
+									data={item.data}
+									onBtnClick={() => handleBtntextBtnClick(item.data)}
+								/>
+							),
 							icontext: <DetailIcontext data={item.data} />,
 							info: <DetailInfo data={item.data} />,
 							form: <DetailForm data={item.data} />,

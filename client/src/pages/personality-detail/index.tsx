@@ -177,7 +177,41 @@ export default function PersonalityDetail() {
 			},
 			{
 				type: 'project',
-				content: JSON.stringify([]),
+				content: JSON.stringify([
+					{
+						type: 'btntext',
+						data: {
+							type: 'miniprogram',
+							appId: 'wx75fbc7eca5fe2581',
+							icon:
+								'https://pic3.zhimg.com/v2-c5f2fde6f6a00eba6cbeb66e8ddd421e_l.jpg',
+							title: '迪卢克',
+							content: ['是咳咳萨克斯'],
+						},
+					},
+					{
+						type: 'btntext',
+						data: {
+							type: 'miniprogram',
+							appId: 'wx75fbc7eca5fe2581',
+							icon:
+								'https://pic4.zhimg.com/80/v2-f97710dbc226349a9c61c16080e3b657_1440w.jpg',
+							title: '甘雨',
+							content: ['是咳咳萨克斯'],
+						},
+					},
+					{
+						type: 'btntext',
+						data: {
+							type: 'miniprogram',
+							appId: 'wx75fbc7eca5fe2581',
+							icon:
+								'https://pic3.zhimg.com/v2-c5f2fde6f6a00eba6cbeb66e8ddd421e_l.jpg',
+							title: '可莉',
+							content: ['是咳咳萨克斯'],
+						},
+					},
+				]),
 			},
 		])
 		setIconList([
