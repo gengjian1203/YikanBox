@@ -51,6 +51,11 @@ export default function PersonalityDetail() {
 								value: '男',
 							},
 							{
+								type: 'school',
+								icon: 'iconxueli',
+								value: '梦工厂',
+							},
+							{
 								type: 'email',
 								icon: 'iconyoujian',
 								value: '202020020202@qq.com',
@@ -81,7 +86,56 @@ export default function PersonalityDetail() {
 			},
 			{
 				type: 'skill',
-				content: JSON.stringify([]),
+				content: JSON.stringify([
+					{
+						type: 'icontext',
+						data: {
+							icon: 'iconvue',
+							title: '框架相关',
+							content: ['是咳咳萨克斯'],
+						},
+					},
+					{
+						type: 'icontext',
+						data: {
+							icon: 'iconsheji',
+							title: '设计模式',
+							content: ['是咳咳萨克斯'],
+						},
+					},
+					{
+						type: 'icontext',
+						data: {
+							icon: 'iconqianduanguifan',
+							title: '前端技术',
+							content: ['是咳咳萨克斯', 'dd', '伤口上可'],
+						},
+					},
+					{
+						type: 'icontext',
+						data: {
+							icon: 'iconmeishu',
+							title: 'UI库',
+							content: ['是咳咳萨克斯'],
+						},
+					},
+					{
+						type: 'icontext',
+						data: {
+							icon: 'icontuandui',
+							title: '辅助团队',
+							content: ['是咳咳萨克斯'],
+						},
+					},
+					{
+						type: 'icontext',
+						data: {
+							icon: 'iconshenghuo',
+							title: '业余生活',
+							content: ['是咳咳萨克斯'],
+						},
+					},
+				]),
 			},
 			{
 				type: 'experience',
@@ -128,28 +182,28 @@ export default function PersonalityDetail() {
 		])
 		setIconList([
 			{
-				title: 'AAAA',
+				title: 'base',
 				icon: 'iconbussiness-man',
 				color: '#FFD700',
-				code: 'AAAA',
+				code: 'base',
 			},
 			{
-				title: 'BBBB',
-				icon: 'iconjineng-20',
+				title: 'skill',
+				icon: 'iconjindianzi',
 				color: '#4169E1',
-				code: 'BBBB',
+				code: 'skill',
 			},
 			{
-				title: 'CCCC',
+				title: 'experience',
 				icon: 'icongongzuo',
 				color: '#00C957',
-				code: 'CCCC',
+				code: 'experience',
 			},
 			{
-				title: 'DDDD',
+				title: 'project',
 				icon: 'iconxiangmu1',
 				color: '#8A2BE2',
-				code: 'DDDD',
+				code: 'project',
 			},
 		])
 		setLoadComplete(true)
@@ -166,7 +220,7 @@ export default function PersonalityDetail() {
 	const renderDetailContent = () => {
 		return (
 			<Swiper
-				className='detail-content-wrap'
+				className='detail-swiper-wrap'
 				indicatorColor='var(--color-shadow)'
 				indicatorActiveColor='var(--color-primary)'
 				current={nCurrentDetail}
@@ -177,14 +231,14 @@ export default function PersonalityDetail() {
 				{arrSwiperList.map((item, index) => (
 					<SwiperItem key={index}>
 						<ScrollView
-							className='flex-center-v detail-content-item'
+							className='flex-center-v detail-swiper-item'
 							enableBackToTop
 							scrollY
 							scrollWithAnimation
 						>
-							<View className='content-item-block'></View>
+							<View className='content-swiper-block'></View>
 							<DetailContent content={item.content} />
-							<View className='content-item-block'></View>
+							<View className='content-swiper-block'></View>
 						</ScrollView>
 					</SwiperItem>
 				))}
