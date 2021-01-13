@@ -182,20 +182,9 @@ export default function PersonalityDetail() {
 						type: 'btntext',
 						data: {
 							type: 'miniprogram',
-							appId: 'wx75fbc7eca5fe2581',
+							appId: 'wxbd3e6f9c3b2c9a33',
 							icon:
-								'https://pic3.zhimg.com/v2-c5f2fde6f6a00eba6cbeb66e8ddd421e_l.jpg',
-							title: '迪卢克',
-							content: ['是咳咳萨克斯'],
-						},
-					},
-					{
-						type: 'btntext',
-						data: {
-							type: 'miniprogram',
-							appId: 'wx75fbc7eca5fe2581',
-							icon:
-								'https://pic4.zhimg.com/80/v2-f97710dbc226349a9c61c16080e3b657_1440w.jpg',
+								'cloud://online-z8369.6f6e-online-z8369-1259256375/resource/miniprogram/qianmi.jpg',
 							title: '甘雨',
 							content: ['是咳咳萨克斯'],
 						},
@@ -204,10 +193,32 @@ export default function PersonalityDetail() {
 						type: 'btntext',
 						data: {
 							type: 'miniprogram',
+							appId: 'wx78268aadd7447297',
+							icon:
+								'cloud://online-z8369.6f6e-online-z8369-1259256375/resource/miniprogram/kunluntang.jpg',
+							title: '迪卢克',
+							content: ['是咳咳萨克斯'],
+						},
+					},
+					{
+						type: 'btntext',
+						data: {
+							type: 'miniprogram',
+							appId: 'wx821aadcd431646f9',
+							icon:
+								'cloud://online-z8369.6f6e-online-z8369-1259256375/resource/miniprogram/gongjuxiang.jpg',
+							title: '即将放飞理想的工具箱工具箱',
+							content: ['是咳咳萨克斯'],
+						},
+					},
+					{
+						type: 'btntext',
+						data: {
+							type: 'miniprogram',
 							appId: 'wx75fbc7eca5fe2581',
 							icon:
-								'https://pic3.zhimg.com/v2-c5f2fde6f6a00eba6cbeb66e8ddd421e_l.jpg',
-							title: '可莉',
+								'cloud://online-z8369.6f6e-online-z8369-1259256375/resource/miniprogram/zuimengtanshuo.jpg',
+							title: '醉梦坛说',
 							content: ['是咳咳萨克斯'],
 						},
 					},
