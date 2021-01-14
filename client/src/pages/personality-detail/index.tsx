@@ -96,7 +96,7 @@ export default function PersonalityDetail() {
 						onIconClick={handleIconClick}
 					/>
 					{/* 分享面板 */}
-					<PanelShare
+					{/* <PanelShare
 						isShowPanelShare={false}
 						strShareTitle=''
 						strShareImage=''
@@ -105,7 +105,7 @@ export default function PersonalityDetail() {
 							shareType: shareType.PATH_PERSONALITY.name,
 							personalityId: personalityId,
 						})}
-					/>
+					/> */}
 				</Fragment>
 			)}
 		</PageContent>

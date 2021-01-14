@@ -47,7 +47,7 @@ export default function VPageDiscover(props: IVPageDiscoverProps) {
 	}
 
 	useEffect(() => {
-		onLoad()
+		// onLoad()
 		return () => {}
 	}, [])
 

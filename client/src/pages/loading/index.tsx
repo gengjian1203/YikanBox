@@ -5,6 +5,8 @@ import appInfoActions from '@/redux/actions/appInfo'
 import memberInfoActions from '@/redux/actions/memberInfo'
 import systemInfoActions from '@/redux/actions/systemInfo'
 import shareInfoActions from '@/redux/actions/shareInfo'
+import articleInfoActions from '@/redux/actions/articleInfo'
+import { SIZE_PAGE_DISCOVER } from '@/redux/constants/articleInfo'
 
 import webApi from '@/api'
 import AppService from '@/services/AppService'
@@ -40,6 +42,7 @@ export default function Loading() {
 	const { setMemberInfo } = useActions(memberInfoActions)
 	const { setSystemInfo } = useActions(systemInfoActions)
 	const { setShareInfo } = useActions(shareInfoActions)
+	const { setArticleList } = useActions(articleInfoActions)
 
 	// 校验该用户是否为黑名单用户
 	const checkIsBlackMember = (appInfo, strMemberId) => {
@@ -165,6 +168,17 @@ export default function Loading() {
 		}
 	}
 
+	// 预加载文章列表
+	const prevLoadingArticleList = async () => {
+		const objParams = {
+			nPageNum: 0,
+			nPageSize: SIZE_PAGE_DISCOVER,
+		}
+		const res = await webApi.articleInfo.queryArticleList(objParams)
+		setArticleList(res ? res.data : [])
+		// console.log('prevLoadingData done.')
+	}
+
 	const onLoad = async () => {
 		Taro.hideShareMenu()
 
@@ -173,6 +187,9 @@ export default function Loading() {
 			resInitSystemInfo,
 			resInitLoginInfo,
 		] = await Promise.all([initApi(), initSystemInfo(), initLoginInfo()])
+
+		// 异步预加载文章数据
+		prevLoadingArticleList()
 
 		console.log(
 			'Loading onLoad',
