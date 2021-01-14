@@ -12,7 +12,7 @@ async function queryPersonalityInfo(data, db, strMemberId) {
 	try {
 		objResult = {
 			code: 200,
-			data: await db.collection('personalityInfo').doc(strMemberId).get(),
+			data: await db.collection('personalityInfo').doc(data._id).get(),
 		}
 	} catch (e) {
 		console.error('queryPersonalityInfo error', e)

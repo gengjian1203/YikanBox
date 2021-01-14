@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import Taro, { useRouter } from '@tarojs/taro'
 import { ScrollView, Swiper, SwiperItem, View } from '@tarojs/components'
 
+import webApi from '@/api'
 import PageContent from '@/components/page-content'
 import PanelShare from '@/components/panel-share'
 import { shareType, processSharePath } from '@/utils/index'
@@ -22,11 +23,22 @@ export default function PersonalityDetail() {
 	const [arrIconList, setIconList] = useState<Array<any>>([])
 	const [nCurrentDetail, setCurrentDetail] = useState<number>(0)
 
+	const onLoad = async () => {
+		const objParams = {
+			_id: personalityId,
+		}
+		const res = await webApi.personalityInfo.queryPersonalityInfo(objParams)
+		console.log('queryPersonalityInfo', res?.data)
+		const arrSwiperListTmp = res?.data?.arrSwiperList || []
+		const arrIconListTmp = res?.data?.arrIconList || []
+		setSwiperList(arrSwiperListTmp)
+		setIconList(arrIconListTmp)
+		setLoadComplete(true)
+	}
+
 	useEffect(() => {
 		Taro.hideShareMenu()
-		setSwiperList([])
-		setIconList([])
-		setLoadComplete(true)
+		onLoad()
 	}, [])
 
 	const handleDetailChange = e => {

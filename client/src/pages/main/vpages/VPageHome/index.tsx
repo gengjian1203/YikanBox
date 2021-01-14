@@ -136,7 +136,7 @@ export default function VPageHome(props: IVPageHomeProps) {
 			{/* banner */}
 			<Banner arrBannerList={arrBannerLocalList} />
 			{/* 临时操作 */}
-			<Button onClick={handleTestClick}>测试按钮</Button>
+			{/* <Button onClick={handleTestClick}>测试按钮</Button> */}
 			{/* <Button onClick={handleCreateArticleClick}>爬取文章</Button> */}
 			{/* <Button onClick={handleLoginClick}>强制登录</Button> */}
 			{/* <Button onClick={handleNavigationJumpClick}>重复跳转</Button> */}
