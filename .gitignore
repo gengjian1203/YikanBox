@@ -3,7 +3,9 @@
 .eslintrc.js
 .prettierrc
 tree.md
+mock.md
 project.config.json
+
 
 #忽略上传的文件夹
 **/.vscode/**

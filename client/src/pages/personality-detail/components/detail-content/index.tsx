@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import DetailBtntext from '../detail-btntext'
@@ -16,6 +17,8 @@ interface IDetailContentParam {
 export default function DetailContent(props: IDetailContentParam) {
 	const { content = '' } = props
 
+	const appInfo = useSelector(state => state.appInfo)
+
 	const [arrContentList, setContentList] = useState<Array<any>>([])
 
 	useEffect(() => {
@@ -30,6 +33,13 @@ export default function DetailContent(props: IDetailContentParam) {
 			case 'miniprogram':
 				Taro.navigateToMiniProgram({
 					appId: data.appId,
+					complete: res => {
+						if (data.appId === 'wx821aadcd431646f9') {
+							Taro.reLaunch({
+								url: appInfo.objAppInfo.strMainPath,
+							})
+						}
+					},
 				})
 				break
 			default:

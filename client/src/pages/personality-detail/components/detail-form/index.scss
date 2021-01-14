@@ -10,6 +10,7 @@
 		}
 
 		.item-icon {
+			flex: 0 0 40px;
 			margin-right: var(--border-thin-space);
 			width: 40px;
 			height: 40px;
@@ -19,6 +20,11 @@
 				font-size: var(--h4);
 				color: var(--color-white);
 			}
+		}
+		.item-value {
+		}
+		.item-enable {
+			color: var(--color-link-normal);
 		}
 	}
 }
