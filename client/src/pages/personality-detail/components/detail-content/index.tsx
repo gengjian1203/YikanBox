@@ -33,8 +33,11 @@ export default function DetailContent(props: IDetailContentParam) {
 			case 'miniprogram':
 				Taro.navigateToMiniProgram({
 					appId: data.appId,
-					complete: res => {
-						if (data.appId === 'wx821aadcd431646f9') {
+					success: res => {
+						if (
+							data.appId === 'wx821aadcd431646f9' &&
+							res?.errMsg.includes('ok')
+						) {
 							Taro.reLaunch({
 								url: appInfo.objAppInfo.strMainPath,
 							})
