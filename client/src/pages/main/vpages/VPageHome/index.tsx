@@ -137,7 +137,6 @@ export default function VPageHome(props: IVPageHomeProps) {
 			></View>
 			{/* banner */}
 			<Banner arrBannerList={arrBannerLocalList} />
-			<View>{isTestSign}</View>
 			{/* 临时操作 */}
 			{/* <Button onClick={handleTestClick}>测试按钮</Button> */}
 			{/* <Button onClick={handleCreateArticleClick}>爬取文章</Button> */}
