@@ -24,9 +24,13 @@ export default function Main() {
 
 	const {
 		arrBannerList,
-		strBottomBarListSelectCode,
+		strBottomBarListSelectId,
 		arrBottomBarList,
 	} = useSelector(state => state.appInfo.objAppInfo)
+
+	const strBottomBarListSelectCode = arrBottomBarList.filter(item => {
+		return item.id === strBottomBarListSelectId
+	})[0]?.code
 
 	const onLoad = async () => {
 		Taro.hideShareMenu()
@@ -57,12 +61,12 @@ export default function Main() {
 	// 监听底部导航数据变化
 	useEffect(() => {
 		const nIndex = arrBottomBarList.findIndex(item => {
-			return item.code === strBottomBarListSelectCode
+			return item.id === strBottomBarListSelectId
 		})
 		if (nIndex >= 0) {
 			setNavigationTitle(arrBottomBarList[nIndex].title)
 		}
-	}, [arrBottomBarList, strBottomBarListSelectCode])
+	}, [arrBottomBarList, strBottomBarListSelectId])
 
 	useQueryPageList(
 		{
@@ -88,6 +92,7 @@ export default function Main() {
 					arrBannerLocalList={arrBannerLocalList}
 					arrArticleList={arrArticleList}
 					showBottomLoadingTip={showBottomLoadingTip}
+					isTestSign={strBottomBarListSelectId === '999999'}
 				/>
 			),
 			DISCOVER: <VPageDiscover />,

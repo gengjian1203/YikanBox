@@ -11,7 +11,9 @@ import {
 } from '@/redux/constants/appInfo'
 
 const INITIAL_STATE = {
-	objAppInfo: {},
+	objAppInfo: {
+    strBottomBarListSelectId: ''
+  },
 	isIOS: false,
 	isPhoneX: false,
 	objAppHeight: {
@@ -49,7 +51,7 @@ export default function appInfoReducer(state = INITIAL_STATE, action) {
 				draft.objAppHeight.nHeightTabbarBottom = payload
 				return draft
 			case SET_BOTTOM_BAR_SELECT:
-				draft.objAppInfo.strBottomBarListSelectCode = payload
+				draft.objAppInfo.strBottomBarListSelectId = payload
 				return draft
 			default:
 				return draft

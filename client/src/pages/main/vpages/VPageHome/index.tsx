@@ -12,6 +12,7 @@ import Banner from './components/banner'
 import './index.scss'
 
 interface IVPageHomeProps {
+	isTestSign?: boolean
 	customWrapClass?: string
 	customWrapStyle?: string
 	arrBannerLocalList?: Array<any>
@@ -21,6 +22,7 @@ interface IVPageHomeProps {
 
 export default function VPageHome(props: IVPageHomeProps) {
 	const {
+		isTestSign = false,
 		customWrapClass = '',
 		customWrapStyle = '',
 		arrBannerLocalList = [],
@@ -135,6 +137,7 @@ export default function VPageHome(props: IVPageHomeProps) {
 			></View>
 			{/* banner */}
 			<Banner arrBannerList={arrBannerLocalList} />
+			<View>{isTestSign}</View>
 			{/* 临时操作 */}
 			{/* <Button onClick={handleTestClick}>测试按钮</Button> */}
 			{/* <Button onClick={handleCreateArticleClick}>爬取文章</Button> */}
@@ -153,7 +156,7 @@ export default function VPageHome(props: IVPageHomeProps) {
 				></Image>
 			) : (
 				<ListFeed
-					strType='MOMENTS'
+					strType={isTestSign ? 'BASE' : 'MOMENTS'}
 					arrList={arrArticleList}
 					showBottomLoadingTip={showBottomLoadingTip}
 					onDetailClick={handleDetailClick}

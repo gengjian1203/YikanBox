@@ -22,8 +22,8 @@ export default function TabBarBottom(props: ITabbarBottomProps) {
 	const arrBottomBarList = useSelector(
 		state => state.appInfo.objAppInfo.arrBottomBarList
 	)
-	const strBottomBarListSelectCode = useSelector(
-		state => state.appInfo.objAppInfo.strBottomBarListSelectCode
+	const strBottomBarListSelectId = useSelector(
+		state => state.appInfo.objAppInfo.strBottomBarListSelectId
 	)
 	const nHeightTabbar = useSelector(
 		state => state.appInfo.objAppHeight.nHeightTabbar
@@ -61,13 +61,13 @@ export default function TabBarBottom(props: ITabbarBottomProps) {
 			})
 		setTabBarBottomList(arrTabBarBottomListTmp)
 		const nIndex = arrTabBarBottomListTmp.findIndex(item => {
-			return item.code === strBottomBarListSelectCode
+			return item.id === strBottomBarListSelectId
 		})
 		setTabBarBottomCurrent(nIndex)
-	}, [arrBottomBarList, strBottomBarListSelectCode])
+	}, [arrBottomBarList, strBottomBarListSelectId])
 
 	const handleTabbarSelect = value => {
-		setBottomBarSelect(arrTabBarBottomList[value].code)
+		setBottomBarSelect(arrTabBarBottomList[value].id)
 	}
 
 	return (

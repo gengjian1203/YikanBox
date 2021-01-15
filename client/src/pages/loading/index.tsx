@@ -109,21 +109,21 @@ export default function Loading() {
 		const loginInfo = await queryLoginInfo()
 		if (loginInfo) {
 			const { strMemberId, appInfo, memberInfo } = loginInfo
-			let strBottomBarListSelectCodeTmp = 'MINE'
+			let strBottomBarListSelectIdTmp = '000000'
 			try {
 				for (let item of appInfo.arrBottomBarList) {
 					if (item.enable) {
-						strBottomBarListSelectCodeTmp = item.code
+						strBottomBarListSelectIdTmp = item.id
 						break
 					}
 				}
 			} catch (e) {
-				console.error('initLoginInfo strBottomBarListSelectCodeTmp', e)
+				console.error('initLoginInfo strBottomBarListSelectIdTmp', e)
 			}
 
 			checkIsBlackMember(appInfo, strMemberId)
 			setAppInfo(appInfo)
-			setBottomBarSelect(strBottomBarListSelectCodeTmp)
+			setBottomBarSelect(strBottomBarListSelectIdTmp)
 			setMemberInfo(memberInfo)
 			// console.log('initLoginInfo done.')
 		}

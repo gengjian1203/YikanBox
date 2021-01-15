@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react'
-import { View, Image } from '@tarojs/components'
+import React from 'react'
+import { View } from '@tarojs/components'
 
+import Base from './Base'
 import Moments from './Moments'
 
 import './index.scss'
@@ -20,7 +21,7 @@ export interface IItemType {
 interface IListFeedProps {
 	strType:
 		| 'MOMENTS' // 朋友圈类型
-		| ''
+		| 'BASE'
 	arrList: Array<IItemType>
 	showBottomLoadingTip?: boolean
 	onDetailClick: (any: any) => void
@@ -38,6 +39,8 @@ export default function ListFeed(props: IListFeedProps) {
 		switch (strType) {
 			case 'MOMENTS':
 				return <Moments arrList={arrList} onDetailClick={onDetailClick} />
+			case 'BASE':
+				return <Base arrList={arrList} onDetailClick={onDetailClick} />
 			default:
 				return <View></View>
 		}

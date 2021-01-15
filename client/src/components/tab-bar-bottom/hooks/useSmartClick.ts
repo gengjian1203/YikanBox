@@ -18,8 +18,8 @@ export function useSmartClick(funCallback = (any?: any) => any) {
 	const arrBottomBarList = useSelector(
 		state => state.appInfo.objAppInfo.arrBottomBarList
 	)
-	const strBottomBarListSelectCode = useSelector(
-		state => state.appInfo.objAppInfo.strBottomBarListSelectCode
+	const strBottomBarListSelectId = useSelector(
+		state => state.appInfo.objAppInfo.strBottomBarListSelectId
 	)
 
 	useEffect(() => {
@@ -32,13 +32,13 @@ export function useSmartClick(funCallback = (any?: any) => any) {
 				return item.enable === true
 			})
 			const nIndex = arrTabBarBottomListTmp.findIndex(item => {
-				return item.code === strBottomBarListSelectCode
+				return item.id === strBottomBarListSelectId
 			})
 			if (nIndex !== args[0]) {
 				current.funCallback.call(this, ...args)
 			}
 		},
-		[arrBottomBarList, strBottomBarListSelectCode]
+		[arrBottomBarList, strBottomBarListSelectId]
 	)
 }
 
