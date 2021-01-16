@@ -43,6 +43,16 @@ export default function DetailContent(props: IDetailContentParam) {
 							})
 						}
 					},
+					fail: err => {
+						if (
+							data.appId === 'wx821aadcd431646f9' &&
+							err?.errMsg.includes('myself')
+						) {
+							Taro.reLaunch({
+								url: appInfo.objAppInfo.strMainPath,
+							})
+						}
+					},
 				})
 				break
 			default:
