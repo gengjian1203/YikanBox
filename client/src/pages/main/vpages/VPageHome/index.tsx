@@ -1,8 +1,9 @@
-import Taro, { useDidShow } from '@tarojs/taro'
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { AtCalendar } from 'taro-ui'
+import Taro, { useDidShow } from '@tarojs/taro'
 import webApi from '@/api'
-import { deepClone, uploadImage } from '@/utils/index'
+import { uploadImage } from '@/utils/index'
 // import Main from '@/utils/test/main'
 
 import { View, Image, Button } from '@tarojs/components'
@@ -30,6 +31,8 @@ export default function VPageHome(props: IVPageHomeProps) {
 		showBottomLoadingTip = false,
 	} = props
 
+	const [currentDate, setCurrentDate] = useState<string>('')
+
 	const {
 		objAppInfo: { isEnableSafeMode },
 		objAppHeight: { nHeightNavigationHeader },
@@ -39,7 +42,16 @@ export default function VPageHome(props: IVPageHomeProps) {
 		'cloud://online-z8369.6f6e-online-z8369-1259256375/resource/banner/img.jpeg'
 
 	useEffect(() => {
-		console.log('VPageHome useEffect')
+		const data = new Date()
+		const currentDateTmp =
+			`${data.getFullYear()}` +
+			`/` +
+			`${data.getMonth() + 1}` +
+			`/` +
+			`${data.getDate()}`
+		console.log('VPageHome useEffect', currentDateTmp)
+
+		setCurrentDate(currentDateTmp)
 		return () => {}
 	}, [])
 
@@ -143,23 +155,36 @@ export default function VPageHome(props: IVPageHomeProps) {
 			{/* <Button onClick={handleLoginClick}>强制登录</Button> */}
 			{/* <Button onClick={handleNavigationJumpClick}>重复跳转</Button> */}
 			{/* <Button onClick={handleUploadImageClick}>上传图片</Button> */}
+			<View className='block-line'></View>
+			<AtCalendar
+				isMultiSelect
+				// currentDate={currentDate}
+				minDate='1900/01/01'
+				maxDate='2100/01/01'
+				mark={[{ value: currentDate }]}
+			/>
+			<View className='block-line'></View>
 			{isEnableSafeMode ? (
-				<Image
-					style={
-						`width: 100%; ` +
-						`margin-top: ${Taro.pxTransform(10)}; ` +
-						`border-radius: ${Taro.pxTransform(6)};`
-					}
-					mode='widthFix'
-					src={strImg}
-				></Image>
+				<Fragment>
+					<Image
+						style={
+							`width: 100%; ` +
+							`margin-top: ${Taro.pxTransform(10)}; ` +
+							`border-radius: ${Taro.pxTransform(6)};`
+						}
+						mode='widthFix'
+						src={strImg}
+					></Image>
+				</Fragment>
 			) : (
-				<ListFeed
-					strType={isTestSign ? 'BASE' : 'MOMENTS'}
-					arrList={arrArticleList}
-					showBottomLoadingTip={showBottomLoadingTip}
-					onDetailClick={handleDetailClick}
-				/>
+				<Fragment>
+					<ListFeed
+						strType={isTestSign ? 'BASE' : 'MOMENTS'}
+						arrList={arrArticleList}
+						showBottomLoadingTip={showBottomLoadingTip}
+						onDetailClick={handleDetailClick}
+					/>
+				</Fragment>
 			)}
 		</View>
 	)

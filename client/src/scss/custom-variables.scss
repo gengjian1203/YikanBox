@@ -7,5 +7,9 @@ $color-brand-dark: var(--color-primary, #f7b500);
 @import 'taro-ui/dist/style/index.scss';
 
 .at-curtain {
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.flex__item--selected {
+	background-color: $color-brand !important;
 }
