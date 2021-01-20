@@ -18,8 +18,15 @@ export default function Main() {
 	const {} = useRouter()
 
 	const [strNavigationTitle, setNavigationTitle] = useState<string>('')
+	const [isNavigationTransparent, setNavigationTransparent] = useState<boolean>(
+		true
+	)
 	const [arrBannerLocalList, setBannerLocalList] = useState<Array<any>>([])
 	const [arrArticleList, setArticleList] = useState<Array<any>>([])
+	const [
+		strBottomBarListSelectCode,
+		setBottomBarListSelectCode,
+	] = useState<string>('MINE')
 	const [showBottomLoadingTip, setBottomLoadingTip] = useState<boolean>(false)
 
 	const {
@@ -27,10 +34,6 @@ export default function Main() {
 		strBottomBarListSelectId,
 		arrBottomBarList,
 	} = useSelector(state => state.appInfo.objAppInfo)
-
-	const strBottomBarListSelectCode = arrBottomBarList.filter(item => {
-		return item.id === strBottomBarListSelectId
-	})[0]?.code
 
 	const onLoad = async () => {
 		Taro.hideShareMenu()
@@ -64,6 +67,12 @@ export default function Main() {
 			return item.id === strBottomBarListSelectId
 		})
 		if (nIndex >= 0) {
+			const strBottomBarListSelectCodeTmp = arrBottomBarList[nIndex].code
+			const isNavigationTransparentTmp = ['MINE', 'DISCOVER'].includes(
+				strBottomBarListSelectCodeTmp
+			)
+			setBottomBarListSelectCode(strBottomBarListSelectCodeTmp)
+			setNavigationTransparent(isNavigationTransparentTmp)
 			setNavigationTitle(arrBottomBarList[nIndex].title)
 		}
 	}, [arrBottomBarList, strBottomBarListSelectId])
@@ -81,10 +90,6 @@ export default function Main() {
 		}[strBottomBarListSelectCode]
 	)
 
-	const handleButtonClick = () => {
-		setArticleList([])
-	}
-
 	const renderVPage = () => {
 		return {
 			HOME: (
@@ -92,7 +97,6 @@ export default function Main() {
 					arrBannerLocalList={arrBannerLocalList}
 					arrArticleList={arrArticleList}
 					showBottomLoadingTip={showBottomLoadingTip}
-					isTestSign={strBottomBarListSelectId === '999999'}
 				/>
 			),
 			DISCOVER: <VPageDiscover />,
@@ -103,7 +107,7 @@ export default function Main() {
 	return (
 		<PageContent
 			isShowLeftIcon={false}
-			isTransparent
+			isTransparent={isNavigationTransparent}
 			colorBackgroud='transparent'
 			strNavigationTitle={strNavigationTitle}
 		>

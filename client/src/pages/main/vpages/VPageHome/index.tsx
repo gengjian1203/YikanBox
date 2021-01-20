@@ -1,19 +1,17 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { AtCalendar } from 'taro-ui'
-import Taro, { useDidShow } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import webApi from '@/api'
 import { uploadImage } from '@/utils/index'
-// import Main from '@/utils/test/main'
 
-import { View, Image, Button } from '@tarojs/components'
-import ListFeed from '@/components/list-feed'
+import { View, Button } from '@tarojs/components'
 import Banner from './components/banner'
+import Tab from './components/tab'
 
 import './index.scss'
 
 interface IVPageHomeProps {
-	isTestSign?: boolean
 	customWrapClass?: string
 	customWrapStyle?: string
 	arrBannerLocalList?: Array<any>
@@ -23,7 +21,6 @@ interface IVPageHomeProps {
 
 export default function VPageHome(props: IVPageHomeProps) {
 	const {
-		isTestSign = false,
 		customWrapClass = '',
 		customWrapStyle = '',
 		arrBannerLocalList = [],
@@ -31,44 +28,27 @@ export default function VPageHome(props: IVPageHomeProps) {
 		showBottomLoadingTip = false,
 	} = props
 
-	const [currentDate, setCurrentDate] = useState<string>('')
+	const [currentDate, setCurrentDate] = useState<Date>()
+	const [tabList, setTabList] = useState<any>([])
 
 	const {
 		objAppInfo: { isEnableSafeMode },
-		objAppHeight: { nHeightNavigationHeader },
 	} = useSelector(state => state.appInfo)
 
-	const strImg =
-		'cloud://online-z8369.6f6e-online-z8369-1259256375/resource/banner/img.jpeg'
-
 	useEffect(() => {
-		const data = new Date()
-		const currentDateTmp =
-			`${data.getFullYear()}` +
-			`/` +
-			`${data.getMonth() + 1}` +
-			`/` +
-			`${data.getDate()}`
-		console.log('VPageHome useEffect', currentDateTmp)
-
-		setCurrentDate(currentDateTmp)
+		setCurrentDate(new Date())
+		setTabList([
+			{ title: '标签页1' },
+			{ title: '标签页2' },
+			// { title: '标签页3' },
+			// { title: '标签页4' },
+			// { title: '标签页5' },
+			// { title: '标签页6' },
+		])
 		return () => {}
 	}, [])
 
-	const handleTestClick = async () => {
-		// const _main = new Main(4)
-		// const num = _main.calculate(4)
-		// console.log('bbbbbb', num)
-		// Taro.navigateToMiniProgram({
-		// 	appId: 'wxbd3e6f9c3b2c9a33',
-		// })
-		// Taro.navigateToMiniProgram({
-		// 	appId: 'wx75fbc7eca5fe2581',
-		// })
-		Taro.navigateTo({
-			url: `/pages/personality-detail/index` + `?personalityId=${11111}`,
-		})
-	}
+	const handleTestClick = async () => {}
 
 	const handleCreateArticleClick = async e => {
 		const res = await webApi.testInfo.spiderArticleInfo()
@@ -131,6 +111,12 @@ export default function VPageHome(props: IVPageHomeProps) {
 		})
 	}
 
+	// 切换tab
+	const handleTabChange = current => {
+		console.log('handleTabChange', current)
+	}
+
+	// 点击详情
 	const handleDetailClick = item => {
 		console.log('handleDetailClick', item)
 		Taro.navigateTo({
@@ -143,48 +129,32 @@ export default function VPageHome(props: IVPageHomeProps) {
 			className={`vpage-home-wrap ${customWrapClass}`}
 			style={customWrapStyle}
 		>
-			{/* 占位栏 */}
-			<View
-				style={`height: ${Taro.pxTransform(nHeightNavigationHeader * 2)}`}
-			></View>
 			{/* banner */}
+			<View className='block-line'></View>
 			<Banner arrBannerList={arrBannerLocalList} />
+
 			{/* 临时操作 */}
-			{/* <Button onClick={handleTestClick}>测试按钮</Button> */}
+			<View className='block-line'></View>
+			<Button onClick={handleTestClick}>测试按钮</Button>
 			{/* <Button onClick={handleCreateArticleClick}>爬取文章</Button> */}
 			{/* <Button onClick={handleLoginClick}>强制登录</Button> */}
 			{/* <Button onClick={handleNavigationJumpClick}>重复跳转</Button> */}
 			{/* <Button onClick={handleUploadImageClick}>上传图片</Button> */}
+
+			{/* 日历 */}
 			<View className='block-line'></View>
-			<AtCalendar
-				isMultiSelect
-				// currentDate={currentDate}
-				minDate='1900/01/01'
-				maxDate='2100/01/01'
-				mark={[{ value: currentDate }]}
-			/>
+			<AtCalendar isMultiSelect mark={[{ value: currentDate }]} />
+
+			{/* tab */}
 			<View className='block-line'></View>
-			{isEnableSafeMode ? (
-				<Fragment>
-					<Image
-						style={
-							`width: 100%; ` +
-							`margin-top: ${Taro.pxTransform(10)}; ` +
-							`border-radius: ${Taro.pxTransform(6)};`
-						}
-						mode='widthFix'
-						src={strImg}
-					></Image>
-				</Fragment>
-			) : (
-				<Fragment>
-					<ListFeed
-						strType={isTestSign ? 'BASE' : 'MOMENTS'}
-						arrList={arrArticleList}
-						showBottomLoadingTip={showBottomLoadingTip}
-						onDetailClick={handleDetailClick}
-					/>
-				</Fragment>
+			{!isEnableSafeMode && (
+				<Tab
+					tabList={tabList}
+					arrList={arrArticleList}
+					showBottomLoadingTip={showBottomLoadingTip}
+					onTabChange={handleTabChange}
+					onDetailClick={handleDetailClick}
+				/>
 			)}
 		</View>
 	)
