@@ -44,7 +44,7 @@ export default function Tab(props: ITabParam) {
 			onClick={handleTabChange}
 		>
 			{tabList.map((item, index) => (
-				<AtTabsPane current={tabCurrent} index={index} key={index}>
+				<AtTabsPane current={tabCurrent} index={index} key={index}> 
 					<ListFeed
 						strType={index % 2 === 0 ? 'MOMENTS' : 'BASE'}
 						arrList={arrList}

@@ -3,10 +3,12 @@ import { useSelector } from 'react-redux'
 import { AtCalendar } from 'taro-ui'
 import Taro from '@tarojs/taro'
 import webApi from '@/api'
+import useCheckLogin from '@/hooks/useCheckLogin'
 import { uploadImage } from '@/utils/index'
 
 import { View, Button } from '@tarojs/components'
 import Banner from './components/banner'
+import Menu from './components/menu'
 import Tab from './components/tab'
 
 import './index.scss'
@@ -29,6 +31,7 @@ export default function VPageHome(props: IVPageHomeProps) {
 	} = props
 
 	const [currentDate, setCurrentDate] = useState<Date>()
+	const [menuList, setMenuList] = useState<any>([])
 	const [tabList, setTabList] = useState<any>([])
 
 	const {
@@ -44,6 +47,14 @@ export default function VPageHome(props: IVPageHomeProps) {
 			// { title: '标签页4' },
 			// { title: '标签页5' },
 			// { title: '标签页6' },
+		])
+		setMenuList([
+			{
+				code: 'blind',
+				color: '#38ae92',
+				icon: 'iconchoujiang',
+				title: '盲盒抽奖',
+			},
 		])
 		return () => {}
 	}, [])
@@ -111,6 +122,11 @@ export default function VPageHome(props: IVPageHomeProps) {
 		})
 	}
 
+	// 点击菜单项
+	const handleMenuClick = item => {
+		console.log('handleMenuClick', item)
+	}
+
 	// 切换tab
 	const handleTabChange = current => {
 		console.log('handleTabChange', current)
@@ -135,26 +151,30 @@ export default function VPageHome(props: IVPageHomeProps) {
 
 			{/* 临时操作 */}
 			<View className='block-line'></View>
-			<Button onClick={handleTestClick}>测试按钮</Button>
+			{/* <Button onClick={handleTestClick}>测试按钮</Button> */}
 			{/* <Button onClick={handleCreateArticleClick}>爬取文章</Button> */}
 			{/* <Button onClick={handleLoginClick}>强制登录</Button> */}
 			{/* <Button onClick={handleNavigationJumpClick}>重复跳转</Button> */}
 			{/* <Button onClick={handleUploadImageClick}>上传图片</Button> */}
 
-			{/* 日历 */}
-			<View className='block-line'></View>
-			<AtCalendar isMultiSelect mark={[{ value: currentDate }]} />
-
 			{/* tab */}
 			<View className='block-line'></View>
-			{!isEnableSafeMode && (
-				<Tab
-					tabList={tabList}
-					arrList={arrArticleList}
-					showBottomLoadingTip={showBottomLoadingTip}
-					onTabChange={handleTabChange}
-					onDetailClick={handleDetailClick}
-				/>
+			{isEnableSafeMode ? (
+				<AtCalendar isMultiSelect mark={[{ value: currentDate }]} />
+			) : (
+				<Fragment>
+					<Menu
+						arrMenuList={menuList}
+						onMenuClick={useCheckLogin(handleMenuClick)}
+					/>
+					<Tab
+						tabList={tabList}
+						arrList={arrArticleList}
+						showBottomLoadingTip={showBottomLoadingTip}
+						onTabChange={handleTabChange}
+						onDetailClick={handleDetailClick}
+					/>
+				</Fragment>
 			)}
 		</View>
 	)
