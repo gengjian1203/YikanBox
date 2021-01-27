@@ -3,6 +3,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import useActions from '@/hooks/useActions'
 import appInfoActions from '@/redux/actions/appInfo'
+import PanelBottom from '@/components/panel-bottom'
 
 import { View } from '@tarojs/components'
 import { AtTabBar } from 'taro-ui'
@@ -71,18 +72,13 @@ export default function TabBarBottom(props: ITabbarBottomProps) {
 	}
 
 	return (
-		<Fragment>
+		<PanelBottom customClass='flex-center-h button-bottom-wrap'>
 			<AtTabBar
 				fixed
 				tabList={arrTabBarBottomList}
 				current={nTabBarBottomCurrent}
 				onClick={useSmartClick(handleTabbarSelect)}
 			/>
-			{/* 文档流占位 */}
-			<Fragment>
-				<View style={`height: ${Taro.pxTransform(nHeightTabbar * 2)}`}></View>
-				<View className='safe-bottom'></View>
-			</Fragment>
-		</Fragment>
+		</PanelBottom>
 	)
 }

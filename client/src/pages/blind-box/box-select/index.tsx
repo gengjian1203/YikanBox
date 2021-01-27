@@ -33,12 +33,12 @@ export default function BoxSelect() {
 		if (exclude[item]) {
 			return
 		}
-		// Taro.navigateTo({
-		// 	url:
-		// 		`/pages/blind-box/box-open/index` +
-		// 		`?selectIndex=${item}` +
-		// 		`&exclude=${JSON.stringify(exclude)}`,
-		// })
+		Taro.navigateTo({
+			url:
+				`/pages/blind-box/box-open/index` +
+				`?selectIndex=${item}` +
+				`&exclude=${JSON.stringify(exclude)}`,
+		})
 	}
 
 	return (

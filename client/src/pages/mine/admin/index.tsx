@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux'
 import webApi from '@/api'
 import { deepClone, deepCompare } from '@/utils/index'
 import { View } from '@tarojs/components'
-import { AtButton, AtList, AtListItem } from 'taro-ui'
+import { AtList, AtListItem } from 'taro-ui'
+import ButtonBottom from '@/components/button-bottom'
 import PageContent from '@/components/page-content'
-import PanelBottom from '@/components/panel-bottom'
 import ModuleTitle from '@/components/module-title'
 
 import './index.scss'
@@ -184,17 +184,7 @@ export default function Admin() {
 				})}
 			</AtList>
 			{/* 保存按钮 */}
-			<PanelBottom customClass='flex-center-h'>
-				<AtButton
-					className='button-bottom'
-					type='primary'
-					size='normal'
-					circle
-					onClick={handleButtonSaveClick}
-				>
-					保存
-				</AtButton>
-			</PanelBottom>
+			<ButtonBottom text='保存' onClick={handleButtonSaveClick} />
 		</PageContent>
 	)
 }
