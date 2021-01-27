@@ -4,24 +4,40 @@ export default {
 	],
 	subpackages: [
 		{
-			root: 'pages/article-detail', // 文章详情页
-			pages: ['index'],
+			root: 'pages/article-detail',
+			pages: [
+				'index', // 文章详情页
+			],
 		},
 		{
-			root: 'pages/avatar-show', // 头像秀页面
-			pages: ['index'],
+			root: 'pages/avatar-show',
+			pages: [
+				'index', // 头像秀页面
+			],
 		},
 		{
-			root: 'pages/demo', // 测试页
-			pages: ['index'],
+			root: 'pages/blind-box',
+			pages: [
+				'hall-room/index', // 盲盒大厅
+			],
 		},
 		{
-			root: 'pages/login', // 统一登录页
-			pages: ['index'],
+			root: 'pages/demo',
+			pages: [
+				'index', // 测试页
+			],
 		},
 		{
-			root: 'pages/main', // 首页
-			pages: ['index'],
+			root: 'pages/login',
+			pages: [
+				'index', // 统一登录页
+			],
+		},
+		{
+			root: 'pages/main',
+			pages: [
+				'index', // 首页
+			],
 		},
 		{
 			root: 'pages/mine', // 我的页面子页面
@@ -34,8 +50,10 @@ export default {
 			],
 		},
 		{
-			root: 'pages/personality-detail', // 个性秀
-			pages: ['index'],
+			root: 'pages/personality-detail',
+			pages: [
+				'index', // 个性秀
+			],
 		},
 	],
 	preloadRule: {

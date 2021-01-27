@@ -50,7 +50,7 @@ export default function VPageHome(props: IVPageHomeProps) {
 		])
 		setMenuList([
 			{
-				code: 'blind',
+				code: 'box',
 				color: '#38ae92',
 				icon: 'iconchoujiang',
 				title: '盲盒抽奖',
@@ -125,6 +125,15 @@ export default function VPageHome(props: IVPageHomeProps) {
 	// 点击菜单项
 	const handleMenuClick = item => {
 		console.log('handleMenuClick', item)
+		switch (item.code) {
+			case 'box':
+				Taro.navigateTo({
+					url: `/pages/blind-box/hall-room/index`,
+				})
+				break
+			default:
+				break
+		}
 	}
 
 	// 切换tab
