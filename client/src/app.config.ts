@@ -19,6 +19,7 @@ export default {
 			root: 'pages/blind-box',
 			pages: [
 				'hall-room/index', // 盲盒大厅
+				'box-select/index', // 选择盒子
 			],
 		},
 		{

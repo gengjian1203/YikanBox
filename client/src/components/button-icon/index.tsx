@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Taro from '@tarojs/taro'
 import { AtButton } from 'taro-ui'
 import { View, Image } from '@tarojs/components'
-import './index.less'
+import './index.scss'
 
 interface IButtonIconParam {
 	value: string // 内容

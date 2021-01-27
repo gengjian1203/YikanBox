@@ -53,6 +53,11 @@ export default function HallRoom() {
 
 	const handleBoxClick = item => {
 		console.log('handleBoxClick', item)
+		Taro.navigateTo({
+			url:
+				`/pages/blind-box/box-select/index` +
+				`?title=${encodeURIComponent(item.title)}`,
+		})
 	}
 
 	return (
