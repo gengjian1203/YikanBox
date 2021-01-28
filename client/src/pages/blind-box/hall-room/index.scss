@@ -1,4 +1,5 @@
 .hall-room-wrap {
+	position: relative;
 	padding: var(--padding-sm);
 	.box-wrap {
 		display: block;
@@ -37,5 +38,11 @@
 				}
 			}
 		}
+	}
+	.float-button {
+		position: fixed;
+		right: 64px;
+		bottom: 200px;
+		z-index: 10;
 	}
 }

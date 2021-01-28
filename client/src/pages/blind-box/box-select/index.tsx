@@ -1,8 +1,10 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState, useCallback } from 'react'
 import Taro, { useRouter } from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import ButtonIcon from '@/components/button-icon'
 import PageContent from '@/components/page-content'
+
+import { deepClone } from '@/utils/index'
 
 import './index.scss'
 
@@ -16,16 +18,32 @@ export default function BoxSelect() {
 	const [strNavigationTitle, setNavigationTitle] = useState<string>(
 		decodeURIComponent(title)
 	)
-	const [exclude, setExclude] = useState<any>({ 2: '4' })
+	const [exclude, setExclude] = useState<any>({})
 
 	const strUrlBoxNew =
 		'https://res.paquapp.com/boxonline/auto_new/series/5/495.png'
 	const strUrlBoxOld =
 		'https://res.paquapp.com/boxonline/auto_new/series/5/496.png'
 
+	const handleBoxExcludeAppend = e => {
+		console.log('handleBoxExcludeAppend', e)
+
+		setExclude(prevExclude => {
+			const excludeTmp = deepClone(prevExclude)
+			excludeTmp[e.selectIndex] = e.value
+			return excludeTmp
+		})
+	}
+
 	useEffect(() => {
 		Taro.hideShareMenu()
+
+		setExclude({ '3': '2', '2': '1' })
+		Taro.eventCenter.on('box-exclude-append', handleBoxExcludeAppend)
 		setLoadComplete(true)
+		return () => {
+			Taro.eventCenter.off('box-exclude-append')
+		}
 	}, [])
 
 	const handleBoxClick = item => {

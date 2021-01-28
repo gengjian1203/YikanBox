@@ -54,6 +54,10 @@ export default function BoxOpen() {
 
 	const handleButtonClick = e => {
 		console.log('handleButtonClick', e)
+		Taro.eventCenter.trigger('box-exclude-append', {
+			selectIndex,
+			value: String(Math.floor(Math.random() * 12)),
+		})
 	}
 
 	return (
