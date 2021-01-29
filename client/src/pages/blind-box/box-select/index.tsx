@@ -5,8 +5,11 @@ import ButtonIcon from '@/components/button-icon'
 import PageContent from '@/components/page-content'
 
 import { deepClone } from '@/utils/index'
+import StorageManager from '@/services/StorageManager'
 
 import './index.scss'
+
+const m_managerStorage = StorageManager.getInstance()
 
 export default function BoxSelect() {
 	const {
@@ -18,19 +21,18 @@ export default function BoxSelect() {
 	const [strNavigationTitle, setNavigationTitle] = useState<string>(
 		decodeURIComponent(title)
 	)
+	const [strUrlBoxNew, setUrlBoxNew] = useState<string>('')
+	const [strUrlBoxOld, setUrlBoxOld] = useState<string>('')
+	const [imgBox, setImgBox] = useState<string>('')
+	const [arrBoxList, setBoxList] = useState<Array<any>>([])
 	const [exclude, setExclude] = useState<any>({})
-
-	const strUrlBoxNew =
-		'https://res.paquapp.com/boxonline/auto_new/series/5/495.png'
-	const strUrlBoxOld =
-		'https://res.paquapp.com/boxonline/auto_new/series/5/496.png'
 
 	const handleBoxExcludeAppend = e => {
 		console.log('handleBoxExcludeAppend', e)
 
 		setExclude(prevExclude => {
 			const excludeTmp = deepClone(prevExclude)
-			excludeTmp[e.selectIndex] = e.value
+			excludeTmp[parseInt(e.selectIndex)] = e.value
 			return excludeTmp
 		})
 	}
@@ -38,7 +40,15 @@ export default function BoxSelect() {
 	useEffect(() => {
 		Taro.hideShareMenu()
 
-		setExclude({ '3': '2', '2': '1' })
+		// setExclude({ '3': '2', '2': '1' })
+		const blindBoxSelect: any = m_managerStorage.getStorageSync(
+			'blind-box-select'
+		)
+		setUrlBoxNew(blindBoxSelect.newBox)
+		setUrlBoxOld(blindBoxSelect.oldBox)
+		setImgBox(blindBoxSelect.imgBox)
+		blindBoxSelect.boxes.pop()
+		setBoxList(blindBoxSelect.boxes)
 		Taro.eventCenter.on('box-exclude-append', handleBoxExcludeAppend)
 		setLoadComplete(true)
 		return () => {
@@ -46,15 +56,15 @@ export default function BoxSelect() {
 		}
 	}, [])
 
-	const handleBoxClick = item => {
-		console.log('handleBoxClick', item)
-		if (exclude[item]) {
+	const handleBoxClick = index => {
+		console.log('handleBoxClick', index)
+		if (exclude[index]) {
 			return
 		}
 		Taro.navigateTo({
 			url:
 				`/pages/blind-box/box-open/index` +
-				`?selectIndex=${item}` +
+				`?selectIndex=${index}` +
 				`&exclude=${JSON.stringify(exclude)}`,
 		})
 	}
@@ -67,36 +77,19 @@ export default function BoxSelect() {
 		>
 			{isLoadComplete && (
 				<Fragment>
-					<Image
-						className='box-select-img'
-						src='https://res.paquapp.com/boxonline/auto_new/series/3/28.png'
-						mode='aspectFit'
-					/>
+					<Image className='box-select-img' src={imgBox} mode='aspectFit' />
 					<View className='box-select-content'>
-						{[
-							'1',
-							'2',
-							'3',
-							'4',
-							'5',
-							'6',
-							'7',
-							'8',
-							'9',
-							'10',
-							'11',
-							'12',
-						].map((item, index) => (
+						{arrBoxList.map((item, index) => (
 							<View className='box-item' key={index}>
 								<ButtonIcon
-									value={exclude[item] ? strUrlBoxOld : strUrlBoxNew}
+									value={exclude[index] ? strUrlBoxOld : strUrlBoxNew}
 									width={160}
 									height={160}
 									radius={0}
-									onClick={() => handleBoxClick(item)}
+									onClick={() => handleBoxClick(index)}
 								/>
 								<View className='box-sign'></View>
-								<View className='flex-center-v box-number'>{item}</View>
+								<View className='flex-center-v box-number'>{index + 1}</View>
 							</View>
 						))}
 					</View>

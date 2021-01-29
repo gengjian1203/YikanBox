@@ -1,12 +1,17 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { AtButton } from 'taro-ui'
 import Taro, { useRouter } from '@tarojs/taro'
+import webApi from '@/api'
 import { View, Image } from '@tarojs/components'
 import PageContent from '@/components/page-content'
 import ButtonIcon from '@/components/button-icon'
 import useQueryPageList from '@/hooks/useQueryPageList'
 
+import StorageManager from '@/services/StorageManager'
+
 import './index.scss'
+
+const m_managerStorage = StorageManager.getInstance()
 
 export default function HallRoom() {
 	const {
@@ -15,28 +20,7 @@ export default function HallRoom() {
 	} = useRouter()
 
 	const [isLoadComplete, setLoadComplete] = useState<boolean>(false) // 是否加载完毕
-	const [arrBoxList, setBoxList] = useState<Array<any>>([
-		{
-			img: 'https://res.paquapp.com/boxonline/auto_new/series/5/494.png',
-			title: '婚礼花童系列',
-			desc: 'MOLLY婚礼花童系列',
-		},
-		{
-			img: 'https://res.paquapp.com/boxonline/auto_new/series/5/494.png',
-			title: '婚礼花童系列',
-			desc: 'MOLLY婚礼花童系列',
-		},
-		{
-			img: 'https://res.paquapp.com/boxonline/auto_new/series/5/494.png',
-			title: '婚礼花童系列',
-			desc: 'MOLLY婚礼花童系列',
-		},
-		{
-			img: 'https://res.paquapp.com/boxonline/auto_new/series/5/494.png',
-			title: '婚礼花童系列',
-			desc: 'MOLLY婚礼花童系列',
-		},
-	])
+	const [arrBoxList, setBoxList] = useState<Array<any>>()
 
 	useEffect(() => {
 		Taro.hideShareMenu()
@@ -46,14 +30,16 @@ export default function HallRoom() {
 	useQueryPageList(
 		res => {
 			const { state, list } = res
-			// setBoxList(list)
+			console.log('queryBlindBoxInfo', list)
+			setBoxList(list)
 		},
-		null,
+		webApi.blindBoxInfo.queryBlindBoxInfo,
 		{}
 	)
 
 	const handleBoxClick = item => {
 		console.log('handleBoxClick', item)
+		m_managerStorage.setStorageSync('blind-box-select', item)
 		Taro.navigateTo({
 			url:
 				`/pages/blind-box/box-select/index` +
@@ -83,7 +69,11 @@ export default function HallRoom() {
 								onClick={() => handleBoxClick(item)}
 							>
 								<View className='flex-center-v box-item'>
-									<Image src={item.img} mode='aspectFill' className='box-img' />
+									<Image
+										src={item.poster}
+										mode='aspectFill'
+										className='box-img'
+									/>
 									<View className='flex-start-v box-content'>
 										<View className='text-justify box-text box-title'>
 											{item.title}

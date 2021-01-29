@@ -3,9 +3,10 @@ import Taro, { useRouter } from '@tarojs/taro'
 import { View, Image, ScrollView } from '@tarojs/components'
 import PageContent from '@/components/page-content'
 import ButtonBottom from '@/components/button-bottom'
-
+import StorageManager from '@/services/StorageManager'
 import './index.scss'
 
+const m_managerStorage = StorageManager.getInstance()
 export default function BoxOpen() {
 	const {
 		path,
@@ -13,42 +14,16 @@ export default function BoxOpen() {
 	} = useRouter()
 
 	const [isLoadComplete, setLoadComplete] = useState<boolean>(false) // 是否加载完毕
+	const [imgBox, setImgBox] = useState<string>('')
 	const [arrBoxList, setBoxList] = useState<Array<any>>([])
 
 	useEffect(() => {
 		Taro.hideShareMenu()
-		setBoxList([
-			{
-				url:
-					'https://bkimg.cdn.bcebos.com/pic/bd3eb13533fa828ba61e856697565634970a304eec57',
-				title: '一一一',
-			},
-			{
-				url:
-					'https://bkimg.cdn.bcebos.com/pic/bd3eb13533fa828ba61e856697565634970a304eec57',
-				title: '收拾啥',
-			},
-			{
-				url:
-					'https://bkimg.cdn.bcebos.com/pic/bd3eb13533fa828ba61e856697565634970a304eec57',
-				title: '一一一',
-			},
-			{
-				url:
-					'https://bkimg.cdn.bcebos.com/pic/bd3eb13533fa828ba61e856697565634970a304eec57',
-				title: '一一一',
-			},
-			{
-				url:
-					'https://bkimg.cdn.bcebos.com/pic/bd3eb13533fa828ba61e856697565634970a304eec57',
-				title: '一一一',
-			},
-			{
-				url:
-					'https://bkimg.cdn.bcebos.com/pic/bd3eb13533fa828ba61e856697565634970a304eec57',
-				title: '一一一',
-			},
-		])
+		const blindBoxSelect: any = m_managerStorage.getStorageSync(
+			'blind-box-select'
+		)
+		setImgBox(blindBoxSelect.imgBox)
+		setBoxList(blindBoxSelect.boxes)
 		setLoadComplete(true)
 	}, [])
 
@@ -68,11 +43,7 @@ export default function BoxOpen() {
 		>
 			{isLoadComplete && (
 				<Fragment>
-					<Image
-						className='box-open-img'
-						src='https://res.paquapp.com/boxonline/auto_new/series/3/28.png'
-						mode='aspectFit'
-					/>
+					<Image className='box-open-img' src={imgBox} mode='aspectFit' />
 					<ScrollView className='flex-start-h box-open-content' scrollX>
 						{arrBoxList &&
 							arrBoxList.map((item, index) => (
