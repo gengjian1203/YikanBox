@@ -18,6 +18,7 @@ const INITIAL_STATE = {
 	data_strMineBorderCode: '',
 	data_arrCollectionArticleList: [],
 	data_arrMineBadgeList: [],
+	data_money: 0,
 }
 
 export default function memberInfoReducer(state = INITIAL_STATE, action: any) {
@@ -28,7 +29,8 @@ export default function memberInfoReducer(state = INITIAL_STATE, action: any) {
 			// 设置成员信息
 			case SET_MEMBER_INFO:
 				draft = payload
-				m_managerStorage.setStorageSync('memberInfo', payload)
+				draft.data_money = payload.data_money ? payload.data_money : 0
+				m_managerStorage.setStorageSync('memberInfo', draft)
 				if (payload && payload.user_avatarUrl) {
 					ResourceManager.getStaticUrl(payload.user_avatarUrl)
 				}

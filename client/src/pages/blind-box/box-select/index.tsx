@@ -26,7 +26,9 @@ export default function BoxSelect() {
 	const [imgBox, setImgBox] = useState<string>('')
 	const [arrBoxList, setBoxList] = useState<Array<any>>([])
 	const [exclude, setExclude] = useState<any>({})
+	const [shaking, setShaking] = useState<any>({})
 
+	// 追加拆过的盒子
 	const handleBoxExcludeAppend = e => {
 		console.log('handleBoxExcludeAppend', e)
 
@@ -37,10 +39,23 @@ export default function BoxSelect() {
 		})
 	}
 
+	// 追加摇过的盒子
+	const handleBoxShakingAppend = e => {
+		console.log('handleBoxShakingAppend', e)
+
+		setShaking(prevShaking => {
+			const shakingTmp = deepClone(prevShaking)
+			if (!shakingTmp[parseInt(e.selectIndex)]) {
+				shakingTmp[parseInt(e.selectIndex)] = []
+			}
+			shakingTmp[parseInt(e.selectIndex)].push(e.value)
+			return shakingTmp
+		})
+	}
+
 	useEffect(() => {
 		Taro.hideShareMenu()
 
-		// setExclude({ '3': '2', '2': '1' })
 		const blindBoxSelect: any = m_managerStorage.getStorageSync(
 			'blind-box-select'
 		)
@@ -50,9 +65,11 @@ export default function BoxSelect() {
 		blindBoxSelect.boxes.pop()
 		setBoxList(blindBoxSelect.boxes)
 		Taro.eventCenter.on('box-exclude-append', handleBoxExcludeAppend)
+		Taro.eventCenter.on('box-shaking-append', handleBoxShakingAppend)
 		setLoadComplete(true)
 		return () => {
 			Taro.eventCenter.off('box-exclude-append')
+			Taro.eventCenter.off('box-shaking-append')
 		}
 	}, [])
 
@@ -65,7 +82,8 @@ export default function BoxSelect() {
 			url:
 				`/pages/blind-box/box-open/index` +
 				`?selectIndex=${index}` +
-				`&exclude=${JSON.stringify(exclude)}`,
+				`&exclude=${JSON.stringify(exclude)}` +
+				`&shaking=${JSON.stringify(shaking)}`,
 		})
 	}
 
