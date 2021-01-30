@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useMemo, useState } from 'react'
 import Taro, { useRouter } from '@tarojs/taro'
 import { View, Image, ScrollView } from '@tarojs/components'
 import { useSelector } from 'react-redux'
+import webApi from '@/api'
 import PageContent from '@/components/page-content'
 import ButtonBottom from '@/components/button-bottom'
 import useDebounce from '@/hooks/useDebounce'
@@ -110,16 +111,24 @@ export default function BoxOpen() {
 		Taro.showModal({
 			title: '提示',
 			content: '开启这个盲盒将会使用掉68金币，确定要开启么？',
-			success: function (res) {
+			success: async res => {
 				if (res.confirm) {
 					console.log('用户点击确定')
+					const params = {
+						arrBoxList,
+						selectIndex,
+						objExclude,
+						objShaking,
+					}
+					const res = await webApi.blindBoxInfo.openBlindBox(params)
+					console.log('handleButtonClick', res)
+					Taro.eventCenter.trigger('box-exclude-append', {
+						selectIndex,
+						value: String(res.id),
+					})
 				}
 			},
 		})
-		// Taro.eventCenter.trigger('box-exclude-append', {
-		// 	selectIndex,
-		// 	value: String(Math.floor(Math.random() * 12)),
-		// })
 	}
 
 	return (

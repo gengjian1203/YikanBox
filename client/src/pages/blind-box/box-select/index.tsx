@@ -87,6 +87,20 @@ export default function BoxSelect() {
 		})
 	}
 
+	const handleResetClick = () => {
+		console.log('handleResetClick')
+		Taro.showModal({
+			title: '提示',
+			content: '确定要换一批盒子么？',
+			success: async res => {
+				if (res.confirm) {
+					setExclude({})
+					setShaking({})
+				}
+			},
+		})
+	}
+
 	return (
 		<PageContent
 			customClass='flex-center-v box-select-wrap'
@@ -113,6 +127,14 @@ export default function BoxSelect() {
 					</View>
 					<View className='flex-center-v box-select-text'>
 						选一个你喜欢的宝宝领回家吧~
+					</View>
+					{/* 换一批子提示 */}
+					<View
+						className='flex-start-h box-reset-tip'
+						onClick={handleResetClick}
+					>
+						<View className='iconfont iconhuanyipi'></View>
+						<View className='tip-text'>换一批</View>
 					</View>
 				</Fragment>
 			)}

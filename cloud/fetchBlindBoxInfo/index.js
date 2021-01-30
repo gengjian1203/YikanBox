@@ -1,5 +1,6 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
+const openBlindBox = require('openBlindBox/index.js')
 const queryBlindBoxInfo = require('queryBlindBoxInfo/index.js')
 
 cloud.init({
@@ -33,6 +34,9 @@ exports.main = async (event, context) => {
 	// console.log('fetchQRCodeInfo.', event.type, event.data)
 
 	switch (event.type) {
+		case 'OPEN_BLIND_BOX':
+			objResult = await openBlindBox(event.data, db, strMemberId)
+			break
 		case 'QUERY_BLIND_BOX_INFO':
 			objResult = await queryBlindBoxInfo(event.data, db, strMemberId)
 			break

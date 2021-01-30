@@ -38,4 +38,12 @@
 		font-size: var(--font-size-md);
 		color: var(--color-text-primary);
 	}
+	.box-reset-tip {
+		margin-bottom: var(--padding-md);
+		font-size: var(--font-size-sm);
+		.iconfont {
+			margin-right: var(--padding-base);
+			font-size: var(--font-size-md);
+		}
+	}
 }
