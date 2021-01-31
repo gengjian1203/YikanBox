@@ -35,6 +35,14 @@ export const shareType = {
 		name: 'QRCODE_PERSONALITY',
 		title: '分享个性二维码',
 	},
+	PATH_BLIND: {
+		name: 'PATH_BLIND',
+		title: '分享盲盒链接',
+	},
+	QRCODE_BLIND: {
+		name: 'QRCODE_BLIND',
+		title: '分享盲盒二维码',
+	},
 }
 
 /**
