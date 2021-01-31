@@ -129,32 +129,39 @@ export default function BoxOpen() {
 			success: async res => {
 				if (res.confirm) {
 					console.log('用户点击确定')
-					Taro.showLoading()
-					const params = {
-						arrBoxList,
-						boxId,
-						price,
-						selectIndex,
-						objExclude,
-						objShaking,
-					}
-					const res = await webApi.blindBoxInfo.openBlindBox(params)
-					console.log('handleButtonClick', res)
-					Taro.hideLoading()
-					if (res) {
-						// 上个页面发消息
-						Taro.eventCenter.trigger('box-exclude-append', {
+					if (memberInfo.data_money >= parseInt(price)) {
+						Taro.showLoading()
+						const params = {
+							arrBoxList,
+							boxId,
+							price,
 							selectIndex,
-							value: String(res.id),
-						})
-						// 更新redux
-						updateMoney(res.money)
-						// 本页面相关交互
-						setShowBaby(true)
-						setBabyInfo(res)
+							objExclude,
+							objShaking,
+						}
+						const res = await webApi.blindBoxInfo.openBlindBox(params)
+						console.log('handleButtonClick', res)
+						Taro.hideLoading()
+						if (res) {
+							// 上个页面发消息
+							Taro.eventCenter.trigger('box-exclude-append', {
+								selectIndex,
+								value: String(res.id),
+							})
+							// 更新redux
+							updateMoney(res.money)
+							// 本页面相关交互
+							setShowBaby(true)
+							setBabyInfo(res)
+						} else {
+							Taro.showToast({
+								title: '开启失败',
+								icon: 'none',
+							})
+						}
 					} else {
 						Taro.showToast({
-							title: '开启失败',
+							title: '金币余额不足',
 							icon: 'none',
 						})
 					}
@@ -193,7 +200,7 @@ export default function BoxOpen() {
 									<Image
 										className='box-item-img'
 										src={item.url}
-										mode='widthFix'
+										mode='aspectFit'
 									/>
 									<View className='flex-center-v box-item-name'>
 										{item.title}
