@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useMemo, useState } from 'react'
+import { AtCurtain } from 'taro-ui'
 import Taro, { useRouter } from '@tarojs/taro'
 import { View, Image, ScrollView } from '@tarojs/components'
 import { useSelector } from 'react-redux'
@@ -6,6 +7,8 @@ import webApi from '@/api'
 import PageContent from '@/components/page-content'
 import ButtonBottom from '@/components/button-bottom'
 import useDebounce from '@/hooks/useDebounce'
+import useActions from '@/hooks/useActions'
+import memberActions from '@/redux/actions/memberInfo'
 import { deepClone } from '@/utils/index'
 import StorageManager from '@/services/StorageManager'
 import './index.scss'
@@ -14,7 +17,13 @@ const m_managerStorage = StorageManager.getInstance()
 export default function BoxOpen() {
 	const {
 		path,
-		params: { selectIndex = '', exclude = '', shaking = '' },
+		params: {
+			selectIndex = '',
+			boxId = '',
+			price = '',
+			exclude = '',
+			shaking = '',
+		},
 	} = useRouter()
 
 	const [isLoadComplete, setLoadComplete] = useState<boolean>(false) // 是否加载完毕
@@ -22,8 +31,12 @@ export default function BoxOpen() {
 	const [arrBoxList, setBoxList] = useState<Array<any>>([])
 	const [objExclude, setExclude] = useState<any>(JSON.parse(exclude))
 	const [objShaking, setShaking] = useState<any>(JSON.parse(shaking))
+	const [isShowBaby, setShowBaby] = useState<boolean>(false)
+	const [objBabyInfo, setBabyInfo] = useState<any>({})
 
 	const memberInfo = useSelector(state => state.memberInfo)
+
+	const { updateMoney } = useActions(memberActions)
 
 	useEffect(() => {
 		Taro.hideShareMenu()
@@ -65,6 +78,7 @@ export default function BoxOpen() {
 		})
 	}, [objShaking])
 
+	// 摇晃盲盒
 	const handleBoxShaking = useDebounce(() => {
 		console.log('handleBoxShaking.......')
 		if (
@@ -107,28 +121,53 @@ export default function BoxOpen() {
 		})
 	}, 1000)
 
+	// 开启盲盒
 	const handleButtonClick = e => {
 		Taro.showModal({
 			title: '提示',
-			content: '开启这个盲盒将会使用掉68金币，确定要开启么？',
+			content: `开启这个盲盒将会使用掉${price}金币，确定要开启么？`,
 			success: async res => {
 				if (res.confirm) {
 					console.log('用户点击确定')
+					Taro.showLoading()
 					const params = {
 						arrBoxList,
+						boxId,
+						price,
 						selectIndex,
 						objExclude,
 						objShaking,
 					}
 					const res = await webApi.blindBoxInfo.openBlindBox(params)
 					console.log('handleButtonClick', res)
-					Taro.eventCenter.trigger('box-exclude-append', {
-						selectIndex,
-						value: String(res.id),
-					})
+					Taro.hideLoading()
+					if (res) {
+						// 上个页面发消息
+						Taro.eventCenter.trigger('box-exclude-append', {
+							selectIndex,
+							value: String(res.id),
+						})
+						// 更新redux
+						updateMoney(res.money)
+						// 本页面相关交互
+						setShowBaby(true)
+						setBabyInfo(res)
+					} else {
+						Taro.showToast({
+							title: '开启失败',
+							icon: 'none',
+						})
+					}
 				}
 			},
 		})
+	}
+
+	// 关闭
+	const handleCurtainClose = () => {
+		console.log('handleCurtainClose')
+		setShowBaby(false)
+		Taro.navigateBack()
 	}
 
 	return (
@@ -170,6 +209,25 @@ export default function BoxOpen() {
 						<View className='iconfont iconjinbi'></View>
 						<View className='money-text'>{memberInfo.data_money}</View>
 					</View>
+					{/* 幕帘弹窗 */}
+					<AtCurtain
+						isOpened={isShowBaby}
+						closeBtnPosition='bottom'
+						onClose={handleCurtainClose}
+					>
+						<View className='flex-center-v box-open-baby'>
+							<Image
+								src={objBabyInfo.url}
+								mode='aspectFit'
+								className={
+									`box-open-baby-image ` +
+									`${isShowBaby ? 'box-open-baby-gray ' : ''}` +
+									`${isShowBaby ? 'fade-in-from-grayscale ' : ''}`
+								}
+							/>
+							<View className='box-open-baby-name'>{`恭喜你获得【${objBabyInfo.title}】`}</View>
+						</View>
+					</AtCurtain>
 					{/* 底部按钮 */}
 					<ButtonBottom text='就决定是你了' onClick={handleButtonClick} />
 				</Fragment>

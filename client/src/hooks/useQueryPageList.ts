@@ -114,12 +114,13 @@ const useQueryPageList = (
 				nPageNum: 0,
 				nPageSize: (nPageNum.current + 1) * nPageSize,
 			}
-			funFetchApi(paramReal).then(res => {
-				console.log('useQueryPageList useUpdateList', res)
-				const { list } = dealFetchResult(res)
-				arrPageList.current = list
-				returnCallBack()
-			})
+			funFetchApi &&
+				funFetchApi(paramReal).then(res => {
+					console.log('useQueryPageList useUpdateList', res)
+					const { list } = dealFetchResult(res)
+					arrPageList.current = list
+					returnCallBack()
+				})
 		}
 	}, [isUpdateList])
 
@@ -140,12 +141,13 @@ const useQueryPageList = (
 				nPageNum: 0,
 				nPageSize: (nPageNum.current + 1) * nPageSize,
 			}
-			funFetchApi(paramReal).then(res => {
-				console.log('useQueryPageList useDidShow', res)
-				const { list } = dealFetchResult(res)
-				arrPageList.current = list
-				returnCallBack()
-			})
+			funFetchApi &&
+				funFetchApi(paramReal).then(res => {
+					console.log('useQueryPageList useDidShow', res)
+					const { list } = dealFetchResult(res)
+					arrPageList.current = list
+					returnCallBack()
+				})
 		}
 	})
 
@@ -166,12 +168,13 @@ const useQueryPageList = (
 			nPageNum: nPageNum.current,
 			nPageSize: nPageSize,
 		}
-		funFetchApi(paramReal).then(res => {
-			console.log('useQueryPageList useReachBottom', res)
-			const { list } = dealFetchResult(res)
-			arrPageList.current = arrPageList.current.concat(list)
-			returnCallBack()
-		})
+		funFetchApi &&
+			funFetchApi(paramReal).then(res => {
+				console.log('useQueryPageList useReachBottom', res)
+				const { list } = dealFetchResult(res)
+				arrPageList.current = arrPageList.current.concat(list)
+				returnCallBack()
+			})
 	})
 
 	/**
@@ -189,12 +192,13 @@ const useQueryPageList = (
 			nPageNum: nPageNum.current,
 			nPageSize: nPageSize,
 		}
-		funFetchApi(paramReal).then(res => {
-			console.log('useQueryPageList usePullDownRefresh', res)
-			const { list } = dealFetchResult(res)
-			arrPageList.current = list
-			returnCallBack()
-		})
+		funFetchApi &&
+			funFetchApi(paramReal).then(res => {
+				console.log('useQueryPageList usePullDownRefresh', res)
+				const { list } = dealFetchResult(res)
+				arrPageList.current = list
+				returnCallBack()
+			})
 	})
 }
 

@@ -5,3 +5,4 @@ export const REMOVE_COLLECTION_ARTICLE_INFO: string =
 export const PUSH_MINE_BADGE_LIST: string = 'PUSH_MINE_BADGE_LIST' // 增加徽章列表
 export const CHANGE_MINE_BORDER_CODE: string = 'CHANGE_MINE_BORDER_CODE' // 切换使用的头像框
 export const UPDATE_AVATAR_URL: string = 'UPDATE_AVATAR_URL' // 更新头像url
+export const UPDATE_MONEY: string = 'UPDATE_MONEY' // 更新金币数量

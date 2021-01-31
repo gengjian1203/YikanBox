@@ -24,14 +24,20 @@ export default function HallRoom() {
 
 	useEffect(() => {
 		Taro.hideShareMenu()
-		setLoadComplete(true)
 	}, [])
 
 	useQueryPageList(
 		res => {
 			const { state, list } = res
 			console.log('queryBlindBoxInfo', list)
-			setBoxList(list)
+			switch (state) {
+				case 'RESULT':
+					setBoxList(list)
+					setLoadComplete(true)
+					break
+				default:
+					break
+			}
 		},
 		webApi.blindBoxInfo.queryBlindBoxInfo,
 		{}
@@ -58,7 +64,7 @@ export default function HallRoom() {
 			isShowLeftIcon
 			strNavigationTitle='盲盒大厅'
 		>
-			{isLoadComplete && (
+			{isLoadComplete ? (
 				<Fragment>
 					{/* 盲盒列表 */}
 					{arrBoxList &&
@@ -98,6 +104,8 @@ export default function HallRoom() {
 						/>
 					</View>
 				</Fragment>
+			) : (
+				<View className='flex-center-v '>加载中...</View>
 			)}
 		</PageContent>
 	)

@@ -97,4 +97,20 @@
 			text-align: right;
 		}
 	}
+
+	.box-open-baby {
+		.box-open-baby-image {
+			width: 400px;
+			height: 400px;
+		}
+		.box-open-baby-gray {
+			filter: grayscale(100%);
+		}
+		.box-open-baby-name {
+			margin-top: var(--padding-md);
+			width: 100%;
+			text-align: center;
+			color: var(--color-white);
+		}
+	}
 }

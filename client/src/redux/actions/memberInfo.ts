@@ -5,6 +5,7 @@ import {
 	PUSH_MINE_BADGE_LIST,
 	CHANGE_MINE_BORDER_CODE,
 	UPDATE_AVATAR_URL,
+	UPDATE_MONEY,
 } from '@/redux/constants/memberInfo'
 
 const memberInfoActions = dispatch => {
@@ -48,6 +49,13 @@ const memberInfoActions = dispatch => {
 		updateAvatarUrl: payload => {
 			dispatch({
 				type: UPDATE_AVATAR_URL,
+				payload,
+			})
+		},
+		// 更新头像url
+		updateMoney: payload => {
+			dispatch({
+				type: UPDATE_MONEY,
 				payload,
 			})
 		},

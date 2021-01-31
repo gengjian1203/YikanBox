@@ -24,6 +24,8 @@ export default function BoxSelect() {
 	const [strUrlBoxNew, setUrlBoxNew] = useState<string>('')
 	const [strUrlBoxOld, setUrlBoxOld] = useState<string>('')
 	const [imgBox, setImgBox] = useState<string>('')
+	const [boxId, setBoxId] = useState<string>('')
+	const [price, setPrice] = useState<number>(999)
 	const [arrBoxList, setBoxList] = useState<Array<any>>([])
 	const [exclude, setExclude] = useState<any>({})
 	const [shaking, setShaking] = useState<any>({})
@@ -62,6 +64,8 @@ export default function BoxSelect() {
 		setUrlBoxNew(blindBoxSelect.newBox)
 		setUrlBoxOld(blindBoxSelect.oldBox)
 		setImgBox(blindBoxSelect.imgBox)
+		setBoxId(blindBoxSelect._id)
+		setPrice(blindBoxSelect.price)
 		blindBoxSelect.boxes.pop()
 		setBoxList(blindBoxSelect.boxes)
 		Taro.eventCenter.on('box-exclude-append', handleBoxExcludeAppend)
@@ -82,6 +86,8 @@ export default function BoxSelect() {
 			url:
 				`/pages/blind-box/box-open/index` +
 				`?selectIndex=${index}` +
+				`&boxId=${boxId}` +
+				`&price=${price}` +
 				`&exclude=${JSON.stringify(exclude)}` +
 				`&shaking=${JSON.stringify(shaking)}`,
 		})

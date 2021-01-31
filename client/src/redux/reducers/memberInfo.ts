@@ -9,6 +9,7 @@ import {
 	PUSH_MINE_BADGE_LIST,
 	CHANGE_MINE_BORDER_CODE,
 	UPDATE_AVATAR_URL,
+	UPDATE_MONEY,
 } from '@/redux/constants/memberInfo'
 
 const m_managerStorage = StorageManager.getInstance()
@@ -57,6 +58,10 @@ export default function memberInfoReducer(state = INITIAL_STATE, action: any) {
 			// 更新头像url
 			case UPDATE_AVATAR_URL:
 				draft.user_avatarUrl = payload
+				return draft
+			// 更新头像url
+			case UPDATE_MONEY:
+				draft.data_money = payload
 				return draft
 			default:
 				return draft
