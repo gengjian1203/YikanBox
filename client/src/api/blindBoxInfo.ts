@@ -35,7 +35,24 @@ const queryBlindBoxInfo = async (objParams?: IQueryBlindBoxInfoType) => {
 	return res.data
 }
 
+interface IQueryBlindBoxInfoType {}
+/**
+ * 查询自身抽取到的盲盒信息
+ * @return
+ */
+const queryBlindBoxList = async (objParams?: IQueryBlindBoxInfoType) => {
+	const params = {
+		type: 'QUERY_BLINK_BOX_LIST',
+		data: objParams,
+	}
+	const res = await CloudFetch.callFunction('fetchBlindBoxInfo', params)
+	console.log('queryBlindBoxList', res)
+	return res.data
+}
+queryBlindBoxList
+
 export default {
 	openBlindBox,
 	queryBlindBoxInfo,
+	queryBlindBoxList,
 }

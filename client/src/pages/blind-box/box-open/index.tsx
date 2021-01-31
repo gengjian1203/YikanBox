@@ -119,7 +119,7 @@ export default function BoxOpen() {
 			selectIndex,
 			value: valueShaking,
 		})
-	}, 1000)
+	}, 600)
 
 	// 开启盲盒
 	const handleButtonClick = e => {

@@ -18,6 +18,7 @@ export default {
 		{
 			root: 'pages/blind-box',
 			pages: [
+				'box-list/index', // 抽取成果
 				'box-open/index', // 打开盒子
 				'box-select/index', // 选择盒子
 				'hall-room/index', // 盲盒大厅

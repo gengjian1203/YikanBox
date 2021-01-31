@@ -2,6 +2,7 @@
 const cloud = require('wx-server-sdk')
 const openBlindBox = require('openBlindBox/index.js')
 const queryBlindBoxInfo = require('queryBlindBoxInfo/index.js')
+const queryBlindBoxList = require('queryBlindBoxList/index.js')
 
 cloud.init({
 	env: cloud.DYNAMIC_CURRENT_ENV, // API 调用都保持和云函数当前所在环境一致
@@ -40,6 +41,8 @@ exports.main = async (event, context) => {
 		case 'QUERY_BLIND_BOX_INFO':
 			objResult = await queryBlindBoxInfo(event.data, db, strMemberId)
 			break
+		case 'QUERY_BLINK_BOX_LIST':
+			objResult = await queryBlindBoxList(event.data, db, strMemberId)
 		default:
 			break
 	}

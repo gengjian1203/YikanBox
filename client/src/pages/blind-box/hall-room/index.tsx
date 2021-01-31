@@ -56,6 +56,9 @@ export default function HallRoom() {
 	const handleHistoryListClick = e => {
 		e.stopPropagation()
 		console.log('handleHistoryListClick')
+		Taro.navigateTo({
+			url: `/pages/blind-box/box-list/index`,
+		})
 	}
 
 	return (
