@@ -30,7 +30,9 @@ export default function memberInfoReducer(state = INITIAL_STATE, action: any) {
 			// 设置成员信息
 			case SET_MEMBER_INFO:
 				draft = payload
-				draft.data_money = payload.data_money ? payload.data_money : 0
+				if (draft) {
+					draft.data_money = payload?.data_money ? payload?.data_money : 0
+				}
 				m_managerStorage.setStorageSync('memberInfo', draft)
 				if (payload && payload.user_avatarUrl) {
 					ResourceManager.getStaticUrl(payload.user_avatarUrl)
@@ -59,7 +61,7 @@ export default function memberInfoReducer(state = INITIAL_STATE, action: any) {
 			case UPDATE_AVATAR_URL:
 				draft.user_avatarUrl = payload
 				return draft
-			// 更新头像url
+			// 更新金额
 			case UPDATE_MONEY:
 				draft.data_money = payload
 				return draft
