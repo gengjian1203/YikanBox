@@ -47,20 +47,20 @@ export default function BoxOpen() {
 		setImgBox(blindBoxSelect.imgBox)
 		setBoxList(blindBoxSelect.boxes)
 		setLoadComplete(true)
-		Taro.startGyroscope({
+		wx.startGyroscope({
 			interval: 'normal',
 			success: res => {
 				console.log('BoxOpen startGyroscope', res)
 			},
 		})
-		Taro.onGyroscopeChange(res => {
+		wx.onGyroscopeChange(res => {
 			if (Math.abs(res.x) > 5 || Math.abs(res.y) > 5 || Math.abs(res.z) > 5) {
 				console.log('BoxOpen onGyroscopeChange', res)
 				handleBoxShaking()
 			}
 		})
 		return () => {
-			Taro.stopGyroscope()
+			wx.stopGyroscope()
 		}
 	}, [])
 
