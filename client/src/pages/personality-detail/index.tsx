@@ -9,8 +9,9 @@ import { shareType, processSharePath } from '@/utils/index'
 
 import BottomWidget from './components/bottom-widget'
 import DetailContent from './components/detail-content'
+import SkeletonContent from './components/skeleton-content'
 
-import './index.less'
+import './index.scss'
 
 export default function PersonalityDetail() {
 	const {
@@ -49,32 +50,49 @@ export default function PersonalityDetail() {
 		setCurrentDetail(e)
 	}
 
+	const handleTestClick = e => {
+		console.log('handleTestClick')
+		setLoadComplete(prev => {
+			return !prev
+		})
+	}
+
 	const renderDetailContent = () => {
 		return (
-			<Swiper
-				className='detail-swiper-wrap'
-				indicatorColor='var(--color-shadow)'
-				indicatorActiveColor='var(--color-primary)'
-				current={nCurrentDetail}
-				circular
-				indicatorDots
-				onChange={handleDetailChange}
-			>
-				{arrSwiperList.map((item, index) => (
-					<SwiperItem key={index}>
-						<ScrollView
-							className='flex-center-v detail-swiper-item'
-							enableBackToTop
-							scrollY
-							scrollWithAnimation
-						>
-							<View className='content-swiper-block'></View>
-							<DetailContent content={item.content} />
-							<View className='content-swiper-block'></View>
-						</ScrollView>
-					</SwiperItem>
-				))}
-			</Swiper>
+			<Fragment>
+				{isLoadComplete ? (
+					<Swiper
+						className='detail-swiper-wrap'
+						indicatorColor='var(--color-shadow)'
+						indicatorActiveColor='var(--color-primary)'
+						current={nCurrentDetail}
+						circular
+						indicatorDots
+						onChange={handleDetailChange}
+					>
+						{arrSwiperList.map((item, index) => (
+							<SwiperItem key={index}>
+								<ScrollView
+									className='flex-center-v detail-swiper-item'
+									enableBackToTop
+									scrollY
+									scrollWithAnimation
+								>
+									<View className='content-swiper-block'></View>
+									<DetailContent content={item.content} />
+									<View className='content-swiper-block'></View>
+								</ScrollView>
+							</SwiperItem>
+						))}
+					</Swiper>
+				) : (
+					<Fragment>
+						<View className='content-swiper-block'></View>
+						<SkeletonContent />
+						<View className='content-swiper-block'></View>
+					</Fragment>
+				)}
+			</Fragment>
 		)
 	}
 
@@ -85,16 +103,24 @@ export default function PersonalityDetail() {
 			colorTitle='var(--color-white)'
 			customClass='personality-detail-wrap flex-center-v'
 		>
-			{isLoadComplete && (
+			{true && (
 				<Fragment>
 					{/* 渲染内容 */}
 					{renderDetailContent()}
 					{/* 底部小组件面板 */}
 					<BottomWidget
+						isLoadComplete={isLoadComplete}
 						arrIconList={arrIconList}
 						nCurrentDetail={nCurrentDetail}
 						onIconClick={handleIconClick}
 					/>
+					{/* 测试按钮 */}
+					{/* <View
+						style='position: fixed; top: 50%; left: 50%; width: 100px; height: 100px; background-color: red;'
+						onClick={handleTestClick}
+					>
+						Hello
+					</View> */}
 					{/* 分享面板 */}
 					{/* <PanelShare
 						isShowPanelShare={false}

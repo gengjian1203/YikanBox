@@ -28,7 +28,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -107,6 +107,13 @@
 					"name": "1111111",
 					"pathName": "pages/loading/index",
 					"query": "sourceID=mem-oKFiZ5WUDQsrZTKoo_OZ4bhnYfJA&shareType=PATH_BLIND&sharePath=%2Fpages%2Fblind-box%2Fhall-room%2Findex%3Ffrom%3Dshare",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/article-detail/index",
+					"pathName": "pages/loading/index",
+					"query": "scene=023ce955600066bf047815437be8cf0c",
 					"scene": null
 				}
 			]
