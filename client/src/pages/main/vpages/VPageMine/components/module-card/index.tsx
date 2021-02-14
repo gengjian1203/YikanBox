@@ -95,7 +95,7 @@ export default function ModuleCard(props: IModuleCardProps) {
 					style={`${isLogin ? '' : 'display: none; '}`}
 					onClick={useThrottle(useCheckLogin(handleClockInClick))}
 				>
-					<View className='right-sign flex-center'>签到</View>
+					<View className='right-sign flex-center-v'>签到</View>
 				</View> */}
 			</View>
 		</View>

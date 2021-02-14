@@ -217,10 +217,10 @@ export default function Loading() {
 		>
 			{isBlackMember ? (
 				<Fragment>
-					<View className='loading-page-text flex-center'>
+					<View className='loading-page-text flex-center-v'>
 						您的帐号由于违规操作而被封，
 					</View>
-					<View className='loading-page-text flex-center'>
+					<View className='loading-page-text flex-center-v'>
 						目前无权限进行该操作。
 					</View>
 				</Fragment>

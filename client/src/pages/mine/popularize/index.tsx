@@ -85,7 +85,7 @@ export default function Popularize() {
 					)
 				})
 			) : (
-				<View className='list-empty flex-center'>
+				<View className='list-empty flex-center-v'>
 					<PanelTips strType='EMPTY' />
 				</View>
 			)}

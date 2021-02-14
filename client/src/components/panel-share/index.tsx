@@ -153,7 +153,7 @@ export default function PanelShare(props: IPanelShareProps) {
 						<View className='share-button-wrap flex-around-h'>
 							<View className='share-button flex-between-v'>
 								<AtButton
-									className='float-btn-icon flex-center bk-green'
+									className='float-btn-icon flex-center-v bk-green'
 									openType='share'
 								>
 									<View className='iconfont iconweixin'></View>
@@ -181,10 +181,10 @@ export default function PanelShare(props: IPanelShareProps) {
 								mode='widthFix'
 								showMenuByLongpress
 							/>
-							{/* <AtButton className='content-btn-icon flex-center content-btn-left'>
+							{/* <AtButton className='content-btn-icon flex-center-v content-btn-left'>
 								<View className='iconfont iconicon-test1'></View>
 							</AtButton>
-							<AtButton className='content-btn-icon flex-center content-btn-right'>
+							<AtButton className='content-btn-icon flex-center-v content-btn-right'>
 								<View className='iconfont iconicon-test3'></View>
 							</AtButton> */}
 						</View>
@@ -192,7 +192,7 @@ export default function PanelShare(props: IPanelShareProps) {
 						<View className='share-button-wrap flex-around-h'>
 							<View className='share-button flex-between-v'>
 								<AtButton
-									className='float-btn-icon flex-center bk-green'
+									className='float-btn-icon flex-center-v bk-green'
 									openType='share'
 								>
 									<View className='iconfont iconweixin'></View>
@@ -201,7 +201,7 @@ export default function PanelShare(props: IPanelShareProps) {
 							</View>
 							<View className='share-button flex-between-v'>
 								<AtButton
-									className='float-btn-icon flex-center bk-blue'
+									className='float-btn-icon flex-center-v bk-blue'
 									onClick={useThrottle(
 										useCheckAuthorize(
 											'scope.writePhotosAlbum',
@@ -215,7 +215,7 @@ export default function PanelShare(props: IPanelShareProps) {
 							</View>
 							<View className='share-button flex-between-v'>
 								<AtButton
-									className='float-btn-icon flex-center bk-yellow'
+									className='float-btn-icon flex-center-v bk-yellow'
 									onClick={useThrottle(handlePanelShareClose)}
 								>
 									<View className='iconfont iconshanchu2'></View>

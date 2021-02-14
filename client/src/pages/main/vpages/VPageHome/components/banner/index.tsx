@@ -43,7 +43,7 @@ export default function Banner(props: IBannerProps) {
 				return (
 					<SwiperItem key={index}>
 						<View
-							className='banner-item flex-center'
+							className='banner-item flex-center-v'
 							onClick={useThrottle(
 								useCheckLogin(() => handleBannerClick(item))
 							)}

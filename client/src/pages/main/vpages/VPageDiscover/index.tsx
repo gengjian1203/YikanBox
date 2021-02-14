@@ -88,7 +88,7 @@ export default function VPageDiscover(props: IVPageDiscoverProps) {
 					onChange={handleSwiperChange}
 				>
 					{arrArticleList.map((item, index) => (
-						<SwiperItem key={index} className='swiper-item flex-center'>
+						<SwiperItem key={index} className='swiper-item flex-center-v'>
 							{/* 文章简介模块 */}
 							{index <= nArticleCurrent + 1 && index >= nArticleCurrent - 1 && (
 								<ModuleArticle objArticleData={item} />
@@ -98,7 +98,7 @@ export default function VPageDiscover(props: IVPageDiscoverProps) {
 				</Swiper>
 			) : (
 				<View
-					className='module-swiper-wrap flex-center'
+					className='module-swiper-wrap flex-center-v'
 					style={`height: calc(100vh - ${Taro.pxTransform(
 						(nHeightNavigationHeader + nHeightTabbarBottom) * 2
 					)}); `}

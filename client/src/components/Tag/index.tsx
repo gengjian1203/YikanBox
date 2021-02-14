@@ -20,7 +20,7 @@ export default function Tag(props: ITagProps) {
 
 	return (
 		<Text
-			className={`tag-wrap flex-center ${customWrapClass}`}
+			className={`tag-wrap flex-center-v ${customWrapClass}`}
 			style={`background-color: ${strBKColor}; ` + `color: ${strColor}; `}
 		>
 			{strName}

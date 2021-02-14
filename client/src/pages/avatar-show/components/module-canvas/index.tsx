@@ -202,7 +202,7 @@ export default function ModuleCanvas(props: IModuleCanvasProps) {
 
 	return (
 		<Fragment>
-			<View className='avatar-show-content flex-center'>
+			<View className='avatar-show-content flex-center-v'>
 				<Canvas
 					canvasId='canvas'
 					disableScroll

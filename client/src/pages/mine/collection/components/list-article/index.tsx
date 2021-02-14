@@ -46,7 +46,7 @@ export default function ListArticle(props: IListArticleProps) {
 					)
 				})
 			) : (
-				<View className='list-empty flex-center'>
+				<View className='list-empty flex-center-v'>
 					<PanelTips strType='EMPTY' />
 				</View>
 			)}

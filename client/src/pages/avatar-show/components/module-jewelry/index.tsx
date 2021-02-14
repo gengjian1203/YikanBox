@@ -131,6 +131,7 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 					<Image
 						src={itemCell.valueEG ? itemCell.valueEG : itemCell.value}
 						mode='widthFix'
+						style='width: 100%;'
 					/>
 				)
 			default:
@@ -157,7 +158,7 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 						circle
 						size='small'
 						disabled={isDisableBtnBack}
-						className='header-item flex-center iconfont iconshangyibu'
+						className='header-item flex-center-v iconfont iconshangyibu'
 						onClick={handleJewelryBackClick}
 					/>
 					<AtButton
@@ -165,7 +166,7 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 						circle
 						size='small'
 						disabled={isDisableBtnReturn}
-						className='header-item flex-center iconfont iconxiayibu'
+						className='header-item flex-center-v iconfont iconxiayibu'
 						onClick={handleJewelryReturnClick}
 					/>
 					<AtButton
@@ -173,7 +174,7 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 						circle
 						size='small'
 						disabled={isDisableBtnClean}
-						className='header-item flex-center iconfont iconshanchu1'
+						className='header-item flex-center-v iconfont iconshanchu1'
 						onClick={handleJewelryCleanClick}
 					/>
 				</View>
@@ -184,7 +185,7 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 						size='small'
 						className={
 							`header-item ` +
-							`flex-center ` +
+							`flex-center-v ` +
 							`iconfont ` +
 							`${isShowJewelryState ? 'iconicon-test2 ' : 'iconicon-test '}`
 						}
@@ -207,10 +208,10 @@ export default function ModuleJewelry(props: IModuleJewelryProps) {
 									return (
 										<View
 											key={indexCell}
-											className='jewelry-item flex-center'
+											className='jewelry-item flex-center-v'
 											onClick={() => handleJewelryCellClick(itemCell)}
 										>
-											<View className='item-content flex-center'>
+											<View className='item-content flex-center-v'>
 												{renderJewelryCell(itemCell)}
 											</View>
 										</View>
